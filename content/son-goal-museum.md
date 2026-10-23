@@ -1,7 +1,7 @@
 # 손흥민 골 기념관
 
 **유형** INTELLIGENCE · **분야** 스포츠 · **상태** PUBLIC  
-**서비스** https://claude.ai/artifact/JsTsSZ4tp6SMEgyCA8NhjX  
+**서비스** https://raspos.github.io/son7/  
 **데이터 기준** 2026-10-15 (통산 302골)
 
 ---
