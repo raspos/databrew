@@ -1,10 +1,14 @@
-<title>databrew</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>databrew — 독립 데이터저널리즘 프로젝트</title>
+<meta name="description" content="기자가 AI로 만든 데이터 저널리즘 11개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: 바둑판 — 3열 격자, 대표 프로젝트 1개가 2칸. 각 칸 위쪽은 사이트 메인 화면 썸네일, 아래는 이름·설명. */
 :root {
   --board: #ece3d0;
   --line: rgba(92, 70, 38, .13);
@@ -19,58 +23,67 @@
   --stone-w: #f6f3ec;
   --open: #2f7a4a;
   --lock: #a8641a;
+  --data-c: #1a5fa8;
+  --exp-c: #2f7a4a;
+  --intel-c: #6a3d9a;
   --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --board: #1b1814; --line: rgba(230, 200, 150, .07); --cell: #25211c; --cell-hover: #2c2721; --shot: #312b24; --ink: #efe8db; --muted: #a89c88;
-  --rule: #3a342b; --accent: #e0a46a; --stone-b: #0e0d0b; --stone-w: #ece6da; --open: #6cc28b; --lock: #e3a35a; color-scheme: dark } }
+  --board: #1b1814; --line: rgba(230,200,150,.07); --cell: #25211c; --cell-hover: #2c2721;
+  --shot: #312b24; --ink: #efe8db; --muted: #a89c88; --rule: #3a342b; --accent: #e0a46a;
+  --stone-b: #0e0d0b; --stone-w: #ece6da; --open: #6cc28b; --lock: #e3a35a;
+  --data-c: #6aaee8; --exp-c: #6cc28b; --intel-c: #c09de8; color-scheme: dark } }
 :root[data-theme="dark"] {
-  --board: #1b1814; --line: rgba(230, 200, 150, .07); --cell: #25211c; --cell-hover: #2c2721; --shot: #312b24; --ink: #efe8db; --muted: #a89c88;
-  --rule: #3a342b; --accent: #e0a46a; --stone-b: #0e0d0b; --stone-w: #ece6da; --open: #6cc28b; --lock: #e3a35a; color-scheme: dark }
+  --board: #1b1814; --line: rgba(230,200,150,.07); --cell: #25211c; --cell-hover: #2c2721;
+  --shot: #312b24; --ink: #efe8db; --muted: #a89c88; --rule: #3a342b; --accent: #e0a46a;
+  --stone-b: #0e0d0b; --stone-w: #ece6da; --open: #6cc28b; --lock: #e3a35a;
+  --data-c: #6aaee8; --exp-c: #6cc28b; --intel-c: #c09de8; color-scheme: dark }
 
+*, *::before, *::after { box-sizing: border-box; }
 body {
+  margin: 0;
   background-color: var(--board);
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 36px 36px;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 15px;
   line-height: 1.6;
 }
-.wrap {
-  max-width: 1180px; margin: 0 auto;
-  padding-block: 44px 56px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 26px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 44px max(16px, env(safe-area-inset-left,0px)) 56px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 28px; }
 .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .16em; color: var(--accent); margin: 0 0 6px; }
 h1 { font-size: clamp(34px, 6.4vw, 64px); font-weight: 700; letter-spacing: -.03em; line-height: 1.08; margin: 0; text-wrap: balance; }
 h1 .acl { color: var(--accent); }
-.sub { color: var(--muted); margin: 8px 0 0; }
-.today { font-family: var(--font-mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sub { color: var(--muted); margin: 8px 0 0; max-width: 54ch; font-size: 14px; line-height: 1.7; }
+.today { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.about { background: var(--cell); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 22px; margin-bottom: 22px; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.about strong { color: var(--ink); }
 
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.filters button {
-  font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
-  padding: 7px 16px; border-radius: 999px;
+/* Filters */
+.filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; align-items: center; }
+.filter-row + .filter-row { margin-bottom: 18px; }
+.filter-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; color: var(--muted); padding: 0 4px 0 0; min-width: 30px; }
+.filter-row button {
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  padding: 6px 14px; border-radius: 999px;
   border: 1px solid var(--rule); background: var(--cell); color: var(--ink);
-  display: inline-flex; align-items: center; gap: 6px;
-  transition: background-color .15s, border-color .15s, color .15s;
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: background .15s, border-color .15s, color .15s;
 }
-.filters button:hover { border-color: var(--accent); }
-.filters button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.filters button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--cell); }
-.filters .count { font-family: var(--font-mono); font-size: 12px; font-weight: 500; opacity: .7; }
-.cat { font-size: 12px; font-weight: 600; color: var(--accent); margin-left: auto; padding: 1px 9px; border: 1px solid var(--accent); border-radius: 999px; }
-.desc2 { margin: 0; max-width: 62ch; color: var(--muted); font-size: 14px; }
+.filter-row button:hover { border-color: var(--accent); }
+.filter-row button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filter-row button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--cell); }
+.filter-row .count { font-family: var(--font-mono); font-size: 11px; font-weight: 500; opacity: .7; }
+.type-row button[data-type="DATA"][aria-pressed="true"] { background: var(--data-c); border-color: var(--data-c); color: #fff; }
+.type-row button[data-type="EXPERIENCE"][aria-pressed="true"] { background: var(--exp-c); border-color: var(--exp-c); color: #fff; }
+.type-row button[data-type="INTELLIGENCE"][aria-pressed="true"] { background: var(--intel-c); border-color: var(--intel-c); color: #fff; }
+
+/* Grid */
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .grid.filtered .card.wide { grid-column: auto; }
 .grid.filtered .card.wide .shot { aspect-ratio: 16 / 10; }
-.grid.filtered .card.wide h2 { font-size: 20px; }
 .card {
   background: var(--cell);
   border: 1px solid var(--rule);
@@ -78,39 +91,72 @@ h1 .acl { color: var(--accent); }
   overflow: hidden;
   display: flex; flex-direction: column;
   min-width: 0;
-  color: inherit; text-decoration: none;
-  transition: background-color .15s, border-color .15s, transform .15s;
+  transition: border-color .15s, transform .15s, background .15s;
 }
-.card:hover { background: var(--cell-hover); border-color: var(--accent); transform: translateY(-2px); }
-.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.card:has(.card-inner:hover) { background: var(--cell-hover); border-color: var(--accent); transform: translateY(-2px); }
 .card.wide { grid-column: span 2; }
-
+.card-inner {
+  display: flex; flex-direction: column; flex: 1;
+  text-decoration: none; color: inherit; min-width: 0;
+}
+.card-inner:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .shot { position: relative; aspect-ratio: 16 / 10; max-width: 100%; background: var(--shot); border-bottom: 1px solid var(--rule); overflow: hidden; }
 .card.wide .shot { aspect-ratio: 16 / 7.2; }
 .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .4s; }
-.card:hover .shot img { transform: scale(1.02); }
+.card:has(.card-inner:hover) .shot img { transform: scale(1.02); }
 .shot.locked { display: grid; place-items: center; text-align: center; padding: 16px;
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 24px 24px; }
 .shot.locked .ph { display: grid; gap: 8px; justify-items: center; color: var(--muted); font-size: 13px; }
 .shot.locked .ph b { font-size: 18px; color: var(--ink); font-weight: 700; }
-
-.body { padding: 18px 20px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-.top { display: flex; align-items: center; gap: 8px; }
+.body { padding: 16px 18px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.top { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
 .stone { width: 13px; height: 13px; border-radius: 50%; flex: none; background: var(--stone-b); box-shadow: inset -2px -2px 3px rgba(255,255,255,.12); }
 .stone.w { background: var(--stone-w); border: 1px solid var(--rule); box-shadow: inset -2px -2px 3px rgba(0,0,0,.08); }
 .access { font-size: 12px; font-weight: 600; }
 .access.open { color: var(--open); }
 .access.lock { color: var(--lock); }
-h2 { font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin: 0; line-height: 1.3; }
-.card.wide h2 { font-size: 24px; }
-.desc { margin: 0; max-width: 62ch; }
+.type-tag { font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: .08em; padding: 1px 6px; border: 1px solid currentColor; border-radius: 2px; }
+.type-tag.data { color: var(--data-c); }
+.type-tag.experience { color: var(--exp-c); }
+.type-tag.intelligence { color: var(--intel-c); }
+.cat { font-size: 12px; font-weight: 600; color: var(--accent); margin-left: auto; padding: 1px 9px; border: 1px solid var(--accent); border-radius: 999px; }
+h2 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; margin: 0; line-height: 1.3; }
+.card.wide h2 { font-size: 22px; }
+.desc { margin: 0; font-size: 14px; line-height: 1.65; }
 .desc.muted { color: var(--muted); }
-.foot { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--rule); }
-.url { font-family: var(--font-mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; min-width: 0; }
-.go { margin-left: auto; color: var(--accent); font-weight: 600; font-size: 14px; white-space: nowrap; }
+.desc2 { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* Card actions */
+.card-actions {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px dashed var(--rule);
+  background: transparent;
+}
+.btn-detail, .btn-service {
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  padding: 6px 13px; border-radius: 4px; text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.btn-detail {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+}
+.btn-detail:hover { border-color: var(--accent); color: var(--accent); }
+.btn-detail:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-service {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #fff;
+  margin-left: auto;
+}
+.btn-service:hover { opacity: .82; }
+.btn-service:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 footer { margin-top: 22px; color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
 .legend { display: inline-flex; align-items: center; gap: 6px; }
 
@@ -119,174 +165,273 @@ footer { margin-top: 22px; color: var(--muted); font-size: 13px; display: flex; 
   .grid { grid-template-columns: minmax(0, 1fr); }
   .card.wide { grid-column: auto; }
   .card.wide .shot { aspect-ratio: 16 / 10; }
+  h2 { font-size: 17px; }
 }
-@media (prefers-reduced-motion: reduce) { .card, .shot img { transition: none; } .card:hover, .card:hover .shot img { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .card, .shot img { transition: none; } }
 </style>
-
+</head>
+<body>
 <div class="wrap">
   <header>
     <div>
       <p class="eyebrow">독립 데이터저널리즘 프로젝트</p>
       <h1><span class="acl">data</span>brew</h1>
-      <p class="sub">AI로 만든 데이터 콘텐트 프로젝트 11개. 칸을 누르면 사이트가 새 탭에서 열립니다.</p>
+      <p class="sub">기자가 AI로 만든 데이터 저널리즘 프로젝트 11개. 데이터를 탐색하고(DATA), 직접 경험하며(EXPERIENCE), 기록과 지식을 쌓아 간다(INTELLIGENCE).</p>
     </div>
-    <div class="today" id="today">2026-10-15</div>
+    <div class="today" id="today"></div>
   </header>
 
-  <nav class="filters" aria-label="분야">
-    <button type="button" id="f-all" data-cat="all" aria-pressed="true">전체 <span class="count">11</span></button>
-    <button type="button" id="f-econ" data-cat="경제" aria-pressed="false">경제 <span class="count">5</span></button>
-    <button type="button" id="f-pol" data-cat="정치" aria-pressed="false">정치 <span class="count">2</span></button>
-    <button type="button" id="f-sports" data-cat="스포츠" aria-pressed="false">스포츠 <span class="count">3</span></button>
-    <button type="button" id="f-society" data-cat="사회" aria-pressed="false">사회 <span class="count">1</span></button>
+  <nav class="filter-row" aria-label="분야별 필터">
+    <span class="filter-label">분야</span>
+    <button type="button" data-cat="all" aria-pressed="true">전체 <span class="count">11</span></button>
+    <button type="button" data-cat="경제" aria-pressed="false">경제 <span class="count">5</span></button>
+    <button type="button" data-cat="정치" aria-pressed="false">정치 <span class="count">2</span></button>
+    <button type="button" data-cat="스포츠" aria-pressed="false">스포츠 <span class="count">3</span></button>
+    <button type="button" data-cat="사회" aria-pressed="false">사회 <span class="count">1</span></button>
+  </nav>
+  <nav class="filter-row type-row" aria-label="유형별 필터">
+    <span class="filter-label">유형</span>
+    <button type="button" data-type="all" aria-pressed="true">전체</button>
+    <button type="button" data-type="DATA" aria-pressed="false">DATA</button>
+    <button type="button" data-type="EXPERIENCE" aria-pressed="false">EXPERIENCE</button>
+    <button type="button" data-type="INTELLIGENCE" aria-pressed="false">INTELLIGENCE</button>
   </nav>
 
   <main class="grid" id="grid">
-    <a class="card wide" data-cat="경제" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/bokwatch.png" alt="BOK워치 메인 화면: 10월 22일 금통위 동결 확률 78.4% 게이지와 회의별 기대 기준금리 표"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">경제</span></div>
-        <h2>BOK워치</h2>
-        <p class="desc">한국은행 금통위 금리 결정 모니터. 모형 추정 확률, 총재 발언, 의사록, 전문가 전망을 매일 오전 10시에 갱신합니다.</p>
-        <p class="desc2">다음 금통위까지 동결·인상 확률이 어떻게 움직이는지 날짜별로 따라갈 수 있습니다.</p>
-        <div class="foot"><span class="url">bokwatch.pages.dev</span><span class="go">열기 ↗</span></div>
-      </div>
-    </a>
 
-    <a class="card" data-cat="정치" href="https://lee-x-tracker.raspos.chatgpt.site/" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/lee-x.png" alt="이재명 X 트래커 메인 화면: '대통령의 말, 데이터로 읽다' 헤드라인과 게시물 수·지지율 요약"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">정치</span></div>
-        <h2>이재명 X 트래커</h2>
-        <p class="desc">대통령의 X 게시물과 반응, 언어와 여론의 흐름을 지지율과 함께 봅니다.</p>
-        <p class="desc2">게시물 1,065건을 AI로 분류해 주제와 감정 표현의 변화를 짚어 냅니다.</p>
-        <div class="foot"><span class="url">lee-x-tracker</span><span class="go">열기 ↗</span></div>
+    <!-- 01 BOK워치 -->
+    <article class="card wide" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="projects/bokwatch/">
+        <div class="shot"><img src="shots/bokwatch.png" alt="BOK워치 메인 화면: 금통위 동결 확률 게이지와 회의별 기대 기준금리 표"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
+          <h2>BOK워치</h2>
+          <p class="desc">한국은행 금통위 금리 결정 모니터. KOFR 선물·OIS에서 역산한 모형 확률, 총재 발언, 의사록, 전문가 전망을 한 화면에서 봅니다.</p>
+          <p class="desc2">다음 금통위까지 동결·인상 확률이 어떻게 움직이는지 날짜별로 추적할 수 있습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/bokwatch/">자세히 보기</a>
+        <a class="btn-service" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="정치" href="https://uijeong-watch.raspos.chatgpt.site/" target="_blank" rel="noopener">
-      <div class="shot locked"><div class="ph"><b>Watchdog</b>로그인 후 열람</div></div>
-      <div class="body">
-        <div class="top"><span class="stone w" aria-hidden="true"></span><span class="access lock">로그인 필요</span><span class="cat">정치</span></div>
-        <h2>Watchdog</h2>
-        <p class="desc muted">국회의원 의정활동 감시자</p>
-        <p class="desc2">법안 발의와 표결, 회의 발언 같은 의정 기록을 한곳에 정리합니다.</p>
-        <div class="foot"><span class="url">uijeong-watch</span><span class="go">열기 ↗</span></div>
+    <!-- 02 이재명 X 트래커 -->
+    <article class="card" data-cat="정치" data-type="INTELLIGENCE">
+      <a class="card-inner" href="projects/lee-x-tracker/">
+        <div class="shot"><img src="shots/lee-x.png" alt="이재명 X 트래커 메인 화면: 대통령의 말, 데이터로 읽다 헤드라인과 게시물 수·지지율 요약"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">정치</span></div>
+          <h2>이재명 X 트래커</h2>
+          <p class="desc">대통령의 X 게시물과 반응, 언어와 여론의 흐름을 지지율과 함께 봅니다.</p>
+          <p class="desc2">게시물 1,065건을 AI로 분류해 주제와 감정 표현의 변화를 짚어 냅니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/lee-x-tracker/">자세히 보기</a>
+        <a class="btn-service" href="https://lee-x-tracker.raspos.chatgpt.site/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
-    </a>
-    <a class="card" data-cat="스포츠" href="https://claude.ai/artifact/JsTsSZ4tp6SMEgyCA8NhjX" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/son.png" alt="손흥민 골 기념관 메인 화면: SON HEUNG-MIN 대형 제목과 2018 월드컵 멕시코전 사진, 통산 302골 요약"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">스포츠</span></div>
-        <h2>손흥민 기념관</h2>
-        <p class="desc">프로 1군 공식 경기와 A매치에서 넣은 302골을 한 골씩 출처와 함께 기록한 아카이브입니다.</p>
-        <p class="desc2">시즌별 추이, 득점 시간대와 발·머리, 슈팅 위치와 xG까지 필터로 찾아볼 수 있습니다.</p>
-        <div class="foot"><span class="url">claude.ai/artifact</span><span class="go">열기 ↗</span></div>
-      </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="경제" href="https://nobel-world-economy.raspos.chatgpt.site/" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/nobel-v2.png" alt="경제학자의 도구상자 메인 화면: 큰 제목과 2024~2026년 노벨 경제학상 수상자 일러스트"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">경제</span></div>
-        <h2>경제학자의 도구상자</h2>
-        <p class="desc">노벨 경제학상 수상자 101명의 연구와 대표 저작으로 세계경제를 설명해 온 이론과 방법을 살펴봅니다.</p>
-        <p class="desc2">입문 설명에서 출발해 논문의 가정과 식별전략까지 원하는 깊이로 읽을 수 있습니다.</p>
-        <div class="foot"><span class="url">nobel-world-economy</span><span class="go">열기 ↗</span></div>
+    <!-- 03 Watchdog -->
+    <article class="card" data-cat="정치" data-type="INTELLIGENCE">
+      <a class="card-inner" href="projects/watchdog/">
+        <div class="shot locked"><div class="ph"><b>Watchdog</b>로그인 후 열람</div></div>
+        <div class="body">
+          <div class="top"><span class="stone w" aria-hidden="true"></span><span class="access lock">로그인 필요</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">정치</span></div>
+          <h2>Watchdog</h2>
+          <p class="desc muted">국회의원 의정활동 감시자</p>
+          <p class="desc2">법안 발의와 표결, 회의 발언 같은 의정 기록을 한곳에 정리합니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/watchdog/">자세히 보기</a>
+        <a class="btn-service" href="https://uijeong-watch.raspos.chatgpt.site/" target="_blank" rel="noopener">서비스 열기 ↗</a>
       </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="스포츠" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/cgdy-v4.png" alt="추강대엽+김 메인 화면: 색색의 '추강대엽김' 큰 글자와 다섯 선수의 야구 카드"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">스포츠</span></div>
-        <h2>추강대엽+김</h2>
-        <p class="desc">추신수·강정호·이대호·이승엽, 그리고 김도영. 다섯 타자의 공식 기록으로 한국 야구 타자의 세대교체를 봅니다.</p>
-        <p class="desc2">MLB·NPB 기록을 KBO 기준으로 환산해 연차별로 나란히 비교하고, 원 기록으로도 바꿔 볼 수 있습니다.</p>
-        <div class="foot"><span class="url">claude.ai/artifact</span><span class="go">열기 ↗</span></div>
+    <!-- 04 손흥민 골 기념관 -->
+    <article class="card" data-cat="스포츠" data-type="INTELLIGENCE">
+      <a class="card-inner" href="projects/son-goal-museum/">
+        <div class="shot"><img src="shots/son.png" alt="손흥민 골 기념관 메인 화면: SON HEUNG-MIN 대형 제목과 2018 월드컵 멕시코전 사진, 통산 302골 요약"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">스포츠</span></div>
+          <h2>손흥민 골 기념관</h2>
+          <p class="desc">프로 1군 공식 경기와 A매치에서 넣은 302골을 한 골씩, 출처와 함께 기록한 아카이브입니다.</p>
+          <p class="desc2">시즌별 추이, 득점 시간대와 발·머리, 슈팅 위치와 xG, 개별 골 영상까지 필터로 찾아볼 수 있습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/son-goal-museum/">자세히 보기</a>
+        <a class="btn-service" href="https://claude.ai/artifact/JsTsSZ4tp6SMEgyCA8NhjX" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="경제" href="https://bibigo-mandu-index.raspos.chatgpt.site/" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/bibigo.png" alt="비비고지수 메인 화면: '만두 100g으로 읽는 세계 경제' 제목과 만두 일러스트, 한국 비비고 왕교자 100g 1,093.33원"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">경제</span></div>
-        <h2>비비고지수</h2>
-        <p class="desc">비비고 만두 100g의 나라별 판매가격을 빅맥과 함께 비교해 세계 물가와 환율을 읽습니다.</p>
-        <p class="desc2">세계 만두 지도와 가격 순위, 환율 계산기로 살펴보고, 판매처 출처와 수집일까지 공개합니다.</p>
-        <div class="foot"><span class="url">bibigo-mandu-index</span><span class="go">열기 ↗</span></div>
+    <!-- 05 경제학자의 도구상자 -->
+    <article class="card" data-cat="경제" data-type="INTELLIGENCE">
+      <a class="card-inner" href="projects/economist-toolkit/">
+        <div class="shot"><img src="shots/nobel-v2.png" alt="경제학자의 도구상자 메인 화면: 큰 제목과 노벨 경제학상 수상자 일러스트"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">경제</span></div>
+          <h2>경제학자의 도구상자</h2>
+          <p class="desc">노벨 경제학상 수상자 101명의 연구와 대표 저작으로 세계경제를 설명해 온 이론과 방법을 살펴봅니다.</p>
+          <p class="desc2">입문 설명에서 출발해 논문의 가정과 식별전략까지 원하는 깊이로 읽을 수 있습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/economist-toolkit/">자세히 보기</a>
+        <a class="btn-service" href="https://nobel-world-economy.raspos.chatgpt.site/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="경제" href="https://self-employed-survival.raspos.chatgpt.site/#setup" target="_blank" rel="noopener">
-      <div class="shot locked"><div class="ph"><b>대한민국 자영업자로 살아남기</b>로그인 후 열람</div></div>
-      <div class="body">
-        <div class="top"><span class="stone w" aria-hidden="true"></span><span class="access lock">로그인 필요</span><span class="cat">경제</span></div>
-        <h2>대한민국 자영업자로 살아남기</h2>
-        <p class="desc muted">한국 자영업자가 마주하는 현실을 데이터로 따라가 봅니다.</p>
-        <p class="desc2">창업 조건을 직접 정하고 가게가 살아남을 수 있는지 시험해 볼 수 있습니다.</p>
-        <div class="foot"><span class="url">self-employed-survival</span><span class="go">열기 ↗</span></div>
+    <!-- 06 추강대엽+김 -->
+    <article class="card" data-cat="스포츠" data-type="EXPERIENCE">
+      <a class="card-inner" href="projects/baseball-legends/">
+        <div class="shot"><img src="shots/cgdy-v4.png" alt="추강대엽+김 메인 화면: 색색의 큰 글자와 다섯 선수의 야구 카드"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
+          <h2>추강대엽+김</h2>
+          <p class="desc">추신수·강정호·이대호·이승엽, 그리고 김도영. 다섯 타자의 공식 기록으로 한국 야구 타자의 세대교체를 봅니다.</p>
+          <p class="desc2">MLB·NPB 기록을 KBO 기준으로 환산해 연차별로 나란히 비교하고, 원 기록으로도 바꿔 볼 수 있습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/baseball-legends/">자세히 보기</a>
+        <a class="btn-service" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="경제" href="https://chip-cycle-3xdv.vercel.app/" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/chip-v2.png" alt="CHIP CYCLE 메인 화면: '반도체 수출액은 폭증했는데, 판매 개수는 줄었다' 제목과 D램·플래시·복합구조칩 수출액 대비 수량 증감 지표"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">경제</span></div>
-        <h2>CHIP CYCLE</h2>
-        <p class="desc">반도체 수출액은 폭증했는데 판매 개수는 줄었다. 한국 반도체 수출 20년을 통관데이터로 추적합니다.</p>
-        <p class="desc2">D램·플래시·복합구조칩 237개월 기록과 한국은행 수출물가지수로 AI 슈퍼사이클의 구조 변화를 읽습니다.</p>
-        <div class="foot"><span class="url">chip-cycle-3xdv.vercel.app</span><span class="go">열기 ↗</span></div>
+    <!-- 07 비비고지수 -->
+    <article class="card" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="projects/bibigo-index/">
+        <div class="shot"><img src="shots/bibigo.png" alt="비비고지수 메인 화면: 만두 100g으로 읽는 세계 경제 제목과 만두 일러스트"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
+          <h2>비비고지수</h2>
+          <p class="desc">비비고 만두 100g의 나라별 판매가격을 빅맥과 함께 비교해 세계 물가와 환율을 읽습니다.</p>
+          <p class="desc2">세계 만두 지도와 가격 순위, 구매력평가 환율 추정까지 판매처 출처와 수집일을 공개합니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/bibigo-index/">자세히 보기</a>
+        <a class="btn-service" href="https://bibigo-mandu-index.raspos.chatgpt.site/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="사회" href="https://korea-ranked.vercel.app/" target="_blank" rel="noopener">
-      <div class="shot"><img src="shots/korea.png" alt="국뽕의 과학 메인 화면: '대한민국은 세계 몇 등?' 제목과 명목 GDP 세계 13위 등 지표별 한국 순위 카드"></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">사회</span></div>
-        <h2>국뽕의 과학</h2>
-        <p class="desc">대한민국은 세계 몇 등일까. 우리가 생각하는 한국과 숫자가 보여주는 한국이 얼마나 다른지 확인합니다.</p>
-        <p class="desc2">경제, 반도체, 출산율, 노동시간, R&amp;D까지 World Bank·OECD·UN 등 공식 통계 53개 지표로 세계지도와 순위를 탐색합니다.</p>
-        <div class="foot"><span class="url">korea-ranked.vercel.app</span><span class="go">열기 ↗</span></div>
+    <!-- 08 대한민국 자영업자로 살아남기 -->
+    <article class="card" data-cat="경제" data-type="EXPERIENCE">
+      <a class="card-inner" href="projects/self-employed/">
+        <div class="shot locked"><div class="ph"><b>대한민국 자영업자로 살아남기</b>로그인 후 열람</div></div>
+        <div class="body">
+          <div class="top"><span class="stone w" aria-hidden="true"></span><span class="access lock">로그인 필요</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">경제</span></div>
+          <h2>대한민국 자영업자로 살아남기</h2>
+          <p class="desc muted">한국 자영업자의 창업과 경영을 체험하는 36개월 시뮬레이션.</p>
+          <p class="desc2">업종과 상권을 고르고, 임대료·인건비·매출 조건을 설정해 가게를 직접 운영해 봅니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/self-employed/">자세히 보기</a>
+        <a class="btn-service" href="https://self-employed-survival.raspos.chatgpt.site/#setup" target="_blank" rel="noopener">서비스 열기 ↗</a>
       </div>
-    </a>
+    </article>
 
-    <a class="card" data-cat="스포츠" href="https://all-time-xi.vercel.app/" target="_blank" rel="noopener">
-      <div class="shot locked"><div class="ph"><b>올타임 베스트 11</b>화면 준비 중</div></div>
-      <div class="body">
-        <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="cat">스포츠</span></div>
-        <h2>올타임 베스트 11</h2>
-        <p class="desc">역대 최강의 국가대표를 만들어라. 나라별 역대 선수로 드림팀 전술판을 짜고 공유합니다.</p>
-        <p class="desc2">A매치 30경기 이상 출전 선수 3,864명의 공식 기록으로 FIFA 랭킹 상위 30개국과 한국의 베스트11을 꾸리고 AI 가상 대결을 붙여 봅니다.</p>
-        <div class="foot"><span class="url">all-time-xi.vercel.app</span><span class="go">열기 ↗</span></div>
+    <!-- 09 CHIP CYCLE -->
+    <article class="card" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="projects/chip-cycle/">
+        <div class="shot"><img src="shots/chip-v2.png" alt="CHIP CYCLE 메인 화면: 반도체 수출액은 폭증했는데 판매 개수는 줄었다 제목과 3대 품목 수출 지표"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
+          <h2>CHIP CYCLE</h2>
+          <p class="desc">반도체 수출액은 폭증했는데 판매 개수는 줄었다. 한국 반도체 수출 20년을 통관데이터로 추적합니다.</p>
+          <p class="desc2">D램·플래시·복합구조칩 237개월 기록과 한국은행 수출물가지수로 AI 슈퍼사이클의 구조를 읽습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/chip-cycle/">자세히 보기</a>
+        <a class="btn-service" href="https://chip-cycle-3xdv.vercel.app/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
-    </a>
+    </article>
+
+    <!-- 10 국뽕의 과학 -->
+    <article class="card" data-cat="사회" data-type="DATA">
+      <a class="card-inner" href="projects/korea-ranked/">
+        <div class="shot"><img src="shots/korea.png" alt="국뽕의 과학 메인 화면: 대한민국은 세계 몇 등 제목과 지표별 순위 카드"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">사회</span></div>
+          <h2>국뽕의 과학</h2>
+          <p class="desc">대한민국은 세계 몇 등일까. 우리가 생각하는 한국과 숫자가 보여주는 한국이 얼마나 다른지 확인합니다.</p>
+          <p class="desc2">World Bank·OECD·UN 등 공식 통계 53개 지표, 28문항 퀴즈, 50년 시계열로 세계지도와 순위를 탐색합니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/korea-ranked/">자세히 보기</a>
+        <a class="btn-service" href="https://korea-ranked.vercel.app/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 11 올타임 베스트 11 -->
+    <article class="card" data-cat="스포츠" data-type="EXPERIENCE">
+      <a class="card-inner" href="projects/all-time-xi/">
+        <div class="shot locked"><div class="ph"><b>올타임 베스트 11</b>화면 준비 중</div></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
+          <h2>올타임 베스트 11</h2>
+          <p class="desc">역대 최강의 국가대표를 만들어라. 나라별 역대 선수로 드림팀 전술판을 짜고 공유합니다.</p>
+          <p class="desc2">A매치 30경기 이상 출전 선수 3,864명의 공식 기록으로 FIFA 랭킹 상위 30개국 + 한국의 베스트11을 구성합니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/all-time-xi/">자세히 보기</a>
+        <a class="btn-service" href="https://all-time-xi.vercel.app/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
   </main>
 
   <footer>
     <span class="legend"><span class="stone" aria-hidden="true"></span>누구나 접속 가능</span>
     <span class="legend"><span class="stone w" aria-hidden="true"></span>로그인해야 열림</span>
-    <span>화면은 2026-10-15 캡처</span>
+    <span id="capdate">화면은 2026-10-15 캡처</span>
   </footer>
 </div>
 
 <script>
 (function () {
-  var t = new Date();
-  var pad = function (n) { return String(n).padStart(2, '0'); };
-  document.getElementById('today').textContent =
-    t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()) + ' 기준';
+  var d = new Date();
+  var p = function (n) { return String(n).padStart(2, '0'); };
+  document.getElementById('today').textContent = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' 기준';
+
   var grid = document.getElementById('grid');
-  var btns = document.querySelectorAll('.filters button');
-  btns.forEach(function (b) {
+  var catBtns = document.querySelectorAll('.filter-row:first-of-type button');
+  var typeBtns = document.querySelectorAll('.type-row button');
+  var activeCat = 'all', activeType = 'all';
+
+  function applyFilters() {
+    var any = activeCat !== 'all' || activeType !== 'all';
+    grid.classList.toggle('filtered', any);
+    grid.querySelectorAll('.card').forEach(function (c) {
+      var cm = activeCat === 'all' || c.dataset.cat === activeCat;
+      var tm = activeType === 'all' || c.dataset.type === activeType;
+      c.hidden = !(cm && tm);
+    });
+  }
+
+  catBtns.forEach(function (b) {
     b.addEventListener('click', function () {
-      var c = b.dataset.cat;
-      btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      grid.classList.toggle('filtered', c !== 'all');
-      grid.querySelectorAll('.card').forEach(function (card) {
-        card.hidden = c !== 'all' && card.dataset.cat !== c;
-      });
+      activeCat = b.dataset.cat;
+      catBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      applyFilters();
+    });
+  });
+
+  typeBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      activeType = b.dataset.type;
+      typeBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      applyFilters();
     });
   });
 })();
 </script>
+</body>
+</html>

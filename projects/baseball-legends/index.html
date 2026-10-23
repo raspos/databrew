@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>추강대엽+김 — databrew</title>
+<meta name="description" content="추신수·강민호·이대호·오승환·김현수 한국 야구 레전드 5인 통산 기록 비교 인터랙티브 아카이브">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">스포츠 · EXPERIENCE</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type experience">EXPERIENCE</span>
+      <span class="badge-cat">스포츠</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>추강대엽+김</h1>
+    <p class="tagline">한국 야구 레전드 5인의 통산 기록을 한 화면에서</p>
+    <p class="hero-desc">추신수·강민호·이대호·오승환·김현수. KBO와 MLB를 가로지른 한국 야구 레전드 5인의 통산 기록을 시즌별·리그별로 비교하고 주요 마일스톤을 탐색합니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/baseball-legends.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/cgdy-v4.png" alt="추강대엽+김 메인 화면: 레전드 5인 선수 카드와 통산 기록 비교 차트">
+  <p class="shot-cap">추강대엽+김 메인 화면 — 5인 선수 카드와 시즌별 타율·홈런·세이브 비교 차트. 2026-10-15 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>왜 만들었는가</h2>
+    <p>한국 야구 팬이라면 추신수·이대호·오승환의 이름은 알지만 커리어 전체를 한눈에 비교할 수 있는 곳은 없었다. KBO와 MLB에 걸친 기록이 흩어져 있어 단순 비교조차 쉽지 않다.</p>
+    <p>5인의 시즌별 전 기록을 KBO·MLB·NPB·MLB 마이너로 구분해 통합하고, 인터랙티브 차트로 커리어 흐름을 한 화면에서 비교할 수 있도록 만들었다. 추신수의 MLB 2,185안타와 오승환의 KBO+MLB 통산 세이브를 같은 척도로 볼 수 있는 도구다.</p>
+    <p class="note">수록 선수: 추신수(외야수·타자), 강민호(포수·타자), 이대호(1루수·타자), 오승환(마무리·투수), 김현수(외야수·타자). KBO 공식 기록 + MLB Baseball Reference 기준.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">5인 통산 기록 탐색</div>
+        <p>타율·홈런·안타·출루율·OPS(타자), 평균자책점·세이브·WHIP(투수) 기준으로 시즌별 기록을 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">KBO·MLB 리그별 분리</div>
+        <p>KBO·MLB·NPB 리그별 기록을 분리해 보거나 통합해서 비교합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">커리어 타임라인</div>
+        <p>5인의 나이별 주요 스탯 변화를 겹쳐 보며 전성기와 커리어 흐름을 비교합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">주요 마일스톤 하이라이트</div>
+        <p>통산 기록 돌파, 수상 내역, 이적·데뷔·은퇴 등 주요 사건을 타임라인 위에 표시합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">상대 비교 레이더 차트</div>
+        <p>선택한 두 선수의 여러 스탯을 레이더 차트로 나란히 비교합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">원문 출처 확인</div>
+        <p>KBO 공식 기록과 Baseball Reference 페이지로 직접 연결됩니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>데이터와 분석 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">KBO 공식 기록실</div>
+        <div class="data-desc">KBO 리그 시즌별 타격·투구 성적 원자료. 강민호·이대호·오승환·김현수 국내 기록.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Baseball Reference</div>
+        <div class="data-desc">MLB·마이너리그 시즌별 성적. 추신수·오승환·이대호·김현수 미국 기록.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Statcast / Fangraphs</div>
+        <div class="data-desc">MLB 고급 스탯(wRC+, fWAR, K%, BB%) 참고. 비교 맥락 제공 용도.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">포스트시즌 기록은 별도 표기하며 통산 기록에 포함하지 않습니다. 기록 기준: 2024 시즌 종료 기준.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>어떻게 활용할 수 있는가</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">야구 팬</div>
+        <p>좋아하는 선수의 커리어 전체를 한눈에 탐색하고 다른 레전드와 비교합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">스포츠 콘텐츠 제작자</div>
+        <p>선수 비교 콘텐츠 제작 시 정확한 기록과 출처를 빠르게 확인합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">야구 데이터 연구자</div>
+        <p>KBO·MLB를 아우르는 장기 커리어 데이터를 탐색하고 분석의 출발점으로 활용합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">정적 HTML/CSS/JavaScript</span>
+      <span class="tech-tag">Python (데이터 수집·정제)</span>
+      <span class="tech-tag">Claude Code</span>
+      <span class="tech-tag">Claude.ai Artifact</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">KBO 공식 기록과 Baseball Reference 데이터를 Python으로 수집·정제해 JSON으로 빌드. 단일 HTML 파일로 Claude.ai Artifact에 배포합니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>2024 시즌 종료 기준 기록 수록. 신규 시즌 종료 후 수동 갱신 필요.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="../../content/baseball-legends.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../son-goal-museum/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>손흥민 골 기념관</strong>
+        <span>302골 출처 검증 디지털 아카이브</span>
+      </a>
+      <a class="other-card" href="../all-time-xi/">
+        <span class="other-type experience">EXPERIENCE</span>
+        <strong>올타임 베스트 11</strong>
+        <span>역대 국가대표로 드림팀 구성</span>
+      </a>
+      <a class="other-card" href="../korea-ranked/">
+        <span class="other-type data">DATA</span>
+        <strong>국뽕의 과학</strong>
+        <span>공식 통계 53개로 보는 한국 순위</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+</body>
+</html>

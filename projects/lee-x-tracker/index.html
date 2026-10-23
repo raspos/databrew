@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이재명 X 트래커 — databrew</title>
+<meta name="description" content="이재명 대통령 X(트위터) 게시물 1,065건을 AI로 분류·분석한 디지털 발언 아카이브">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">정치 · INTELLIGENCE</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type intelligence">INTELLIGENCE</span>
+      <span class="badge-cat">정치</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>이재명<br>X 트래커</h1>
+    <p class="tagline">대통령의 1,065건 게시물을 한 자리에</p>
+    <p class="hero-desc">이재명 대통령이 X(구 트위터)에 게시한 1,065건의 게시물을 AI로 분류·감정 분석하고 시계열·주제별로 탐색할 수 있도록 정리한 발언 아카이브입니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://lee-x-tracker.raspos.chatgpt.site/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/lee-x-tracker.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/lee-x.png" alt="이재명 X 트래커 메인 화면: 게시물 시계열 차트와 주제별 분류 통계">
+  <p class="shot-cap">이재명 X 트래커 메인 화면 — 1,065건 게시물 시계열 및 주제 분류 현황. 2026-10-15 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>왜 만들었는가</h2>
+    <p>대통령의 X 게시물은 공식 입장이 아닌 경우도 있지만, 실시간으로 올라오는 발언이어서 정치적 메시지를 추적하는 데 중요한 1차 소스다. 그러나 검색 기능이 제한적인 X 특성상 과거 게시물을 체계적으로 분석하기 어렵다.</p>
+    <p>AI 분류를 통해 게시물을 경제·외교·복지·정치 등 주제별로 정리하고, 시계열 변화와 감정 톤을 함께 볼 수 있도록 만들었다. 팩트체킹, 이슈 추적, 정책 발언 정리에 활용할 수 있다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">1,065건 전수 탐색</div>
+        <p>날짜·주제·키워드로 필터링해 원하는 게시물을 빠르게 찾아봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">주제별 AI 분류</div>
+        <p>경제·외교·복지·정치 등 주제별 분류 결과와 분류 근거를 함께 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">게시물 시계열 분석</div>
+        <p>일별·주별·월별 게시 빈도와 주제 비중 변화를 차트로 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">AI 감정 분석</div>
+        <p>게시물별 감정 톤(긍정·부정·중립) 분포와 시기별 변화를 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">지지율 비교 연동</div>
+        <p>주요 여론조사 지지율 데이터와 게시 패턴을 나란히 비교합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">원문 직접 링크</div>
+        <p>각 게시물에서 X 원문 링크로 바로 이동해 맥락을 확인합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>데이터와 분석 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">X (트위터) API</div>
+        <div class="data-desc">이재명 대통령 공식 X 계정 게시물 수집. 본문·날짜·좋아요·리트윗·링크 포함.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">OpenAI API (GPT-4)</div>
+        <div class="data-desc">게시물별 주제 분류 및 감정 분석. 분류 체계: 경제·외교·복지·정치·기타 5대 범주. 프롬프트와 분류 기준 공개.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">여론조사 데이터</div>
+        <div class="data-desc">주요 기관 주간 지지율 조사 결과. 게시 패턴 비교 분석용으로만 활용.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">AI 분류 결과는 자동 분류이며 오류가 있을 수 있습니다. 분류 기준과 프롬프트를 서비스 내에서 공개합니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>어떻게 활용할 수 있는가</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">정치부 기자</div>
+        <p>특정 이슈·날짜에 대통령이 어떤 발언을 했는지 빠르게 확인하고 원문 링크를 확보합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">팩트체커·연구자</div>
+        <p>발언 아카이브를 시계열로 추적해 입장 변화나 패턴을 분석합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">정치 관심 독자</div>
+        <p>주제별로 정리된 게시물을 통해 대통령의 관심사와 메시지 변화를 일목요연하게 파악합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">OpenAI API (GPT-4)</span>
+      <span class="tech-tag">X API v2</span>
+      <span class="tech-tag">ChatGPT.site</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>1,065건 수록. 신규 게시물 갱신 시 수동 업데이트 필요.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://lee-x-tracker.raspos.chatgpt.site/" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="../../content/lee-x-tracker.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../watchdog/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>Watchdog</strong>
+        <span>의정 활동 AI 모니터링 시스템</span>
+      </a>
+      <a class="other-card" href="../son-goal-museum/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>손흥민 골 기념관</strong>
+        <span>302골 출처 검증 디지털 아카이브</span>
+      </a>
+      <a class="other-card" href="../economist-toolkit/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>경제학자의 도구상자</strong>
+        <span>노벨경제학상 수상자 50년 분석</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+</body>
+</html>

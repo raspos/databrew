@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대한민국 자영업자로 살아남기 — databrew</title>
+<meta name="description" content="자영업 폐업률·업종별 생존율·지역별 포화도를 데이터로 탐색하는 인터랙티브 시뮬레이터">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">경제 · EXPERIENCE</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type experience">EXPERIENCE</span>
+      <span class="badge-cat">경제</span>
+      <span class="badge-status restricted">로그인 필요</span>
+    </div>
+    <h1>대한민국<br>자영업자로<br>살아남기</h1>
+    <p class="tagline">창업 전에 데이터로 먼저 폐업해 보세요</p>
+    <p class="hero-desc">업종·지역·창업 시기를 선택하면 실제 폐업률·생존율·경쟁 밀도를 보여주는 인터랙티브 데이터 시뮬레이터. 국세청·소상공인시장진흥공단 공개 데이터 기반.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://self-employed-survival.raspos.chatgpt.site/#setup" target="_blank" rel="noopener">서비스 접속하기 ↗</a>
+      <a class="btn-secondary" href="../../content/self-employed.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<main class="content" style="padding-top:48px">
+
+  <section class="section" style="margin-top:0;border-top:none;padding-top:0">
+    <div class="status-box restricted" style="margin-bottom:32px">
+      <span class="status-label">로그인 필요</span>
+      <p>현재 초대 접근 방식으로 운영됩니다.</p>
+    </div>
+  </section>
+
+  <section class="section" style="margin-top:0;border-top:none">
+    <div class="sec-label">01 / WHY</div>
+    <h2>왜 만들었는가</h2>
+    <p>매년 100만 명 이상이 자영업에 뛰어들고 80만 명 가까이 폐업한다. "해보기 전엔 모른다"는 말과 달리, 업종과 지역을 선택하면 폐업 확률을 꽤 정확히 추정할 수 있는 데이터가 이미 존재한다.</p>
+    <p>국세청 사업자 등록·폐업 통계와 소상공인시장진흥공단 상권 데이터를 결합해 "내가 선택한 업종·지역의 실제 생존율"을 창업 전에 데이터로 확인할 수 있도록 만들었다.</p>
+    <p class="note">생존율은 업종·지역 기준 통계 추정값이며 개별 사업의 성공을 보장하지 않습니다. 창업 결정에 앞서 전문가 상담을 권장합니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">업종별 생존율 탐색</div>
+        <p>한식·카페·미용·학원 등 50여 개 업종의 1·3·5년 생존율을 비교합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">지역별 포화도 지도</div>
+        <p>읍면동 단위 상권 밀도와 인구당 사업체 수를 지도 위에서 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">내 창업 시나리오 시뮬레이션</div>
+        <p>업종·지역·자본금을 입력하면 비슷한 조건 사업자의 폐업률 통계를 제시합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">업종 트렌드 추이</div>
+        <p>최근 5년 창업·폐업 추이로 '뜨는 업종'과 '지는 업종'을 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">폐업 이유 분석</div>
+        <p>소상공인진흥공단 조사 기반 폐업 이유 분포와 업종별 차이를 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">지원 정책 연결</div>
+        <p>소상공인 창업 및 폐업 지원 정책 링크를 제공합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>데이터와 분석 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">국세청 국세통계포털</div>
+        <div class="data-desc">업종별·지역별 사업자 등록·폐업 현황. 연도별 시계열 데이터.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">소상공인시장진흥공단</div>
+        <div class="data-desc">상권 분석 서비스 데이터. 읍면동 단위 업종별 사업체 밀도, 매출 추정치.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">통계청 전국사업체조사</div>
+        <div class="data-desc">업종별 사업체 수·종사자 수 5년 주기 조사 데이터.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">ChatGPT.site</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box restricted">
+      <span class="status-label">로그인 필요</span>
+      <p>현재 초대 접근 방식으로 운영 중. 일반 공개는 데이터 검증 완료 후 진행 예정.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://self-employed-survival.raspos.chatgpt.site/#setup" target="_blank" rel="noopener">서비스 접속하기 ↗</a>
+      <a class="link-btn" href="../../content/self-employed.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bibigo-index/">
+        <span class="other-type data">DATA</span>
+        <strong>비비고지수</strong>
+        <span>만두로 읽는 세계 물가와 환율</span>
+      </a>
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>반도체 수출 20년 통관데이터 분석</span>
+      </a>
+      <a class="other-card" href="../baseball-legends/">
+        <span class="other-type experience">EXPERIENCE</span>
+        <strong>추강대엽+김</strong>
+        <span>한국 야구 레전드 5인 기록 비교</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+</body>
+</html>

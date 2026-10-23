@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOK워치 — databrew</title>
+<meta name="description" content="한국은행 금통위 금리 결정 확률을 KOFR 선물 모형으로 추정하는 데이터 서비스">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">경제 · DATA</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">경제</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>BOK워치</h1>
+    <p class="tagline">한국은행 통화정책을 데이터로 읽다</p>
+    <p class="hero-desc">다음 금통위 금리 결정을 시장 데이터로 추정하는 서비스. KOFR 선물 가격에서 역산한 모형 확률, 총재 발언과 의사록, 전문가 전망을 한 화면에서 봅니다. 매일 오전 10시 자동 갱신됩니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/bokwatch.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/bokwatch.png" alt="BOK워치 메인 화면: 금통위 동결 확률 게이지와 회의별 기대 기준금리 표">
+  <p class="shot-cap">BOK워치 메인 화면 — 다음 금통위 동결·인하 확률 게이지와 회의별 기대 기준금리 전망표. 2026-10-15 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>왜 만들었는가</h2>
+    <p>금리 전망은 언론이 "전문가들은 동결 예상"이라고 전하지만, 정작 시장이 실제로 어느 정도 확률로 금리 변화를 기대하는지는 별도의 계산 없이 알 수 없었다. 금융시장에서는 KOFR 선물 가격에 그 집단 판단이 이미 녹아 있다.</p>
+    <p>이를 모형으로 전환해 동결·인하·인상 확률을 숫자로 제시하고, 총재 발언·의사록·기관 전망을 같은 화면에서 비교할 수 있도록 만들었다. 단순한 전문가 의견 모음이 아닌, 데이터 기반의 확률로 통화정책을 읽는 도구를 목표로 한다.</p>
+    <p class="note">모형 확률은 KOFR 선물 가격을 역산한 추정값으로, 시장의 확정적 전망이 아닙니다. 모형의 가정과 한계는 서비스 안에서 함께 공개합니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">금리 결정 확률 추정</div>
+        <p>다음 금통위 회의의 동결·인하·인상 확률을 KOFR 선물 기반 모형으로 추정해 게이지로 표시합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">회의별 기대 금리 전망</div>
+        <p>앞으로 예정된 금통위 회의별로 시장이 기대하는 기준금리 수준을 표로 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">확률 변화 히스토리</div>
+        <p>동결 확률이 어떻게 변해 왔는지 날짜별 추이를 그래프로 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">통방문 문구 비교</div>
+        <p>회의별 통화정책방향 결정문(통방문)의 문구 변화를 이전 회의와 나란히 비교합니다. 매파·비둘기 보조점수도 표시합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">총재 발언 및 의사록</div>
+        <p>한국은행 총재 공개 발언과 의사록 요약을 확인하고, 소수의견과 점도표를 함께 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">기관 전망 컨센서스</div>
+        <p>증권사·IB 등 주요 기관의 금리 전망을 모아 컨센서스로 정리합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">주요 경제지표 일정</div>
+        <p>미국 FOMC, CPI, 고용 일정과 한국 주요 지표 발표 일정을 캘린더로 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">AI 종합 판단 참고 지표</div>
+        <p>네이버 뉴스 기사에서 AI가 추출한 통화정책 압력 신호를 참고 지표로 제공합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>데이터와 분석 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">ECOS (한국은행)</div>
+        <div class="data-desc">기준금리(722Y001) 및 CD 91일 시장금리(817Y002) 자동 수집. 금리 모형의 핵심 입력 데이터.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">KRX Open API</div>
+        <div class="data-desc">KOFR 3개월 선물 정산가격 수집. KOFR 선물 → 회의별 동결·인하·인상 확률 역산에 사용.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">한국은행 공식 사이트</div>
+        <div class="data-desc">통화정책방향 결정문 원문, 의사록 목록, 점도표 수집. 문구 변화 분석의 기반.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">연합뉴스 RSS</div>
+        <div class="data-desc">총재 관련 기사 자동 수집·필터링.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">수기 입력 (data/reports.yaml)</div>
+        <div class="data-desc">기관 전망, 총재 발언 발췌, 주요 경제 일정을 YAML로 직접 입력·관리.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">OpenAI API</div>
+        <div class="data-desc">네이버 뉴스 기사 분류·태깅, 통화정책 압력지수 생성. AI 참고 지표로만 활용.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">갱신 주기: 매일 오전 10시 GitHub Actions 자동 실행. 기관 전망·발언 항목은 수동 입력 후 배포.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>어떻게 활용할 수 있는가</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">경제·금융 기자</div>
+        <p>금통위 보도 전 시장 기대 확률과 전문가 컨센서스를 한 화면에서 확인해 기사 배경으로 활용합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">금융·투자 업무 종사자</div>
+        <p>동결 확률 변화 추이와 의사록 소수의견을 함께 보며 통화정책 방향 변화 신호를 모니터링합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">경제학·금융 연구자</div>
+        <p>KOFR 선물 기반 확률 모형의 방법론과 백테스트 결과를 직접 확인하고 참고 자료로 활용합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">d3.js v7.9</span>
+      <span class="tech-tag">정적 HTML/CSS/JS</span>
+      <span class="tech-tag">Cloudflare Pages</span>
+      <span class="tech-tag">GitHub Actions</span>
+      <span class="tech-tag">OpenAI API</span>
+      <span class="tech-tag">ECOS API</span>
+      <span class="tech-tag">KRX Open API</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+    <p style="margin-top:14px; font-size:14px; color:var(--muted)">정적 HTML 사이트로 빌드 결과물을 Cloudflare Pages에 배포합니다. GitHub Actions가 매일 데이터를 수집·빌드해 자동 배포합니다. 브라우저는 서버 없이 같은 출처 JSON만 읽습니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>매일 오전 10시 자동 갱신 운영 중. 금통위 회의 직전후 수기 데이터(기관 전망, 총재 발언) 추가 필요.</p>
+    </div>
+    <p style="margin-top:12px;font-size:13px;color:var(--muted)">현재 기준: 2026-10-23. 데이터 기준일은 서비스 메인 화면에서 확인.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="../../content/bokwatch.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>반도체 수출 20년 통관데이터 분석</span>
+      </a>
+      <a class="other-card" href="../korea-ranked/">
+        <span class="other-type data">DATA</span>
+        <strong>국뽕의 과학</strong>
+        <span>공식 통계 53개로 보는 한국의 세계 순위</span>
+      </a>
+      <a class="other-card" href="../bibigo-index/">
+        <span class="other-type data">DATA</span>
+        <strong>비비고지수</strong>
+        <span>만두 100g으로 읽는 세계 물가와 환율</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>국뽕의 과학 — databrew</title>
+<meta name="description" content="세계은행·OECD·WIPO 등 공식 통계 53개로 측정하는 한국의 세계 순위 인터랙티브 탐색기">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">사회 · DATA</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">사회</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>국뽕의<br>과학</h1>
+    <p class="tagline">공식 통계 53개로 측정하는 한국의 세계 순위</p>
+    <p class="hero-desc">세계은행·OECD·WIPO·UNDP·IFR·IOC 등 국제기구 공식 통계 53개 지표로 측정한 한국의 세계 순위를 인터랙티브로 탐색합니다. 50년 타임라인, 국가 비교, 퀴즈까지 제공합니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://korea-ranked.vercel.app/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/korea-ranked.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/korea.png" alt="국뽕의 과학 메인 화면: 한국 세계 순위 지표 카드 그리드와 필터 패널">
+  <p class="shot-cap">국뽕의 과학 메인 화면 — 53개 지표 카드 탐색기와 국가 비교 모드. 2026-10-15 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>왜 만들었는가</h2>
+    <p>"한국이 세계 몇 위야?" 하는 질문은 맥락 없이 오가는 경우가 많다. 경제 규모는 상위권이지만 노동시간·불평등·자살률에서는 최하위권이기도 하다. 전체 지표를 한 화면에서 보기 전까지 어느 쪽이 '사실'인지 알기 어렵다.</p>
+    <p>53개 지표를 국제기구 공식 출처만으로 선별하고, 선택적으로 인용하거나 자의적으로 해석하지 않도록 맥락 설명을 붙였다. '국뽕'이라는 제목은 한국에 대한 과잉 자부심과 과잉 비관 모두를 함께 검토하자는 의미입니다.</p>
+    <p class="note">데이터 출처: 세계은행, OECD, WIPO, UNDP, IFR(국제로봇연맹), IOC, WHO, ILO, IMF 공식 발표 데이터만 수록. 비교 대상 국가 수는 지표마다 다릅니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">53개 지표 탐색</div>
+        <p>경제·기술·사회·환경·스포츠 카테고리로 필터링해 원하는 지표의 한국 순위와 값을 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">국가별 비교</div>
+        <p>최대 5개국을 선택해 53개 지표 전체에서 나란히 비교합니다. G7·OECD 회원국 기준 필터도 제공합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">50년 타임라인</div>
+        <p>1973년부터 2023년까지 한국이 어떤 지표에서 어떻게 순위가 바뀌었는지 연도별로 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">세계지도 시각화</div>
+        <p>지표별로 세계 지도 위에 각국 순위와 값을 색상으로 표시합니다. D3 Geo·TopoJSON 기반.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">순위 퀴즈 (28문항)</div>
+        <p>28개 지표에서 한국 순위를 맞히는 인터랙티브 퀴즈로 '내가 얼마나 알고 있나'를 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">출처 투명 공개</div>
+        <p>모든 지표에서 국제기구 원문 출처 링크와 최신 데이터 기준 연도를 함께 표시합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>데이터와 분석 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">세계은행</div>
+        <div class="data-desc">GDP, 무역액, R&D 투자, 인터넷 보급률, 기대수명, 유아사망률 등 거시·사회 지표.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">OECD</div>
+        <div class="data-desc">연평균 노동시간, 소득불평등(지니), 교육비 지출, 노인 빈곤율, 자살률, 삶의 만족도.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">WIPO</div>
+        <div class="data-desc">글로벌 혁신지수(GII), 특허 출원 건수, 상표·디자인 등록.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">UNDP</div>
+        <div class="data-desc">인간개발지수(HDI), 젠더불평등지수(GII), 다차원빈곤지수.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">IFR (국제로봇연맹)</div>
+        <div class="data-desc">제조업 로봇 밀도(근로자 1만 명당 설치 대수).</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">IOC·FIFA·기타</div>
+        <div class="data-desc">하계올림픽 메달 순위, FIFA 랭킹, e스포츠 대회 성적.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">모든 데이터는 국제기구 공식 발표 원자료만 수록하며, 2차 가공 통계는 사용하지 않습니다. 데이터 기준 연도는 지표마다 다릅니다 (각 지표 상세 화면에서 확인).</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>어떻게 활용할 수 있는가</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">경제·사회 기자</div>
+        <p>한국의 특정 지표 순위를 국제 비교 맥락에서 확인하고 공식 출처를 바로 확보합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">교육·연구 목적</div>
+        <p>사회과학·경제학 수업에서 국제 비교 지표를 인터랙티브로 탐색하고 50년 변화를 이해합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">일반 독자</div>
+        <p>퀴즈로 자신이 실제로 한국 순위를 얼마나 정확히 알고 있는지 확인합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Next.js</span>
+      <span class="tech-tag">React</span>
+      <span class="tech-tag">TypeScript</span>
+      <span class="tech-tag">Tailwind CSS 4</span>
+      <span class="tech-tag">Recharts</span>
+      <span class="tech-tag">D3 Geo / TopoJSON</span>
+      <span class="tech-tag">Python (데이터 파이프라인)</span>
+      <span class="tech-tag">Vercel</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">국제기구 공개 API 및 다운로드 파일을 Python 파이프라인으로 정제해 JSON으로 변환. Next.js + Tailwind CSS 4로 렌더링하며 Vercel에 배포합니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>53개 지표 수록. 국제기구 데이터 갱신 주기에 맞춰 연 1회 업데이트 예정.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://korea-ranked.vercel.app/" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="../../content/korea-ranked.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>반도체 수출 20년 통관데이터 분석</span>
+      </a>
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK워치</strong>
+        <span>한국은행 금리 결정 확률 모니터</span>
+      </a>
+      <a class="other-card" href="../bibigo-index/">
+        <span class="other-type data">DATA</span>
+        <strong>비비고지수</strong>
+        <span>만두로 읽는 세계 물가와 환율</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+</body>
+</html>
