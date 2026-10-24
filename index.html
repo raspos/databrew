@@ -8,7 +8,7 @@
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@700;800&display=swap">
 <style>
 :root {
   --board: #f6f2ea;
@@ -252,14 +252,72 @@ html.js header h1 .brw { background: linear-gradient(to bottom, #fff 50%, var(--
   .sub .w-data { color: var(--data-c); } .sub .w-exp { color: var(--exp-c); } .sub .w-int { color: var(--intel-c); }
 }
 @media (max-width: 600px) { .wrap { padding-top: 44px; } header { margin-bottom: 32px; padding-bottom: 24px; } }
+
+/* ===== Brand: data BREW (navy + peach + copper) ===== */
+:root { --navy: #062433; --peach: #f2c4a0; --copper: #b98558; }
+.wrap { padding-top: 0; }
+header { position: relative; overflow: hidden; isolation: isolate; background: var(--navy); color: var(--peach);
+  margin: 0 calc(50% - 50vw) 40px; padding: 72px max(20px, calc(50vw - 570px)) 56px; border-bottom: 0; align-items: flex-end; }
+body { overflow-x: hidden; }
+.hl { position: relative; z-index: 1; }
+.hright { position: relative; z-index: 1; }
+header .eyebrow { color: var(--peach); opacity: .75; margin: 0 0 22px; }
+.tagl { margin: 0 0 6px; font-weight: 600; font-size: 15px; color: var(--peach); letter-spacing: -.01em; }
+.tagl2 { margin: 18px 0 0; font-size: clamp(16px, 2.2vw, 20px); font-weight: 500; color: #fff; letter-spacing: -.01em; }
+header h1.wm { font-family: "Outfit", "IBM Plex Sans KR", sans-serif; font-weight: 800; letter-spacing: -.035em; line-height: .86; text-wrap: nowrap; }
+html.js header h1 .wm-data { display: block; font-size: clamp(46px, 8.6vw, 92px); text-transform: lowercase; color: var(--peach) !important; position: relative; width: max-content; }
+.wm-data .deg { display: inline-block; width: .17em; height: .17em; border-radius: 50%; background: var(--peach); margin-left: .06em; vertical-align: .78em; }
+html.js header h1 .brw { display: block; font-size: clamp(78px, 16.5vw, 178px); letter-spacing: -.03em; margin-top: .02em; width: max-content;
+  background: linear-gradient(to bottom, transparent 50%, var(--peach) 50%) 0 0 / 100% 200% no-repeat;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px var(--peach);
+  animation: rise .7s ease-out .55s forwards, brewcycle 12s ease-in-out 0s infinite; }
+header .sub { color: rgba(242,196,160,.82); max-width: 56ch; margin-top: 22px; }
+.sub .w-data { --c: #7db8ee; } .sub .w-exp { --c: #7fd3a0; } .sub .w-int { --c: #c9a8ee; }
+header .today { color: rgba(242,196,160,.6); }
+.drip .line { stroke: var(--peach); opacity: .85; }
+.drip .level { fill: var(--copper); }
+.drip .dt { fill: var(--peach); }
+.drip .grounds text { fill: var(--peach); opacity: .5; }
+.drip .steam path { stroke: var(--peach); }
+
+/* copper drip streams + bokeh (from the brand video) */
+.bars { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.bars i { position: absolute; top: 0; bottom: 0; width: 13px; background: repeating-linear-gradient(to bottom, var(--copper) 0 56px, transparent 56px 118px); opacity: .42;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%);
+  animation: flow 9s linear infinite; }
+.bars i:nth-child(1) { left: 54%; animation-duration: 11s; }
+.bars i:nth-child(2) { left: 58%; animation-duration: 8s; }
+.bars i:nth-child(3) { left: 62%; animation-duration: 13s; }
+.bars i:nth-child(4) { left: 66%; animation-duration: 9.5s; }
+.bars i:nth-child(5) { left: 70%; animation-duration: 12s; }
+@keyframes flow { to { background-position: 0 118px; } }
+.bars .bk { position: absolute; border-radius: 50%; background: var(--copper); filter: blur(2px); opacity: .22; animation: bokeh 14s ease-in-out infinite; }
+.bars .k1 { width: 74px; height: 74px; left: 46%; top: 10%; }
+.bars .k2 { width: 56px; height: 56px; left: 76%; top: 62%; animation-delay: -5s; }
+.bars .k3 { width: 90px; height: 90px; left: 88%; top: 14%; animation-delay: -9s; opacity: .14; }
+@keyframes bokeh { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(14px, -20px); } }
+.drip { width: 150px; }
+@media (max-width: 600px) {
+  .drip { width: 96px; }
+  header { padding-top: 48px; padding-bottom: 40px; margin-bottom: 28px; }
+  .bars i:nth-child(n+4) { display: none; }
+  .bars i:nth-child(1) { left: 60%; } .bars i:nth-child(2) { left: 70%; } .bars i:nth-child(3) { left: 80%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bars i, .bars .bk { animation: none !important; }
+  html.js header h1 .brw { background-position: 0 100% !important; }
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div>
+    <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b class="bk k1"></b><b class="bk k2"></b><b class="bk k3"></b></div>
+    <div class="hl">
       <p class="eyebrow">독립 데이터저널리즘 프로젝트</p>
-      <h1><span class="acl">data</span><span class="brw">brew</span></h1>
+      <p class="tagl">:사실은 진하다</p>
+      <h1 class="wm" aria-label="data BREW"><span class="acl wm-data" aria-hidden="true">data<i class="deg"></i></span><span class="brw" aria-hidden="true">BREW</span></h1>
+      <p class="tagl2">데이터로 내린 풍미깊은 뉴스</p>
       <p class="sub">기자가 AI로 만든 데이터 저널리즘 프로젝트 12개. 데이터를 탐색하고(<span class="w-data">DATA</span>),<br>직접 경험하며(<span class="w-exp">EXPERIENCE</span>), 기록과 지식을 쌓아 간다(<span class="w-int">INTELLIGENCE</span>).<br>모든 프로젝트는 서로 이어져 있습니다.</p>
     </div>
     <div class="hright">
