@@ -193,8 +193,8 @@ footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
 @keyframes ripple { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(5, 3); } }
 @keyframes fillcup { 0% { transform: translateY(34px); } 78% { transform: translateY(2px); } 92% { transform: translateY(2px); opacity: 1; } 100% { transform: translateY(2px); opacity: 0; } }
 @keyframes steam { 0% { opacity: 0; stroke-dashoffset: 0; transform: translateY(6px); } 30% { opacity: .55; } 100% { opacity: 0; stroke-dashoffset: -40; transform: translateY(-10px); } }
-html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, var(--coffee) 50%) 0 0 / 100% 200% no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; animation: rise .7s ease-out .55s forwards, brewfill 5s ease-in-out 1.1s forwards; }
-@keyframes brewfill { to { background-position: 0 100%; } }
+html.js header h1 .brw { background: linear-gradient(to bottom, #fff 50%, var(--coffee) 50%) 0 0 / 100% 200% no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px var(--ink); animation: rise .7s ease-out .55s forwards, brewcycle 12s ease-in-out 0s infinite; }
+@keyframes brewcycle { 0% { background-position: 0 0; } 78%, 92% { background-position: 0 100%; } 100% { background-position: 0 0; } }
 @media (prefers-reduced-motion: reduce) {
   .drip .dt, .drip .ripple { display: none; }
   .drip .level, .drip .steam path, .drip .grounds text { animation: none; }
@@ -293,7 +293,6 @@ html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, 
     <div class="stat"><b data-to="711">711</b><span>반도체 수출 관측치 (237개월)</span></div>
     <div class="stat"><b data-to="53">53</b><span>국제기구 공식 통계 지표</span></div>
     <div class="stat"><b data-to="56">56</b><span>노벨경제학상 수상자 지도</span></div>
-    <div class="stat"><b data-to="138">138</b><span>슈팅 위치·xG까지 기록한 골</span></div>
   </div>
 
   <nav class="filter-row" aria-label="분야별 필터">
