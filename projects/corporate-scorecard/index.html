@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기업 모멘텀 랭킹 — databrew</title>
+<meta name="description" content="OpenDART 공시로 상장기업의 3년 재무 개선도를 측정하는 기업 모멘텀 랭킹. 가장 큰 기업이 아니라 가장 크게 달라진 기업을 찾습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">경제 · DATA</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">경제</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>기업 모멘텀<br>랭킹</h1>
+    <p class="tagline">지난 3년, 가장 좋아진 기업은?</p>
+    <p class="hero-desc">상장기업의 재무제표로 성장성·수익성·재무건전성·현금창출력의 변화를 측정합니다. 기업의 현재 규모가 아니라 2022~2025년 성과의 개선 속도와 질을 평가합니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/korea-corporate-scorecard/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/corporate-scorecard.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/corporate-scorecard.png" alt="기업 모멘텀 랭킹 메인 화면: 지난 3년 가장 좋아진 기업은 제목과 모멘텀 종합·성장·수익성 부문 잠정 1위 카드">
+  <p class="shot-cap">기업 모멘텀 랭킹 메인 화면 — 2022~2025 모멘텀 평가, 잠정 순위. 2026-10-24 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>왜 만들었는가</h2>
+    <p>기업 순위는 대개 매출이나 자산이 큰 순서로 매겨진다. 하지만 투자자와 독자가 궁금한 것은 지금 크기가 아니라 어느 기업이 실제로 좋아지고 있는가다.</p>
+    <p>금융감독원 OpenDART 공시 재무제표로 3년간의 변화를 측정해 "가장 큰 기업이 아니라, 가장 크게 달라진 기업"을 찾도록 만들었다.</p>
+    <p class="note">현재 순위는 잠정입니다. 공시 원문·정정공시, 연결·별도 재무제표, 시장·업종 분류, 이상치 검증이 진행 중이어서 결과가 바뀔 수 있습니다. 점수는 비교 그룹 내 상대 평가이며 절대 평가가 아닙니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">기업 모멘텀 지수 (CII)</div>
+        <p>2022~2025년 재무 개선도를 측정합니다. 데이터가 완전한 기업을 대상으로 잠정 순위를 공개합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">재무체력 지수 (FSI)</div>
+        <p>2025년 수익성·재무안정성·현금창출력·자산효율을 평가하며, 모멘텀과 별도로 보여 줍니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">턴어라운드 기업</div>
+        <p>현재 재무는 약하지만 최근 회복세를 보이는 기업을 따로 모아 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">기업 모멘텀 지도</div>
+        <p>FSI(가로)와 CII(세로) 좌표 위에 기업을 배치해 체력과 개선 속도를 한눈에 비교합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">규모별 그룹과 특별 렌즈</div>
+        <p>2024~2025 평균 총자산 기준 그룹, 매출 성장·흑자 전환 같은 특별 렌즈로 탐색합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">기업 맞대결과 다운로드</div>
+        <p>최대 3개 기업을 나란히 비교하고, 결과를 CSV·Excel로 내려받을 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>데이터와 분석 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">금융감독원 OpenDART</div>
+        <div class="data-desc">상장기업 공시 재무제표. 성장성·수익성·재무건전성·현금창출력 지표 산출의 원자료.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">모멘텀 지수 (CII)</div>
+        <div class="data-desc">2022~2025년 개선도 측정. 비교 그룹 내 상대 점수로 환산합니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">재무체력 지수 (FSI)</div>
+        <div class="data-desc">2025년 수익성·재무안정성·현금창출력·자산효율 평가. CII와 분리해 보고합니다.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">규모 그룹은 2024~2025 평균 총자산 기준의 평가 구간이며 법적 기업 규모 분류가 아닙니다. 2026년 분기 수치는 2025년 연간 평가에 포함하지 않습니다. 방법론·모형 검증·수집 품질 현황은 서비스 안에 공개돼 있습니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>어떻게 활용할 수 있는가</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">경제·기업 담당 기자</div>
+        <p>규모가 아닌 변화를 기준으로 주목할 기업을 찾고, 원 공시와 대조할 출발점으로 삼습니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">투자자·애널리스트</div>
+        <p>모멘텀과 재무체력을 따로 보며 턴어라운드 후보를 걸러 내고, 기업을 맞대결로 비교합니다.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">일반 독자</div>
+        <p>이름만 아는 기업의 지난 3년 재무가 실제로 좋아졌는지 지도 위에서 확인합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">OpenDART API</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI 보조 제작</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC · 잠정</span>
+      <p>2022~2025 모멘텀 순위는 잠정 공개 상태이며, 공시 원문 검증과 이상치 점검이 끝나는 대로 갱신됩니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/korea-corporate-scorecard/" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="../../content/corporate-scorecard.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK워치</strong>
+        <span>한국은행 금리 결정 확률 모니터</span>
+      </a>
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>반도체 수출 20년 통관데이터 분석</span>
+      </a>
+      <a class="other-card" href="../economist-toolkit/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>이코노미스트 툴킷</strong>
+        <span>노벨경제학상 수상자 지식 지도</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+<script src="../../detail.js" defer></script>
+</body>
+</html>
