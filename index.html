@@ -168,6 +168,17 @@ footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
 }
 .card[hidden] { display: none; }
 
+/* Hero network */
+.hero-net { position: relative; height: 360px; margin: -12px 0 0; border-radius: 16px; background: var(--cell); border: 1px solid var(--rule); overflow: hidden; }
+.hero-net canvas { width: 100%; height: 100%; display: block; touch-action: pan-y; }
+.stats { display: flex; flex-wrap: wrap; gap: 14px 44px; margin: 0 0 52px; padding: 22px 6px 0; }
+.stat b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 30px; letter-spacing: -.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12.5px; color: var(--muted); }
+.card.flash { animation: flash 1.2s ease-out; }
+@keyframes flash { 0% { box-shadow: 0 0 0 0 var(--accent); } 30% { box-shadow: 0 0 0 8px rgba(138,75,28,.25); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.card:has(.card-inner:hover) .shot img { transform: scale(1.1) translate(-1.5%, -1.5%); transition: transform 4s cubic-bezier(.2,.6,.2,1); }
+@media (max-width: 600px) { .hero-net { height: 300px; } .stat b { font-size: 24px; } }
+
 /* Connectivity */
 .grid { position: relative; }
 .card { position: relative; z-index: 1; transition: box-shadow .2s, transform .2s, opacity .35s; }
@@ -217,6 +228,16 @@ footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
     </div>
     <div class="today" id="today"></div>
   </header>
+
+  <section class="hero-net" id="heroNet" aria-label="프로젝트 연결 지도: 노드를 누르면 해당 프로젝트 카드로 이동합니다">
+    <canvas id="netc"></canvas>
+  </section>
+  <div class="stats" id="stats">
+    <div class="stat"><b data-to="11">11</b><span>프로젝트</span></div>
+    <div class="stat"><b data-to="302">302</b><span>손흥민 골 기록</span></div>
+    <div class="stat"><b data-to="1065">1,065</b><span>분류한 대통령 게시물</span></div>
+    <div class="stat"><b data-to="3817">3,817</b><span>축구 국가대표 선수 데이터</span></div>
+  </div>
 
   <nav class="filter-row" aria-label="분야별 필터">
     <span class="filter-label">분야</span>
@@ -446,13 +467,25 @@ footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
 
   function applyFilters() {
     var any = activeCat !== 'all' || activeType !== 'all';
+    var before = new Map();
+    grid.querySelectorAll('.card').forEach(function (c) { c.classList.remove('rv'); if (!c.hidden) before.set(c, c.getBoundingClientRect()); });
     grid.classList.toggle('filtered', any);
     grid.querySelectorAll('.card').forEach(function (c) {
       var cm = activeCat === 'all' || c.dataset.cat === activeCat;
       var tm = activeType === 'all' || c.dataset.type === activeType;
       c.hidden = !(cm && tm);
     });
-    requestAnimationFrame(drawBase);
+    if (!reduce) grid.querySelectorAll('.card').forEach(function (c) {
+      if (c.hidden || !c.animate) return;
+      var o = before.get(c), n = c.getBoundingClientRect();
+      if (o) {
+        var dx = o.left - n.left, dy = o.top - n.top;
+        if (dx || dy) c.animate([{ transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      } else {
+        c.animate([{ opacity: 0, transform: 'translateY(16px) scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 480, easing: 'ease-out' });
+      }
+    });
+    requestAnimationFrame(function () { drawBase(); });
   }
 
   /* ---- 연결망: 카드 사이 틈에 선이 보이도록 카드 뒤에 그린다 ---- */
@@ -493,12 +526,15 @@ footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
     if (animate === true && !reduce) setTimeout(show, 900); else show();
   }
 
+  var heroCard = null;
   function clearHover() {
+    heroCard = null;
     clearNet('path.hot');
     cards.forEach(function (c) { c.classList.remove('rel-type', 'rel-cat', 'dim', 'self'); c.style.removeProperty('--tc'); });
   }
   function hover(c) {
     clearHover();
+    heroCard = c;
     var tc = 'var(' + TC[c.dataset.type] + ')';
     c.classList.add('self');
     cards.forEach(function (o) {
@@ -530,6 +566,171 @@ footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule);
     }, { rootMargin: '0px 0px -8% 0px' });
     cards.forEach(function (c) { io.observe(c); });
   } else { cards.forEach(function (c) { c.classList.remove('rv'); }); }
+
+  /* ---- 히어로: 살아 움직이는 연결 지도 ---- */
+  (function () {
+    var box = document.getElementById('heroNet'), cv = document.getElementById('netc');
+    if (!box || !cv.getContext) return;
+    var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = 1, t0 = performance.now(), frame = 0, running = false;
+    var order = ['DATA', 'EXPERIENCE', 'INTELLIGENCE'], cxr = [0.2, 0.5, 0.8];
+    var nodes = cards.map(function (c, i) {
+      return { el: c, type: c.dataset.type, cat: c.dataset.cat, title: c.querySelector('h2').textContent,
+        x: 0, y: 0, vx: 0, vy: 0, ph: i * 1.7, r: 6 };
+    });
+    var links = [];
+    for (var i = 0; i < nodes.length; i++) for (var j = i + 1; j < nodes.length; j++) {
+      var st = nodes[i].type === nodes[j].type, sc = nodes[i].cat === nodes[j].cat;
+      if (st || sc) links.push({ a: nodes[i], b: nodes[j], type: st });
+    }
+    var pulses = [];
+    var colors = {}, mouse = null, hov = null;
+    function readColors() {
+      var s = getComputedStyle(document.documentElement);
+      ['--data-c', '--exp-c', '--intel-c', '--ink', '--muted', '--accent'].forEach(function (k) { colors[k] = s.getPropertyValue(k).trim(); });
+    }
+    function tcol(n) { return colors[TC[n.type]]; }
+    function center(k) { return { x: W * cxr[k], y: H * 0.5 }; }
+
+    function resize() {
+      var r = box.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(2, window.devicePixelRatio || 1);
+      cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      nodes.forEach(function (n) {
+        if (!n.x) { var c = center(order.indexOf(n.type)); n.x = c.x + (Math.random() - .5) * 140; n.y = c.y + (Math.random() - .5) * 140; }
+        n.x = Math.max(30, Math.min(W - 30, n.x)); n.y = Math.max(34, Math.min(H - 46, n.y));
+      });
+    }
+
+    function step(time) {
+      nodes.forEach(function (n) {
+        var c = center(order.indexOf(n.type));
+        n.vx += (c.x - n.x) * 0.010 + Math.sin(time * 0.7 + n.ph) * 0.04;
+        n.vy += (c.y - 8 - n.y) * 0.010 + Math.cos(time * 0.6 + n.ph * 1.3) * 0.04;
+      });
+      for (var i = 0; i < nodes.length; i++) for (var j = i + 1; j < nodes.length; j++) {
+        var a = nodes[i], b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy) || 1, m = 105;
+        if (d < m) { var f = (m - d) / m * 0.7; a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f; }
+      }
+      links.forEach(function (l) {
+        if (l.type) return;
+        var dx = l.b.x - l.a.x, dy = l.b.y - l.a.y, d = Math.sqrt(dx * dx + dy * dy) || 1, f = (d - 170) * 0.0009;
+        l.a.vx += dx / d * f; l.a.vy += dy / d * f; l.b.vx -= dx / d * f; l.b.vy -= dy / d * f;
+      });
+      nodes.forEach(function (n) {
+        if (mouse) {
+          var dx = n.x - mouse.x, dy = n.y - mouse.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+          if (d < 120) { var f = (120 - d) / 120 * 1.4; n.vx += dx / d * f; n.vy += dy / d * f; }
+        }
+        n.vx *= 0.9; n.vy *= 0.9; n.x += n.vx; n.y += n.vy;
+        n.x = Math.max(30, Math.min(W - 30, n.x)); n.y = Math.max(34, Math.min(H - 46, n.y));
+      });
+    }
+
+    function spawn(time) {
+      if (pulses.length >= 16 || !links.length) return;
+      var l = links[Math.floor(Math.random() * links.length)];
+      if (l.a.el.hidden || l.b.el.hidden) return;
+      pulses.push({ l: l, t: 0, sp: 0.35 + Math.random() * 0.4, dir: Math.random() < .5 ? 1 : -1 });
+    }
+
+    function related(n) {
+      var cur = hov || (heroCard && nodes.filter(function (x) { return x.el === heroCard; })[0]);
+      if (!cur) return null;
+      return cur;
+    }
+
+    function draw(time) {
+      ctx.clearRect(0, 0, W, H);
+      var cur = related(), small = W < 520;
+      order.forEach(function (k, i) {
+        var c = center(i); ctx.font = '500 ' + (small ? 10 : 11) + 'px "IBM Plex Mono", monospace'; ctx.textAlign = 'center';
+        ctx.fillStyle = colors[TC[k]]; ctx.globalAlpha = .75; ctx.fillText(k, c.x, H - 16); ctx.globalAlpha = 1;
+      });
+      links.forEach(function (l) {
+        var off = l.a.el.hidden || l.b.el.hidden, hot = cur && (l.a === cur || l.b === cur);
+        ctx.beginPath(); ctx.moveTo(l.a.x, l.a.y); ctx.lineTo(l.b.x, l.b.y);
+        ctx.setLineDash(l.type ? [] : [3, 5]);
+        ctx.strokeStyle = l.type ? tcol(l.a) : colors['--accent'];
+        ctx.globalAlpha = off ? .03 : hot ? .85 : (cur ? .06 : (l.type ? .22 : .14));
+        ctx.lineWidth = hot ? 2 : 1.2; ctx.stroke();
+      });
+      ctx.setLineDash([]); ctx.globalAlpha = 1;
+      for (var p = pulses.length - 1; p >= 0; p--) {
+        var s = pulses[p]; s.t += s.sp * 0.016;
+        if (s.t >= 1) { pulses.splice(p, 1); continue; }
+        var u = s.dir > 0 ? s.t : 1 - s.t, x = s.l.a.x + (s.l.b.x - s.l.a.x) * u, y = s.l.a.y + (s.l.b.y - s.l.a.y) * u;
+        var col = s.l.type ? tcol(s.l.a) : colors['--accent'], g = ctx.createRadialGradient(x, y, 0, x, y, 9);
+        g.addColorStop(0, col); g.addColorStop(1, 'transparent');
+        ctx.globalAlpha = Math.sin(Math.PI * s.t) * .9; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 9, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = Math.sin(Math.PI * s.t); ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, 2.4, 0, 6.283); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      nodes.forEach(function (n) {
+        var off = n.el.hidden, isCur = n === cur;
+        var near = cur && !isCur && links.some(function (l) { return (l.a === cur && l.b === n) || (l.b === cur && l.a === n); });
+        var dim = off ? .15 : (cur && !isCur && !near ? .28 : 1), br = 1 + Math.sin(time * 2 + n.ph) * .12;
+        var r = (isCur ? 10 : 6.5) * br, col = tcol(n);
+        ctx.globalAlpha = dim * .22; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(n.x, n.y, r + 7, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = dim; ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 6.283); ctx.fill();
+        ctx.fillStyle = colors['--ink']; ctx.font = (isCur ? '700 ' : '500 ') + (small ? 11 : 12.5) + 'px "IBM Plex Sans KR", sans-serif';
+        ctx.textAlign = n.x > W - 150 ? 'right' : 'left';
+        ctx.globalAlpha = dim * (isCur || near ? 1 : .8);
+        ctx.fillText(n.title, n.x + (ctx.textAlign === 'left' ? r + 9 : -r - 9), n.y + 4.5);
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    function loop(now) {
+      if (!running) return;
+      var time = (now - t0) / 1000; frame++;
+      if (frame % 90 === 0) readColors();
+      if (Math.random() < 0.06) spawn(time);
+      step(time); draw(time); requestAnimationFrame(loop);
+    }
+    function start() { if (!running && !reduce) { running = true; requestAnimationFrame(loop); } }
+    function stop() { running = false; }
+
+    function pick(e) {
+      var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 22;
+      nodes.forEach(function (n) { if (n.el.hidden) return; var d = Math.hypot(n.x - x, n.y - y); if (d < bd) { bd = d; best = n; } });
+      return { x: x, y: y, node: best };
+    }
+    cv.addEventListener('pointermove', function (e) {
+      var p = pick(e); mouse = { x: p.x, y: p.y };
+      if (p.node !== hov) { hov = p.node; if (hov) hover(hov.el); else clearHover(); cv.style.cursor = hov ? 'pointer' : 'default'; }
+      if (reduce) draw(0);
+    });
+    cv.addEventListener('pointerleave', function () { mouse = null; hov = null; clearHover(); cv.style.cursor = 'default'; if (reduce) draw(0); });
+    cv.addEventListener('click', function (e) {
+      var p = pick(e); if (!p.node) return;
+      p.node.el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      p.node.el.classList.remove('flash'); void p.node.el.offsetWidth; p.node.el.classList.add('flash');
+    });
+
+    readColors(); resize();
+    for (var k = 0; k < 260; k++) step(k * 0.016);
+    draw(0);
+    window.addEventListener('resize', function () { resize(); if (reduce) draw(0); });
+    if (window.matchMedia) window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { readColors(); if (reduce) draw(0); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es[0].isIntersecting ? start() : stop(); }).observe(box); else start();
+    document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  })();
+
+  /* ---- 숫자 카운트업 ---- */
+  (function () {
+    var els = document.querySelectorAll('.stat b');
+    function run(el) {
+      var to = +el.dataset.to, t = performance.now();
+      (function tick(now) {
+        var u = Math.max(0, Math.min(1, (now - t) / 1500)), e = 1 - Math.pow(1 - u, 3);
+        el.textContent = Math.round(to * e).toLocaleString('en-US');
+        if (u < 1) requestAnimationFrame(tick);
+      })(t);
+    }
+    if (reduce || !('IntersectionObserver' in window)) return;
+    els.forEach(function (el) { el.textContent = '0'; });
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } }); }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
 
   var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { drawBase(); }, 150); });
   window.addEventListener('load', function () { drawBase(true); });
