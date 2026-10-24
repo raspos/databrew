@@ -205,7 +205,7 @@ html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, 
 @media (max-width: 600px) { .drip { width: 80px; } }
 
 /* Hero network */
-.hero-net { position: relative; height: 360px; margin: -12px 0 0; border-radius: 16px; background: var(--cell); border: 1px solid var(--rule); overflow: hidden; }
+.hero-net { position: relative; height: 440px; margin: -12px 0 0; border-radius: 16px; background: var(--cell); border: 1px solid var(--rule); overflow: hidden; }
 .hero-net canvas { width: 100%; height: 100%; display: block; touch-action: pan-y; }
 .stats { display: flex; flex-wrap: wrap; gap: 14px 44px; margin: 0 0 52px; padding: 22px 6px 0; }
 .stat b { display: block; font-family: var(--font-mono); font-weight: 500; font-size: 30px; letter-spacing: -.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
@@ -213,7 +213,7 @@ html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, 
 .card.flash { animation: flash 1.2s ease-out; }
 @keyframes flash { 0% { box-shadow: 0 0 0 0 var(--accent); } 30% { box-shadow: 0 0 0 8px rgba(138,75,28,.25); } 100% { box-shadow: 0 0 0 0 transparent; } }
 .card:has(.card-inner:hover) .shot img { transform: scale(1.1) translate(-1.5%, -1.5%); transition: transform 4s cubic-bezier(.2,.6,.2,1); }
-@media (max-width: 600px) { .hero-net { height: 300px; } .stat b { font-size: 24px; } }
+@media (max-width: 600px) { .hero-net { height: 380px; } .stat b { font-size: 24px; } }
 
 /* Connectivity */
 .grid { position: relative; }
@@ -664,7 +664,7 @@ html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, 
         n.vy += (c.y - 8 - n.y) * 0.010 + Math.cos(time * 0.6 + n.ph * 1.3) * 0.04;
       });
       for (var i = 0; i < nodes.length; i++) for (var j = i + 1; j < nodes.length; j++) {
-        var a = nodes[i], b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy) || 1, m = 105;
+        var a = nodes[i], b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy) || 1, m = 135;
         if (d < m) { var f = (m - d) / m * 0.7; a.vx += dx / d * f; a.vy += dy / d * f; b.vx -= dx / d * f; b.vy -= dy / d * f; }
       }
       links.forEach(function (l) {
@@ -699,8 +699,8 @@ html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, 
       ctx.clearRect(0, 0, W, H);
       var cur = related(), small = W < 520;
       order.forEach(function (k, i) {
-        var c = center(i); ctx.font = '500 ' + (small ? 10 : 11) + 'px "IBM Plex Mono", monospace'; ctx.textAlign = 'center';
-        ctx.fillStyle = colors[TC[k]]; ctx.globalAlpha = .75; ctx.fillText(k, c.x, H - 16); ctx.globalAlpha = 1;
+        var c = center(i); ctx.font = '500 ' + (small ? 12 : 14) + 'px "IBM Plex Mono", monospace'; ctx.textAlign = 'center';
+        ctx.fillStyle = colors[TC[k]]; ctx.globalAlpha = .75; ctx.fillText(k, c.x, H - 18); ctx.globalAlpha = 1;
       });
       links.forEach(function (l) {
         var off = l.a.el.hidden || l.b.el.hidden, hot = cur && (l.a === cur || l.b === cur);
@@ -718,20 +718,20 @@ html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, 
         var col = s.l.type ? tcol(s.l.a) : colors['--accent'], g = ctx.createRadialGradient(x, y, 0, x, y, 9);
         g.addColorStop(0, col); g.addColorStop(1, 'transparent');
         ctx.globalAlpha = Math.sin(Math.PI * s.t) * .9; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 9, 0, 6.283); ctx.fill();
-        ctx.globalAlpha = Math.sin(Math.PI * s.t); ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, 2.4, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = Math.sin(Math.PI * s.t); ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, 3, 0, 6.283); ctx.fill();
       }
       ctx.globalAlpha = 1;
       nodes.forEach(function (n) {
         var off = n.el.hidden, isCur = n === cur;
         var near = cur && !isCur && links.some(function (l) { return (l.a === cur && l.b === n) || (l.b === cur && l.a === n); });
         var dim = off ? .15 : (cur && !isCur && !near ? .28 : 1), br = 1 + Math.sin(time * 2 + n.ph) * .12;
-        var r = (isCur ? 10 : 6.5) * br, col = tcol(n);
-        ctx.globalAlpha = dim * .22; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(n.x, n.y, r + 7, 0, 6.283); ctx.fill();
+        var r = (isCur ? 14 : 9.5) * br, col = tcol(n);
+        ctx.globalAlpha = dim * .22; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(n.x, n.y, r + 9, 0, 6.283); ctx.fill();
         ctx.globalAlpha = dim; ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 6.283); ctx.fill();
-        ctx.fillStyle = colors['--ink']; ctx.font = (isCur ? '700 ' : '500 ') + (small ? 11 : 12.5) + 'px "IBM Plex Sans KR", sans-serif';
-        ctx.textAlign = n.x > W - 150 ? 'right' : 'left';
+        ctx.fillStyle = colors['--ink']; ctx.font = (isCur ? '700 ' : '500 ') + (small ? 12.5 : 15.5) + 'px "IBM Plex Sans KR", sans-serif';
+        ctx.textAlign = n.x > W - 190 ? 'right' : 'left';
         ctx.globalAlpha = dim * (isCur || near ? 1 : .8);
-        ctx.fillText(n.title, n.x + (ctx.textAlign === 'left' ? r + 9 : -r - 9), n.y + 4.5);
+        ctx.fillText(n.title, n.x + (ctx.textAlign === 'left' ? r + 11 : -r - 11), n.y + 5.5);
       });
       ctx.globalAlpha = 1;
     }
@@ -747,7 +747,7 @@ html.js header h1 .brw { background: linear-gradient(to bottom, var(--ink) 50%, 
     function stop() { running = false; }
 
     function pick(e) {
-      var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 22;
+      var r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 28;
       nodes.forEach(function (n) { if (n.el.hidden) return; var d = Math.hypot(n.x - x, n.y - y); if (d < bd) { bd = d; best = n; } });
       return { x: x, y: y, node: best };
     }
