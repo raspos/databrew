@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FX ODDS — databrew</title>
+<meta name="description" content="원/달러 환율의 7일·30일 뒤 확률분포와 압력 요인을 보여 주는 환율 확률 모니터. 방향을 찍지 않고 불확실성의 범위를 보여 줍니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">경제 · DATA</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">경제</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>FX ODDS</h1>
+    <p class="tagline">환율의 확률과 압력을 읽다</p>
+    <p class="hero-desc">원/달러 환율이 7일·30일 뒤 어느 범위에 있을 확률이 높은지를 확률분포로 보여 주는 환율 모니터. 방향을 단정하지 않고, 모형별 예측구간과 도달 확률로 불확실성을 보여 줍니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/fx-odds/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/fx-odds.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/fx-odds.png" alt="FX ODDS 메인 화면: 환율의 확률과 압력을 읽다 제목과 원/달러 환율, 7일·30일 후 80% 범위">
+  <p class="shot-cap">FX ODDS 메인 화면 — 원/달러 환율과 7일·30일 후 80% 예측구간. 2026-10-26 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>왜 만들었는가</h2>
+    <p>환율 전망 기사는 대개 한두 개의 숫자나 방향으로 끝난다. 하지만 환율에서 확실히 말할 수 있는 것은 방향이 아니라 어느 정도 범위 안에 있을 확률이다.</p>
+    <p>BOK워치의 설계 철학을 이어받아, 환율의 불확실성을 확률분포로 보여 주고 어떤 모형이 실제로 더 잘 맞아 왔는지를 성적표로 공개하도록 만들었다.</p>
+    <p class="note">통계적 확률은 과거 자료에서 추정한 값이며 실제 결과를 보장하지 않습니다. 서비스는 네 모형 모두 방향성을 가정하지 않으며 검증된 방향 예측력이 없다고 밝히고 있습니다. 투자 조언이 아닙니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">환율의 미래</div>
+        <p>7일·30일 뒤 달러당 원화값의 50%·80%·90% 예측구간과 확률분포를 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">특정 환율 도달 확률 계산기</div>
+        <p>원하는 환율을 입력하면 만기 시점과 기간 중 돌파 확률을 계산합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">모형별 비교</div>
+        <p>랜덤워크, 역사적 변동성, EWMA, 재표본추출 네 모형의 중앙값과 예측구간을 나란히 비교합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">환율의 압력</div>
+        <p>환율에 영향을 주는 요인과 보고서·뉴스의 압력을 따로 살핍니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">동조화 레이더</div>
+        <p>원화와 다른 통화의 움직임이 얼마나 함께 가는지 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">예측 성적표와 방법론</div>
+        <p>실현이 확정된 예측의 점수(CRPS)로 모형의 성적을 공개하고 방법론을 설명합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>데이터와 분석 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">한국은행 ECOS</div>
+        <div class="data-desc">원/미국달러 매매기준율(731Y001, 서울외환시장 기준) 등 환율·금리·국제수지 시계열.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Yahoo Finance</div>
+        <div class="data-desc">해외 시장 지표. 서비스 화면에 별도 기준일로 표시.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">예측 모형 (공식: EWMA)</div>
+        <div class="data-desc">환율 수익률과 변동성만으로 예측구간을 계산합니다. 평균 CRPS가 가장 낮은 모형을 공식으로 삼고, 정규분포 꼬리가 극단 사건을 과소평가할 수 있음을 밝힙니다.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">정성 압력과 통합 전망은 검증 전이라 공식 전망에 반영하지 않습니다. 모형 설명과 검증 결과는 서비스의 방법론·예측 성적표 탭에서 확인할 수 있습니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">한국은행 ECOS API</span>
+      <span class="tech-tag">통계 모형 (EWMA·재표본추출)</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI 보조 제작</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>v0.2.0. 자동 갱신되며 서비스 화면에 최종 갱신 시각과 데이터 기준일이 표시됩니다. 일부 지표 수집이 실패하면 화면에 알립니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/fx-odds/" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="../../content/fx-odds.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK워치</strong>
+        <span>한국은행 금리 결정 확률 모니터</span>
+      </a>
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>반도체 수출 20년 통관데이터 분석</span>
+      </a>
+      <a class="other-card" href="../corporate-scorecard/">
+        <span class="other-type data">DATA</span>
+        <strong>기업 모멘텀 랭킹</strong>
+        <span>3년간 가장 좋아진 상장기업 찾기</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+<script src="../../detail.js" defer></script>
+</body>
+</html>
