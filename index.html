@@ -337,8 +337,8 @@ header .today { color: rgba(242,196,160,.6); }
     <span class="filter-label">분야</span>
     <button type="button" data-cat="all" aria-pressed="true">전체 <span class="count">15</span></button>
     <button type="button" data-cat="경제" aria-pressed="false">경제 <span class="count">8</span></button>
-    <button type="button" data-cat="정치" aria-pressed="false">정치 <span class="count">2</span></button>
-    <button type="button" data-cat="스포츠" aria-pressed="false">스포츠 <span class="count">4</span></button>
+    <button type="button" data-cat="정치" aria-pressed="false">정치 <span class="count">1</span></button>
+    <button type="button" data-cat="스포츠" aria-pressed="false">스포츠 <span class="count">5</span></button>
     <button type="button" data-cat="사회" aria-pressed="false">사회 <span class="count">1</span></button>
   </nav>
   <nav class="filter-row type-row" aria-label="유형별 필터">
@@ -402,23 +402,6 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 03 Watchdog -->
-    <article class="card" data-cat="정치" data-type="INTELLIGENCE">
-      <a class="card-inner" href="projects/watchdog/">
-        <div class="shot locked"><div class="ph"><b>Watchdog</b>로그인 후 열람</div></div>
-        <div class="body">
-          <div class="top"><span class="stone w" aria-hidden="true"></span><span class="access lock">로그인 필요</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">정치</span></div>
-          <h2>Watchdog</h2>
-          <p class="desc muted">국회의원 의정활동 감시자</p>
-          <p class="desc2">법안 발의와 표결, 회의 발언 같은 의정 기록을 한곳에 정리합니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/watchdog/">자세히 보기</a>
-        <a class="btn-service" href="https://uijeong-watch.raspos.chatgpt.site/" target="_blank" rel="noopener">서비스 열기 ↗</a>
-      </div>
-    </article>
-
     <!-- 04 손흥민 골 기념관 -->
     <article class="card" data-cat="스포츠" data-type="INTELLIGENCE">
       <a class="card-inner" href="projects/son-goal-museum/">
@@ -467,6 +450,23 @@ header .today { color: rgba(242,196,160,.6); }
       <div class="card-actions">
         <a class="btn-detail" href="projects/baseball-legends/">자세히 보기</a>
         <a class="btn-service" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 16 E-WAR -->
+    <article class="card" data-cat="스포츠" data-type="DATA">
+      <a class="card-inner" href="projects/e-war/">
+        <div class="shot"><img src="shots/e-war.png" alt="E-WAR 메인 화면: KBO 2026 시즌 기대를 뛰어넘은 선수들 제목과 기대 기준 설정, 2026 시즌 E-WAR 랭킹 표" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">스포츠</span></div>
+          <h2>E-WAR</h2>
+          <p class="desc">기대를 뛰어넘은 선수들. 구단은 얼마를 기대했고, 선수는 얼마나 해냈을까?</p>
+          <p class="desc2">시즌 전 기대 WAR와 실제 WAR의 차이로 KBO 선수와 구단의 기대 대비 성과를 랭킹으로 봅니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/e-war/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
     </article>
 
