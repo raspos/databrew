@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raspos.github.io/databrew/sitemap.xml
