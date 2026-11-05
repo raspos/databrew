@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FX ODDS — databrew</title>
+<title>FX워치 — databrew</title>
 <meta name="description" content="원/달러 환율의 7일·30일 뒤 확률분포와 압력 요인을 보여 주는 환율 확률 모니터. 방향을 찍지 않고 불확실성의 범위를 보여 줍니다.">
 <link rel="canonical" href="https://raspos.github.io/databrew/projects/fx-odds/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="databrew">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:title" content="FX ODDS — databrew">
+<meta property="og:title" content="FX워치 — databrew">
 <meta property="og:description" content="원/달러 환율의 7일·30일 뒤 확률분포와 압력 요인을 보여 주는 환율 확률 모니터. 방향을 찍지 않고 불확실성의 범위를 보여 줍니다.">
 <meta property="og:url" content="https://raspos.github.io/databrew/projects/fx-odds/">
 <meta property="og:image" content="https://raspos.github.io/databrew/shots/fx-odds.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="FX ODDS — databrew">
+<meta name="twitter:title" content="FX워치 — databrew">
 <meta name="twitter:description" content="원/달러 환율의 7일·30일 뒤 확률분포와 압력 요인을 보여 주는 환율 확률 모니터. 방향을 찍지 않고 불확실성의 범위를 보여 줍니다.">
 <meta name="twitter:image" content="https://raspos.github.io/databrew/shots/fx-odds.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@
       <span class="badge-cat">경제</span>
       <span class="badge-status public">PUBLIC</span>
     </div>
-    <h1>FX ODDS</h1>
+    <h1>FX워치</h1>
     <p class="tagline">환율의 확률과 압력을 읽다</p>
     <p class="hero-desc">원/달러 환율이 7일·30일 뒤 어느 범위에 있을 확률이 높은지를 확률분포로 보여 주는 환율 모니터. 방향을 단정하지 않고, 모형별 예측구간과 도달 확률로 불확실성을 보여 줍니다.</p>
     <div class="hero-cta">
@@ -46,8 +46,8 @@
 </header>
 
 <div class="hero-shot">
-  <img src="../../shots/fx-odds.png" alt="FX ODDS 메인 화면: 환율의 확률과 압력을 읽다 제목과 원/달러 환율, 7일·30일 후 80% 범위">
-  <p class="shot-cap">FX ODDS 메인 화면 — 원/달러 환율과 7일·30일 후 80% 예측구간. 2026-10-26 캡처.</p>
+  <img src="../../shots/fx-odds.png" alt="FX워치 메인 화면: 환율의 확률과 압력을 읽다 제목과 원/달러 환율, 7일·30일 후 80% 범위">
+  <p class="shot-cap">FX워치 메인 화면 — 원/달러 환율과 7일·30일 후 80% 예측구간. 2026-11-05 캡처.</p>
 </div>
 
 <main class="content">
@@ -57,7 +57,7 @@
     <h2>왜 만들었는가</h2>
     <p>환율 전망 기사는 대개 한두 개의 숫자나 방향으로 끝난다. 하지만 환율에서 확실히 말할 수 있는 것은 방향이 아니라 어느 정도 범위 안에 있을 확률이다.</p>
     <p>BOK워치의 설계 철학을 이어받아, 환율의 불확실성을 확률분포로 보여 주고 어떤 모형이 실제로 더 잘 맞아 왔는지를 성적표로 공개하도록 만들었다.</p>
-    <p class="note">통계적 확률은 과거 자료에서 추정한 값이며 실제 결과를 보장하지 않습니다. 서비스는 네 모형 모두 방향성을 가정하지 않으며 검증된 방향 예측력이 없다고 밝히고 있습니다. 투자 조언이 아닙니다.</p>
+    <p class="note">통계적 확률은 과거 자료에서 추정한 값이며 실제 결과를 보장하지 않습니다. 서비스는 공식 모형이 방향 정보를 담지 않으며 검증된 방향 예측력이 없다고 밝히고 있습니다. 투자 조언이 아닙니다.</p>
   </section>
 
   <section class="section">
@@ -73,12 +73,12 @@
         <p>원하는 환율을 입력하면 만기 시점과 기간 중 돌파 확률을 계산합니다.</p>
       </div>
       <div class="feat-card">
-        <div class="feat-title">모형별 비교</div>
-        <p>랜덤워크, 역사적 변동성, EWMA, 재표본추출 네 모형의 중앙값과 예측구간을 나란히 비교합니다.</p>
+        <div class="feat-title">변동성 지수 (FXVI)</div>
+        <p>환율 변동성이 역사적으로 어느 수준인지 0~100으로 보여 주고, 최근 일중 변동폭을 함께 표시합니다.</p>
       </div>
       <div class="feat-card">
-        <div class="feat-title">환율의 압력</div>
-        <p>환율에 영향을 주는 요인과 보고서·뉴스의 압력을 따로 살핍니다.</p>
+        <div class="feat-title">압력·뉴스</div>
+        <p>뉴스 압력지수(FSI)와 통계 압력지수(FPI)를 실험적으로 보여 줍니다. 방향 압력이며 확률이 아닙니다.</p>
       </div>
       <div class="feat-card">
         <div class="feat-title">동조화 레이더</div>
@@ -104,8 +104,8 @@
         <div class="data-desc">해외 시장 지표. 서비스 화면에 별도 기준일로 표시.</div>
       </div>
       <div class="data-row">
-        <div class="data-src">예측 모형 (공식: EWMA)</div>
-        <div class="data-desc">환율 수익률과 변동성만으로 예측구간을 계산합니다. 평균 CRPS가 가장 낮은 모형을 공식으로 삼고, 정규분포 꼬리가 극단 사건을 과소평가할 수 있음을 밝힙니다.</div>
+        <div class="data-src">예측 모형</div>
+        <div class="data-desc">7일은 EWMA, 30일은 파킨슨(고저가, 스케일 보정) 모형이 공식입니다. 환율 수익률과 변동성만으로 예상 범위를 계산하며 방향 판단은 담지 않습니다.</div>
       </div>
     </div>
     <p class="note" style="margin-top:16px">정성 압력과 통합 전망은 검증 전이라 공식 전망에 반영하지 않습니다. 모형 설명과 검증 결과는 서비스의 방법론·예측 성적표 탭에서 확인할 수 있습니다.</p>
@@ -127,7 +127,7 @@
     <h2>개발 현황</h2>
     <div class="status-box public">
       <span class="status-label">PUBLIC</span>
-      <p>v0.2.0. 자동 갱신되며 서비스 화면에 최종 갱신 시각과 데이터 기준일이 표시됩니다. 일부 지표 수집이 실패하면 화면에 알립니다.</p>
+      <p>v0.3.0. 자동 갱신되며 서비스 화면에 최종 갱신 시각과 데이터 기준일이 표시됩니다. 일부 지표 수집이 실패하면 화면에 알립니다.</p>
     </div>
   </section>
 
