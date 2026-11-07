@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>서울 아파트 신고가 트래커 — databrew</title>
+<meta name="description" content="서울 아파트, 최고가에서 얼마나 멀어졌을까? 국토교통부 실거래가로 서울 25개 구의 신고가 거래와 고점 대비 거리를 매일 추적하는 트래커.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">경제 · DATA</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">경제</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>서울 아파트<br>신고가 트래커</h1>
+    <p class="tagline">서울 아파트, 최고가에서 얼마나 멀어졌을까?</p>
+    <p class="hero-desc">서울 25개 구의 아파트 실거래가를 단지와 면적 단위로 쌓아 두고, 과거 최고가를 새로 넘긴 거래, 곧 신고가를 가려냅니다. 오늘 어디서 신고가가 나왔는지, 우리 아파트는 최고가에서 얼마나 떨어져 있는지, 어느 동네가 고점에 가장 가까운지를 한곳에서 봅니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/seoul-apartment-tracker/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/seoul-apartment-tracker.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/seoul-apartment-tracker.png" alt="서울 아파트 신고가 트래커 메인 화면: 서울 아파트 최고가에서 얼마나 멀어졌을까 문구와 아파트 일러스트, 서울 전체 신고가 거래 추이">
+  <p class="shot-cap">서울 아파트 신고가 트래커 메인 화면 — 업데이트 2026-11-07, 서울 25개 구. 2026-11-07 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / INTRO</div>
+    <h2>이런 서비스입니다</h2>
+    <p>아파트 가격 뉴스에는 늘 신고가라는 말이 따라붙습니다. 그런데 신고가가 하루에 서울에서 몇 건이나 나오는지, 우리 아파트는 최고가에서 얼마나 멀어졌는지는 뉴스만으로는 알 수 없습니다.</p>
+    <p>이 트래커는 국토교통부 실거래가를 같은 단지, 같은 정수 면적 그룹 단위로 이어 붙이고, 2021년 1월 이후 그 그룹의 최고가를 넘긴 거래를 신고가로 셉니다. 신고가만 보여 주지 않고 반대쪽도 봅니다. 최근 거래된 그룹이 고점에서 평균 얼마나 떨어져 있는지, 고점을 되찾은 그룹은 얼마나 되는지를 함께 계산해 서울 시장이 지금 최고가의 어디쯤에 있는지 보여 줍니다.</p>
+    <p>숫자가 확실하지 않으면 확실한 척하지 않습니다. 실거래 자료가 아직 적재되지 않은 월이 비교 기간에 있으면 신고가 판정을 보류하고, 적재되지 않은 날짜의 0건은 실제 0건이 아니라고 화면에 밝힙니다.</p>
+    <p class="note">층, 향, 동 차이를 보정하지 않은 실거래 분포이며 현재 시세나 감정평가액, 공식 가격지수가 아닙니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 할 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">서울 전체: 신고가 거래 추이</div>
+        <p>일별, 월별, 전체 기간으로 신고가 거래 건수를 막대로 봅니다. 막대를 누르면 그 기간의 신고가 목록이 열리고, 주요 부동산 대책 발표일 10건을 같은 시간축에 표시합니다. 날짜마다 자료 상태(수집 완료 구, 비교 완료 또는 예정)도 보여 줍니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">신고가와의 거리</div>
+        <p>기준일과 기간(최근 거래, 30일, 90일, 180일, 1년)을 고르면 고점 대비 거리 중앙값, 분석 대상 그룹 수, 고점에 도달한 비중이 나옵니다. 구별 거리 순위와 고점 회복 분포도 함께 봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">우리 아파트</div>
+        <p>자치구와 단지명, 면적 그룹을 고르면 그 아파트의 신고가까지 얼마나 남았는지 확인합니다. 오래된 거래도 검색되므로 마지막 계약일을 함께 봐야 합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">지역별 신고가</div>
+        <p>계약월과 자치구를 고르면 구별 신고가 중 거래금액 상위 3건이 나옵니다. 무작위 4개 구를 보여 주는 "다른 동네 보기"로 둘러볼 수도 있습니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">우리동네 신고가</div>
+        <p>구와 법정동, 계약 시작일을 골라 우리 동네에서 새 기록이 나왔는지 찾아봅니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">전체 거래 표와 CSV</div>
+        <p>조회한 거래를 단지, 전용면적, 거래금액, 층, 계약일, 이전 기록, 상승액과 상승률, 해제 여부 열로 보고 CSV로 내려받습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / SCREENS</div>
+    <h2>화면 미리보기</h2>
+    <div class="shots-grid">
+      <div class="shot-item">
+        <img src="../../shots/seoul-apartment-tracker.png" alt="서울 아파트 신고가 트래커 서울 전체 탭: 신고가 거래 추이 차트" loading="lazy">
+        <p>서울 전체 — 신고가 거래 추이</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../shots/seoul-apartment-distance.png" alt="서울 아파트 신고가 트래커 신고가와의 거리 탭: 고점 대비 거리 중앙값 -2.4%, 분석 대상 4,197그룹, 고점 도달 비중 37.8%" loading="lazy">
+        <p>신고가와의 거리 — 고점에서 얼마나 멀어졌나</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../shots/seoul-apartment-apartment.png" alt="서울 아파트 신고가 트래커 우리 아파트 탭: 자치구, 단지명, 면적 그룹으로 검색" loading="lazy">
+        <p>우리 아파트 — 단지와 면적으로 검색</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../shots/seoul-apartment-region.png" alt="서울 아파트 신고가 트래커 지역별 신고가 탭: 계약월과 자치구를 고르면 구별 신고가 TOP이 나오는 화면" loading="lazy">
+        <p>지역별 신고가 — 어느 구에서 나왔나</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / DATA &amp; METHODS</div>
+    <h2>데이터와 계산 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">국토교통부 실거래가</div>
+        <div class="data-desc">공공데이터포털의 국토교통부 아파트 매매 실거래가 자료입니다. 서울 25개 구를 모두 수집하며, 화면에 수집 완료 구 수(25 / 25)와 업데이트 날짜를 표시합니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">신고가 판정</div>
+        <div class="data-desc">2021년 1월부터 같은 단지, 같은 정수 면적 그룹의 과거 최고가를 넘긴 거래만 셉니다. 동률, 첫 관측, 해제 거래는 제외합니다. 비교 기간에 적재되지 않은 월이 있으면 판정을 보류합니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">고점 대비 거리</div>
+        <div class="data-desc">그룹마다 최신 계약일의 최고금액 1건을 대표 거래로 삼아 그 그룹의 역대 최고가와 비교한 비율입니다. 거래가 충분한 그룹(4건 이상)만 쓰고, 첫 관측뿐이거나 비교 월이 빠진 그룹은 통계에서 뺍니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">부동산 대책 표시</div>
+        <div class="data-desc">공식 발표일 기준 주요 대책 10건입니다. 시행일과 다를 수 있고 가격 변화의 원인을 뜻하지 않습니다.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">역대 신고가는 전체 과거 자료를 검증하기 전까지 판정을 보류한다고 화면에 밝히고 있습니다. 같은 날 복수 거래는 별도로 표시하고, 면적은 정수로 묶어(예: 84㎡ 그룹) 비교합니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 / LIMITS</div>
+    <h2>알 수 없는 것들</h2>
+    <p>실거래 신고에는 시차가 있어 최근 계약일의 건수는 나중에 늘어날 수 있습니다. 신고가는 같은 단지, 같은 면적이라도 층과 향, 동에 따라 크게 갈릴 수 있고 이 서비스는 그 차이를 보정하지 않습니다. 따라서 신고가가 많다고 시장 전체가 오른다는 뜻도, 거리가 가깝다고 가격이 곧 오른다는 뜻도 아닙니다.</p>
+    <p>2021년 이전 거래는 비교에 쓰지 않으며, 최근 거래가 없는 단지가 많다는 사실 자체(최근 거래 없음 15,392그룹)도 통계의 한계로 함께 안내합니다. 가격 변화의 원인은 설명하지 않습니다.</p>
+    <p class="note">수치는 투자 조언이 아닙니다. 인용하기 전에 국토교통부 실거래가 공개시스템의 원자료를 확인해 주세요.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">국토교통부 실거래가 OpenAPI</span>
+      <span class="tech-tag">공공데이터포털</span>
+      <span class="tech-tag">정적 웹</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI 보조 제작</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>2026-11-07 업데이트, 서울 25개 구 전부 수집 완료. 새 실거래가 신고되면 갱신해 계약일별 자료 상태에 반영합니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/seoul-apartment-tracker/" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="https://www.data.go.kr/data/15126468/openapi.do" target="_blank" rel="noopener">국토교통부 실거래가 자료 ↗</a>
+      <a class="link-btn" href="../../content/seoul-apartment-tracker.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../pay-watch/">
+        <span class="other-type data">DATA</span>
+        <strong>PAY워치</strong>
+        <span>내 친구는 얼마 벌까? 기업 평균연봉</span>
+      </a>
+      <a class="other-card" href="../corporate-scorecard/">
+        <span class="other-type data">DATA</span>
+        <strong>기업 모멘텀 랭킹</strong>
+        <span>3년간 가장 좋아진 상장기업 찾기</span>
+      </a>
+      <a class="other-card" href="../self-employed/">
+        <span class="other-type experience">EXPERIENCE</span>
+        <strong>대한민국 자영업자로 살아남기</strong>
+        <span>36개월 창업 생존 시뮬레이션</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+<script src="../../detail.js" defer></script>
+</body>
+</html>
