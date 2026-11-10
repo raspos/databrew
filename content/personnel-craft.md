@@ -1,6 +1,6 @@
 # 인사 크래프트 (PERSONNEL CRAFT) — 편집국 생존기
 
-**유형** EXPERIENCE · **분야** 사회 · **상태** PUBLIC
+**유형** EXPERIENCE · **분야** 게임 · **상태** PUBLIC
 **서비스** https://raspos.github.io/personnel-craft/
 
 ---
