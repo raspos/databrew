@@ -1,6 +1,6 @@
 # KOREAN NEWSROOM HUB — 공식 데이터로 묻고, 근거로 확인하다
 
-**유형** DATA · **분야** 도구 · **상태** 승인 계정 시험 운영 (MCP 0.4.0 RC)
+**유형** DATA · **분야** 도구 · **상태** PUBLIC (안내 사이트 공개, 도구는 승인 계정 시험 운영 · MCP 0.4.0 RC)
 **안내 사이트(HUB)** https://raspos.github.io/korean-newsroom-hub/
 **1페이지 설치 안내** https://raspos.github.io/korean-newsroom-hub/install-guide.html
 
