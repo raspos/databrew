@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEBT워치 — databrew</title>
+<meta name="description" content="돌아오는 빚, 감당할 수 있을까? 미국 국채 만기 사다리와 차환비용 시나리오, 한·미 국채금리 전망, 세계 부채 지도를 한곳에서 보는 빚과 차환압력 모니터.">
+<link rel="canonical" href="https://raspos.github.io/databrew/projects/debt-watch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="DEBT워치 — databrew">
+<meta property="og:description" content="돌아오는 빚, 감당할 수 있을까? 미국 국채 만기 사다리와 차환비용 시나리오, 한·미 국채금리 전망, 세계 부채 지도를 한곳에서 보는 빚과 차환압력 모니터.">
+<meta property="og:url" content="https://raspos.github.io/databrew/projects/debt-watch/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/debt-watch.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEBT워치 — databrew">
+<meta name="twitter:description" content="돌아오는 빚, 감당할 수 있을까? 미국 국채 만기 사다리와 차환비용 시나리오, 한·미 국채금리 전망, 세계 부채 지도를 한곳에서 보는 빚과 차환압력 모니터.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/debt-watch.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">경제 · DATA</span>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">경제</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>DEBT워치</h1>
+    <p class="tagline">돌아오는 빚, 감당할 수 있을까? 빚과 차환압력</p>
+    <p class="hero-desc">정부는 빚을 한 번 내고 끝내지 않고, 만기가 올 때마다 새 빚으로 갚습니다. DEBT워치는 그 차환이 얼마나 무거운지를 공개 통계로 보여 줍니다. 미국 국채가 앞으로 12개월에 얼마나 돌아오는지, 지금 금리로 갈아타면 이자가 얼마나 늘어나는지, 한국과 미국의 국채금리는 어디로 움직일 수 있는지, 세계 각국의 부채는 얼마나 쌓였는지를 한곳에서 봅니다. BOK워치와 FX워치의 후속 프로젝트입니다.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      <a class="btn-secondary" href="../../content/debt-watch.md" download>소개 자료 (.md)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../shots/debt-watch.png" alt="DEBT워치 메인 화면: 미국 10년물 금리와 한국 10년물 금리, 미국 12개월 내 만기 국채, 금리 충격 시 이자 증가를 보여주는 네 개의 요약 카드와 한미 국채금리 전망">
+  <p class="shot-cap">DEBT워치 메인 화면 — 갱신 2026-11-10, 데이터 기준 2026-11-06. 2026-11-11 캡처.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / INTRO</div>
+    <h2>이런 서비스입니다</h2>
+    <p>국가부채 뉴스는 대부분 총액에서 멈춥니다. 몇 조 달러가 쌓였다는 말만으로는 그 빚이 언제 돌아오고, 그때 이자가 얼마나 늘어나는지 알 수 없습니다. 같은 빚이라도 3년 뒤에 갚는 것과 3개월 뒤에 갚는 것은 무게가 다르고, 낮은 금리로 빌렸다가 높은 금리로 갈아타는 순간 이자는 훌쩍 뜁니다.</p>
+    <p>DEBT워치는 그 차이를 계산합니다. 미국 재무부가 공개하는 국채 종목별 자료(460개 종목)로 만기 도래 사다리를 짜고, 만기가 도래하는 국채를 지금 시장금리로 다시 발행한다고 가정해 추가 이자를 계산합니다. 금리가 오르거나 내릴 때 이자가 어떻게 달라지는지도 시나리오로 보여 줍니다. 한국과 미국의 국채금리는 80% 예상 범위로, 뉴스는 금리를 올리는 힘과 내리는 힘으로 나눠 보여 줍니다.</p>
+    <p>기준일과 출처를 숫자마다 적고, 모르는 것은 모른다고 씁니다. 한국은 종목별 만기·표면금리 자료를 구하지 못해 차환비용을 계산하지 않았고, 미국 10년물 전망은 검증이 끝날 때까지 방향 확률을 공개하지 않습니다.</p>
+    <p class="note">공개 통계 기반의 분석이며 투자 자문이나 국가부도 예측이 아닙니다. 차환비용은 가정에 따른 시나리오이고 정부 이자지출 전망이 아닙니다. 이 서비스는 자료 제공 기관의 승인이나 후원을 받은 것이 아닙니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>무엇을 볼 수 있는가</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">메인: 한·미 국채금리 전망</div>
+        <p>미국 10년물과 한국 국고채(10년·3년)의 7일, 30일, 90일 후 80% 예상 범위를 띠로 보여 줍니다. 25bp 급등 확률, 21일 모멘텀, 200일선 이격, 한·미 10년 금리차와 추이를 함께 봅니다. 위쪽 요약 카드 네 장(미국 10년물, 한국 10년물, 미국 12개월 내 만기, 금리 충격 시나리오)이 핵심 수치를 먼저 보여 줍니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">지금 금리를 움직이는 요인</div>
+        <p>미국 국채시장과 한국 국고채시장 뉴스를 72시간 압력(상승, 중립, 하락)으로 요약하고, 국채 공급 압력, 차환비용 압력, 시장 스트레스 압력을 3대 수급 지표로 보여 줍니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">시장 상세: 차환비용 시나리오</div>
+        <p>만기 국채를 10년물로 일괄 차환하는 단순 계산과, 단기채(Bills)·중기채(Notes) 같은 실제 발행구조를 반영한 계산을 나란히 놓고 금리가 -100bp부터 +200bp까지 변할 때 연간 이자 변화를 봅니다. 3개월부터 120개월까지 만기 도래 사다리와 미·한·일·독·영 5개국 10년 국채금리 현황도 있습니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">국가별 부채: 세계 부채 지도</div>
+        <p>IMF 세계경제전망으로 국가별 GDP 대비 일반정부 부채 비율을 지도에 칠하고, 연도 재생으로 1980년부터 2031년까지의 변화를 봅니다. IMF 판(2025.10, 2026.4, 현재)을 바꿔 가며 상위 15개국과 주요국 시계열을 비교하고, 한국 중앙정부 채권 발행잔액과 1년 내 만기, 외화표시 비중, 국외 보유 비중도 확인합니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">뉴스 분석: 금리를 올리고 내리는 힘</div>
+        <p>24시간, 72시간, 7일, 30일 기간의 뉴스 압력 점수와 주요 금리 상승·하락 요인, 최근 거시 사건 타임라인을 보여 줍니다. 같은 사건을 여러 언론사가 보도해도 하나의 사건 클러스터로 묶어 기사량에 의한 왜곡을 막습니다. 채권 가격과 금리는 반대로 움직인다는 인과관계 가이드도 붙어 있습니다.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">방법·검증: 전망 성적표</div>
+        <p>데이터 출처와 수집 상태, 기계가 읽을 수 있는 JSON 파일 목록, 미국 10년물 전망 모델의 백테스트 성적표와 데이터 무결성 감사 결과를 공개합니다. 텍스트 요약(report)과 llms.txt, 수집 상태 페이지도 따로 제공합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / SCREENS</div>
+    <h2>화면 미리보기</h2>
+    <div class="shots-grid">
+      <div class="shot-item">
+        <img src="../../shots/debt-watch.png" alt="DEBT워치 메인 화면: 한미 국채금리 전망과 80% 예상 범위" loading="lazy">
+        <p>메인 — 한·미 국채금리 전망</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../shots/debt-watch-market.png" alt="DEBT워치 시장 상세: 국채 공급 압력과 차환비용 압력, 시장 스트레스 압력, 뉴스 압력과 차환비용 시나리오" loading="lazy">
+        <p>시장 상세 — 차환비용 시나리오와 만기 사다리</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../shots/debt-watch-country.png" alt="DEBT워치 국가별 부채: IMF 세계경제전망 기반 세계 부채 지도와 한국, 미국, 일본, G7 부채비율" loading="lazy">
+        <p>국가별 부채 — 세계 부채 지도</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../shots/debt-watch-news.png" alt="DEBT워치 뉴스 분석: 24시간, 72시간, 7일, 30일 뉴스 압력 점수와 금리 상승 요인" loading="lazy">
+        <p>뉴스 분석 — 금리를 올리고 내리는 힘</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / DATA &amp; METHODS</div>
+    <h2>데이터와 계산 방법</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">미국 재무부</div>
+        <div class="data-desc">일별 CMT 국채 수익률 곡선(par yield)과 FiscalData의 MSPD 표3 만기 도래 국채 종목별 상세(매월 초 갱신). 460개 종목의 만기 사다리와 기존 평균 조달금리를 만드는 원자료입니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">한국은행 ECOS</div>
+        <div class="data-desc">국고채 1~50년 일별 금리와 상세채권통계. 한국 10년물 금리와 중앙정부 채권 발행잔액, 1년 내 만기 구성의 근거입니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">IMF 세계경제전망 · BIS · 연준</div>
+        <div class="data-desc">IMF WEO는 국가별 부채비율(4·10월 반기), BIS는 중앙정부 부채증권 잔존만기(분기), 연준은 공식 성명서·의사록·연설문 RSS입니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">차환비용 계산</div>
+        <div class="data-desc">만기가 오는 국채의 기존 가중평균 조달금리와 현재 시장금리의 차이로 추가 이자를 계산합니다. 금리 충격은 신규 조달금리에만 더하고, TIPS와 변동금리채는 기존금리와 직접 비교할 수 없어 제외합니다. 실제 발행구조 반영 시나리오는 Bills, Notes, Bonds 유형별로 현재 CMT 곡선 금리로 재발행한다고 가정합니다.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">전망 모델과 성적표</div>
+        <div class="data-desc">과거 시계열 통계로 80% 예상 범위를 계산합니다. 2015-01-06부터 2026-10-07까지 walk-forward 백테스트를 하고 미래 데이터가 평가에 섞이지 않았는지 무결성 감사를 공개합니다.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">백테스트 결과 미국 10년물의 방향 적중률은 7일 47.8%(592건), 30일 51.6%(589건), 90일 51.0%(580건)로, 방향 확률 모델은 정식 공개 기준을 넘지 못해 "모델 검증 중"으로 두고 전망 확률을 공개하지 않습니다. 80% 예상 범위 포함률은 76%~79.6%였습니다. 반면 30일 안에 금리가 10bp 이상, 25bp 이상 떨어지는 사건에서는 기준 모델보다 나은 신호가 확인됐다고 밝힙니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 / LIMITS</div>
+    <h2>알 수 없는 것들</h2>
+    <p>종목별 만기와 표면금리 자료는 미국 재무부만 확보했습니다. 한국, 일본, 영국, 독일, 이탈리아는 국채금리 곡선 위주이고, 종목별 자료가 없는 나라에는 만기 지도와 차환비용을 만들지 않았습니다. 한국은 연간 국고채 발행한도와 평균 만기도 공식 문서에서 숫자를 읽지 못해 싣지 않았습니다.</p>
+    <p>차환비용은 가정에 따른 시나리오이며 정부의 실제 이자지출이 아닙니다. 뉴스 압력 지수는 시장 심리를 보는 정성적 보조 지표로, 통계 모델과 합산하지 않습니다. 한국 부채비율처럼 IMF가 판을 바꾸며 수정한 수치도 있으므로 판 이름과 기준 시점을 함께 봐야 합니다.</p>
+    <p class="note">수치의 정확성, 완전성, 적시성은 보장되지 않습니다. 이용에 따른 판단과 책임은 이용자에게 있습니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>기술 및 제작 방식</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python 데이터 수집</span>
+      <span class="tech-tag">정적 JSON</span>
+      <span class="tech-tag">React · TypeScript · Vite</span>
+      <span class="tech-tag">Apache ECharts</span>
+      <span class="tech-tag">Cloudflare Pages</span>
+      <span class="tech-tag">AI 보조 제작</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">Python 수집기가 공식 API와 통계 파일을 받아 정적 JSON으로 만들고, 사이트는 그 JSON만 읽어 화면을 그립니다. 전망·뉴스 압력·차환 시나리오·만기 사다리·세계 지도 지오메트리는 모두 /data 아래의 JSON으로 공개돼 있습니다. 세계 지도 경계는 Natural Earth(공공 영역)를 쓰며 정치적 입장을 나타내지 않습니다.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>개발 현황</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>2026-11-10 13:50 갱신, 데이터 기준 2026-11-06. 6개 공식 출처가 정상 수집 중이고 수집 상태 페이지에 공개됩니다. 미국 10년물 방향 전망은 검증 중이라 확률을 공개하지 않습니다.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>관련 링크 및 자료</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">실제 서비스 체험하기 ↗</a>
+      <a class="link-btn" href="../../content/debt-watch.md" download>소개 자료 다운로드 (.md)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">다른 프로젝트 탐색</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK워치</strong>
+        <span>한국은행 금리 결정 확률 모니터</span>
+      </a>
+      <a class="other-card" href="../fx-odds/">
+        <span class="other-type data">DATA</span>
+        <strong>FX워치</strong>
+        <span>환율의 확률과 압력을 읽다</span>
+      </a>
+      <a class="other-card" href="../seoul-apartment-tracker/">
+        <span class="other-type data">DATA</span>
+        <strong>서울 아파트 신고가 트래커</strong>
+        <span>최고가에서 얼마나 멀어졌을까?</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>독립 데이터저널리즘 프로젝트</span>
+</footer>
+<script src="../../detail.js" defer></script>
+</body>
+</html>
