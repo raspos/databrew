@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>databrew — 독립 데이터저널리즘 프로젝트</title>
-<meta name="description" content="기자가 AI로 만든 데이터 저널리즘 22개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브.">
+<meta name="description" content="기자가 AI로 만든 데이터 저널리즘 25개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브.">
 <link rel="canonical" href="https://raspos.github.io/databrew/">
 <meta name="robots" content="index, follow">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "databrew", "alternateName": ["데이터브루", "data BREW"], "url": "https://raspos.github.io/databrew/", "inLanguage": "ko-KR", "description": "독립 데이터저널리즘 프로젝트. 데이터로 내린 풍미깊은 뉴스.", "author": {"@type": "Person", "name": "프로딴짓러", "url": "https://www.facebook.com/rough1020"}}</script>
@@ -12,14 +12,14 @@
 <meta property="og:site_name" content="databrew">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:title" content="databrew — 데이터로 내린 풍미깊은 뉴스">
-<meta property="og:description" content="기자가 AI로 만든 데이터 저널리즘 22개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브. 독립 데이터저널리즘 프로젝트.">
+<meta property="og:description" content="기자가 AI로 만든 데이터 저널리즘 25개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브. 독립 데이터저널리즘 프로젝트.">
 <meta property="og:url" content="https://raspos.github.io/databrew/">
 <meta property="og:image" content="https://raspos.github.io/databrew/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="databrew — 데이터로 내린 풍미깊은 뉴스">
-<meta name="twitter:description" content="기자가 AI로 만든 데이터 저널리즘 22개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브. 독립 데이터저널리즘 프로젝트.">
+<meta name="twitter:description" content="기자가 AI로 만든 데이터 저널리즘 25개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브. 독립 데이터저널리즘 프로젝트.">
 <meta name="twitter:image" content="https://raspos.github.io/databrew/og.png">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -318,6 +318,17 @@ header .today { color: rgba(242,196,160,.6); }
   .bars i, .bars .bk { animation: none !important; }
   html.js header h1 .brw { background-position: 0 100% !important; }
 }
+
+/* Series bundles */
+.series-head { grid-column: 1 / -1; padding: 8px 4px 0; }
+.series-head[hidden] { display: none; }
+.series-head h3 { margin: 0 0 4px; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.series-head p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.series-head + .card, .series-head ~ .series-head { margin-top: 0; }
+.grid > .series-head:not(:first-child) { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--rule); }
+.grid.filtered .series-head { display: none; }
+.filter-row.type-row { margin-bottom: 10px; }
+.filter-row.series-row { margin-bottom: 36px; }
 </style>
 </head>
 <body>
@@ -329,7 +340,7 @@ header .today { color: rgba(242,196,160,.6); }
       <p class="tagl">:사실은 진하다</p>
       <h1 class="wm" aria-label="data BREW"><span class="acl wm-data" aria-hidden="true">data<i class="deg"></i></span><span class="brw" aria-hidden="true">BREW</span></h1>
       <p class="tagl2">데이터로 내린 풍미깊은 뉴스</p>
-      <p class="sub">기자가 AI로 만든 데이터 저널리즘 프로젝트 22개. 데이터를 탐색하고(<span class="w-data">DATA</span>),<br>직접 경험하며(<span class="w-exp">EXPERIENCE</span>), 기록과 지식을 쌓아 간다(<span class="w-int">INTELLIGENCE</span>).<br>모든 프로젝트는 서로 이어져 있습니다.</p>
+      <p class="sub">기자가 AI로 만든 데이터 저널리즘 프로젝트 25개. 데이터를 탐색하고(<span class="w-data">DATA</span>),<br>직접 경험하며(<span class="w-exp">EXPERIENCE</span>), 기록과 지식을 쌓아 간다(<span class="w-int">INTELLIGENCE</span>).<br>모든 프로젝트는 서로 이어져 있습니다.</p>
     </div>
     <div class="hright">
       <svg class="drip" viewBox="0 0 120 150" role="img" aria-label="커피가 드리퍼에서 한 방울씩 떨어져 잔에 차오르는 애니메이션">
@@ -353,13 +364,13 @@ header .today { color: rgba(242,196,160,.6); }
 
   <nav class="filter-row" aria-label="분야별 필터">
     <span class="filter-label">분야</span>
-    <button type="button" data-cat="all" aria-pressed="true">전체 <span class="count">22</span></button>
-    <button type="button" data-cat="경제" aria-pressed="false">경제 <span class="count">11</span></button>
+    <button type="button" data-cat="all" aria-pressed="true">전체 <span class="count">25</span></button>
+    <button type="button" data-cat="경제" aria-pressed="false">경제 <span class="count">12</span></button>
     <button type="button" data-cat="정치" aria-pressed="false">정치 <span class="count">2</span></button>
     <button type="button" data-cat="스포츠" aria-pressed="false">스포츠 <span class="count">5</span></button>
     <button type="button" data-cat="사회" aria-pressed="false">사회 <span class="count">2</span></button>
     <button type="button" data-cat="도구" aria-pressed="false">도구 <span class="count">1</span></button>
-    <button type="button" data-cat="게임" aria-pressed="false">게임 <span class="count">1</span></button>
+    <button type="button" data-cat="게임" aria-pressed="false">게임 <span class="count">3</span></button>
   </nav>
   <nav class="filter-row type-row" aria-label="유형별 필터">
     <span class="filter-label">유형</span>
@@ -369,10 +380,21 @@ header .today { color: rgba(242,196,160,.6); }
     <button type="button" data-type="INTELLIGENCE" aria-pressed="false">INTELLIGENCE</button>
   </nav>
 
+  <nav class="filter-row series-row" aria-label="시리즈별 필터">
+    <span class="filter-label">시리즈</span>
+    <button type="button" data-series="all" aria-pressed="true">전체</button>
+    <button type="button" data-series="watch" aria-pressed="false">워치 시리즈 <span class="count">5</span></button>
+    <button type="button" data-series="craft" aria-pressed="false">크래프트 시리즈 <span class="count">3</span></button>
+  </nav>
+
   <main class="grid" id="grid">
+    <div class="series-head" data-series-head="watch">
+      <h3>워치 시리즈</h3>
+      <p>시장과 숫자를 매일 지켜보는 서비스 5종. 금리, 환율, 국채와 부채, 기업 연봉, 아파트 시장심리를 연속 관측합니다.</p>
+    </div>
 
     <!-- 01 BOK워치 -->
-    <article class="card wide" data-cat="경제" data-type="DATA">
+    <article class="card wide" data-series="watch" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/bokwatch/">
         <div class="shot"><img src="shots/bokwatch.png" alt="BOK워치 메인 화면: 금통위 동결 확률 게이지와 회의별 기대 기준금리 표"></div>
         <div class="body">
@@ -389,7 +411,7 @@ header .today { color: rgba(242,196,160,.6); }
     </article>
 
     <!-- 01-2 FX워치 -->
-    <article class="card" data-cat="경제" data-type="DATA">
+    <article class="card" data-series="watch" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/fx-odds/">
         <div class="shot"><img src="shots/fx-odds.png" alt="FX워치 메인 화면: 환율의 확률과 압력을 읽다 제목과 원/달러 환율, 7일·30일 후 80% 범위" loading="lazy"></div>
         <div class="body">
@@ -406,7 +428,7 @@ header .today { color: rgba(242,196,160,.6); }
     </article>
 
     <!-- 01-3 DEBT워치 -->
-    <article class="card" data-cat="경제" data-type="DATA">
+    <article class="card" data-series="watch" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/debt-watch/">
         <div class="shot"><img src="shots/debt-watch.png" alt="DEBT워치 메인 화면: 미국 10년물, 한국 10년물, 미국 12개월 내 만기 국채, 금리 충격 시 이자 증가 요약 카드와 한미 국채금리 전망" loading="lazy"></div>
         <div class="body">
@@ -421,6 +443,101 @@ header .today { color: rgba(242,196,160,.6); }
         <a class="btn-service" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
     </article>
+
+    <!-- 02-2 PAY워치 -->
+    <article class="card" data-series="watch" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="projects/pay-watch/">
+        <div class="shot"><img src="shots/pay-watch-corp.png" alt="PAY워치 회사 화면: 삼성전자의 DART 공시 평균연봉과 근속 구간별 추정 연봉 범위" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
+          <h2>PAY워치</h2>
+          <p class="desc">내 친구는 얼마 벌까? 회사 이름만 검색하면 공시된 평균연봉이 나옵니다.</p>
+          <p class="desc2">친구들 회사로 랭킹을 만들고 월급 배틀을 붙여 보고, DART 공시와 국민연금 자료는 섞지 않고 따로 보여 줍니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/pay-watch/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/pay-watch/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- APT워치 -->
+    <article class="card" data-cat="경제" data-type="DATA" data-series="watch">
+      <a class="card-inner" href="projects/apt-watch/">
+        <div class="shot"><img src="shots/apt-watch.png" alt="APT워치 메인 화면: NEGO INDEX 네고 압력지수 현재 +3.6%와 7일, 28일 변화, 매물 증감률 요약" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
+          <h2>APT워치</h2>
+          <p class="desc">서울 아파트 시장심리지수. 집주인 호가는 최근 실거래가보다 얼마나 높을까요?</p>
+          <p class="desc2">서울 25개 구 110개 단지의 매물을 매일 관측해 네고 압력지수와 매물 증감률로 시장심리를 읽습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/apt-watch/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/apt-watch/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <div class="series-head" data-series-head="craft">
+      <h3>크래프트 시리즈</h3>
+      <p>직접 해 보며 이해하는 시뮬레이션 게임 3종. 기자의 인사발령, 홍보팀장의 기사 막기, 건설사의 수주전쟁을 체험합니다.</p>
+    </div>
+
+    <!-- 17 인사 크래프트 -->
+    <article class="card" data-series="craft" data-cat="게임" data-type="EXPERIENCE">
+      <a class="card-inner" href="projects/personnel-craft/">
+        <div class="shot"><img src="shots/personnel-craft.png" alt="인사 크래프트 메인 화면: 편집국에 오신 것을 환영합니다 문구와 3D 블록 기자 캐릭터, 신상 정보와 외형 설정" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">게임</span></div>
+          <h2>인사 크래프트</h2>
+          <p class="desc">편집국 생존기. 정기인사 철, 이번엔 원하는 부서로 갈 수 있을까요?</p>
+          <p class="desc2">3D 블록 기자로 커리어를 쌓고 인사 농사를 지은 뒤, 1만 번의 시뮬레이션으로 나온 확률 위에서 호외 발령을 받는 게임입니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/personnel-craft/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/personnel-craft/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 홍담 크래프트 -->
+    <article class="card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+      <a class="card-inner" href="projects/hongdam-craft/">
+        <div class="shot"><img src="shots/hongdam-craft.png" alt="홍담 크래프트 시작 화면: 단독예고 속보, 홍보팀장과 출입기자 12유형의 대결 구도, 난이도와 3D 복셀 캐릭터 선택" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">게임</span></div>
+          <h2>홍담 크래프트</h2>
+          <p class="desc">기사 막기 전쟁. 기사는 쏟아지고, 예산은 바닥나고, 팀장 목숨은 하나다.</p>
+          <p class="desc2">기업 홍보팀장이 되어 단독부터 오너리스크까지 6번의 위기 취재를 넘기고, 생존 확률을 시뮬레이션해 봅니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/hongdam-craft/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/hongdam-craft/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 재건축 크래프트 -->
+    <article class="card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+      <a class="card-inner" href="projects/reconstruction-craft/">
+        <div class="shot"><img src="shots/recon-game.png" alt="재건축 크래프트 수주 화면: 가온 신시가지 15개 단지를 3D 입체 도시 지도로 보여주고 업계 동향과 첩보를 제공하는 화면" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">게임</span></div>
+          <h2>재건축 크래프트</h2>
+          <p class="desc">시공사 수주전쟁. 가온 신시가지 15개 단지와 조합원 표심을 공략하는 건설사 영업본부장 게임입니다.</p>
+          <p class="desc2">8개 건설사 중 하나를 골라 7개 경쟁사와 맞붙으며 행동력과 영업예산으로 수주 목표를 채웁니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/reconstruction-craft/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/reconstruction-craft/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <div class="series-head" data-series-head="other">
+      <h3>그 밖의 프로젝트</h3>
+      <p>정치, 경제, 스포츠, 사회와 도구를 데이터로 풀어낸 프로젝트들입니다.</p>
+    </div>
 
     <!-- 02 이재명 X 트래커 -->
     <article class="card" data-cat="정치" data-type="INTELLIGENCE">
@@ -453,23 +570,6 @@ header .today { color: rgba(242,196,160,.6); }
       <div class="card-actions">
         <a class="btn-detail" href="projects/ramen-genealogy/">자세히 보기</a>
         <a class="btn-service" href="https://raspos.github.io/ramen-genealogy/#/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 02-2 PAY워치 -->
-    <article class="card" data-cat="경제" data-type="DATA">
-      <a class="card-inner" href="projects/pay-watch/">
-        <div class="shot"><img src="shots/pay-watch-corp.png" alt="PAY워치 회사 화면: 삼성전자의 DART 공시 평균연봉과 근속 구간별 추정 연봉 범위" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>PAY워치</h2>
-          <p class="desc">내 친구는 얼마 벌까? 회사 이름만 검색하면 공시된 평균연봉이 나옵니다.</p>
-          <p class="desc2">친구들 회사로 랭킹을 만들고 월급 배틀을 붙여 보고, DART 공시와 국민연금 자료는 섞지 않고 따로 보여 줍니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/pay-watch/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/pay-watch/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
     </article>
 
@@ -694,23 +794,6 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 17 인사 크래프트 -->
-    <article class="card" data-cat="게임" data-type="EXPERIENCE">
-      <a class="card-inner" href="projects/personnel-craft/">
-        <div class="shot"><img src="shots/personnel-craft.png" alt="인사 크래프트 메인 화면: 편집국에 오신 것을 환영합니다 문구와 3D 블록 기자 캐릭터, 신상 정보와 외형 설정" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">게임</span></div>
-          <h2>인사 크래프트</h2>
-          <p class="desc">편집국 생존기. 정기인사 철, 이번엔 원하는 부서로 갈 수 있을까요?</p>
-          <p class="desc2">3D 블록 기자로 커리어를 쌓고 인사 농사를 지은 뒤, 1만 번의 시뮬레이션으로 나온 확률 위에서 호외 발령을 받는 게임입니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/personnel-craft/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/personnel-craft/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
     <!-- 19 서울 아파트 신고가 트래커 -->
     <article class="card" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/seoul-apartment-tracker/">
@@ -762,19 +845,21 @@ header .today { color: rgba(242,196,160,.6); }
   document.getElementById('today').textContent = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' 기준';
 
   var grid = document.getElementById('grid');
-  var catBtns = document.querySelectorAll('.filter-row:first-of-type button');
+  var catBtns = document.querySelectorAll('.filter-row[aria-label="분야별 필터"] button');
+  var seriesBtns = document.querySelectorAll('.series-row button');
   var typeBtns = document.querySelectorAll('.type-row button');
-  var activeCat = 'all', activeType = 'all';
+  var activeCat = 'all', activeType = 'all', activeSeries = 'all';
 
   function applyFilters() {
-    var any = activeCat !== 'all' || activeType !== 'all';
+    var any = activeCat !== 'all' || activeType !== 'all' || activeSeries !== 'all';
     var before = new Map();
     grid.querySelectorAll('.card').forEach(function (c) { c.classList.remove('rv'); if (!c.hidden) before.set(c, c.getBoundingClientRect()); });
     grid.classList.toggle('filtered', any);
     grid.querySelectorAll('.card').forEach(function (c) {
       var cm = activeCat === 'all' || c.dataset.cat === activeCat;
       var tm = activeType === 'all' || c.dataset.type === activeType;
-      c.hidden = !(cm && tm);
+      var sm = activeSeries === 'all' || c.dataset.series === activeSeries;
+      c.hidden = !(cm && tm && sm);
     });
     if (!reduce) grid.querySelectorAll('.card').forEach(function (c) {
       if (c.hidden || !c.animate) return;
@@ -876,6 +961,14 @@ header .today { color: rgba(242,196,160,.6); }
     b.addEventListener('click', function () {
       activeCat = b.dataset.cat;
       catBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      applyFilters();
+    });
+  });
+
+  seriesBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      activeSeries = b.dataset.series;
+      seriesBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
       applyFilters();
     });
   });
