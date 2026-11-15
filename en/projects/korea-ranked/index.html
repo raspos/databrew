@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Science of K-Pride — databrew</title>
+<meta name="description" content="An interactive explorer of Korea's world rankings, measured with 53 official statistics from the World Bank, OECD, WIPO, and others">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/korea-ranked/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/korea-ranked/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/korea-ranked/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="The Science of K-Pride — databrew">
+<meta property="og:description" content="An interactive explorer of Korea's world rankings, measured with 53 official statistics from the World Bank, OECD, WIPO, and others">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/korea-ranked/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/korea.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Science of K-Pride — databrew">
+<meta name="twitter:description" content="An interactive explorer of Korea's world rankings, measured with 53 official statistics from the World Bank, OECD, WIPO, and others">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/korea.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Society · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/korea-ranked/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Society</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>The Science<br>of K-Pride</h1>
+    <p class="tagline">Korea's world rankings, measured with 53 official statistics</p>
+    <p class="hero-desc">Explore interactively Korea's world rankings, measured with 53 official indicators from international organizations such as the World Bank, OECD, WIPO, UNDP, IFR, and IOC. It also offers a 50-year timeline, country comparisons, and a quiz.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://korea-ranked.vercel.app/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/korea-ranked.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/korea.png" alt="The Science of K-Pride main screen: a grid of cards for Korea's world ranking indicators and a filter panel">
+  <p class="shot-cap">The Science of K-Pride main screen — an explorer of 53 indicator cards and the country comparison mode. Captured 2026-10-15.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why we built it</h2>
+    <p>The question "Where does Korea rank in the world?" is often tossed around without context. Korea's economy is among the largest, yet it is also near the bottom in working hours, inequality, and suicide rate. Until you see all the indicators on one screen, it is hard to tell which side is the "fact."</p>
+    <p>We selected 53 indicators using only official sources from international organizations, and attached context explanations so they are not quoted selectively or interpreted arbitrarily. The title "K-Pride" (gukppong) means we should examine both excessive pride and excessive pessimism about Korea.</p>
+    <p class="note">Data sources: only data officially published by the World Bank, OECD, WIPO, UNDP, IFR (International Federation of Robotics), IOC, WHO, ILO, and IMF is included. The number of countries compared varies by indicator.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Explore 53 indicators</div>
+        <p>Filter by category — economy, technology, society, environment, sports — to see Korea's rank and value for the indicator you want.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Country comparison</div>
+        <p>Select up to 5 countries and compare them side by side across all 53 indicators. Filters based on G7 and OECD membership are also available.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">50-year timeline</div>
+        <p>See, year by year from 1973 to 2023, how Korea's rank changed on which indicators.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">World map visualization</div>
+        <p>For each indicator, each country's rank and value are shown in color on a world map. Built on D3 Geo and TopoJSON.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Ranking quiz (28 questions)</div>
+        <p>An interactive quiz where you guess Korea's rank on 28 indicators, to find out "how much do I really know?"</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Transparent sources</div>
+        <p>Every indicator shows a link to the original source at the international organization and the latest reference year of the data.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and analysis methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">World Bank</div>
+        <div class="data-desc">Macro and social indicators such as GDP, trade volume, R&amp;D investment, internet penetration, life expectancy, and infant mortality.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">OECD</div>
+        <div class="data-desc">Average annual working hours, income inequality (Gini), education spending, elderly poverty rate, suicide rate, and life satisfaction.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">WIPO</div>
+        <div class="data-desc">Global Innovation Index (GII), number of patent applications, and trademark and design registrations.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">UNDP</div>
+        <div class="data-desc">Human Development Index (HDI), Gender Inequality Index (GII), and Multidimensional Poverty Index.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">IFR (International Federation of Robotics)</div>
+        <div class="data-desc">Manufacturing robot density (units installed per 10,000 workers).</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">IOC, FIFA, and others</div>
+        <div class="data-desc">Summer Olympics medal rankings, FIFA rankings, and esports tournament results.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">All data includes only raw data officially published by international organizations; secondarily processed statistics are not used. The data reference year varies by indicator (see each indicator's detail screen).</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>How to use it</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">Economy and society reporters</div>
+        <p>Check Korea's rank on a specific indicator in an international comparison and get the official source right away.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Education and research</div>
+        <p>Explore international comparison indicators interactively in social science and economics classes and understand 50 years of change.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">General readers</div>
+        <p>Use the quiz to see how accurately you actually know Korea's rankings.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Next.js</span>
+      <span class="tech-tag">React</span>
+      <span class="tech-tag">TypeScript</span>
+      <span class="tech-tag">Tailwind CSS 4</span>
+      <span class="tech-tag">Recharts</span>
+      <span class="tech-tag">D3 Geo / TopoJSON</span>
+      <span class="tech-tag">Python (data pipeline)</span>
+      <span class="tech-tag">Vercel</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">Public APIs and download files from international organizations are cleaned with a Python pipeline and converted to JSON. It is rendered with Next.js and Tailwind CSS 4 and deployed on Vercel.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Includes 53 indicators. Planned to be updated once a year, in line with the international organizations' data refresh cycles.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://korea-ranked.vercel.app/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/korea-ranked.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>20 years of customs data on semiconductor exports</span>
+      </a>
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK Watch</strong>
+        <span>Bank of Korea rate decision probability monitor</span>
+      </a>
+      <a class="other-card" href="../bibigo-index/">
+        <span class="other-type data">DATA</span>
+        <strong>Bibigo Index</strong>
+        <span>Reading world prices and exchange rates through dumplings</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KOREAN NEWSROOM HUB — databrew</title>
+<meta name="description" content="Ask with official data, confirm with evidence. A guide to an MCP tool for reporters that connects ChatGPT to official data from the Bank of Korea ECOS, KOSIS and OpenDART, so figures, units, reference periods and sources come together.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/korean-newsroom-hub/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/korean-newsroom-hub/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/korean-newsroom-hub/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="KOREAN NEWSROOM HUB — databrew">
+<meta property="og:description" content="Ask with official data, confirm with evidence. A guide to an MCP tool for reporters that connects ChatGPT to official data from the Bank of Korea ECOS, KOSIS and OpenDART, so figures, units, reference periods and sources come together.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/korean-newsroom-hub/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/newsroom-hub.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KOREAN NEWSROOM HUB — databrew">
+<meta name="twitter:description" content="Ask with official data, confirm with evidence. A guide to an MCP tool for reporters that connects ChatGPT to official data from the Bank of Korea ECOS, KOSIS and OpenDART, so figures, units, reference periods and sources come together.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/newsroom-hub.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Tool · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/korean-newsroom-hub/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Tool</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>KOREAN<br>NEWSROOM HUB</h1>
+    <p class="tagline">Ask with official data, confirm with evidence</p>
+    <p class="hero-desc">An MCP tool that lets reporters covering the economy, finance and industry have ChatGPT query the official APIs of the Bank of Korea ECOS, Statistics Korea KOSIS and the Financial Supervisory Service OpenDART directly. Answers come with the figure, unit, reference period and source. The HUB this page describes is a guide site for reporters that introduces the tool and helps them connect it.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/korean-newsroom-hub/" target="_blank" rel="noopener">Open the HUB ↗</a>
+      <a class="btn-secondary" href="../../../content/korean-newsroom-hub.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/newsroom-hub.png" alt="KOREAN NEWSROOM HUB main screen: the line 'Connect official data and your reporting gains depth,' a 90-second intro video, and a read-only summary of official APIs from 3 institutions and 12 tools">
+  <p class="shot-cap">KOREAN NEWSROOM HUB main screen — MCP 0.4.0 RC, trial operation for approved accounts. Screen as of 2026-11-10.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / INTRO</div>
+    <h2>What this tool is</h2>
+    <p>Ask ChatGPT for Samsung Electronics' revenue and a plausible number comes back. But what worries a reporter is not the number, it is the basis: consolidated or separate, annual or cumulative, % or %p, and the value as of which date. If even one of these is off, the number in the article is wrong.</p>
+    <p>KOREAN NEWSROOM hands this checking process to a tool. Using MCP (Model Context Protocol), it attaches official API query tools to ChatGPT, so when a reporter asks a question it calls ECOS, KOSIS and OpenDART directly and returns the raw figure together with the unit, reference period, data identifier and a link to the official source. The reporter gets the source and calculation basis to hand to the desk in one go.</p>
+    <p>The tool is read-only and does not write articles for you. It only finds, compares and verifies official data. The HUB also states clearly that checking against the original source and the final judgment are the reporter's job.</p>
+    <p class="note">KOREAN NEWSROOM HUB is a guide site independent of the official services of institutions such as the Bank of Korea, Statistics Korea and the Financial Supervisory Service. The tool is in a trial operation stage used only by approved accounts.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can see on the HUB</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Why MCP</div>
+        <p>It shows side by side how plain ChatGPT and MCP each work through the same question (Samsung Electronics' annual consolidated revenue for 2024). It explains that plain ChatGPT can also search the web and check sources, and that MCP differs by connecting official API query conditions with calculation and verification steps. This explains how it works; it is not an actual run result.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">11-step install guide</div>
+        <p>You follow 11 steps one screen at a time: from signing in to ChatGPT, adding a custom MCP server and OAuth authentication, to refreshing the tools after access approval, then a first question and follow-up questions. No personal ECOS, KOSIS or DART keys are needed. A 5 min 30 s install video and a one-page install guide are also available.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Troubleshooting checklist</div>
+        <p>It separates what to check yourself from what to ask the operator when the add-MCP menu is missing, the server address won't connect, the tools don't appear after login, a usage limit kicks in, or a number differs from the official site. It also warns against sending tokens or private reporting materials.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Sample questions and answers</div>
+        <p>You can copy example questions such as the change in savings deposit rates, an employment rate comparison between Jung-gu in Seoul and Jung-gu in Busan, and Samsung Electronics' consolidated revenue. Each example comes with the institution, reference period, data identifier, display unit, points for the reporter to check, and follow-up reporting questions.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">12 reporting tools</div>
+        <p>It shows the 12 read-only tools for searching, comparing and verifying, along with the supported scope. An unsupported list states that automatic article writing, a ranking of all listed manufacturers, Korea Customs Service HS export contribution, and a full ranking of bank delinquency rates are not supported.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Service status and update history</div>
+        <p>It publishes the implementation, testing and deployment status of MCP 0.4.0 RC and the check results for each institution, with dates. It does not inflate the current state and plainly states what is not yet done (connection for general users).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / SCREENS</div>
+    <h2>Screen preview</h2>
+    <div class="shots-grid">
+      <div class="shot-item">
+        <img src="../../../shots/newsroom-hub-why.png" alt="KOREAN NEWSROOM HUB 'Why MCP': a screen comparing how the same question is solved with plain ChatGPT and with an MCP connection" loading="lazy">
+        <p>Why MCP — same question, different verification process</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/newsroom-hub-connect.png" alt="KOREAN NEWSROOM HUB install guide: how to connect with an approved account, the server address, and a 5 min 30 s install video" loading="lazy">
+        <p>Install guide — for reporters connecting for the first time</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/newsroom-hub-cases.png" alt="KOREAN NEWSROOM HUB sample questions and answers: an example question and answer verifying whether the savings deposit rate rose 0.09%p" loading="lazy">
+        <p>Sample questions and answers — copy and ask right away</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/newsroom-hub-tools.png" alt="KOREAN NEWSROOM HUB supported tools: 12 reporting tools, supported scope and unsupported items" loading="lazy">
+        <p>Supported tools — what works and what doesn't</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / DATA &amp; METHODS</div>
+    <h2>Data and how it is checked</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Bank of Korea ECOS</div>
+        <div class="data-desc">Economic statistics such as interest rates. The example is the savings deposit rate rising 0.09%p from 2.81% in November 2025 to 2.90% in December (table ECOS 121Y002).</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">KOSIS official statistical tables</div>
+        <div class="data-desc">Statistics Korea data. The example is the employment rate in the second half of 2025: Jung-gu, Seoul 58.4% and Jung-gu, Busan 58.2%, a 0.2%p difference (table DT_1ES3A03_A01S).</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">OpenDART official disclosures</div>
+        <div class="data-desc">Financial Supervisory Service disclosures. The example is Samsung Electronics' annual consolidated revenue for fiscal 2024: KRW 300,870,903,000,000, about KRW 300.87 trillion (linked to the original document by disclosure receipt number).</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">How it checks</div>
+        <div class="data-desc">With every query it specifies the period, item and unit, consolidated vs. separate, annual vs. cumulative, and % vs. %p, and returns the raw figure together with the unit, data identifier, reference period and a link to the official source.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">The sample questions and answers are built from official historical figures and are not actual ChatGPT responses. The HUB states that the figures on screen are past verification cases, not current values, that API unit conflicts are corrected only for items cross-checked against official sources, and that this does not mean every item is verified. It does not always guarantee a more accurate answer, and checking against the original source and the reporter's judgment are still required.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 / LIMITS</div>
+    <h2>What it can't do</h2>
+    <p>This tool does not write articles automatically and is read-only. Some questions are also unsupported, such as a ranking of all listed manufacturers, Korea Customs Service HS export contribution, and a full ranking of bank delinquency rates. If a number differs from the official site, hold off on using it and check it with the table ID or the disclosure receipt number.</p>
+    <p>There are also constraints on how it connects. Your ChatGPT web account needs permission for custom MCP connections, and a plan name alone does not guarantee the menu is offered. The server is a free HTTPS server, so it may go to sleep if unused for a while and the first connection may be slow.</p>
+    <p class="note">It is currently a trial operation stage open only to accounts approved by the operator. Connection for general users is being prepared.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was built</h2>
+    <div class="tech-list">
+      <span class="tech-tag">MCP (Model Context Protocol)</span>
+      <span class="tech-tag">ECOS · KOSIS · OpenDART API</span>
+      <span class="tech-tag">OAuth (Auth0)</span>
+      <span class="tech-tag">Docker · CI</span>
+      <span class="tech-tag">GitHub Pages (guide site)</span>
+      <span class="tech-tag">AI-assisted build</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">The HUB states that the 12 tools passed 73 automated tests and Docker/CI verification, and that ECOS, KOSIS and DART queries through ChatGPT were confirmed on the operator's trial account on 2026-11-10.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>The guide site (HUB) is open to everyone. MCP 0.4.0 RC. As of 2026-11-10, the HTTPS server connection and install video are public, and the tool is in trial operation, issuing accounts through user sign-up and operator access approval.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/korean-newsroom-hub/" target="_blank" rel="noopener">Open the HUB ↗</a>
+      <a class="link-btn" href="https://raspos.github.io/korean-newsroom-hub/install-guide.html" target="_blank" rel="noopener">One-page install guide ↗</a>
+      <a class="link-btn" href="../../../content/korean-newsroom-hub.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK Watch</strong>
+        <span>Bank of Korea rate-decision probability monitor</span>
+      </a>
+      <a class="other-card" href="../pay-watch/">
+        <span class="other-type data">DATA</span>
+        <strong>PAY Watch</strong>
+        <span>How much does my friend earn? Average pay by company</span>
+      </a>
+      <a class="other-card" href="../corporate-scorecard/">
+        <span class="other-type data">DATA</span>
+        <strong>Corporate Momentum Ranking</strong>
+        <span>Finding the listed companies that improved most over 3 years</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

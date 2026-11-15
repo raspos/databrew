@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lee Jae-myung X Tracker — databrew</title>
+<meta name="description" content="A digital archive of 1,065 posts by President Lee Jae-myung on X (Twitter), classified and analyzed with AI">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/lee-x-tracker/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/lee-x-tracker/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/lee-x-tracker/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Lee Jae-myung X Tracker — databrew">
+<meta property="og:description" content="A digital archive of 1,065 posts by President Lee Jae-myung on X (Twitter), classified and analyzed with AI">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/lee-x-tracker/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/lee-x.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lee Jae-myung X Tracker — databrew">
+<meta name="twitter:description" content="A digital archive of 1,065 posts by President Lee Jae-myung on X (Twitter), classified and analyzed with AI">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/lee-x.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Politics · INTELLIGENCE</span>
+  <a class="lang-switch-detail" href="../../../projects/lee-x-tracker/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type intelligence">INTELLIGENCE</span>
+      <span class="badge-cat">Politics</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>Lee Jae-myung<br>X Tracker</h1>
+    <p class="tagline">The president's 1,065 posts in one place</p>
+    <p class="hero-desc">A statement archive that organizes the 1,065 posts President Lee Jae-myung has published on X (formerly Twitter), classified and sentiment-analyzed with AI, so they can be explored as time series and by topic.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://lee-x-tracker.raspos.chatgpt.site/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/lee-x-tracker.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/lee-x.png" alt="Lee Jae-myung X Tracker main screen: a time-series chart of posts and topic classification statistics">
+  <p class="shot-cap">Lee Jae-myung X Tracker main screen — time series and topic classification of the 1,065 posts. Captured 2026-10-15.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why it was built</h2>
+    <p>The president's X posts are sometimes not official positions, but because they go up in real time they are an important primary source for tracking political messages. However, X's limited search makes it hard to analyze past posts systematically.</p>
+    <p>Through AI classification, posts are organized by topic such as economy, diplomacy, welfare and politics, so you can see changes over time and emotional tone together. It can be used for fact-checking, issue tracking and compiling policy statements.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Browse all 1,065 posts</div>
+        <p>Filter by date, topic and keyword to find the posts you want quickly.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">AI classification by topic</div>
+        <p>See the classification results by topic, such as economy, diplomacy, welfare and politics, along with the reasoning for each classification.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Post time-series analysis</div>
+        <p>View daily, weekly and monthly posting frequency and changes in topic share as charts.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">AI sentiment analysis</div>
+        <p>Check the distribution of emotional tone (positive, negative, neutral) per post and how it changes over time.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Approval-rating comparison</div>
+        <p>Compare approval ratings from major polls side by side with posting patterns.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Direct links to originals</div>
+        <p>Jump straight from each post to the original on X to check the context.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and analysis methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">X (Twitter) API</div>
+        <div class="data-desc">Collects posts from President Lee Jae-myung's official X account, including text, date, likes, retweets and links.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">OpenAI API (GPT-4)</div>
+        <div class="data-desc">Topic classification and sentiment analysis for each post. Classification scheme: five categories — economy, diplomacy, welfare, politics and other. Prompts and classification criteria are public.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Polling data</div>
+        <div class="data-desc">Weekly approval-rating survey results from major organizations. Used only for comparative analysis with posting patterns.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">AI classification results are automatic and may contain errors. The classification criteria and prompts are published within the service.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>How it can be used</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">Political reporters</div>
+        <p>Quickly check what the president said on a given issue or date and secure a link to the original.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Fact-checkers and researchers</div>
+        <p>Track the statement archive over time to analyze shifts in position or patterns.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Readers interested in politics</div>
+        <p>Through posts organized by topic, get a clear picture of the president's interests and how his messages have changed.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was built</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">OpenAI API (GPT-4)</span>
+      <span class="tech-tag">X API v2</span>
+      <span class="tech-tag">ChatGPT.site</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>1,065 posts included. Manual updates are needed when new posts are added.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://lee-x-tracker.raspos.chatgpt.site/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/lee-x-tracker.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../fx-odds/">
+        <span class="other-type data">DATA</span>
+        <strong>FX Watch</strong>
+        <span>Reading the odds and pressure behind the exchange rate</span>
+      </a>
+      <a class="other-card" href="../son-goal-museum/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>Son Heung-min Goal Museum</strong>
+        <span>A digital archive of 302 goals with verified sources</span>
+      </a>
+      <a class="other-card" href="../economist-toolkit/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>Economists' Toolbox</strong>
+        <span>50 years of Nobel economics laureates analyzed</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FX Watch — databrew</title>
+<meta name="description" content="A KRW/USD exchange rate probability monitor showing the probability distribution and pressure factors 7 and 30 days ahead. It doesn't call a direction; it shows the range of uncertainty.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/fx-odds/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/fx-odds/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/fx-odds/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="FX Watch — databrew">
+<meta property="og:description" content="A KRW/USD exchange rate probability monitor showing the probability distribution and pressure factors 7 and 30 days ahead. It doesn't call a direction; it shows the range of uncertainty.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/fx-odds/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/fx-odds.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FX Watch — databrew">
+<meta name="twitter:description" content="A KRW/USD exchange rate probability monitor showing the probability distribution and pressure factors 7 and 30 days ahead. It doesn't call a direction; it shows the range of uncertainty.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/fx-odds.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Watch Series · Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/fx-odds/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-cat">Watch Series</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>FX Watch</h1>
+    <p class="tagline">Reading the odds and pressure behind the exchange rate</p>
+    <p class="hero-desc">An exchange rate monitor that uses a probability distribution to show which range the KRW/USD rate is most likely to be in 7 and 30 days from now. It doesn't assert a direction; it shows uncertainty through each model's prediction interval and the probability of reaching a given level.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/fx-odds/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/fx-odds.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/fx-odds.png" alt="FX Watch main screen: the title 'Reading the odds and pressure behind the exchange rate', the KRW/USD rate, and the 80% range 7 and 30 days ahead">
+  <p class="shot-cap">FX Watch main screen — the KRW/USD rate and the 80% prediction interval 7 and 30 days ahead. Captured 2026-11-05.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why we built it</h2>
+    <p>Exchange rate forecast stories usually end with a number or two, or a direction. But what can be said with confidence about the exchange rate is not the direction; it is the probability that it stays within a certain range.</p>
+    <p>Carrying on the design philosophy of BOK Watch, we built it to show the uncertainty of the exchange rate as a probability distribution, and to publish a scorecard of which models have actually fit better.</p>
+    <p class="note">Statistical probabilities are estimated from past data and do not guarantee actual outcomes. The service states that its official models carry no directional information and have no verified directional forecasting power. This is not investment advice.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">The exchange rate's future</div>
+        <p>See the 50%, 80%, and 90% prediction intervals and the probability distribution for the won per dollar 7 and 30 days ahead.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Probability calculator for a specific rate</div>
+        <p>Enter the rate you want and it calculates the probability of ending there at maturity and of breaching it during the period.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Volatility index (FXVI)</div>
+        <p>Shows on a 0–100 scale where exchange rate volatility stands historically, alongside the recent intraday range.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Pressure and news</div>
+        <p>Experimentally shows a news pressure index (FSI) and a statistical pressure index (FPI). They measure directional pressure, not probability.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Co-movement radar</div>
+        <p>Check how closely the won moves together with other currencies.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Forecast scorecard and methodology</div>
+        <p>Publishes each model's performance using the score (CRPS) of forecasts whose outcomes are settled, and explains the methodology.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and analysis methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Bank of Korea ECOS</div>
+        <div class="data-desc">Time series for exchange rates, interest rates, and the balance of payments, including the won/US dollar base rate (731Y001, Seoul foreign exchange market basis).</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Yahoo Finance</div>
+        <div class="data-desc">Overseas market indicators. Shown on the service screen with a separate reference date.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Forecast models</div>
+        <div class="data-desc">The official models are EWMA for 7 days and Parkinson (high-low prices, scale-adjusted) for 30 days. The expected range is calculated from exchange rate returns and volatility alone, with no directional judgment.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">Qualitative pressure and the integrated outlook are not yet validated, so they are not reflected in the official forecast. Model explanations and validation results are in the service's Methodology and Forecast Scorecard tabs.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Bank of Korea ECOS API</span>
+      <span class="tech-tag">Statistical models (EWMA, resampling)</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>v0.3.0. Updates automatically, and the service screen shows the last update time and the data reference date. If collection of some indicators fails, the screen says so.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/fx-odds/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/fx-odds.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK Watch</strong>
+        <span>Bank of Korea rate decision probability monitor</span>
+      </a>
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>20 years of customs data on semiconductor exports</span>
+      </a>
+      <a class="other-card" href="../corporate-scorecard/">
+        <span class="other-type data">DATA</span>
+        <strong>Corporate Momentum Ranking</strong>
+        <span>Finding the listed companies that improved most over three years</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-WAR — databrew</title>
+<meta name="description" content="A ranking that uses approximate WAR to calculate how much more KBO players delivered than expected before the season. How much did the club expect, and how much did the player deliver?">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/e-war/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/e-war/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/e-war/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="E-WAR — databrew">
+<meta property="og:description" content="A ranking that uses approximate WAR to calculate how much more KBO players delivered than expected before the season. How much did the club expect, and how much did the player deliver?">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/e-war/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/e-war.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="E-WAR — databrew">
+<meta name="twitter:description" content="A ranking that uses approximate WAR to calculate how much more KBO players delivered than expected before the season. How much did the club expect, and how much did the player deliver?">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/e-war.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Sports Series · Sports · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/e-war/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Sports</span>
+      <span class="badge-cat">Sports Series</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>E-WAR</h1>
+    <p class="tagline">Players who beat expectations</p>
+    <p class="hero-desc">How much did the club expect, and how much did the player deliver? E-WAR is a KBO player's actual WAR minus the pre-season expected WAR, used to find players and clubs that delivered more than expected.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/e-war.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/e-war.png" alt="E-WAR main screen: the headline 'Players who beat expectations in the 2026 KBO season', the expectation baseline settings and the 2026 season E-WAR ranking table">
+  <p class="shot-cap">E-WAR main screen — KBO 2026 season E-WAR ranking. Captured 2026-10-31.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why we built it</h2>
+    <p>A WAR ranking shows who did the most, but it puts players with low expectations and players with high expectations on the same scale. What fans and clubs really want to know is how much more a player delivered than expected.</p>
+    <p>We estimate the pre-season expected WAR from the previous three seasons' records and age, and define the gap from actual WAR as E-WAR, so players who beat expectations can be found at a glance.</p>
+    <p class="note">The WAR in this service is an approximate WAR (aWAR) calculated directly from KBO basic statistics, and is not an official WAR such as STATIZ's. Expectations are statistical expectations estimated from past records and age, not the club's actual internal expectations. Defense and baserunning are not included in WAR.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">E-WAR ranking</div>
+        <p>Pick a season from 2020 to 2026 and sort players who beat expectations by club, position, age and playing-time criteria.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Expectation vs. reality</div>
+        <p>See expected WAR, its 90% expected interval and actual WAR side by side, with players outside the interval flagged.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Club report card</div>
+        <p>Adds up performance relative to expectations for each club and compares them.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Player types</div>
+        <p>Classifies players by type, such as above or below expectations, for browsing.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Negotiation helper</div>
+        <p>Calculates estimated surplus value and WAR per 100 million won from salary and performance, offered as reference material for salary negotiations.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Model validation lab</div>
+        <p>Publishes the error and validation results of the expectation model.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">KBO basic statistics</div>
+        <div class="data-desc">Approximate WAR is calculated by adding a positional adjustment to batting for hitters, and by blending FIP and runs allowed per nine innings (RA9) for pitchers. The replacement level is calibrated to Naver WAR.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Expected WAR</div>
+        <div class="data-desc">Estimated from the previous three seasons' records and age. For the 2026 season it combines the model expectation with salary-converted WAR, with calculated weights of 75% model to 25% salary.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Salary</div>
+        <div class="data-desc">Only 2026 season salaries were obtained, with no contract (FA) information. Foreign players' dollar salaries are converted at the average exchange rate.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">The ranking covers 270 players (2026) who have records from the previous three seasons and exceed the minimum playing-time threshold; rookies and returning players are excluded because expectations cannot be built for them. The service states that no backtest could be run because there is only one season of data.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it's made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Statistical model (expected WAR estimation)</span>
+      <span class="tech-tag">Interactive tables and charts</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Based on the KBO 2026 season. It uses approximate WAR and statistical expectations, and the service's first screen notes that this is not an official WAR.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/e-war.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../baseball-legends/">
+        <span class="other-type experience">EXPERIENCE</span>
+        <strong>Chu-Kang-Dae-Yeop + Kim</strong>
+        <span>Comparing the records of five Korean baseball legends</span>
+      </a>
+      <a class="other-card" href="../se-young-archive/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>THE SE YOUNG ARCHIVE</strong>
+        <span>An Se-young, a rally carried on through records</span>
+      </a>
+      <a class="other-card" href="../son-goal-museum/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>Son Heung-min Goal Museum</strong>
+        <span>A digital archive of 302 goals with verified sources</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

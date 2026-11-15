@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bibigo Index — databrew</title>
+<meta name="description" content="An exploratory index that looks at relative prices and exchange rates in 36 countries using the price of 100g of Bibigo Wang Gyoza dumplings, and compares it with the Big Mac Index.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/bibigo-index/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/bibigo-index/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/bibigo-index/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Bibigo Index — databrew">
+<meta property="og:description" content="An exploratory index that looks at relative prices and exchange rates in 36 countries using the price of 100g of Bibigo Wang Gyoza dumplings, and compares it with the Big Mac Index.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/bibigo-index/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/bibigo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bibigo Index — databrew">
+<meta name="twitter:description" content="An exploratory index that looks at relative prices and exchange rates in 36 countries using the price of 100g of Bibigo Wang Gyoza dumplings, and compares it with the Big Mac Index.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/bibigo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/bibigo-index/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>Bibigo Index</h1>
+    <p class="tagline">Reading the world economy through 100g of dumplings</p>
+    <p class="hero-desc">In Korea, 100g of Bibigo Wang Gyoza costs 1,093.33 won. What does it cost in grocery baskets around the world? Local sale prices are matched to the same weight, and relative prices and exchange rates by country are examined alongside the Big Mac.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://bibigo-mandu-index.raspos.chatgpt.site/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/bibigo-index.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/bibigo.png" alt="Bibigo Index main screen: the title 'Reading the world economy through 100g of dumplings' and the price of 100g of Bibigo Wang Gyoza in Korea">
+  <p class="shot-cap">Bibigo Index main screen — relative price of 100g of dumplings with Korea set to 100. Data checked 2026-10-17, captured 2026-10-31.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why it was made</h2>
+    <p>The Economist's Big Mac Index is the best-known indicator for intuitively comparing prices and exchange rates across countries. But Korean readers are more familiar with Korean brands. So we tested whether the same comparison could be made with Bibigo Wang Gyoza dumplings.</p>
+    <p>The local sale price of Bibigo dumplings is standardized to the same 100g, and relative prices with the Korean price set to 100 are compared by country. Paired with the Big Mac Index, it also shows how similar the conclusions of the two indices are.</p>
+    <p class="note">The service states that products with a different taste or composition are excluded from highest and lowest judgments, and that it does not assert a representative price for any country. This index is an exploratory comparison, not an academic purchasing power parity (PPP) index.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">The story of dumpling prices</div>
+        <p>With Korea set to 100, compare the most expensive and the cheapest places. Above 100 means more expensive than Korea.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Bibigo Dumpling Index vs Big Mac Index</div>
+        <p>With each product's Korean price as the baseline line, lay out relative prices around the world side by side, and pair-compare countries that have both indices and a common exchange rate.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">World Bibigo dumpling survey map</div>
+        <p>Shows all 45 entries from the 36 surveyed countries, including countries where no index could be calculated because exchange-rate or Big Mac data was missing.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Pick a country and check the retailer</div>
+        <p>Choose a country to see the observed price, the price range per 100g, and the verification status of the retailer's original page.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Comparison with actual exchange rates</div>
+        <p>Shows how to read relative prices by comparing them with actual exchange rates.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Comparison ranking and sources</div>
+        <p>Discloses the comparison ranking by country, retailer and supporting sources, and the distinction of verification status.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and analysis method</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Bibigo dumpling sale prices</div>
+        <div class="data-desc">45 entries from 36 countries. Retailer sources are disclosed, prices are standardized to 100g, and verification status is distinguished. Includes retailer and supporting sources and data that needs checking.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Exchange rates</div>
+        <div class="data-desc">Common exchange-rate reference date 2026-10-16, KRW per 1 unit of local currency.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Big Mac prices</div>
+        <div class="data-desc">Used for the paired comparison with the Big Mac Index. The 8 countries that have both indices and a common exchange rate are the default paired-comparison sample.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">Data checked 2026-10-17. The index is a sample result using only countries whose products are similar in composition to the reference product and whose common exchange rate was confirmed. Local-currency price, package weight and source status must be read together.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>How it can be used</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">Economics education and content</div>
+        <p>Explains the concepts of purchasing power parity and the Big Mac Index intuitively with a Korean-brand product.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Economy and prices reporters</div>
+        <p>Use relative prices of the same product by country as a story angle, while noting the sample limits the service discloses.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">General readers</div>
+        <p>Take a light look at how different overseas grocery prices are from Korea's.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Interactive web</span>
+      <span class="tech-tag">ChatGPT.site</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>2026 edition. Data checked 2026-10-17, common exchange-rate reference date 2026-10-16.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://bibigo-mandu-index.raspos.chatgpt.site/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/bibigo-index.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK Watch</strong>
+        <span>A Bank of Korea rate-decision probability monitor</span>
+      </a>
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>Analysis of 20 years of customs data on semiconductor exports</span>
+      </a>
+      <a class="other-card" href="../korea-ranked/">
+        <span class="other-type data">DATA</span>
+        <strong>The Science of K-Pride</strong>
+        <span>Korea's rankings across 53 official statistics</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

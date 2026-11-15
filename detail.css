@@ -159,3 +159,7 @@ p{margin:0 0 14px}
   .sec-label::after{width:56px;transition:none}
   .read-bar{display:none}
 }
+
+.lang-switch-detail{margin-left:auto;font-family:var(--font-mono,monospace);font-size:12px;letter-spacing:.08em;color:inherit;text-decoration:none;border:1px solid currentColor;border-radius:999px;padding:4px 12px;opacity:.8}
+.lang-switch-detail:hover{opacity:1}
+.lang-switch-detail:focus-visible{outline:2px solid currentColor;outline-offset:3px}

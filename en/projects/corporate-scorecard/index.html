@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corporate Momentum Ranking — databrew</title>
+<meta name="description" content="A corporate momentum ranking that measures listed companies' three-year financial improvement from OpenDART filings. It finds not the biggest companies, but the ones that changed the most.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/corporate-scorecard/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/corporate-scorecard/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/corporate-scorecard/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Corporate Momentum Ranking — databrew">
+<meta property="og:description" content="A corporate momentum ranking that measures listed companies' three-year financial improvement from OpenDART filings. It finds not the biggest companies, but the ones that changed the most.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/corporate-scorecard/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/corporate-scorecard.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Corporate Momentum Ranking — databrew">
+<meta name="twitter:description" content="A corporate momentum ranking that measures listed companies' three-year financial improvement from OpenDART filings. It finds not the biggest companies, but the ones that changed the most.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/corporate-scorecard.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/corporate-scorecard/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>Corporate Momentum<br>Ranking</h1>
+    <p class="tagline">Which company improved the most over the past three years?</p>
+    <p class="hero-desc">Measures changes in growth, profitability, financial soundness and cash generation from listed companies' financial statements. It evaluates the speed and quality of improvement in 2022–2025 performance, not a company's current size.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/korea-corporate-scorecard/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/corporate-scorecard.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/corporate-scorecard.png" alt="Corporate Momentum Ranking main screen: the headline 'Which company improved the most over the past three years?' and provisional No. 1 cards for overall momentum, growth and profitability">
+  <p class="shot-cap">Corporate Momentum Ranking main screen — 2022–2025 momentum evaluation, provisional ranking. Captured 2026-10-24.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why we built it</h2>
+    <p>Corporate rankings are usually ordered by revenue or assets. But what investors and readers want to know is not current size but which companies are actually getting better.</p>
+    <p>We measure three years of change from financial statements filed with the Financial Supervisory Service's OpenDART, to find "not the biggest companies, but the ones that changed the most."</p>
+    <p class="note">The current ranking is provisional. Checks of original filings and amended filings, consolidated versus separate statements, market and industry classification, and outlier validation are still under way, so results may change. Scores are relative evaluations within a comparison group, not absolute ones.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Corporate Momentum Index (CII)</div>
+        <p>Measures financial improvement over 2022–2025. A provisional ranking is published for companies with complete data.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Financial Strength Index (FSI)</div>
+        <p>Evaluates 2025 profitability, financial stability, cash generation and asset efficiency, shown separately from momentum.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Turnaround companies</div>
+        <p>Browse companies whose finances are currently weak but that have shown a recent recovery, gathered in one place.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Corporate momentum map</div>
+        <p>Places companies on FSI (horizontal) and CII (vertical) coordinates so you can compare strength and speed of improvement at a glance.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Size groups and special lenses</div>
+        <p>Explore by groups based on 2024–2025 average total assets, and by special lenses such as revenue growth and return to profit.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Company head-to-head and download</div>
+        <p>Compare up to three companies side by side, and download the results as CSV or Excel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Financial Supervisory Service OpenDART</div>
+        <div class="data-desc">Financial statements filed by listed companies. The raw data for calculating growth, profitability, financial soundness and cash generation indicators.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Momentum Index (CII)</div>
+        <div class="data-desc">Measures improvement over 2022–2025. Converted to relative scores within a comparison group.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Financial Strength Index (FSI)</div>
+        <div class="data-desc">Evaluates 2025 profitability, financial stability, cash generation and asset efficiency. Reported separately from CII.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">Size groups are evaluation bands based on 2024–2025 average total assets and are not a legal classification of company size. 2026 quarterly figures are not included in the 2025 annual evaluation. The methodology, model validation and data collection quality status are published within the service.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>How it can be used</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">Economy and corporate beat reporters</div>
+        <p>Find companies worth watching based on change rather than size, and use them as a starting point for checking against the original filings.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Investors and analysts</div>
+        <p>Look at momentum and financial strength separately to screen turnaround candidates, and compare companies head-to-head.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">General readers</div>
+        <p>Check on the map whether the finances of a company you only know by name have actually improved over the past three years.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it's made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">OpenDART API</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC · Provisional</span>
+      <p>The 2022–2025 momentum ranking is published provisionally and will be updated once verification against original filings and outlier checks are complete.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/korea-corporate-scorecard/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/corporate-scorecard.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK Watch</strong>
+        <span>Bank of Korea rate decision probability monitor</span>
+      </a>
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>Analysis of 20 years of semiconductor export customs data</span>
+      </a>
+      <a class="other-card" href="../economist-toolkit/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>Economists' Toolbox</strong>
+        <span>A knowledge map of Nobel economics laureates</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

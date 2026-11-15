@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHIP CYCLE — databrew</title>
+<meta name="description" content="Tracking 20 years of Korean semiconductor exports with 237 months of customs data on DRAM, flash and multi-chip packages">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/chip-cycle/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/chip-cycle/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/chip-cycle/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="CHIP CYCLE — databrew">
+<meta property="og:description" content="Tracking 20 years of Korean semiconductor exports with 237 months of customs data on DRAM, flash and multi-chip packages">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/chip-cycle/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/chip-v2.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CHIP CYCLE — databrew">
+<meta name="twitter:description" content="Tracking 20 years of Korean semiconductor exports with 237 months of customs data on DRAM, flash and multi-chip packages">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/chip-v2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Economy &amp; Industry · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/chip-cycle/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>CHIP CYCLE</h1>
+    <p class="tagline">Export value surged, but the number of units sold fell</p>
+    <p class="hero-desc">Twenty years of Korean semiconductor exports, tracked with 237 months of customs data on DRAM, flash memory and multi-chip packages and the Bank of Korea export price index. A Shapley decomposition shows whether the surge in export value came from higher volume or higher prices.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://chip-cycle-3xdv.vercel.app/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/chip-cycle.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/chip-v2.png" alt="CHIP CYCLE main screen: the headline 'Chip export value surged, but units sold fell' and export indicators for the three main items">
+  <p class="shot-cap">CHIP CYCLE main screen — September 2026 DRAM export value +532% YoY versus declared quantity +1.5% YoY. Captured 2026-10-15.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why we built it</h2>
+    <p>News of record-high semiconductor exports keeps recurring. But it is rarely explained whether the rise in export value comes from selling more or from higher prices.</p>
+    <p>In September 2026, DRAM export value rose +532% from a year earlier, while declared quantity grew by only +1.5%. Almost all of the export growth came from rising unit prices. We built this to confirm and explain that structure directly from customs data.</p>
+    <p class="note">Data range: January 2007 – September 2026 (237 months, 711 observations in total). HSK codes for the three main items: DRAM 8542321010, flash 8542321030, multi-chip package 8542323000.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Explore 20 years of exports</div>
+        <p>View monthly export value, declared quantity and average unit price for DRAM, flash and multi-chip packages across 237 months in interactive charts.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Visualizing the unit price surge</div>
+        <p>Compare a unit price index based on September 2025 (=100) with the Bank of Korea export price index.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Price and volume contribution breakdown</div>
+        <p>Publishes the results of a Shapley symmetric decomposition that splits the export increase into price and volume effects, along with the formulas used.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Comparing three supercycles</div>
+        <p>Compare the three supercycles of 2017–18, 2021–22 and 2024–26 side by side and analyze the order in which they reached their peaks.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Deep dive on multi-chip packages</div>
+        <p>Explains the background of the surge in HSK 8542323000 by strictly separating customs facts from technical and industry interpretation.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Raw data lookup and download</div>
+        <p>Search all 711 observations directly and download them as CSV.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Korea Customs Service / K-stat (KITA)</div>
+        <div class="data-desc">Raw monthly export value (USD) and declared quantity (U) by 10-digit HSK item. Collected from the Korea International Trade Association trade statistics system.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Bank of Korea ECOS</div>
+        <div class="data-desc">Export price index 4.3.1.3 (semiconductors, 2020=100). Used to cross-check unit price estimates.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Bank of Korea Issue Notes</div>
+        <div class="data-desc">Macro analysis reports No. 2026-16 and No. 2026-20. Used to analyze how semiconductor exports pass through to the terms of trade and GDI.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Analysis methodology</div>
+        <div class="data-desc">Decomposition of export increases: Shapley symmetric decomposition (price effect = ΔP × average Q, volume effect = ΔQ × average P). All formulas are published within the service.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">Data integrity: passed the automated validation script covering 12 major checks. Data reference date: September 2026 (latest observation).</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>How it can be used</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">Economy and industry reporters</div>
+        <p>In semiconductor export reporting, check with data whether a rise in export value is due to unit prices or volume, and use the charts.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Semiconductor and trade researchers</div>
+        <p>Download the 237 months of raw data as CSV for your own analysis, and review the methodology through the published decomposition formulas.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">General readers</div>
+        <p>Understand the relationship between expanding AI investment and changes in semiconductor prices and the export structure through an interactive story.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it's made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Next.js</span>
+      <span class="tech-tag">React</span>
+      <span class="tech-tag">TypeScript</span>
+      <span class="tech-tag">Tailwind CSS</span>
+      <span class="tech-tag">Recharts</span>
+      <span class="tech-tag">Python (data pipeline)</span>
+      <span class="tech-tag">Vercel</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">Raw K-stat .xls and BOK ECOS .csv files are converted to JSON and CSV by a Python pipeline and rendered in a Next.js app. Deployed on Vercel. To rerun the data pipeline: <code>python scripts/build_chip_cycle_data.py</code>.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Includes observations through September 2026. Updating the data requires rerunning the pipeline and redeploying.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://chip-cycle-3xdv.vercel.app/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/chip-cycle.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK Watch</strong>
+        <span>Bank of Korea rate decision probability monitor</span>
+      </a>
+      <a class="other-card" href="../korea-ranked/">
+        <span class="other-type data">DATA</span>
+        <strong>The Science of K-Pride</strong>
+        <span>Korea's rankings across 53 official statistics</span>
+      </a>
+      <a class="other-card" href="../bibigo-index/">
+        <span class="other-type data">DATA</span>
+        <strong>Bibigo Index</strong>
+        <span>Reading global prices and exchange rates through dumplings</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

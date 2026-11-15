@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEBT Watch — databrew</title>
+<meta name="description" content="Can we handle the debt coming due? A debt and refinancing-pressure monitor that puts the US Treasury maturity ladder and refinancing cost scenarios, Korea–US government bond yield forecasts, and a world debt map in one place.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/debt-watch/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/debt-watch/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/debt-watch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="DEBT Watch — databrew">
+<meta property="og:description" content="Can we handle the debt coming due? A debt and refinancing-pressure monitor that puts the US Treasury maturity ladder and refinancing cost scenarios, Korea–US government bond yield forecasts, and a world debt map in one place.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/debt-watch/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/debt-watch.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DEBT Watch — databrew">
+<meta name="twitter:description" content="Can we handle the debt coming due? A debt and refinancing-pressure monitor that puts the US Treasury maturity ladder and refinancing cost scenarios, Korea–US government bond yield forecasts, and a world debt map in one place.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/debt-watch.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Watch Series · Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/debt-watch/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-cat">Watch Series</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>DEBT Watch</h1>
+    <p class="tagline">Can we handle the debt coming due? Debt and refinancing pressure</p>
+    <p class="hero-desc">Governments don't borrow once and be done; they repay each maturing debt with new debt. DEBT Watch uses public statistics to show how heavy that refinancing is. See in one place how much US Treasury debt comes due over the next 12 months, how much interest rises if it is rolled over at today's rates, where Korean and US government bond yields could move, and how much debt each country has piled up. It is the follow-up project to BOK Watch and FX Watch.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/debt-watch.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/debt-watch.png" alt="DEBT Watch main screen: four summary cards showing the US 10-year yield, the Korean 10-year yield, US Treasuries maturing within 12 months and the interest increase under a rate shock, plus the Korea–US bond yield forecast">
+  <p class="shot-cap">DEBT Watch main screen — updated 2026-11-10, data as of 2026-11-06. Captured 2026-11-11.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / INTRO</div>
+    <h2>What this service is</h2>
+    <p>Most news about national debt stops at the total. Saying that trillions of dollars have piled up does not tell you when that debt comes due or how much interest will rise then. Even the same debt weighs differently if it is repaid in three years rather than three months, and interest jumps the moment debt borrowed at a low rate is rolled over at a high one.</p>
+    <p>DEBT Watch calculates that difference. It builds a maturity ladder from the US Treasury's security-level data (460 securities), and calculates the extra interest by assuming maturing Treasuries are reissued at current market rates. Scenarios also show how interest changes when rates rise or fall. Korean and US government bond yields are shown as 80% expected ranges, and news is split into forces pushing yields up and forces pushing them down.</p>
+    <p>Every number carries its reference date and source, and what is not known is stated as unknown. For Korea we could not obtain security-level maturity and coupon data, so refinancing costs are not calculated, and directional probabilities for the US 10-year forecast are not published until validation is complete.</p>
+    <p class="note">This is analysis based on public statistics, not investment advice or a prediction of national default. Refinancing costs are scenarios based on assumptions, not a forecast of government interest spending. This service is not approved or sponsored by the data providers.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can see</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Main: Korea–US bond yield forecast</div>
+        <p>Shows 80% expected ranges 7, 30 and 90 days ahead for the US 10-year and Korean Treasury bonds (10-year and 3-year) as bands. Also see the probability of a 25 bp jump, 21-day momentum, deviation from the 200-day average, and the Korea–US 10-year yield gap and its trend. Four summary cards at the top (US 10-year, Korea 10-year, US maturing within 12 months, rate shock scenario) show the key figures first.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">What is moving yields now</div>
+        <p>Summarizes US Treasury market and Korean Treasury market news as 72-hour pressure (up, neutral, down), and shows Treasury supply pressure, refinancing cost pressure and market stress pressure as three supply-demand indicators.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Market detail: refinancing cost scenarios</div>
+        <p>Places a simple calculation that rolls all maturing Treasuries into 10-year notes beside one that reflects the actual issuance structure, such as short-term Bills and medium-term Notes, and shows the change in annual interest as rates move from -100 bp to +200 bp. It also has a maturity ladder from 3 to 120 months and the current 10-year yields of five countries: the US, Korea, Japan, Germany and the UK.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Debt by country: world debt map</div>
+        <p>Shades a map by each country's general government debt-to-GDP ratio from the IMF World Economic Outlook, and lets you play through the years to see change from 1980 to 2031. Switch between IMF editions (October 2025, April 2026, current) to compare the top 15 countries and the time series of major economies, and check Korea's outstanding central government bonds, the share maturing within a year, the foreign-currency share and the foreign-held share.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">News analysis: forces pushing yields up and down</div>
+        <p>Shows news pressure scores over 24-hour, 72-hour, 7-day and 30-day windows, the main factors pushing yields up and down, and a timeline of recent macro events. Even when several outlets report the same event, it is grouped into one event cluster to prevent distortion from article volume. A causality guide explains that bond prices and yields move in opposite directions.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Methods and validation: forecast report card</div>
+        <p>Publishes data sources and collection status, a list of machine-readable JSON files, the backtest report card for the US 10-year forecast model, and the results of a data integrity audit. A text summary (report), llms.txt and a collection status page are also provided separately.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / SCREENS</div>
+    <h2>Screen previews</h2>
+    <div class="shots-grid">
+      <div class="shot-item">
+        <img src="../../../shots/debt-watch.png" alt="DEBT Watch main screen: Korea–US bond yield forecast and 80% expected ranges" loading="lazy">
+        <p>Main — Korea–US bond yield forecast</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/debt-watch-market.png" alt="DEBT Watch market detail: Treasury supply pressure, refinancing cost pressure, market stress pressure, news pressure and refinancing cost scenarios" loading="lazy">
+        <p>Market detail — refinancing cost scenarios and maturity ladder</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/debt-watch-country.png" alt="DEBT Watch debt by country: world debt map based on the IMF World Economic Outlook, with debt ratios for Korea, the US, Japan and the G7" loading="lazy">
+        <p>Debt by country — world debt map</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/debt-watch-news.png" alt="DEBT Watch news analysis: 24-hour, 72-hour, 7-day and 30-day news pressure scores and factors pushing yields up" loading="lazy">
+        <p>News analysis — forces pushing yields up and down</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / DATA &amp; METHODS</div>
+    <h2>Data and calculation methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">US Department of the Treasury</div>
+        <div class="data-desc">The daily CMT Treasury yield curve (par yield) and security-level detail of maturing Treasuries from FiscalData's MSPD Table 3 (updated at the start of each month). The raw data for building the maturity ladder of 460 securities and the existing average funding rate.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Bank of Korea ECOS</div>
+        <div class="data-desc">Daily yields for Korean Treasury bonds from 1 to 50 years and detailed bond statistics. The basis for the Korean 10-year yield, outstanding central government bonds and the composition maturing within one year.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">IMF World Economic Outlook · BIS · Federal Reserve</div>
+        <div class="data-desc">IMF WEO provides debt ratios by country (semiannual, April and October), BIS provides the remaining maturity of central government debt securities (quarterly), and the Fed provides RSS feeds of official statements, minutes and speeches.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Refinancing cost calculation</div>
+        <div class="data-desc">Extra interest is calculated from the gap between the existing weighted-average funding rate of maturing Treasuries and the current market rate. A rate shock is added only to the new funding rate, and TIPS and floating-rate notes are excluded because they cannot be compared directly with existing rates. The scenario reflecting the actual issuance structure assumes reissuance at current CMT curve rates by type: Bills, Notes and Bonds.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Forecast model and report card</div>
+        <div class="data-desc">Calculates 80% expected ranges from historical time-series statistics. It runs a walk-forward backtest from 2015-01-06 to 2026-10-07 and publishes an integrity audit showing that future data did not leak into the evaluation.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">In the backtest, directional hit rates for the US 10-year yield were 47.8% at 7 days (592 cases), 51.6% at 30 days (589) and 51.0% at 90 days (580). The directional probability model did not clear the standard for formal publication, so it is kept as "model under validation" and forecast probabilities are not published. Coverage of the 80% expected range was 76% to 79.6%. On the other hand, for events where yields fall 10 bp or more, or 25 bp or more, within 30 days, a better signal than the baseline model was confirmed.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 / LIMITS</div>
+    <h2>What we cannot know</h2>
+    <p>Security-level maturity and coupon data were obtained only for the US Treasury. For Korea, Japan, the UK, Germany and Italy the service centers on government bond yield curves, and no maturity map or refinancing cost is built for countries without security-level data. For Korea, we also did not publish the annual Treasury bond issuance limit or the average maturity, because the numbers could not be read from official documents.</p>
+    <p>Refinancing costs are scenarios based on assumptions, not the government's actual interest spending. The news pressure index is a qualitative auxiliary indicator of market sentiment and is not combined with the statistical model. Some figures, such as Korea's debt ratio, have been revised by the IMF between editions, so the edition name and reference date should be read together.</p>
+    <p class="note">The accuracy, completeness and timeliness of the figures are not guaranteed. Users are responsible for their own judgments and any consequences of using the service.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it's made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python data collection</span>
+      <span class="tech-tag">Static JSON</span>
+      <span class="tech-tag">React · TypeScript · Vite</span>
+      <span class="tech-tag">Apache ECharts</span>
+      <span class="tech-tag">Cloudflare Pages</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">A Python collector pulls official APIs and statistics files into static JSON, and the site reads only that JSON to draw its screens. Forecasts, news pressure, refinancing scenarios, the maturity ladder and the world map geometry are all published as JSON under /data. World map boundaries use Natural Earth (public domain) and do not express any political position.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Updated 2026-11-10 13:50, data as of 2026-11-06. Six official sources are being collected normally, as shown on the collection status page. The US 10-year directional forecast is under validation, so probabilities are not published.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/debt-watch.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../bokwatch/">
+        <span class="other-type data">DATA</span>
+        <strong>BOK Watch</strong>
+        <span>Bank of Korea rate decision probability monitor</span>
+      </a>
+      <a class="other-card" href="../fx-odds/">
+        <span class="other-type data">DATA</span>
+        <strong>FX Watch</strong>
+        <span>Reading the odds and pressure on exchange rates</span>
+      </a>
+      <a class="other-card" href="../seoul-apartment-tracker/">
+        <span class="other-type data">DATA</span>
+        <strong>Seoul Apartment New-High Tracker</strong>
+        <span>How far have prices fallen from their peak?</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

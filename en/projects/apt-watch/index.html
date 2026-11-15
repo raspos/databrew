@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APT Watch — databrew</title>
+<meta name="description" content="APT Watch reads Seoul apartment market sentiment by how far owners' asking prices sit above the last 90 days of actual transaction prices. See the Negotiation Pressure Index (NEGO INDEX) and the change in listings on a map of 25 districts.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/apt-watch/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/apt-watch/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/apt-watch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="APT Watch — databrew">
+<meta property="og:description" content="APT Watch reads Seoul apartment market sentiment by how far owners' asking prices sit above the last 90 days of actual transaction prices. See the Negotiation Pressure Index (NEGO INDEX) and the change in listings on a map of 25 districts.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/apt-watch/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/apt-watch.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="APT Watch — databrew">
+<meta name="twitter:description" content="APT Watch reads Seoul apartment market sentiment by how far owners' asking prices sit above the last 90 days of actual transaction prices. See the Negotiation Pressure Index (NEGO INDEX) and the change in listings on a map of 25 districts.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/apt-watch.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Watch Series · Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/apt-watch/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-cat">Watch Series</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>APT Watch</h1>
+    <p class="tagline">A Seoul apartment market sentiment index: how far above actual transaction prices are asking prices?</p>
+    <p class="hero-desc">The gap between what owners ask and what homes actually sell for is the most candid picture of apartment market sentiment. APT Watch observes listings every day in a fixed sample of 110 complexes across Seoul's 25 districts, turns how many percent asking prices sit above the last 90 days of transaction prices into the Negotiation Pressure Index (NEGO INDEX), and also tracks whether listings at the same complexes are rising or falling. It is the fifth service in the Watch Series, built on the transaction data of the Seoul Apartment New-High Tracker.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/apt-watch/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/apt-watch.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/apt-watch.png" alt="APT Watch main screen: NEGO INDEX negotiation pressure index at +3.6% now, with 7-day and 28-day changes and a summary of the change in listings">
+  <p class="shot-cap">APT Watch main screen — transactions updated 2026-11-14 07:00 KST, observed sample of 110 complexes and 12,017 listings. Captured 2026-11-14.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / INTRO</div>
+    <h2>What this service is</h2>
+    <p>Apartment price news starts from transaction prices. But a transaction price is the record of a contract already signed. From transaction prices alone you can't tell what owners are asking right now, or how far above actual sale prices those asking prices are.</p>
+    <p>APT Watch turns that gap into a number. It groups the same complex, the same exclusive floor area and the same floor band into one comparison group, and compares the group's current median asking price with its median transaction price over the last 90 days. The higher the asking price, the more owners are holding firm on price; when that gap narrows, it reads as more negotiation, that is, more room to bargain. Values for all of Seoul and its 25 districts are painted on a map.</p>
+    <p>Safeguards are placed wherever the numbers could wobble. The quality of each collected complex is checked one by one, the official index is published only on days when at least 105 of the 110 complexes pass, and districts with too small a sample are left as not calculated rather than filled with 0 or the Seoul average. For changes whose comparison observation dates have not yet built up, the change is not set to 0%; it is marked as accumulating.</p>
+    <p class="note">Asking prices are sellers' hoped-for prices, not actual negotiation outcomes. The 110-complex sample is not weighted to represent Seoul's whole housing stock.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can see</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">NEGO INDEX (Negotiation Pressure Index)</div>
+        <p>Shows median asking price ÷ median transaction price over the last 90 days − 1, in %. It shows the daily, 7-day and 28-day changes separately, and displays "accumulating" until enough observation dates build up for comparison. The formula and method are in the collapsed explanation.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Change in listings</div>
+        <p>Shows how much the for-sale listings at the same sample complexes rose or fell. Only complexes that passed quality checks on both dates are compared and duplicate listing IDs are removed; new listings and ended observations are shown net of cases where only the ID changed. An ended observation does not mean the sale was completed.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Supporting leading indicators</div>
+        <p>The Asking-Price Adjustment Index tracks whether the same listing's price was raised or cut across consecutive observations, and the Trading Vitality Index looks at the actual contract level relative to the number of listings. There is also a graph overlaying price expectations and listing trends, and a panel that records the previous-day change of the two indicators as four combinations.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Seoul 25-district market sentiment map</div>
+        <p>Pick one of negotiation pressure, change in negotiation pressure, asking-price adjustment or trading vitality to paint each district, and tap a district to see the number of observed complexes and listings and its 90-day and 180-day transaction coverage. You can switch observation dates to compare.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Change in Seoul market sentiment</div>
+        <p>View the transaction price index (monthly) and asking price (daily) time series over all time, 5 years, 1 year or 3 months. There is also a decomposition that splits why negotiation pressure changed into three parts: the contribution of asking-price changes, the contribution of recalculating the transaction baseline, and changes in sample composition.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">25-district comparison table</div>
+        <p>Sort each district's negotiation pressure, change in listings, asking-price adjustment, trading vitality and observed sample (complexes and listings) in a table. Tapping a row selects that district on the map.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / SCREENS</div>
+    <h2>Screen preview</h2>
+    <div class="shots-grid">
+      <div class="shot-item">
+        <img src="../../../shots/apt-watch.png" alt="APT Watch main: negotiation pressure index and change in listings" loading="lazy">
+        <p>Main — negotiation pressure and change in listings</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/apt-watch-map.png" alt="APT Watch Seoul 25-district market sentiment map" loading="lazy">
+        <p>Map — 25-district market sentiment</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/apt-watch-series.png" alt="APT Watch time series of change in Seoul market sentiment and decomposition of negotiation pressure" loading="lazy">
+        <p>Time series — change in Seoul market sentiment</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/apt-watch-table.png" alt="APT Watch Seoul 25-district comparison table" loading="lazy">
+        <p>Comparison table — sorted figures by district</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / DATA &amp; METHODS</div>
+    <h2>Data and calculation method</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Asking-price data</div>
+        <div class="data-desc">Collects Naver Real Estate for-sale listings for a fixed sample of 110 complexes across Seoul's 25 districts every day at 06:00 (KST). For each complex it checks price, exclusive area of 10–600㎡ and complex name, compares listing IDs, counts and median price with the previous normal observation, and uses only complexes that pass. The official index is published only on days when at least 105 of the 110 pass.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Transaction data</div>
+        <div class="data-desc">Queries the Ministry of Land, Infrastructure and Transport's open API for apartment sale transactions directly every day, and records the time each transaction was first seen and the original evidence. The index uses only transactions confirmed up to that day, so transactions reported later don't change past index values. Cancelled transactions are excluded and the base period is the most recent 90 days by contract date.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">NEGO INDEX</div>
+        <div class="data-desc">Groups the same complex, exclusive area (in 1㎡ units) and floor band (low 1–3, mid 4–9, high 10 and above) as a comparison group and uses only groups with at least 3 transactions in the last 90 days. For each group it calculates (median asking price ÷ median transaction price − 1) × 100, and the Seoul index is the median of valid group values (equal weighting).</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Change and publication deferral</div>
+        <div class="data-desc">The change is the average of changes in groups valid on both dates. Publication is deferred if fewer than 30 groups are common or if any single group moves by more than ±15 percentage points. The change in listings compares regular 06:00 collections with each other, and if re-collections are mixed in, the same figure is shown only as "for reference".</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">On the current screen the NEGO INDEX is +3.6% (70 comparison groups, 2026-11-14 data), negotiation pressure is calculated for 22 districts, and 3 districts (Jongno, Seocho, Gangnam) are not calculated for lack of sample. The transaction price index (monthly) is a separate fixed-effects model index that is not used in the NEGO INDEX calculation; its underlying data is 451,053 raw district-month records across 2,375 district-months (433,330 analyzed).</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 / LIMITS</div>
+    <h2>What can't be known</h2>
+    <p>Asking prices are sellers' hoped-for prices and can differ from actual negotiation outcomes. The 110-complex sample is not weighted to represent Seoul's whole housing stock, comparison groups are concentrated in some complexes and sizes with recent transactions, and many groups rest on only 3–4 transactions. So values for districts with few groups and day-to-day changes should be treated as reference only.</p>
+    <p>If observation times vary from day to day, even observations at 06:00 and 09:00 on the same day can make listings differ by several percent. For this reason observations other than the regular collection are left out of the official rate of change and shown only for reference. The combination of negotiation pressure and listing change is just a record, not a signal verified to indicate the direction of housing prices.</p>
+    <p class="note">This is not investment advice. Figures are continually updated; please check the Ministry of Land, Infrastructure and Transport's raw transaction data before citing them.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python data collection</span>
+      <span class="tech-tag">MOLIT real-transaction OpenAPI</span>
+      <span class="tech-tag">SQLite ledger</span>
+      <span class="tech-tag">Static web</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Transactions updated 2026-11-14 07:00 KST. With 2026-11-14 as the first official baseline, daily, 7-day and 28-day changes are being accumulated, and the first regular change in listings will be published once the 06:00 regular collection has been normal for two days in a row.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/apt-watch/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/apt-watch.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../seoul-apartment-tracker/">
+        <span class="other-type data">DATA</span>
+        <strong>Seoul Apartment New-High Tracker</strong>
+        <span>How far have prices fallen from their peak?</span>
+      </a>
+      <a class="other-card" href="../debt-watch/">
+        <span class="other-type data">DATA</span>
+        <strong>DEBT Watch</strong>
+        <span>Debt coming due: can it be handled?</span>
+      </a>
+      <a class="other-card" href="../pay-watch/">
+        <span class="other-type data">DATA</span>
+        <strong>PAY Watch</strong>
+        <span>How much does my friend earn?</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

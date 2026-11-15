@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honmaek Map — databrew</title>
+<meta name="description" content="A network of marriage ties among Korean corporate families, cross-checked against disclosures and Fair Trade Commission data. Explore the family trees of 100 families and 2,439 people, and the marriage ties between families, on a map.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/honmaek-map/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/honmaek-map/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/honmaek-map/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Honmaek Map — databrew">
+<meta property="og:description" content="A network of marriage ties among Korean corporate families, cross-checked against disclosures and Fair Trade Commission data. Explore the family trees of 100 families and 2,439 people, and the marriage ties between families, on a map.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/honmaek-map/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/honmaek-map.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Honmaek Map — databrew">
+<meta name="twitter:description" content="A network of marriage ties among Korean corporate families, cross-checked against disclosures and Fair Trade Commission data. Explore the family trees of 100 families and 2,439 people, and the marriage ties between families, on a map.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/honmaek-map.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Economy · INTELLIGENCE</span>
+  <a class="lang-switch-detail" href="../../../projects/honmaek-map/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type intelligence">INTELLIGENCE</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>Honmaek<br>Map</h1>
+    <p class="tagline">The network of Korean corporate families</p>
+    <p class="hero-desc">Explore, on a single network map, the family trees of 100 corporate families centered on the chaebol and 2,439 people, the marriage ties between families, and the lineages of independent companies split off from their groups. Every relationship was cross-checked against disclosures and Fair Trade Commission data.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/honmaek-map/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/honmaek-map.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/honmaek-map.png" alt="Honmaek Map main screen: summary cards for 100 corporate families and 2,439 people in total, and the chaebol marriage-tie network map">
+  <p class="shot-cap">Honmaek Map main screen — 100 families, 2,439 people, and 58 marriage ties between families. Data as of 2026-10-25, captured 2026-10-26.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why we built it</h2>
+    <p>Marriage ties between families are often mentioned when explaining corporate governance and succession of control, but they are buried in scattered reports and disclosures and are hard to see at a glance.</p>
+    <p>We made corporate families the nodes and verified marriages the lines, so you can see on a map how each family connects to which business group.</p>
+    <p class="note">The service states that it includes only relationships cross-checked against disclosures and Fair Trade Commission data. Family trees are built around the first to fourth generations and the executives within the scope of public data.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Chaebol marriage-tie map</div>
+        <p>Zoom and pan the full network drawn with families as nodes and marriage ties as lines, and save it as an image.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Marriage-tie matching by company</div>
+        <p>Pick a company and it finds the families and marriage ties connected to it.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Lineage of corporate splits</div>
+        <p>Follow the lineages of companies that split off and became independent from a group, and see 11 cases of independence.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Network analysis from many angles</div>
+        <p>Analyze connected families and business groups from several perspectives.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Detailed family tree by family</div>
+        <p>Pick a family to see its first-to-fourth-generation family tree and its executives.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Search and share</div>
+        <p>Search people, families, and companies, and share the current view as a link.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and analysis methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Financial Supervisory Service DART</div>
+        <div class="data-desc">Disclosure data such as executive status. Used to confirm links between people and companies.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Fair Trade Commission</div>
+        <div class="data-desc">Data on large business groups designated for disclosure. The basis for the 40 connected business groups.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Relationship verification</div>
+        <div class="data-desc">A relationship verification rate of 100%, as stated by the service. Includes 58 marriage ties that passed cross-checking against independent sources and 11 independent split-offs.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">Figures are the values shown on the service screen (data as of 2026-10-25). The verification criteria and methods are in the service's Verification and Methodology tab.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">DART OpenAPI</span>
+      <span class="tech-tag">Network visualization</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Includes 100 families and 2,439 people as of 2026-10-25. Redeployed when the data is updated.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/honmaek-map/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/honmaek-map.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../corporate-scorecard/">
+        <span class="other-type data">DATA</span>
+        <strong>Corporate Momentum Ranking</strong>
+        <span>Finding the listed companies that improved most over three years</span>
+      </a>
+      <a class="other-card" href="../economist-toolkit/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>Economists' Toolbox</strong>
+        <span>A knowledge map of Nobel economics laureates</span>
+      </a>
+      <a class="other-card" href="../korea-ranked/">
+        <span class="other-type data">DATA</span>
+        <strong>The Science of K-Pride</strong>
+        <span>Korea's rankings across 53 official statistics</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

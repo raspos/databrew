@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seoul Apartment New-High Tracker — databrew</title>
+<meta name="description" content="How far have Seoul apartments fallen from their peak prices? A tracker that uses Ministry of Land, Infrastructure and Transport transaction prices to follow new-high deals and distance from the peak across Seoul's 25 districts every day.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/seoul-apartment-tracker/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/seoul-apartment-tracker/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/seoul-apartment-tracker/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Seoul Apartment New-High Tracker — databrew">
+<meta property="og:description" content="How far have Seoul apartments fallen from their peak prices? A tracker that uses Ministry of Land, Infrastructure and Transport transaction prices to follow new-high deals and distance from the peak across Seoul's 25 districts every day.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/seoul-apartment-tracker/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/seoul-apartment-tracker.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Seoul Apartment New-High Tracker — databrew">
+<meta name="twitter:description" content="How far have Seoul apartments fallen from their peak prices? A tracker that uses Ministry of Land, Infrastructure and Transport transaction prices to follow new-high deals and distance from the peak across Seoul's 25 districts every day.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/seoul-apartment-tracker.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/seoul-apartment-tracker/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>Seoul Apartment<br>New-High Tracker</h1>
+    <p class="tagline">How far have Seoul apartments fallen from their peak prices?</p>
+    <p class="hero-desc">It stacks transaction prices for apartments in Seoul's 25 districts by complex and floor area, and picks out the deals that newly exceeded a past peak price, in other words new highs. See in one place where new highs hit today, how far your apartment sits from its peak, and which neighborhood is closest to its high.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/seoul-apartment-tracker/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/seoul-apartment-tracker.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/seoul-apartment-tracker.png" alt="Seoul Apartment New-High Tracker main screen: the line 'How far have Seoul apartments fallen from their peak?' with an apartment illustration, and the trend of new-high deals across Seoul">
+  <p class="shot-cap">Seoul Apartment New-High Tracker main screen — updated 2026-11-07, Seoul's 25 districts. Captured 2026-11-07.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / INTRO</div>
+    <h2>What this service is</h2>
+    <p>Apartment price news always comes with the phrase "new high." But the news alone cannot tell you how many new highs occur in Seoul in a day, or how far your own apartment has slipped from its peak.</p>
+    <p>This tracker stitches Ministry of Land, Infrastructure and Transport transaction prices together by the same complex and the same whole-number floor-area group, and counts as a new high any deal since January 2021 that exceeds that group's peak price. It does not show only new highs; it also looks at the other side. It calculates how far recently traded groups sit below their peaks on average and how many groups have regained their peaks, to show where the Seoul market stands against its highs right now.</p>
+    <p class="note">This is a distribution of transactions with no adjustment for floor, orientation or building differences. It is not a current market price, an appraisal or an official price index.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">All of Seoul: new-high deal trend</div>
+        <p>See the number of new-high deals as bars by day, by month or over the whole period. Click a bar to open the list of new highs for that period; 10 major housing-policy announcement dates are marked on the same time axis. Each date also shows its data status (districts collected, comparison done or pending).</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Distance from the new high</div>
+        <p>Choose a reference date and a period (latest deal, 30 days, 90 days, 180 days, 1 year) to get the median distance from the peak, the number of groups analyzed and the share that reached their peak. You can also see the district distance ranking and the distribution of peak recovery.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">My apartment</div>
+        <p>Choose a district, complex name and floor-area group to see how far that apartment is from its new high. Older deals are also searchable, so check the last contract date as well.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">New highs by area</div>
+        <p>Choose a contract month and district to see the top 3 new-high deals in that district by price. You can also browse with "See other neighborhoods," which shows 4 random districts.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">New highs in my neighborhood</div>
+        <p>Choose a district, legal neighborhood (beopjeong-dong) and contract start date to find out whether a new record has been set in your neighborhood.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Full deal table and CSV</div>
+        <p>View the deals you looked up with columns for complex, exclusive floor area, price, floor, contract date, previous record, increase in amount and percent, and cancellation status, and download them as CSV.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / SCREENS</div>
+    <h2>Screen preview</h2>
+    <div class="shots-grid">
+      <div class="shot-item">
+        <img src="../../../shots/seoul-apartment-tracker.png" alt="Seoul Apartment New-High Tracker All of Seoul tab: chart of the new-high deal trend" loading="lazy">
+        <p>All of Seoul — new-high deal trend</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/seoul-apartment-distance.png" alt="Seoul Apartment New-High Tracker Distance from the new high tab: median distance from peak -2.4%, 4,197 groups analyzed, 37.8% share at peak" loading="lazy">
+        <p>Distance from the new high — how far from the peak</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/seoul-apartment-apartment.png" alt="Seoul Apartment New-High Tracker My apartment tab: search by district, complex name and floor-area group" loading="lazy">
+        <p>My apartment — search by complex and floor area</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/seoul-apartment-region.png" alt="Seoul Apartment New-High Tracker New highs by area tab: choose a contract month and district to see the top new highs by district" loading="lazy">
+        <p>New highs by area — which district they came from</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / DATA &amp; METHODS</div>
+    <h2>Data and calculation methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">Ministry of Land, Infrastructure and Transport transaction prices</div>
+        <div class="data-desc">Apartment sale transaction-price data from the Ministry of Land, Infrastructure and Transport on the Public Data Portal. All 25 Seoul districts are collected, and the screen shows the number of districts collected (25 / 25) and the update date.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">New-high determination</div>
+        <div class="data-desc">Since January 2021, only deals that exceed the past peak price of the same complex and the same whole-number floor-area group are counted. Ties, first observations and cancelled deals are excluded. If any month in the comparison period has not been loaded, the determination is withheld.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Distance from peak</div>
+        <div class="data-desc">For each group, the single highest-priced deal on the latest contract date is taken as the representative deal, and its ratio to the group's all-time peak price is calculated. Only groups with enough deals (4 or more) are used, and groups with only a first observation or with missing comparison months are left out of the statistics.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Housing-policy markers</div>
+        <div class="data-desc">10 major policies, by official announcement date. These may differ from effective dates and do not imply a cause of any price change.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">The screen states that all-time new highs are withheld until the full historical data has been verified. Multiple deals on the same day are shown separately, and floor areas are grouped into whole numbers (for example, the 84㎡ group) for comparison.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 / LIMITS</div>
+    <h2>What we can't know</h2>
+    <p>Transaction reports lag, so the count for recent contract dates may rise later. Even within the same complex and floor area, new-high prices can vary widely by floor, orientation and building, and this service does not adjust for those differences. So many new highs do not mean the whole market is rising, and a short distance does not mean the price will soon rise.</p>
+    <p>Deals before 2021 are not used in comparisons, and the very fact that many complexes have no recent deals (15,392 groups with no recent deal) is also noted as a limit of the statistics. It does not explain the causes of price changes.</p>
+    <p class="note">The figures are not investment advice. Before citing them, please check the original data on the Ministry of Land, Infrastructure and Transport's real transaction price disclosure system.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Tech and how it was made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">MOLIT transaction-price OpenAPI</span>
+      <span class="tech-tag">Public Data Portal</span>
+      <span class="tech-tag">Static web</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI-assisted production</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Updated 2026-11-07, with all 25 Seoul districts collected. When new transaction prices are reported it is refreshed and reflected in the data status by contract date.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/seoul-apartment-tracker/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="https://www.data.go.kr/data/15126468/openapi.do" target="_blank" rel="noopener">MOLIT transaction-price data ↗</a>
+      <a class="link-btn" href="../../../content/seoul-apartment-tracker.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../pay-watch/">
+        <span class="other-type data">DATA</span>
+        <strong>PAY Watch</strong>
+        <span>How much does my friend make? Average salaries by company</span>
+      </a>
+      <a class="other-card" href="../corporate-scorecard/">
+        <span class="other-type data">DATA</span>
+        <strong>Corporate Momentum Ranking</strong>
+        <span>Find the listed companies that improved most over 3 years</span>
+      </a>
+      <a class="other-card" href="../self-employed/">
+        <span class="other-type experience">EXPERIENCE</span>
+        <strong>Surviving as a Small-Business Owner in Korea</strong>
+        <span>A 36-month startup survival simulation</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

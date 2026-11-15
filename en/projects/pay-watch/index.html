@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PAY Watch — databrew</title>
+<meta name="description" content="How much does my friend earn? Search a company name to see its average salary from DART filings, then pit your friends' companies against each other in rankings and salary battles. A service for average corporate pay.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/pay-watch/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/pay-watch/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/pay-watch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="PAY Watch — databrew">
+<meta property="og:description" content="How much does my friend earn? Search a company name to see its average salary from DART filings, then pit your friends' companies against each other in rankings and salary battles. A service for average corporate pay.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/pay-watch/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/pay-watch-corp.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PAY Watch — databrew">
+<meta name="twitter:description" content="How much does my friend earn? Search a company name to see its average salary from DART filings, then pit your friends' companies against each other in rankings and salary battles. A service for average corporate pay.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/pay-watch-corp.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Watch Series · Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/pay-watch/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-cat">Watch Series</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>PAY Watch</h1>
+    <p class="tagline">How much does my friend earn? The art of sneaking a peek at others' pay</p>
+    <p class="hero-desc">Search a company name and you get the average salary disclosed in its business report. Build a pay ranking from your friends' companies, pick two or three for a salary battle, and even see the wage level for your own career bracket. Every number is a company-level statistic, not anyone's actual salary.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://raspos.github.io/pay-watch/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/pay-watch.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/pay-watch-corp.png" alt="PAY Watch company screen: Samsung Electronics' average salary from DART filings and estimated salary ranges by tenure bracket">
+  <p class="shot-cap">PAY Watch company screen — disclosed average pay and tenure-bracket estimates. Screen as of 2026-11-07, captured 2026-11-07.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / INTRO</div>
+    <h2>What this service is</h2>
+    <p>You may know which company a friend works at, but not what people at that company earn on average. Listed companies and externally audited corporations disclose their headcount and total pay in business reports, yet few places present it in an easy-to-read form.</p>
+    <p>PAY Watch shows those numbers from just a company name. It displays the representative average salary in large type, with the source and reference year right below it. Then comes the fun part: gather your friends' companies into a ranking, pit two or three against each other like Samsung Electronics vs. SK hynix, and see where your friend's company stands within its industry.</p>
+    <p>The part we worked hardest on is the salary-by-tenure estimate. A company's average salary alone can't tell you what a seventh-year employee earns, so we fitted the official wage structure of the same industry to that company's average salary to build salary ranges by tenure bracket. Rather than pin down a single assumption, the range is computed from several tenure-mix scenarios, and if the result depends too heavily on the assumptions or the range is too wide, no number is produced.</p>
+    <p>The other principles are simple. Disclosed values, estimated values and values back-calculated from the National Pension differ in nature, so they are never mixed into one ranking, and values with weak grounding are marked "no data."</p>
+    <p class="note">The average salary on screen is a company-wide average, not an individual's actual salary. It includes bonuses and incentive pay, and pay by job type or rank cannot be known.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Company search</div>
+        <p>Find any of 5,463 companies from a single search box. The result screen shows the representative average salary, the source (DART filing or Saramin estimate) and reference year, average tenure and headcount, and location.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Salary estimates by tenure bracket</div>
+        <p>Tap through five brackets, from under 1 year to 10+ years, to see the average salary range of that group. An experimental research feature that shows a basic estimate reflecting only workforce composition alongside an extended estimate that also reflects changes in the shape of the pay curve.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Friends' ranking</div>
+        <p>Enter the companies your friends work at and get a ranking of who among you works at the best-paying company. Rankings by company and by industry can also be viewed separately. It is based on the average salary of the company they work for, not on the friends themselves.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Salary battle</div>
+        <p>Pick 2 to 4 companies and compare them side by side on the same basis. Matchups such as Samsung Electronics vs. SK hynix, Hyundai Motor vs. Kia, Naver vs. Kakao, and KB Kookmin Bank vs. Shinhan Bank are ready. The highest is marked only among values of the same kind, and no overall winner is declared.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">LAB: What does my career earn?</div>
+        <p>Choose an industry to see average wage levels by years of tenure, or choose an occupation to see them by years of experience, using the Ministry of Employment and Labor's 2025 statistics. You can choose from 92 industry classifications and compare against other classifications.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">National Pension–based detail analysis</div>
+        <p>Inside the company screen, see pay back-calculated from National Pension enrolled-workplace data alongside the disclosed value. It is not used as the average salary; it serves only as a reference indicator for checking whether the contribution cap applies.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / SCREENS</div>
+    <h2>Screen preview</h2>
+    <div class="shots-grid">
+      <div class="shot-item">
+        <img src="../../../shots/pay-watch.png" alt="PAY Watch home: the line 'How much does my friend earn' and a company search box" loading="lazy">
+        <p>Home — just search a company name</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/pay-watch-corp.png" alt="PAY Watch company screen: Samsung Electronics' disclosed average salary and tenure-bracket estimates" loading="lazy">
+        <p>Company — disclosed average pay and tenure-bracket estimates</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/pay-watch-battle.png" alt="PAY Watch salary battle: bars comparing the disclosed per-person average pay of Samsung Electronics and SK hynix" loading="lazy">
+        <p>Salary battle — compared only on the same basis</p>
+      </div>
+      <div class="shot-item">
+        <img src="../../../shots/pay-watch-lab.png" alt="PAY Watch LAB: a screen for choosing an industry and years of tenure to see average wage levels" loading="lazy">
+        <p>LAB — wage level for your career bracket</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / DATA &amp; METHODS</div>
+    <h2>Data and how it is calculated</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">DART disclosed average pay</div>
+        <div class="data-desc">Total pay divided by headcount from the employee status section of business reports on the Financial Supervisory Service's DART (2025 business reports). If it differs by more than 5% from the weighted average of the per-person average pay listed row by row in the report, the source data is judged unreliable and is excluded from the representative value.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Saramin estimated average salary</div>
+        <div class="data-desc">A substitute value used only for companies with no DART value or whose value was held back in verification. It is a per-company estimate provided by Saramin, and the screen always labels it as a Saramin estimate with display year 2025. The two values differ in nature, so neither is ranked above the other.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">National Pension enrolled-workplace records</div>
+        <div class="data-desc">Uses the monthly data from the Public Data Portal for the most recent 13 months (2025-09 to 2026-09). The monthly billed amount is divided by the number of enrollees and the contribution rate to get the average standard monthly income, then multiplied by 12 to annualize. Bonuses and incentive pay are not reflected, and pay above the cap is cut off, so high-paying companies come out low.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Ministry of Employment and Labor Survey on Labor Conditions by Employment Type</div>
+        <div class="data-desc">Data for 2020–2025. It uses wages by industry and years of tenure, and by occupation and years of experience. Only five brackets are used, and individual years are not interpolated.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">Companies with an average salary currently shown number 4,000 (2,071 from DART, 1,929 from Saramin). For the representative value, only one source is chosen in the order DART filing, Saramin estimate, no data, and the raw values from each source are kept separately without overwriting one another. Tenure-bracket estimates are provided only for 1,888 DART-based companies and 794 industry-reference estimates based on Saramin average salary. The methodology version is 0.4.0-stage4.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">05 / LIMITS</div>
+    <h2>What can't be known</h2>
+    <p>The average salary is a company-wide average. Even within the same company, pay varies widely by role and rank, and the tenure-bracket numbers are experimental estimates whose accuracy has not been independently verified. Companies in the same industry have heavily overlapping estimate ranges, so don't use them as grounds for ranking companies.</p>
+    <p>Unlisted companies may have no DART value, and unusually high disclosed values such as those of holding companies are shown as they are if there is no consistency problem, with a note to be careful when comparing. Individual salaries, pay by job type, total compensation including bonuses and incentive pay, the number of hires and leavers and the turnover rate, and compensation relative to business performance cannot be known.</p>
+    <p class="note">The figures are not an evaluation or judgment of any company. Please check the source data before citing them. Corrections and tips are accepted through the link at the bottom of the service screen.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it was built</h2>
+    <div class="tech-list">
+      <span class="tech-tag">DART OpenAPI</span>
+      <span class="tech-tag">Public Data Portal (National Pension)</span>
+      <span class="tech-tag">Python data pipeline</span>
+      <span class="tech-tag">Static web</span>
+      <span class="tech-tag">GitHub Pages</span>
+      <span class="tech-tag">AI-assisted build</span>
+    </div>
+    <p style="margin-top:14px;font-size:14px;color:var(--muted)">Raw disclosure data is collected, verified and matched with a Python pipeline, then built into static files and deployed. Visit statistics are counted only with cookie-free GoatCounter, and no personally identifying information is collected.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Launched 2026-11-07. Offers integrated search of 5,463 companies, tenure-bracket estimates, salary battles and the LAB. When new data is obtained, it is refined, verified and added, and recorded in the history on the methodology page.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://raspos.github.io/pay-watch/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="https://raspos.github.io/pay-watch/methodology.html" target="_blank" rel="noopener">Methodology, sources and limits ↗</a>
+      <a class="link-btn" href="../../../content/pay-watch.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../corporate-scorecard/">
+        <span class="other-type data">DATA</span>
+        <strong>Corporate Momentum Ranking</strong>
+        <span>Finding the listed companies that improved most over 3 years</span>
+      </a>
+      <a class="other-card" href="../honmaek-map/">
+        <span class="other-type intelligence">INTELLIGENCE</span>
+        <strong>Honmaek Map</strong>
+        <span>The marriage network of Korean business families</span>
+      </a>
+      <a class="other-card" href="../self-employed/">
+        <span class="other-type experience">EXPERIENCE</span>
+        <strong>Surviving as a Small-Business Owner in Korea</strong>
+        <span>A 36-month startup survival simulation</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>

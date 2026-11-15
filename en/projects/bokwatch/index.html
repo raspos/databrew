@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOK Watch — databrew</title>
+<meta name="description" content="A data service that estimates the probabilities of Bank of Korea rate decisions from a KOFR futures model">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/projects/bokwatch/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/projects/bokwatch/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/projects/bokwatch/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="BOK Watch — databrew">
+<meta property="og:description" content="A data service that estimates the probabilities of Bank of Korea rate decisions from a KOFR futures model">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/projects/bokwatch/">
+<meta property="og:image" content="https://raspos.github.io/databrew/shots/bokwatch.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BOK Watch — databrew">
+<meta name="twitter:description" content="A data service that estimates the probabilities of Bank of Korea rate decisions from a KOFR futures model">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/shots/bokwatch.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../../detail.css">
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">Watch Series · Economy · DATA</span>
+  <a class="lang-switch-detail" href="../../../projects/bokwatch/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-wrap">
+    <div class="badges">
+      <span class="badge-type data">DATA</span>
+      <span class="badge-cat">Economy</span>
+      <span class="badge-cat">Watch Series</span>
+      <span class="badge-status public">PUBLIC</span>
+    </div>
+    <h1>BOK Watch</h1>
+    <p class="tagline">Reading Bank of Korea monetary policy through data</p>
+    <p class="hero-desc">A service that estimates the next Monetary Policy Board rate decision from market data. See model probabilities backed out of KOFR futures prices, the governor's remarks and minutes, and expert forecasts on a single screen. Updated automatically every day at 10 a.m.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">Try the service ↗</a>
+      <a class="btn-secondary" href="../../../content/bokwatch.md" download>Intro document (.md, Korean)</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero-shot">
+  <img src="../../../shots/bokwatch.png" alt="BOK Watch main screen: hold-probability gauge for the Monetary Policy Board and a table of expected policy rates by meeting">
+  <p class="shot-cap">BOK Watch main screen — gauge of hold and cut probabilities for the next Monetary Policy Board meeting, plus a table of expected policy rates by meeting. Captured 2026-10-15.</p>
+</div>
+
+<main class="content">
+
+  <section class="section">
+    <div class="sec-label">01 / WHY</div>
+    <h2>Why we built it</h2>
+    <p>The press reports that "experts expect a hold," but there was no way to know, without separate calculations, how much probability the market actually assigns to a rate change. In financial markets, that collective judgment is already built into KOFR futures prices.</p>
+    <p>We turned this into a model that presents hold, cut and hike probabilities as numbers, and lets you compare the governor's remarks, minutes and institutional forecasts on the same screen. The goal is a tool that reads monetary policy through data-based probabilities, not just a collection of expert opinions.</p>
+    <p class="note">Model probabilities are estimates backed out of KOFR futures prices, not a definitive market forecast. The model's assumptions and limitations are disclosed within the service.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">02 / FEATURES</div>
+    <h2>What you can do</h2>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-title">Rate decision probability estimates</div>
+        <p>Estimates hold, cut and hike probabilities for the next Monetary Policy Board meeting with a KOFR futures-based model and shows them as a gauge.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Expected rate outlook by meeting</div>
+        <p>See the policy rate level the market expects for each upcoming Monetary Policy Board meeting in a table.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Probability history</div>
+        <p>Check how the hold probability has changed over time in a day-by-day chart.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Policy statement wording comparison</div>
+        <p>Compare changes in the wording of each meeting's monetary policy decision statement side by side with the previous meeting. Hawkish and dovish auxiliary scores are also shown.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Governor's remarks and minutes</div>
+        <p>Review the Bank of Korea governor's public remarks and summaries of the minutes, along with dissenting opinions and the dot plot.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Institutional forecast consensus</div>
+        <p>Collects rate forecasts from major institutions such as brokerages and investment banks and compiles them into a consensus.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">Key economic indicator calendar</div>
+        <p>See the US FOMC, CPI and jobs schedules and the release dates of major Korean indicators in a calendar.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-title">AI composite reference indicator</div>
+        <p>Provides a reference indicator of monetary policy pressure signals that AI extracts from Naver news articles.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">03 / DATA &amp; METHODS</div>
+    <h2>Data and methods</h2>
+    <div class="data-table">
+      <div class="data-row">
+        <div class="data-src">ECOS (Bank of Korea)</div>
+        <div class="data-desc">Automatically collects the policy rate (722Y001) and the 91-day CD market rate (817Y002). Core input data for the rate model.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">KRX Open API</div>
+        <div class="data-desc">Collects settlement prices of 3-month KOFR futures. Used to back out hold, cut and hike probabilities for each meeting from KOFR futures.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Bank of Korea official site</div>
+        <div class="data-desc">Collects the full text of monetary policy decision statements, the list of minutes, and the dot plot. The basis for wording-change analysis.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Yonhap News RSS</div>
+        <div class="data-desc">Automatically collects and filters articles related to the governor.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">Manual entry (data/reports.yaml)</div>
+        <div class="data-desc">Institutional forecasts, excerpts of the governor's remarks and the key economic calendar are entered and managed directly in YAML.</div>
+      </div>
+      <div class="data-row">
+        <div class="data-src">OpenAI API</div>
+        <div class="data-desc">Classifies and tags Naver news articles and generates a monetary policy pressure index. Used only as an AI reference indicator.</div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:16px">Update cycle: runs automatically on GitHub Actions every day at 10 a.m. Institutional forecast and remarks entries are entered manually, then deployed.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">04 / HOW TO USE</div>
+    <h2>How it can be used</h2>
+    <div class="use-list">
+      <div class="use-item">
+        <div class="use-who">Economy and finance reporters</div>
+        <p>Check market-implied probabilities and the expert consensus on one screen before reporting on a Monetary Policy Board meeting, and use them as background for articles.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Finance and investment professionals</div>
+        <p>Monitor signals of a shift in the monetary policy direction by watching the trend in hold probability together with dissenting opinions in the minutes.</p>
+      </div>
+      <div class="use-item">
+        <div class="use-who">Economics and finance researchers</div>
+        <p>Review the methodology and backtest results of the KOFR futures-based probability model directly and use them as reference material.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">06 / TECH STACK</div>
+    <h2>Technology and how it's made</h2>
+    <div class="tech-list">
+      <span class="tech-tag">Python</span>
+      <span class="tech-tag">d3.js v7.9</span>
+      <span class="tech-tag">Static HTML/CSS/JS</span>
+      <span class="tech-tag">Cloudflare Pages</span>
+      <span class="tech-tag">GitHub Actions</span>
+      <span class="tech-tag">OpenAI API</span>
+      <span class="tech-tag">ECOS API</span>
+      <span class="tech-tag">KRX Open API</span>
+      <span class="tech-tag">Claude Code</span>
+    </div>
+    <p style="margin-top:14px; font-size:14px; color:var(--muted)">A static HTML site whose build output is deployed to Cloudflare Pages. GitHub Actions collects data and builds and deploys it automatically every day. The browser reads only same-origin JSON, with no server.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">07 / STATUS</div>
+    <h2>Development status</h2>
+    <div class="status-box public">
+      <span class="status-label">PUBLIC</span>
+      <p>Running with automatic updates every day at 10 a.m. Manually entered data (institutional forecasts, governor's remarks) must be added just before and after Monetary Policy Board meetings.</p>
+    </div>
+    <p style="margin-top:12px;font-size:13px;color:var(--muted)">As of 2026-10-23. Check the data reference date on the service's main screen.</p>
+  </section>
+
+  <section class="section">
+    <div class="sec-label">08 / LINKS</div>
+    <h2>Related links and materials</h2>
+    <div class="links-row">
+      <a class="link-btn primary" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">Open the live service ↗</a>
+      <a class="link-btn" href="../../../content/bokwatch.md" download>Download intro document (.md, Korean)</a>
+    </div>
+  </section>
+
+</main>
+
+<section class="other-projects">
+  <div class="other-wrap">
+    <div class="other-label">Explore other projects</div>
+    <div class="other-grid">
+      <a class="other-card" href="../chip-cycle/">
+        <span class="other-type data">DATA</span>
+        <strong>CHIP CYCLE</strong>
+        <span>Analysis of 20 years of semiconductor export customs data</span>
+      </a>
+      <a class="other-card" href="../korea-ranked/">
+        <span class="other-type data">DATA</span>
+        <strong>The Science of K-Pride</strong>
+        <span>Korea's world rankings across 53 official statistics</span>
+      </a>
+      <a class="other-card" href="../bibigo-index/">
+        <span class="other-type data">DATA</span>
+        <strong>Bibigo Index</strong>
+        <span>Reading global prices and exchange rates through 100 g of dumplings</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <a href="../../">databrew</a>
+  <span>An independent data journalism project</span>
+</footer>
+<script src="../../../detail.js" defer></script>
+</body>
+</html>
