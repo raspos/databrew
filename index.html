@@ -572,7 +572,7 @@ html { scroll-behavior: smooth; }
     <div class="series-head">
       <p class="series-kicker">CRAFT SERIES · <span data-live-count>3</span> PROJECTS</p>
       <h2 class="series-title" id="h-craft">복잡한 현실을 직접 플레이하다</h2>
-      <p class="series-live"><span class="live-dot" aria-hidden="true"></span>누적 접속 <b data-craft-total>집계 중</b> <span class="live-note" data-craft-updated>· 약 1분마다 갱신</span></p>
+      <p class="series-live"><span class="live-dot" aria-hidden="true"></span>누적 접속 <b data-craft-total>집계 중</b> <span class="live-note" data-craft-updated></span></p>
       <p class="series-desc">조직과 이해관계, 경쟁과 의사결정이 얽힌 현실을 게임과 시뮬레이션으로 재구성하는 시리즈입니다. 가상 설정 위에서 직접 선택해 봅니다.</p>
     </div>
     <div class="grid">
@@ -1031,7 +1031,7 @@ html { scroll-behavior: smooth; }
       var ok = names.every(function (k) { return typeof craftLast[k] === 'number'; });
       var now = new Date(), pad = function (n) { return String(n).padStart(2, '0'); };
       document.querySelectorAll('[data-craft-updated]').forEach(function (e) {
-        e.textContent = ok ? '· ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' 갱신 · 약 1분마다' : '· 일부 게임 집계를 불러오지 못했습니다';
+        e.textContent = ok ? '· ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' 갱신' : '· 일부 게임 집계를 불러오지 못했습니다';
       });
     });
   }
