@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>databrew — 독립 데이터저널리즘 프로젝트</title>
-<meta name="description" content="기자가 AI로 만든 데이터 저널리즘 25개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브.">
+<meta name="description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
 <link rel="canonical" href="https://raspos.github.io/databrew/">
 <meta name="robots" content="index, follow">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "databrew", "alternateName": ["데이터브루", "data BREW"], "url": "https://raspos.github.io/databrew/", "inLanguage": "ko-KR", "description": "독립 데이터저널리즘 프로젝트. 데이터로 내린 풍미깊은 뉴스.", "author": {"@type": "Person", "name": "프로딴짓러", "url": "https://www.facebook.com/rough1020"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "databrew", "alternateName": ["데이터브루", "data BREW"], "url": "https://raspos.github.io/databrew/", "inLanguage": "ko-KR", "description": "WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.", "author": {"@type": "Person", "name": "프로딴짓러", "url": "https://www.facebook.com/rough1020"}}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="databrew">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:title" content="databrew — 데이터로 내린 풍미깊은 뉴스">
-<meta property="og:description" content="기자가 AI로 만든 데이터 저널리즘 25개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브. 독립 데이터저널리즘 프로젝트.">
+<meta property="og:description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
 <meta property="og:url" content="https://raspos.github.io/databrew/">
 <meta property="og:image" content="https://raspos.github.io/databrew/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="databrew — 데이터로 내린 풍미깊은 뉴스">
-<meta name="twitter:description" content="기자가 AI로 만든 데이터 저널리즘 25개 프로젝트. 데이터 탐색, 직접 체험, 지식 아카이브. 독립 데이터저널리즘 프로젝트.">
+<meta name="twitter:description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
 <meta name="twitter:image" content="https://raspos.github.io/databrew/og.png">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,8 +98,8 @@ h1 .acl { color: var(--accent); }
 
 /* Grid */
 .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; }
-.grid.filtered .card.wide { grid-column: auto; }
-.grid.filtered .card.wide .shot { aspect-ratio: 16 / 10; }
+.filtered .card.wide { grid-column: auto; }
+.filtered .card.wide .shot { aspect-ratio: 16 / 10; }
 .card {
   background: var(--cell);
   border: 1px solid var(--rule);
@@ -138,8 +138,8 @@ h1 .acl { color: var(--accent); }
 .type-tag.experience { color: var(--exp-c); }
 .type-tag.intelligence { color: var(--intel-c); }
 .cat { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: auto; }
-h2 { font-size: 21px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 0; line-height: 1.3; }
-.card.wide h2 { font-size: 26px; }
+.card h3 { font-size: 21px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 0; line-height: 1.3; }
+.card.wide h3 { font-size: 26px; }
 .desc { margin: 0; font-size: 14px; line-height: 1.65; }
 .desc.muted { color: var(--muted); }
 .desc2 { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
@@ -182,7 +182,7 @@ footer a:hover { color: var(--accent); }
   .grid { grid-template-columns: minmax(0, 1fr); }
   .card.wide { grid-column: auto; }
   .card.wide .shot { aspect-ratio: 16 / 10; }
-  h2 { font-size: 17px; }
+  .card h3 { font-size: 17px; }
 }
 .card[hidden] { display: none; }
 
@@ -319,16 +319,80 @@ header .today { color: rgba(242,196,160,.6); }
   html.js header h1 .brw { background-position: 0 100% !important; }
 }
 
-/* Series bundles */
-.series-head { grid-column: 1 / -1; padding: 8px 4px 0; }
-.series-head[hidden] { display: none; }
-.series-head h3 { margin: 0 0 4px; font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
-.series-head p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-.series-head + .card, .series-head ~ .series-head { margin-top: 0; }
-.grid > .series-head:not(:first-child) { margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--rule); }
-.grid.filtered .series-head { display: none; }
-.filter-row.type-row { margin-bottom: 10px; }
-.filter-row.series-row { margin-bottom: 36px; }
+
+/* ===== Series hub ===== */
+:root { --c-watch: #1f4e8c; --c-craft: #1f5f46; --c-sports: #7a2335; --on-series: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c-watch: #7fb2f2; --c-craft: #6fcaa1; --c-sports: #ec8fa1; --on-series: #12151a; } }
+:root[data-theme="dark"] { --c-watch: #7fb2f2; --c-craft: #6fcaa1; --c-sports: #ec8fa1; --on-series: #12151a; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.s-watch, .p-watch { --series: var(--c-watch); }
+.s-craft, .p-craft { --series: var(--c-craft); }
+.s-sports, .p-sports { --series: var(--c-sports); }
+.s-archive { --series: var(--muted); }
+
+.series-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0 0 14px; }
+.panel { position: relative; display: flex; flex-direction: column; gap: 6px; min-height: 210px; padding: 24px 24px 20px; border: 1px solid var(--rule); border-radius: 14px; background: var(--cell); color: inherit; text-decoration: none; overflow: hidden; transition: box-shadow .2s, transform .2s, border-color .2s; }
+.panel::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--series); }
+.panel::after { content: ""; position: absolute; right: -18px; bottom: -18px; width: 150px; height: 120px; opacity: .55; pointer-events: none; }
+.p-watch::after { background: repeating-linear-gradient(to right, transparent 0 9px, color-mix(in srgb, var(--series) 14%, transparent) 9px 11px), linear-gradient(to top, color-mix(in srgb, var(--series) 12%, transparent), transparent 70%); }
+.p-craft::after { background: conic-gradient(color-mix(in srgb, var(--series) 14%, transparent) 25%, transparent 0 50%, color-mix(in srgb, var(--series) 14%, transparent) 0 75%, transparent 0) 0 0 / 28px 28px; }
+.p-sports::after { background: repeating-linear-gradient(-55deg, transparent 0 12px, color-mix(in srgb, var(--series) 14%, transparent) 12px 15px); }
+.panel > * { position: relative; z-index: 1; }
+.panel:hover { border-color: var(--series); box-shadow: 0 14px 30px -16px rgba(40,30,10,.3); transform: translateY(-3px); }
+.panel:focus-visible { outline: 3px solid var(--series); outline-offset: 3px; }
+.panel-word { font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: .2em; color: var(--series); }
+.panel-title { font-size: 24px; font-weight: 700; letter-spacing: -.03em; line-height: 1.25; margin-top: 8px; }
+.panel-sub { color: var(--muted); font-size: 14px; line-height: 1.55; }
+.panel-foot { margin-top: auto; padding-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.panel-count { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; color: var(--muted); }
+.panel-go { font-size: 14px; font-weight: 700; color: var(--series); }
+.archive-link { margin: 0 0 18px; font-size: 14px; text-align: right; }
+.archive-link a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.archive-link a:hover { color: var(--accent); }
+
+.filterbar { border: 1px solid var(--rule); border-radius: 12px; background: var(--cell); margin: 0 0 8px; }
+.filterbar > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-size: 14px; font-weight: 600; border-radius: 12px; }
+.filterbar > summary::-webkit-details-marker { display: none; }
+.filterbar > summary::after { content: "+"; margin-left: auto; font-family: var(--font-mono); font-size: 16px; color: var(--muted); }
+.filterbar[open] > summary::after { content: "−"; }
+.filterbar > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filter-hint { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; font-weight: 500; color: var(--muted); }
+.filter-body { padding: 4px 16px 14px; }
+.filter-status { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 8px; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 12px; font-size: 14px; }
+.filter-status[hidden] { display: none; }
+.filter-status button { font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: var(--cell); }
+.filter-status button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.series { margin-top: 72px; scroll-margin-top: 20px; }
+.series[hidden] { display: none; }
+.series-head { display: grid; gap: 8px; margin: 0 0 26px; padding: 2px 0 2px 18px; border-left: 5px solid var(--series); }
+.series-kicker { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .16em; color: var(--series); }
+.series-title { margin: 0; font-size: clamp(26px, 4.2vw, 38px); font-weight: 700; letter-spacing: -.035em; line-height: 1.2; }
+.series-desc { margin: 0; max-width: 64ch; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.series .btn-service { background: var(--series); border-color: var(--series); color: var(--on-series); }
+.s-archive .btn-service { background: var(--accent); border-color: var(--accent); color: #fff; }
+.series .card:hover, .series .card:has(.card-inner:hover) { border-color: color-mix(in srgb, var(--series) 55%, var(--rule)); }
+.series-card .body { gap: 8px; }
+.series-card .q { margin: 2px 0 0; font-size: 16px; font-weight: 600; line-height: 1.5; letter-spacing: -.01em; }
+.series-card .sub { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55; }
+.s-craft .series-card .shot { aspect-ratio: 16 / 10.5; }
+
+@media (max-width: 920px) {
+  .series-nav { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .panel { min-height: 0; padding: 20px 20px 16px; }
+  .panel-foot { padding-top: 12px; }
+  .archive-link { text-align: left; }
+  .series { margin-top: 56px; }
+}
+@media (max-width: 600px) {
+  .series-head { padding-left: 14px; margin-bottom: 20px; }
+  .filter-row button { padding: 8px 14px; }
+  .series-card .q { font-size: 15px; }
+}
+@media (max-width: 380px) { .panel-title { font-size: 21px; } .btn-detail, .btn-service { padding: 8px 12px; } .card-actions { flex-wrap: wrap; } }
+.filter-body .filter-row + .filter-row { margin-bottom: 0; }
+.filter-body .filter-row { margin-bottom: 10px; }
 </style>
 </head>
 <body>
@@ -362,281 +426,282 @@ header .today { color: rgba(242,196,160,.6); }
     </div>
   </header>
 
-  <nav class="filter-row" aria-label="분야별 필터">
-    <span class="filter-label">분야</span>
-    <button type="button" data-cat="all" aria-pressed="true">전체 <span class="count">25</span></button>
-    <button type="button" data-cat="경제" aria-pressed="false">경제 <span class="count">12</span></button>
-    <button type="button" data-cat="정치" aria-pressed="false">정치 <span class="count">2</span></button>
-    <button type="button" data-cat="스포츠" aria-pressed="false">스포츠 <span class="count">5</span></button>
-    <button type="button" data-cat="사회" aria-pressed="false">사회 <span class="count">2</span></button>
-    <button type="button" data-cat="도구" aria-pressed="false">도구 <span class="count">1</span></button>
-    <button type="button" data-cat="게임" aria-pressed="false">게임 <span class="count">3</span></button>
+  <nav class="series-nav" aria-label="대표 시리즈">
+    <a class="panel p-watch" href="#watch" data-target="watch">
+      <span class="panel-word">WATCH SERIES</span>
+      <strong class="panel-title">세상의 변화를 숫자로 읽다</strong>
+      <span class="panel-sub">금리·환율·부채·연봉·아파트 시장</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="watch">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
+    </a>
+    <a class="panel p-craft" href="#craft" data-target="craft">
+      <span class="panel-word">CRAFT SERIES</span>
+      <strong class="panel-title">복잡한 현실을 직접 플레이하다</strong>
+      <span class="panel-sub">기자 인사·홍보전략·재건축 수주전</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">3</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
+    </a>
+    <a class="panel p-sports" href="#sports" data-target="sports">
+      <span class="panel-word">SPORTS SERIES</span>
+      <strong class="panel-title">스포츠를 기록으로 읽다</strong>
+      <span class="panel-sub">축구·야구·배드민턴의 기록과 전설</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="sports">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
+    </a>
   </nav>
-  <nav class="filter-row type-row" aria-label="유형별 필터">
-    <span class="filter-label">유형</span>
-    <button type="button" data-type="all" aria-pressed="true">전체</button>
-    <button type="button" data-type="DATA" aria-pressed="false">DATA</button>
-    <button type="button" data-type="EXPERIENCE" aria-pressed="false">EXPERIENCE</button>
-    <button type="button" data-type="INTELLIGENCE" aria-pressed="false">INTELLIGENCE</button>
-  </nav>
+  <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
 
-  <nav class="filter-row series-row" aria-label="시리즈별 필터">
-    <span class="filter-label">시리즈</span>
-    <button type="button" data-series="all" aria-pressed="true">전체</button>
-    <button type="button" data-series="watch" aria-pressed="false">워치 시리즈 <span class="count">5</span></button>
-    <button type="button" data-series="craft" aria-pressed="false">크래프트 시리즈 <span class="count">3</span></button>
-    <button type="button" data-series="sports" aria-pressed="false">스포츠 시리즈 <span class="count">5</span></button>
-  </nav>
-
-  <main class="grid" id="grid">
-    <div class="series-head" data-series-head="watch">
-      <h3>워치 시리즈</h3>
-      <p>시장과 숫자를 매일 지켜보는 서비스 5종. 금리, 환율, 국채와 부채, 기업 연봉, 아파트 시장심리를 연속 관측합니다.</p>
+  <details class="filterbar" id="filterbar">
+    <summary>분야·유형으로 좁혀 보기 <span class="filter-hint">필터</span></summary>
+    <div class="filter-body">
+      <nav class="filter-row" aria-label="분야별 필터">
+        <span class="filter-label">분야</span>
+          <button type="button" data-cat="all" aria-pressed="true">전체 <span class="count" data-cat-count="all"></span></button>
+          <button type="button" data-cat="경제" aria-pressed="false">경제 <span class="count" data-cat-count="경제"></span></button>
+          <button type="button" data-cat="정치" aria-pressed="false">정치 <span class="count" data-cat-count="정치"></span></button>
+          <button type="button" data-cat="스포츠" aria-pressed="false">스포츠 <span class="count" data-cat-count="스포츠"></span></button>
+          <button type="button" data-cat="사회" aria-pressed="false">사회 <span class="count" data-cat-count="사회"></span></button>
+          <button type="button" data-cat="도구" aria-pressed="false">도구 <span class="count" data-cat-count="도구"></span></button>
+          <button type="button" data-cat="게임" aria-pressed="false">게임 <span class="count" data-cat-count="게임"></span></button>
+      </nav>
+      <nav class="filter-row type-row" aria-label="유형별 필터">
+        <span class="filter-label">유형</span>
+          <button type="button" data-type="all" aria-pressed="true">전체</button>
+          <button type="button" data-type="DATA" aria-pressed="false">DATA</button>
+          <button type="button" data-type="EXPERIENCE" aria-pressed="false">EXPERIENCE</button>
+          <button type="button" data-type="INTELLIGENCE" aria-pressed="false">INTELLIGENCE</button>
+      </nav>
     </div>
+  </details>
+  <div class="filter-status" id="filterStatus" hidden role="status" aria-live="polite">
+    <span id="filterCount"></span>
+    <button type="button" id="filterReset">전체 보기</button>
+  </div>
 
-    <!-- 01 BOK워치 -->
-    <article class="card wide" data-series="watch" data-cat="경제" data-type="DATA">
-      <a class="card-inner" href="projects/bokwatch/">
-        <div class="shot"><img src="shots/bokwatch.png" alt="BOK워치 메인 화면: 금통위 동결 확률 게이지와 회의별 기대 기준금리 표"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>BOK워치</h2>
-          <p class="desc">한국은행 금통위 금리 결정 모니터. KOFR 선물·OIS에서 역산한 모형 확률, 총재 발언, 의사록, 전문가 전망을 한 화면에서 봅니다.</p>
-          <p class="desc2">다음 금통위까지 동결·인상 확률이 어떻게 움직이는지 날짜별로 추적할 수 있습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/bokwatch/">자세히 보기</a>
-        <a class="btn-service" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
+  <main id="main">
 
-    <!-- 01-2 FX워치 -->
-    <article class="card" data-series="watch" data-cat="경제" data-type="DATA">
-      <a class="card-inner" href="projects/fx-odds/">
-        <div class="shot"><img src="shots/fx-odds.png" alt="FX워치 메인 화면: 환율의 확률과 압력을 읽다 제목과 원/달러 환율, 7일·30일 후 80% 범위" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>FX워치</h2>
-          <p class="desc">환율의 확률과 압력을 읽다. 원/달러가 7일·30일 뒤 어느 범위에 있을지 확률분포로 봅니다.</p>
-          <p class="desc2">7일·30일 예상 범위와 특정 환율 도달 확률, 변동성 지수, 모형 성적표까지 공개합니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/fx-odds/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/fx-odds/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 01-3 DEBT워치 -->
-    <article class="card" data-series="watch" data-cat="경제" data-type="DATA">
-      <a class="card-inner" href="projects/debt-watch/">
-        <div class="shot"><img src="shots/debt-watch.png" alt="DEBT워치 메인 화면: 미국 10년물, 한국 10년물, 미국 12개월 내 만기 국채, 금리 충격 시 이자 증가 요약 카드와 한미 국채금리 전망" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>DEBT워치</h2>
-          <p class="desc">돌아오는 빚, 감당할 수 있을까? 국채 만기와 차환압력을 공개 통계로 봅니다.</p>
-          <p class="desc2">미국 국채 460개 종목의 만기 사다리와 차환비용 시나리오, 한·미 국채금리 전망, 세계 부채 지도를 담았습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/debt-watch/">자세히 보기</a>
-        <a class="btn-service" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 02-2 PAY워치 -->
-    <article class="card" data-series="watch" data-cat="경제" data-type="DATA">
-      <a class="card-inner" href="projects/pay-watch/">
-        <div class="shot"><img src="shots/pay-watch-corp.png" alt="PAY워치 회사 화면: 삼성전자의 DART 공시 평균연봉과 근속 구간별 추정 연봉 범위" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>PAY워치</h2>
-          <p class="desc">내 친구는 얼마 벌까? 회사 이름만 검색하면 공시된 평균연봉이 나옵니다.</p>
-          <p class="desc2">친구들 회사로 랭킹을 만들고 월급 배틀을 붙여 보고, DART 공시와 국민연금 자료는 섞지 않고 따로 보여 줍니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/pay-watch/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/pay-watch/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- APT워치 -->
-    <article class="card" data-cat="경제" data-type="DATA" data-series="watch">
-      <a class="card-inner" href="projects/apt-watch/">
-        <div class="shot"><img src="shots/apt-watch.png" alt="APT워치 메인 화면: NEGO INDEX 네고 압력지수 현재 +3.6%와 7일, 28일 변화, 매물 증감률 요약" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>APT워치</h2>
-          <p class="desc">서울 아파트 시장심리지수. 집주인 호가는 최근 실거래가보다 얼마나 높을까요?</p>
-          <p class="desc2">서울 25개 구 110개 단지의 매물을 매일 관측해 네고 압력지수와 매물 증감률로 시장심리를 읽습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/apt-watch/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/apt-watch/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <div class="series-head" data-series-head="craft">
-      <h3>크래프트 시리즈</h3>
-      <p>직접 해 보며 이해하는 시뮬레이션 게임 3종. 기자의 인사발령, 홍보팀장의 기사 막기, 건설사의 수주전쟁을 체험합니다.</p>
+  <section class="series s-watch" id="watch" aria-labelledby="h-watch" data-series-sec="watch">
+    <div class="series-head">
+      <p class="series-kicker">WATCH SERIES · <span data-live-count>5</span> PROJECTS</p>
+      <h2 class="series-title" id="h-watch">세상의 변화를 숫자로 읽다</h2>
+      <p class="series-desc">경제·금융·부동산 시장을 지속적으로 관측하고 새로운 지수와 분석 도구를 만드는 시리즈입니다. 다섯 서비스가 하나의 관측망을 이룹니다.</p>
     </div>
-
-    <!-- 17 인사 크래프트 -->
-    <article class="card" data-series="craft" data-cat="게임" data-type="EXPERIENCE">
-      <a class="card-inner" href="projects/personnel-craft/">
-        <div class="shot"><img src="shots/personnel-craft.png" alt="인사 크래프트 메인 화면: 편집국에 오신 것을 환영합니다 문구와 3D 블록 기자 캐릭터, 신상 정보와 외형 설정" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">게임</span></div>
-          <h2>인사 크래프트</h2>
-          <p class="desc">편집국 생존기. 정기인사 철, 이번엔 원하는 부서로 갈 수 있을까요?</p>
-          <p class="desc2">3D 블록 기자로 커리어를 쌓고 인사 농사를 지은 뒤, 1만 번의 시뮬레이션으로 나온 확률 위에서 호외 발령을 받는 게임입니다.</p>
+    <div class="grid">
+      <article class="card series-card wide" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="projects/bokwatch/">
+          <div class="shot"><img src="shots/bokwatch.png" alt="BOK워치 메인 화면: 금통위 동결 확률 게이지와 회의별 기대 기준금리 표" loading="lazy"></div>
+          <div class="body">
+            <h3>BOK워치</h3>
+            <p class="q">다음 금통위에서 금리는 어떻게 결정될까?</p>
+            <p class="sub">금통위 금리 결정 확률·총재 발언·전문가 전망</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/bokwatch/">자세히 보기</a>
+          <a class="btn-service" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">서비스 열기 ↗</a>
         </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/personnel-craft/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/personnel-craft/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 홍담 크래프트 -->
-    <article class="card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
-      <a class="card-inner" href="projects/hongdam-craft/">
-        <div class="shot"><img src="shots/hongdam-craft.png" alt="홍담 크래프트 시작 화면: 단독예고 속보, 홍보팀장과 출입기자 12유형의 대결 구도, 난이도와 3D 복셀 캐릭터 선택" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">게임</span></div>
-          <h2>홍담 크래프트</h2>
-          <p class="desc">기사 막기 전쟁. 기사는 쏟아지고, 예산은 바닥나고, 팀장 목숨은 하나다.</p>
-          <p class="desc2">기업 홍보팀장이 되어 단독부터 오너리스크까지 6번의 위기 취재를 넘기고, 생존 확률을 시뮬레이션해 봅니다.</p>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="projects/fx-odds/">
+          <div class="shot"><img src="shots/fx-odds.png" alt="FX워치 메인 화면: 환율의 확률과 압력을 읽다 제목과 원/달러 환율, 7일·30일 후 80% 범위" loading="lazy"></div>
+          <div class="body">
+            <h3>FX워치</h3>
+            <p class="q">원/달러 환율은 앞으로 어디까지 움직일 수 있을까?</p>
+            <p class="sub">7일·30일 후 예상 범위와 시장 압력</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/fx-odds/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/fx-odds/" target="_blank" rel="noopener">서비스 열기 ↗</a>
         </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/hongdam-craft/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/hongdam-craft/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 재건축 크래프트 -->
-    <article class="card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
-      <a class="card-inner" href="projects/reconstruction-craft/">
-        <div class="shot"><img src="shots/recon-game.png" alt="재건축 크래프트 수주 화면: 가온 신시가지 15개 단지를 3D 입체 도시 지도로 보여주고 업계 동향과 첩보를 제공하는 화면" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">게임</span></div>
-          <h2>재건축 크래프트</h2>
-          <p class="desc">시공사 수주전쟁. 가온 신시가지 15개 단지와 조합원 표심을 공략하는 건설사 영업본부장 게임입니다.</p>
-          <p class="desc2">8개 건설사 중 하나를 골라 7개 경쟁사와 맞붙으며 행동력과 영업예산으로 수주 목표를 채웁니다.</p>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="projects/debt-watch/">
+          <div class="shot"><img src="shots/debt-watch.png" alt="DEBT워치 메인 화면: 미국 10년물, 한국 10년물, 미국 12개월 내 만기 국채, 금리 충격 시 이자 증가 요약 카드와 한미 국채금리 전망" loading="lazy"></div>
+          <div class="body">
+            <h3>DEBT워치</h3>
+            <p class="q">돌아오는 빚, 감당할 수 있을까?</p>
+            <p class="sub">미국 국채 만기·차환비용, 세계 부채 지도</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/debt-watch/">자세히 보기</a>
+          <a class="btn-service" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">서비스 열기 ↗</a>
         </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/reconstruction-craft/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/reconstruction-craft/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <div class="series-head" data-series-head="sports">
-      <h3>스포츠 시리즈</h3>
-      <p>스포츠를 기록으로 읽는 서비스 5종. 손흥민의 302골, 한국 야구 타자의 세대교체, KBO의 기대 이상 선수, 안세영의 랠리, 역대 국가대표 베스트 11을 다룹니다.</p>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="projects/pay-watch/">
+          <div class="shot"><img src="shots/pay-watch-corp.png" alt="PAY워치 회사 화면: 삼성전자의 DART 공시 평균연봉과 근속 구간별 추정 연봉 범위" loading="lazy"></div>
+          <div class="body">
+            <h3>PAY워치</h3>
+            <p class="q">내 친구는 얼마 벌까?</p>
+            <p class="sub">회사 평균연봉 검색·랭킹·월급 배틀</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/pay-watch/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/pay-watch/" target="_blank" rel="noopener">서비스 열기 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="projects/apt-watch/">
+          <div class="shot"><img src="shots/apt-watch.png" alt="APT워치 메인 화면: NEGO INDEX 네고 압력지수 현재 +3.6%와 7일, 28일 변화, 매물 증감률 요약" loading="lazy"></div>
+          <div class="body">
+            <h3>APT워치</h3>
+            <p class="q">집주인의 호가는 실거래가보다 얼마나 높을까?</p>
+            <p class="sub">서울 25개 구 네고 압력지수·매물 증감률</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/apt-watch/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/apt-watch/" target="_blank" rel="noopener">서비스 열기 ↗</a>
+        </div>
+      </article>
     </div>
+  </section>
 
-    <!-- 04 손흥민 골 기념관 -->
-    <article class="card" data-series="sports" data-cat="스포츠" data-type="INTELLIGENCE">
-      <a class="card-inner" href="projects/son-goal-museum/">
-        <div class="shot"><img src="shots/son.png" alt="손흥민 골 기념관 메인 화면: SON HEUNG-MIN 대형 제목과 2018 월드컵 멕시코전 사진, 통산 302골 요약"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">스포츠</span></div>
-          <h2>손흥민 골 기념관</h2>
-          <p class="desc">프로 1군 공식 경기와 A매치에서 넣은 302골을 한 골씩, 출처와 함께 기록한 아카이브입니다.</p>
-          <p class="desc2">시즌별 추이, 득점 시간대와 발·머리, 슈팅 위치와 xG, 개별 골 영상까지 필터로 찾아볼 수 있습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/son-goal-museum/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/son7/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 16 E-WAR -->
-    <article class="card" data-series="sports" data-cat="스포츠" data-type="DATA">
-      <a class="card-inner" href="projects/e-war/">
-        <div class="shot"><img src="shots/e-war.png" alt="E-WAR 메인 화면: KBO 2026 시즌 기대를 뛰어넘은 선수들 제목과 기대 기준 설정, 2026 시즌 E-WAR 랭킹 표" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">스포츠</span></div>
-          <h2>E-WAR</h2>
-          <p class="desc">기대를 뛰어넘은 선수들. 구단은 얼마를 기대했고, 선수는 얼마나 해냈을까?</p>
-          <p class="desc2">시즌 전 기대 WAR와 실제 WAR의 차이로 KBO 선수와 구단의 기대 대비 성과를 랭킹으로 봅니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/e-war/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 15 THE SE YOUNG ARCHIVE -->
-    <article class="card" data-series="sports" data-cat="스포츠" data-type="INTELLIGENCE">
-      <a class="card-inner" href="projects/se-young-archive/">
-        <div class="shot"><img src="shots/se-young-archive.png" alt="THE SE YOUNG ARCHIVE 메인 화면: 안세영은 역대 최고인가 질문과 역대 전설 비교, 안세영의 모든 경기, 나만의 GOAT 선정 메뉴" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">스포츠</span></div>
-          <h2>THE SE YOUNG ARCHIVE</h2>
-          <p class="desc">안세영은 역대 최고인가? 평판이 아니라 기록으로 이어 가는 랠리.</p>
-          <p class="desc2">경기 390건, 세계랭킹 궤적, 역대 전설 15명과의 비교, 나만의 GOAT 선정까지 담았습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/se-young-archive/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/se-young-archive/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 11 올타임 베스트 11 -->
-    <article class="card" data-series="sports" data-cat="스포츠" data-type="EXPERIENCE">
-      <a class="card-inner" href="projects/all-time-xi/">
-        <div class="shot"><img src="shots/all-time-xi.png" alt="올타임 베스트 11" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
-          <h2>올타임 베스트 11</h2>
-          <p class="desc">역대 최강의 국가대표를 만들어라. 나라별 역대 선수로 드림팀 전술판을 짜고 공유합니다.</p>
-          <p class="desc2">A매치 30경기 이상 출전 선수 3,864명의 공식 기록으로 FIFA 랭킹 상위 30개국 + 한국의 베스트11을 구성합니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/all-time-xi/">자세히 보기</a>
-        <a class="btn-service" href="https://all-time-xi.vercel.app/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 06 추강대엽+김 -->
-    <article class="card" data-series="sports" data-cat="스포츠" data-type="EXPERIENCE">
-      <a class="card-inner" href="projects/baseball-legends/">
-        <div class="shot"><img src="shots/cgdy-v4.png" alt="추강대엽+김 메인 화면: 색색의 큰 글자와 다섯 선수의 야구 카드"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
-          <h2>추강대엽+김</h2>
-          <p class="desc">추신수·강정호·이대호·이승엽, 그리고 김도영. 다섯 타자의 공식 기록으로 한국 야구 타자의 세대교체를 봅니다.</p>
-          <p class="desc2">MLB·NPB 기록을 KBO 기준으로 환산해 연차별로 나란히 비교하고, 원 기록으로도 바꿔 볼 수 있습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/baseball-legends/">자세히 보기</a>
-        <a class="btn-service" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <div class="series-head" data-series-head="other">
-      <h3>그 밖의 프로젝트</h3>
-      <p>정치, 경제, 사회와 도구를 데이터로 풀어낸 프로젝트들입니다.</p>
+  <section class="series s-craft" id="craft" aria-labelledby="h-craft" data-series-sec="craft">
+    <div class="series-head">
+      <p class="series-kicker">CRAFT SERIES · <span data-live-count>3</span> PROJECTS</p>
+      <h2 class="series-title" id="h-craft">복잡한 현실을 직접 플레이하다</h2>
+      <p class="series-desc">조직과 이해관계, 경쟁과 의사결정이 얽힌 현실을 게임과 시뮬레이션으로 재구성하는 시리즈입니다. 가상 설정 위에서 직접 선택해 봅니다.</p>
     </div>
+    <div class="grid">
+      <article class="card series-card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+        <a class="card-inner" href="projects/personnel-craft/">
+          <div class="shot"><img src="shots/personnel-craft.png" alt="인사 크래프트 메인 화면: 편집국에 오신 것을 환영합니다 문구와 3D 블록 기자 캐릭터, 신상 정보와 외형 설정" loading="lazy"></div>
+          <div class="body">
+            <h3>인사 크래프트</h3>
+            <p class="q">이번 인사에서 원하는 부서로 갈 수 있을까?</p>
+            <p class="sub">3D 블록 기자로 인사 농사부터 발령까지</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/personnel-craft/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/personnel-craft/" target="_blank" rel="noopener">게임 시작 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+        <a class="card-inner" href="projects/hongdam-craft/">
+          <div class="shot"><img src="shots/hongdam-craft.png" alt="홍담 크래프트 시작 화면: 단독예고 속보, 홍보팀장과 출입기자 12유형의 대결 구도, 난이도와 3D 복셀 캐릭터 선택" loading="lazy"></div>
+          <div class="body">
+            <h3>홍담 크래프트</h3>
+            <p class="q">홍보팀장이 되어 6번의 위기 취재를 막아낼 수 있을까?</p>
+            <p class="sub">위기 6단계와 출입기자 12유형</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/hongdam-craft/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/hongdam-craft/" target="_blank" rel="noopener">게임 시작 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+        <a class="card-inner" href="projects/reconstruction-craft/">
+          <div class="shot"><img src="shots/recon-game.png" alt="재건축 크래프트 수주 화면: 가온 신시가지 15개 단지를 3D 입체 도시 지도로 보여주고 업계 동향과 첩보를 제공하는 화면" loading="lazy"></div>
+          <div class="body">
+            <h3>재건축 크래프트</h3>
+            <p class="q">재건축 수주전에서 목표 수주액을 채울 수 있을까?</p>
+            <p class="sub">목동 정비계획 기반 15개 단지, 건설사 8곳 중 선택</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/reconstruction-craft/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/reconstruction-craft/" target="_blank" rel="noopener">게임 시작 ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    <!-- 02 이재명 X 트래커 -->
-    <article class="card" data-cat="정치" data-type="INTELLIGENCE">
+  <section class="series s-sports" id="sports" aria-labelledby="h-sports" data-series-sec="sports">
+    <div class="series-head">
+      <p class="series-kicker">SPORTS SERIES · <span data-live-count>5</span> PROJECTS</p>
+      <h2 class="series-title" id="h-sports">스포츠를 기록으로 읽다</h2>
+      <p class="series-desc">선수와 팀의 기록을 모으고 비교하며 새로운 분석으로 스포츠의 질문을 푸는 시리즈입니다. 기록관, 지수, 비교, 직접 참여가 함께 있습니다.</p>
+    </div>
+    <div class="grid">
+      <article class="card series-card wide" data-cat="스포츠" data-type="INTELLIGENCE" data-series="sports">
+        <a class="card-inner" href="projects/son-goal-museum/">
+          <div class="shot"><img src="shots/son.png" alt="손흥민 골 기념관 메인 화면: SON HEUNG-MIN 대형 제목과 2018 월드컵 멕시코전 사진, 통산 302골 요약" loading="lazy"></div>
+          <div class="body">
+            <h3>손흥민 골 기념관</h3>
+            <p class="q">손흥민의 모든 골을 기록하다.</p>
+            <p class="sub">골별 필터·득점 패턴·슈팅 위치·xG</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/son-goal-museum/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/son7/" target="_blank" rel="noopener">기념관 열기 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="DATA" data-series="sports">
+        <a class="card-inner" href="projects/e-war/">
+          <div class="shot"><img src="shots/e-war.png" alt="E-WAR 메인 화면: KBO 2026 시즌 기대를 뛰어넘은 선수들 제목과 기대 기준 설정, 2026 시즌 E-WAR 랭킹 표" loading="lazy"></div>
+          <div class="body">
+            <h3>E-WAR</h3>
+            <p class="q">기대를 뛰어넘은 선수는 누구인가?</p>
+            <p class="sub">KBO 선수의 기대 대비 성과 랭킹</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/e-war/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">서비스 열기 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="INTELLIGENCE" data-series="sports">
+        <a class="card-inner" href="projects/se-young-archive/">
+          <div class="shot"><img src="shots/se-young-archive.png" alt="THE SE YOUNG ARCHIVE 메인 화면: 안세영은 역대 최고인가 질문과 역대 전설 비교, 안세영의 모든 경기, 나만의 GOAT 선정 메뉴" loading="lazy"></div>
+          <div class="body">
+            <h3>THE SE YOUNG ARCHIVE</h3>
+            <p class="q">안세영은 역대 최고인가?</p>
+            <p class="sub">경기 기록·세계랭킹·역대 전설과 비교</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/se-young-archive/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/se-young-archive/" target="_blank" rel="noopener">아카이브 열기 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="EXPERIENCE" data-series="sports">
+        <a class="card-inner" href="projects/all-time-xi/">
+          <div class="shot"><img src="shots/all-time-xi.png" alt="올타임 베스트 11" loading="lazy"></div>
+          <div class="body">
+            <h3>올타임 베스트 11</h3>
+            <p class="q">역대 최강의 베스트 11을 만들어라.</p>
+            <p class="sub">포메이션을 고르고 나만의 전술판 구성</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/all-time-xi/">자세히 보기</a>
+          <a class="btn-service" href="https://all-time-xi.vercel.app/" target="_blank" rel="noopener">베스트 11 만들기 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="EXPERIENCE" data-series="sports">
+        <a class="card-inner" href="projects/baseball-legends/">
+          <div class="shot"><img src="shots/cgdy-v4.png" alt="추강대엽+김 메인 화면: 색색의 큰 글자와 다섯 선수의 야구 카드" loading="lazy"></div>
+          <div class="body">
+            <h3>추강대엽+김</h3>
+            <p class="q">한국 야구 최고의 타자는 누구인가?</p>
+            <p class="sub">다섯 타자의 기록을 KBO 기준으로 환산해 비교</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/baseball-legends/">자세히 보기</a>
+          <a class="btn-service" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">서비스 열기 ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="series s-archive" id="archive" aria-labelledby="h-archive" data-series-sec="archive">
+    <div class="series-head">
+      <p class="series-kicker">PROJECT ARCHIVE · <span data-live-count>12</span> PROJECTS</p>
+      <h2 class="series-title" id="h-archive">그 밖의 프로젝트</h2>
+      <p class="series-desc">정치·경제·사회와 도구를 데이터로 풀어낸 개별 프로젝트들입니다. 위 시리즈에 속하지 않는 서비스를 모았습니다.</p>
+    </div>
+    <div class="grid">
+      <article class="card" data-cat="정치" data-type="INTELLIGENCE">
       <a class="card-inner" href="projects/lee-x-tracker/">
         <div class="shot"><img src="shots/lee-x.png" alt="이재명 X 트래커 메인 화면: 대통령의 말, 데이터로 읽다 헤드라인과 게시물 수·지지율 요약"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">정치</span></div>
-          <h2>이재명 X 트래커</h2>
+          <h3>이재명 X 트래커</h3>
           <p class="desc">대통령의 X 게시물과 반응, 언어와 여론의 흐름을 지지율과 함께 봅니다.</p>
           <p class="desc2">게시물 1,065건을 AI로 분류해 주제와 감정 표현의 변화를 짚어 냅니다.</p>
         </div>
@@ -647,13 +712,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 02-2 라면의 계보 -->
-    <article class="card" data-cat="사회" data-type="INTELLIGENCE">
+      <article class="card" data-cat="사회" data-type="INTELLIGENCE">
       <a class="card-inner" href="projects/ramen-genealogy/">
         <div class="shot"><img src="shots/ramen-genealogy.png" alt="라면의 계보 메인 화면: 정당 계보도처럼 한눈에 보는 한국 라면 60년 문구와 라면 파벌 실록 계보도" loading="lazy"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">사회</span></div>
-          <h2>라면의 계보</h2>
+          <h3>라면의 계보</h3>
           <p class="desc">1963년부터 오늘까지, 한국 라면은 어떻게 갈라졌을까? 정당 계보도처럼 그린 라면 60년입니다.</p>
           <p class="desc2">국물파와 비국물파의 파벌·분열·집권 계보도에 라면 199종 도감, 랭킹, 오늘의 조합 연구소까지 담았습니다.</p>
         </div>
@@ -664,13 +728,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 05 경제학자의 도구상자 -->
-    <article class="card" data-cat="경제" data-type="INTELLIGENCE">
+      <article class="card" data-cat="경제" data-type="INTELLIGENCE">
       <a class="card-inner" href="projects/economist-toolkit/">
         <div class="shot"><img src="shots/nobel-v2.png" alt="경제학자의 도구상자 메인 화면: 큰 제목과 노벨 경제학상 수상자 일러스트"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">경제</span></div>
-          <h2>경제학자의 도구상자</h2>
+          <h3>경제학자의 도구상자</h3>
           <p class="desc">노벨 경제학상 수상자 101명의 연구와 대표 저작으로 세계경제를 설명해 온 이론과 방법을 살펴봅니다.</p>
           <p class="desc2">입문 설명에서 출발해 논문의 가정과 식별전략까지 원하는 깊이로 읽을 수 있습니다.</p>
         </div>
@@ -681,13 +744,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 07 비비고지수 -->
-    <article class="card" data-cat="경제" data-type="DATA">
+      <article class="card" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/bibigo-index/">
         <div class="shot"><img src="shots/bibigo.png" alt="비비고지수 메인 화면: 만두 100g으로 읽는 세계 경제 제목과 만두 일러스트"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>비비고지수</h2>
+          <h3>비비고지수</h3>
           <p class="desc">비비고 만두 100g의 나라별 판매가격을 빅맥과 함께 비교해 세계 물가와 환율을 읽습니다.</p>
           <p class="desc2">세계 만두 지도와 가격 순위, 구매력평가 환율 추정까지 판매처 출처와 수집일을 공개합니다.</p>
         </div>
@@ -698,13 +760,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 08 대한민국 자영업자로 살아남기 -->
-    <article class="card" data-cat="경제" data-type="EXPERIENCE">
+      <article class="card" data-cat="경제" data-type="EXPERIENCE">
       <a class="card-inner" href="projects/self-employed/">
         <div class="shot"><img src="shots/self-employed.png" alt="대한민국 자영업자로 살아남기" loading="lazy"></div>
         <div class="body">
           <div class="top"><span class="stone w" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">경제</span></div>
-          <h2>대한민국 자영업자로 살아남기</h2>
+          <h3>대한민국 자영업자로 살아남기</h3>
           <p class="desc muted">한국 자영업자의 창업과 경영을 체험하는 36개월 시뮬레이션.</p>
           <p class="desc2">업종과 상권을 고르고, 임대료·인건비·매출 조건을 설정해 가게를 직접 운영해 봅니다.</p>
         </div>
@@ -715,13 +776,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 09 CHIP CYCLE -->
-    <article class="card" data-cat="경제" data-type="DATA">
+      <article class="card" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/chip-cycle/">
         <div class="shot"><img src="shots/chip-v2.png" alt="CHIP CYCLE 메인 화면: 반도체 수출액은 폭증했는데 판매 개수는 줄었다 제목과 3대 품목 수출 지표"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>CHIP CYCLE</h2>
+          <h3>CHIP CYCLE</h3>
           <p class="desc">반도체 수출액은 폭증했는데 판매 개수는 줄었다. 한국 반도체 수출 20년을 통관데이터로 추적합니다.</p>
           <p class="desc2">D램·플래시·복합구조칩 237개월 기록과 한국은행 수출물가지수로 AI 슈퍼사이클의 구조를 읽습니다.</p>
         </div>
@@ -732,13 +792,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 10 국뽕의 과학 -->
-    <article class="card" data-cat="사회" data-type="DATA">
+      <article class="card" data-cat="사회" data-type="DATA">
       <a class="card-inner" href="projects/korea-ranked/">
         <div class="shot"><img src="shots/korea.png" alt="국뽕의 과학 메인 화면: 대한민국은 세계 몇 등 제목과 지표별 순위 카드"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">사회</span></div>
-          <h2>국뽕의 과학</h2>
+          <h3>국뽕의 과학</h3>
           <p class="desc">대한민국은 세계 몇 등일까. 우리가 생각하는 한국과 숫자가 보여주는 한국이 얼마나 다른지 확인합니다.</p>
           <p class="desc2">World Bank·OECD·UN 등 공식 통계 53개 지표, 28문항 퀴즈, 50년 시계열로 세계지도와 순위를 탐색합니다.</p>
         </div>
@@ -749,13 +808,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 12 기업 모멘텀 랭킹 -->
-    <article class="card" data-cat="경제" data-type="DATA">
+      <article class="card" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/corporate-scorecard/">
         <div class="shot"><img src="shots/corporate-scorecard.png" alt="기업 모멘텀 랭킹 메인 화면: 지난 3년 가장 좋아진 기업은 제목과 모멘텀 종합·성장·수익성 부문 잠정 1위 카드" loading="lazy"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>기업 모멘텀 랭킹</h2>
+          <h3>기업 모멘텀 랭킹</h3>
           <p class="desc">지난 3년, 가장 좋아진 기업은? 가장 큰 기업이 아니라 가장 크게 달라진 기업을 찾습니다.</p>
           <p class="desc2">OpenDART 공시 재무제표로 성장성·수익성·재무건전성·현금창출력의 변화를 측정하고, 체력과 모멘텀을 지도 위에 올려 봅니다.</p>
         </div>
@@ -766,13 +824,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 13 혼맥의 지도 -->
-    <article class="card" data-cat="경제" data-type="INTELLIGENCE">
+      <article class="card" data-cat="경제" data-type="INTELLIGENCE">
       <a class="card-inner" href="projects/honmaek-map/">
         <div class="shot"><img src="shots/honmaek-map.png" alt="혼맥의 지도 메인 화면: 수록 기업 가문 100개, 인물 2,439명 요약 카드와 재벌가 혼맥 네트워크 지도" loading="lazy"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">경제</span></div>
-          <h2>혼맥의 지도</h2>
+          <h3>혼맥의 지도</h3>
           <p class="desc">대한민국 기업 가문 연결망. 재벌가의 혼맥과 계열분리 계보를 한 장의 지도로 봅니다.</p>
           <p class="desc2">공시·공정위 자료로 교차검증한 100개 가문, 2,439명의 가계도와 가문 간 혼맥 58건을 탐색합니다.</p>
         </div>
@@ -783,13 +840,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 16 발칙한 상상 -->
-    <article class="card" data-cat="정치" data-type="EXPERIENCE">
+      <article class="card" data-cat="정치" data-type="EXPERIENCE">
       <a class="card-inner" href="projects/balchik-imagination/">
         <div class="shot"><img src="shots/balchik-imagination.png" alt="발칙한 상상 메인 화면: 한국과 일본이 하나의 나라가 된다면 제목과 태극기·일장기를 합친 그림" loading="lazy"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">정치</span></div>
-          <h2>발칙한 상상</h2>
+          <h3>발칙한 상상</h3>
           <p class="desc">한국과 일본이 하나의 나라가 된다면? 두 나라를 더하는 일과 하나가 되는 일 사이를 따져 봅니다.</p>
           <p class="desc2">합친 규모와 생활 속 차이, 국민정서, EU의 경험을 보고 직접 공동체의 규칙을 설계해 보는 사고실험입니다.</p>
         </div>
@@ -800,13 +856,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 19 서울 아파트 신고가 트래커 -->
-    <article class="card" data-cat="경제" data-type="DATA">
+      <article class="card" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/seoul-apartment-tracker/">
         <div class="shot"><img src="shots/seoul-apartment-tracker.png" alt="서울 아파트 신고가 트래커 메인 화면: 서울 아파트 최고가에서 얼마나 멀어졌을까 문구와 아파트 일러스트, 신고가 거래 추이" loading="lazy"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">경제</span></div>
-          <h2>서울 아파트 신고가 트래커</h2>
+          <h3>서울 아파트 신고가 트래커</h3>
           <p class="desc">서울 아파트, 최고가에서 얼마나 멀어졌을까? 신고가 거래를 매일 추적합니다.</p>
           <p class="desc2">국토교통부 실거래가로 서울 25개 구의 신고가와 고점 대비 거리를 단지·면적 단위로 계산해 우리 아파트까지 찾아봅니다.</p>
         </div>
@@ -817,13 +872,12 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 20 KOREAN NEWSROOM HUB -->
-    <article class="card" data-cat="도구" data-type="DATA">
+      <article class="card" data-cat="도구" data-type="DATA">
       <a class="card-inner" href="projects/korean-newsroom-hub/">
         <div class="shot"><img src="shots/newsroom-hub.png" alt="KOREAN NEWSROOM HUB 메인 화면: 공식 데이터를 연결하면 취재의 깊이가 달라집니다 문구와 90초 소개 영상" loading="lazy"></div>
         <div class="body">
           <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">도구</span></div>
-          <h2>KOREAN NEWSROOM HUB</h2>
+          <h3>KOREAN NEWSROOM HUB</h3>
           <p class="desc">공식 데이터로 묻고, 근거로 확인하다. 기자를 위한 ChatGPT 공식 통계 조회 도구입니다.</p>
           <p class="desc2">한국은행 ECOS, KOSIS, OpenDART를 MCP로 연결해 수치·단위·기준시점·출처를 함께 확인합니다.</p>
         </div>
@@ -834,12 +888,14 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
+    </div>
+  </section>
   </main>
 
   <footer>
     <span class="legend"><span class="stone" aria-hidden="true"></span>누구나 접속 가능</span>
     <span class="legend"><span class="stone w" aria-hidden="true"></span>로그인해야 열림</span>
-    <span id="capdate">화면은 2026-10-15 캡처</span>
+    <span id="capdate">미리보기 화면은 캡처 시점 기준</span>
     <span>© <a href="https://www.facebook.com/rough1020" target="_blank" rel="noopener">프로딴짓러</a></span>
   </footer>
 </div>
@@ -848,144 +904,84 @@ header .today { color: rgba(242,196,160,.6); }
 (function () {
   var d = new Date();
   var p = function (n) { return String(n).padStart(2, '0'); };
-  document.getElementById('today').textContent = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' 기준';
+  var today = document.getElementById('today');
+  if (today) today.textContent = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' 기준';
 
-  var grid = document.getElementById('grid');
+  var main = document.getElementById('main');
+  var cards = Array.prototype.slice.call(main.querySelectorAll('.card'));
+  var sections = Array.prototype.slice.call(main.querySelectorAll('.series'));
   var catBtns = document.querySelectorAll('.filter-row[aria-label="분야별 필터"] button');
-  var seriesBtns = document.querySelectorAll('.series-row button');
   var typeBtns = document.querySelectorAll('.type-row button');
-  var activeCat = 'all', activeType = 'all', activeSeries = 'all';
+  var status = document.getElementById('filterStatus');
+  var statusText = document.getElementById('filterCount');
+  var resetBtn = document.getElementById('filterReset');
+  var bar = document.getElementById('filterbar');
+  var activeCat = 'all', activeType = 'all';
 
-  function applyFilters() {
-    var any = activeCat !== 'all' || activeType !== 'all' || activeSeries !== 'all';
-    var before = new Map();
-    grid.querySelectorAll('.card').forEach(function (c) { c.classList.remove('rv'); if (!c.hidden) before.set(c, c.getBoundingClientRect()); });
-    grid.classList.toggle('filtered', any);
-    grid.querySelectorAll('.card').forEach(function (c) {
-      var cm = activeCat === 'all' || c.dataset.cat === activeCat;
-      var tm = activeType === 'all' || c.dataset.type === activeType;
-      var sm = activeSeries === 'all' || c.dataset.series === activeSeries;
-      c.hidden = !(cm && tm && sm);
-    });
-    if (!reduce) grid.querySelectorAll('.card').forEach(function (c) {
-      if (c.hidden || !c.animate) return;
-      var o = before.get(c), n = c.getBoundingClientRect();
-      if (o) {
-        var dx = o.left - n.left, dy = o.top - n.top;
-        if (dx || dy) c.animate([{ transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'none' }], { duration: 520, easing: 'cubic-bezier(.2,.7,.2,1)' });
-      } else {
-        c.animate([{ opacity: 0, transform: 'translateY(16px) scale(.97)' }, { opacity: 1, transform: 'none' }], { duration: 480, easing: 'ease-out' });
-      }
-    });
-    requestAnimationFrame(function () { drawBase(); });
-  }
-
-  /* ---- 연결망: 카드 사이 틈에 선이 보이도록 카드 뒤에 그린다 ---- */
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var NS = 'http://www.w3.org/2000/svg';
-  var net = document.createElementNS(NS, 'svg');
-  net.id = 'net'; net.setAttribute('aria-hidden', 'true');
-  grid.insertBefore(net, grid.firstChild);
-  var TC = { DATA: '--data-c', EXPERIENCE: '--exp-c', INTELLIGENCE: '--intel-c' };
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('.card'));
-
-  function center(c) { return { x: c.offsetLeft + c.offsetWidth / 2, y: c.offsetTop + c.offsetHeight / 2 }; }
-  function link(a, b, cls) {
-    var p = center(a), q = center(b);
-    var mx = (p.x + q.x) / 2, my = (p.y + q.y) / 2;
-    var dx = q.x - p.x, dy = q.y - p.y, len = Math.sqrt(dx * dx + dy * dy) || 1;
-    var k = Math.min(60, len * 0.18);
-    var path = document.createElementNS(NS, 'path');
-    path.setAttribute('d', 'M' + p.x + ',' + p.y + ' Q' + (mx - dy / len * k) + ',' + (my + dx / len * k) + ' ' + q.x + ',' + q.y);
-    path.setAttribute('pathLength', '1');
-    path.setAttribute('class', cls);
-    return path;
-  }
-  function clearNet(sel) { net.querySelectorAll(sel).forEach(function (n) { n.remove(); }); }
-
-  function drawBase(animate) {
-    clearNet('path.base');
-    var vis = cards.filter(function (c) { return !c.hidden; });
-    var made = [];
-    for (var i = 0; i < vis.length; i++) {
-      for (var j = i + 1; j < vis.length; j++) {
-        if (vis[i].dataset.type === vis[j].dataset.type || vis[i].dataset.cat === vis[j].dataset.cat) {
-          var p = link(vis[i], vis[j], 'base'); net.appendChild(p); made.push(p);
-        }
-      }
-    }
-    var show = function () { made.forEach(function (p, n) { setTimeout(function () { p.classList.add('on'); }, reduce ? 0 : n * 40); }); };
-    if (animate === true && !reduce) setTimeout(show, 900); else show();
-  }
-
-  var heroCard = null;
-  function clearHover() {
-    heroCard = null;
-    clearNet('path.hot');
-    cards.forEach(function (c) { c.classList.remove('rel-type', 'rel-cat', 'dim', 'self'); c.style.removeProperty('--tc'); });
-  }
-  function hover(c) {
-    clearHover();
-    heroCard = c;
-    var tc = 'var(' + TC[c.dataset.type] + ')';
-    c.classList.add('self');
-    cards.forEach(function (o) {
-      if (o === c || o.hidden) return;
-      var st = o.dataset.type === c.dataset.type, sc = o.dataset.cat === c.dataset.cat;
-      if (st || sc) {
-        o.classList.add(st ? 'rel-type' : 'rel-cat'); o.style.setProperty('--tc', tc);
-        var p = link(c, o, 'hot' + (st ? '' : ' cat'));
-        if (st) p.style.stroke = tc;
-        net.appendChild(p);
-      } else { o.classList.add('dim'); }
-    });
-  }
-  cards.forEach(function (c) {
-    c.addEventListener('mouseenter', function () { hover(c); });
-    c.addEventListener('mouseleave', clearHover);
-    c.addEventListener('focusin', function () { hover(c); });
-    c.addEventListener('focusout', clearHover);
+  function count(sel) { return main.querySelectorAll(sel).length; }
+  sections.forEach(function (sec) {
+    var key = sec.dataset.seriesSec, n = sec.querySelectorAll('.card').length;
+    sec.querySelectorAll('[data-live-count]').forEach(function (e) { e.textContent = n; });
+    document.querySelectorAll('[data-panel-count="' + key + '"]').forEach(function (e) { e.textContent = n; });
+  });
+  catBtns.forEach(function (b) {
+    var v = b.dataset.cat, el = b.querySelector('.count');
+    if (el) el.textContent = v === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat === v; }).length;
   });
 
-  /* ---- 스크롤 등장 ---- */
-  cards.forEach(function (c) { c.classList.add('rv'); });
-  var seq = 0;
-  function reveal(c) { setTimeout(function () { c.classList.remove('rv'); }, reduce ? 0 : (seq++ % 6) * 70); }
-  if ('IntersectionObserver' in window && !reduce) {
-    var io = new IntersectionObserver(function (es) {
-      seq = 0;
-      es.forEach(function (e) { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    cards.forEach(function (c) { io.observe(c); });
-  } else { cards.forEach(function (c) { c.classList.remove('rv'); }); }
-
-  var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { drawBase(); }, 150); });
-  window.addEventListener('load', function () { drawBase(true); });
-  drawBase(true);
+  function setPressed(btns, active, key) {
+    btns.forEach(function (x) { x.setAttribute('aria-pressed', x.dataset[key] === active ? 'true' : 'false'); });
+  }
+  function apply() {
+    var any = activeCat !== 'all' || activeType !== 'all';
+    var shown = 0;
+    main.classList.toggle('filtered', any);
+    cards.forEach(function (c) {
+      var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType);
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    sections.forEach(function (sec) {
+      var n = sec.querySelectorAll('.card:not([hidden])').length, total = sec.querySelectorAll('.card').length;
+      sec.hidden = n === 0;
+      sec.querySelectorAll('[data-live-count]').forEach(function (e) { e.textContent = any ? n + ' / ' + total : total; });
+    });
+    status.hidden = !any;
+    if (any) {
+      var parts = [];
+      if (activeCat !== 'all') parts.push('분야: ' + activeCat);
+      if (activeType !== 'all') parts.push('유형: ' + activeType);
+      statusText.textContent = parts.join(' · ') + ' — ' + shown + '개 프로젝트';
+    }
+  }
+  function reset() {
+    activeCat = 'all'; activeType = 'all';
+    setPressed(catBtns, 'all', 'cat'); setPressed(typeBtns, 'all', 'type');
+    apply();
+  }
 
   catBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      activeCat = b.dataset.cat;
-      catBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      applyFilters();
-    });
+    b.addEventListener('click', function () { activeCat = b.dataset.cat; setPressed(catBtns, activeCat, 'cat'); apply(); });
   });
-
-  seriesBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      activeSeries = b.dataset.series;
-      seriesBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      applyFilters();
-    });
-  });
-
   typeBtns.forEach(function (b) {
-    b.addEventListener('click', function () {
-      activeType = b.dataset.type;
-      typeBtns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      applyFilters();
-    });
+    b.addEventListener('click', function () { activeType = b.dataset.type; setPressed(typeBtns, activeType, 'type'); apply(); });
   });
+  resetBtn.addEventListener('click', function () { reset(); });
+
+  function goTo(id, e) {
+    var sec = document.getElementById(id);
+    if (!sec) return;
+    if (sec.hidden) reset();
+    if (e) e.preventDefault();
+    sec.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+    var h = sec.querySelector('.series-title');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  }
+  document.querySelectorAll('.panel, .archive-link a').forEach(function (a) {
+    a.addEventListener('click', function (e) { goTo(a.getAttribute('href').slice(1), e); });
+  });
+  if (location.hash.length > 1) { setTimeout(function () { var id = location.hash.slice(1); if (document.getElementById(id) && document.getElementById(id).classList.contains('series')) goTo(id); }, 50); }
 })();
 </script>
 </body>
