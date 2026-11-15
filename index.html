@@ -393,6 +393,17 @@ html { scroll-behavior: smooth; }
 @media (max-width: 380px) { .panel-title { font-size: 21px; } .btn-detail, .btn-service { padding: 8px 12px; } .card-actions { flex-wrap: wrap; } }
 .filter-body .filter-row + .filter-row { margin-bottom: 0; }
 .filter-body .filter-row { margin-bottom: 10px; }
+
+/* Craft live views */
+.series-live { margin: 2px 0 0; font-family: var(--font-mono); font-size: 13px; color: var(--series); display: flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; }
+.series-live b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.series-live .live-note { color: var(--muted); font-size: 11px; letter-spacing: .04em; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--series); display: inline-block; }
+@media (prefers-reduced-motion: no-preference) { .live-dot { animation: livepulse 2.4s ease-in-out infinite; } }
+@keyframes livepulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+.series-card .views { margin: 2px 0 0; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .04em; color: var(--muted); }
+.series-card .views b { font-weight: 600; color: var(--series); font-variant-numeric: tabular-nums; }
+.panel-count b { font-weight: 600; color: var(--series); font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body>
@@ -437,7 +448,7 @@ html { scroll-behavior: smooth; }
       <span class="panel-word">CRAFT SERIES</span>
       <strong class="panel-title">복잡한 현실을 직접 플레이하다</strong>
       <span class="panel-sub">기자 인사·홍보전략·재건축 수주전</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">3</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">3</span> PROJECTS · 누적 접속 <b data-craft-total>집계 중</b></span><span class="panel-go">시리즈 보기 →</span></span>
     </a>
     <a class="panel p-sports" href="#sports" data-target="sports">
       <span class="panel-word">SPORTS SERIES</span>
@@ -561,6 +572,7 @@ html { scroll-behavior: smooth; }
     <div class="series-head">
       <p class="series-kicker">CRAFT SERIES · <span data-live-count>3</span> PROJECTS</p>
       <h2 class="series-title" id="h-craft">복잡한 현실을 직접 플레이하다</h2>
+      <p class="series-live"><span class="live-dot" aria-hidden="true"></span>누적 접속 <b data-craft-total>집계 중</b> <span class="live-note" data-craft-updated>· 약 1분마다 갱신</span></p>
       <p class="series-desc">조직과 이해관계, 경쟁과 의사결정이 얽힌 현실을 게임과 시뮬레이션으로 재구성하는 시리즈입니다. 가상 설정 위에서 직접 선택해 봅니다.</p>
     </div>
     <div class="grid">
@@ -571,6 +583,7 @@ html { scroll-behavior: smooth; }
             <h3>인사 크래프트</h3>
             <p class="q">이번 인사에서 원하는 부서로 갈 수 있을까?</p>
             <p class="sub">3D 블록 기자로 인사 농사부터 발령까지</p>
+            <p class="views">누적 접속 <b data-craft="personnel">–</b></p>
           </div>
         </a>
         <div class="card-actions">
@@ -585,6 +598,7 @@ html { scroll-behavior: smooth; }
             <h3>홍담 크래프트</h3>
             <p class="q">홍보팀장이 되어 6번의 위기 취재를 막아낼 수 있을까?</p>
             <p class="sub">위기 6단계와 출입기자 12유형</p>
+            <p class="views">누적 접속 <b data-craft="hongdam">–</b></p>
           </div>
         </a>
         <div class="card-actions">
@@ -599,6 +613,7 @@ html { scroll-behavior: smooth; }
             <h3>재건축 크래프트</h3>
             <p class="q">재건축 수주전에서 목표 수주액을 채울 수 있을까?</p>
             <p class="sub">목동 정비계획 기반 15개 단지, 건설사 8곳 중 선택</p>
+            <p class="views">누적 접속 <b data-craft="recon">–</b></p>
           </div>
         </a>
         <div class="card-actions">
@@ -981,6 +996,48 @@ html { scroll-behavior: smooth; }
   document.querySelectorAll('.panel, .archive-link a').forEach(function (a) {
     a.addEventListener('click', function (e) { goTo(a.getAttribute('href').slice(1), e); });
   });
+
+  /* ---- 크래프트 시리즈 누적 접속(읽기 전용 카운터 조회) ---- */
+  var CRAFT_KEYS = { personnel: 'raspos_personnel_craft_total_v2', hongdam: 'raspos_hongdam_craft_total_v1', recon: 'raspos_reconstruction_craft_total_v1' };
+  var CRAFT_API = 'https://countapi.mileshilliard.com/api/v1/get/';
+  var craftLast = {}, craftBusy = false;
+  function fmt(n) { return Number(n).toLocaleString('en-US'); }
+  function fetchCount(key) {
+    var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    var to = ctl ? setTimeout(function () { ctl.abort(); }, 8000) : null;
+    return fetch(CRAFT_API + key, { cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) { if (typeof j.value !== 'number') throw new Error('bad'); return j.value; })
+      .then(function (v) { if (to) clearTimeout(to); return v; }, function (e) { if (to) clearTimeout(to); throw e; });
+  }
+  function renderCraft() {
+    var names = Object.keys(CRAFT_KEYS), have = names.filter(function (k) { return typeof craftLast[k] === 'number'; });
+    names.forEach(function (k) {
+      document.querySelectorAll('[data-craft="' + k + '"]').forEach(function (e) { e.textContent = typeof craftLast[k] === 'number' ? fmt(craftLast[k]) : '–'; });
+    });
+    var total = have.reduce(function (a, k) { return a + craftLast[k]; }, 0);
+    var txt = have.length === 0 ? '집계 중' : (have.length < names.length ? fmt(total) + '+' : fmt(total));
+    document.querySelectorAll('[data-craft-total]').forEach(function (e) { e.textContent = txt; });
+  }
+  function refreshCraft() {
+    if (craftBusy) return;
+    craftBusy = true;
+    var names = Object.keys(CRAFT_KEYS);
+    Promise.all(names.map(function (k) {
+      return fetchCount(CRAFT_KEYS[k]).then(function (v) { craftLast[k] = v; }, function () {});
+    })).then(function () {
+      craftBusy = false;
+      renderCraft();
+      var ok = names.every(function (k) { return typeof craftLast[k] === 'number'; });
+      var now = new Date(), pad = function (n) { return String(n).padStart(2, '0'); };
+      document.querySelectorAll('[data-craft-updated]').forEach(function (e) {
+        e.textContent = ok ? '· ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' 갱신 · 약 1분마다' : '· 일부 게임 집계를 불러오지 못했습니다';
+      });
+    });
+  }
+  refreshCraft();
+  setInterval(function () { if (!document.hidden) refreshCraft(); }, 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) refreshCraft(); });
   if (location.hash.length > 1) { setTimeout(function () { var id = location.hash.slice(1); if (document.getElementById(id) && document.getElementById(id).classList.contains('series')) goTo(id); }, 50); }
 })();
 </script>
