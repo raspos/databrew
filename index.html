@@ -385,6 +385,7 @@ header .today { color: rgba(242,196,160,.6); }
     <button type="button" data-series="all" aria-pressed="true">전체</button>
     <button type="button" data-series="watch" aria-pressed="false">워치 시리즈 <span class="count">5</span></button>
     <button type="button" data-series="craft" aria-pressed="false">크래프트 시리즈 <span class="count">3</span></button>
+    <button type="button" data-series="sports" aria-pressed="false">스포츠 시리즈 <span class="count">5</span></button>
   </nav>
 
   <main class="grid" id="grid">
@@ -534,9 +535,99 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
+    <div class="series-head" data-series-head="sports">
+      <h3>스포츠 시리즈</h3>
+      <p>스포츠를 기록으로 읽는 서비스 5종. 손흥민의 302골, 한국 야구 타자의 세대교체, KBO의 기대 이상 선수, 안세영의 랠리, 역대 국가대표 베스트 11을 다룹니다.</p>
+    </div>
+
+    <!-- 04 손흥민 골 기념관 -->
+    <article class="card" data-series="sports" data-cat="스포츠" data-type="INTELLIGENCE">
+      <a class="card-inner" href="projects/son-goal-museum/">
+        <div class="shot"><img src="shots/son.png" alt="손흥민 골 기념관 메인 화면: SON HEUNG-MIN 대형 제목과 2018 월드컵 멕시코전 사진, 통산 302골 요약"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">스포츠</span></div>
+          <h2>손흥민 골 기념관</h2>
+          <p class="desc">프로 1군 공식 경기와 A매치에서 넣은 302골을 한 골씩, 출처와 함께 기록한 아카이브입니다.</p>
+          <p class="desc2">시즌별 추이, 득점 시간대와 발·머리, 슈팅 위치와 xG, 개별 골 영상까지 필터로 찾아볼 수 있습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/son-goal-museum/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/son7/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 16 E-WAR -->
+    <article class="card" data-series="sports" data-cat="스포츠" data-type="DATA">
+      <a class="card-inner" href="projects/e-war/">
+        <div class="shot"><img src="shots/e-war.png" alt="E-WAR 메인 화면: KBO 2026 시즌 기대를 뛰어넘은 선수들 제목과 기대 기준 설정, 2026 시즌 E-WAR 랭킹 표" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">스포츠</span></div>
+          <h2>E-WAR</h2>
+          <p class="desc">기대를 뛰어넘은 선수들. 구단은 얼마를 기대했고, 선수는 얼마나 해냈을까?</p>
+          <p class="desc2">시즌 전 기대 WAR와 실제 WAR의 차이로 KBO 선수와 구단의 기대 대비 성과를 랭킹으로 봅니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/e-war/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 15 THE SE YOUNG ARCHIVE -->
+    <article class="card" data-series="sports" data-cat="스포츠" data-type="INTELLIGENCE">
+      <a class="card-inner" href="projects/se-young-archive/">
+        <div class="shot"><img src="shots/se-young-archive.png" alt="THE SE YOUNG ARCHIVE 메인 화면: 안세영은 역대 최고인가 질문과 역대 전설 비교, 안세영의 모든 경기, 나만의 GOAT 선정 메뉴" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">스포츠</span></div>
+          <h2>THE SE YOUNG ARCHIVE</h2>
+          <p class="desc">안세영은 역대 최고인가? 평판이 아니라 기록으로 이어 가는 랠리.</p>
+          <p class="desc2">경기 390건, 세계랭킹 궤적, 역대 전설 15명과의 비교, 나만의 GOAT 선정까지 담았습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/se-young-archive/">자세히 보기</a>
+        <a class="btn-service" href="https://raspos.github.io/se-young-archive/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 11 올타임 베스트 11 -->
+    <article class="card" data-series="sports" data-cat="스포츠" data-type="EXPERIENCE">
+      <a class="card-inner" href="projects/all-time-xi/">
+        <div class="shot"><img src="shots/all-time-xi.png" alt="올타임 베스트 11" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
+          <h2>올타임 베스트 11</h2>
+          <p class="desc">역대 최강의 국가대표를 만들어라. 나라별 역대 선수로 드림팀 전술판을 짜고 공유합니다.</p>
+          <p class="desc2">A매치 30경기 이상 출전 선수 3,864명의 공식 기록으로 FIFA 랭킹 상위 30개국 + 한국의 베스트11을 구성합니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/all-time-xi/">자세히 보기</a>
+        <a class="btn-service" href="https://all-time-xi.vercel.app/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
+    <!-- 06 추강대엽+김 -->
+    <article class="card" data-series="sports" data-cat="스포츠" data-type="EXPERIENCE">
+      <a class="card-inner" href="projects/baseball-legends/">
+        <div class="shot"><img src="shots/cgdy-v4.png" alt="추강대엽+김 메인 화면: 색색의 큰 글자와 다섯 선수의 야구 카드"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
+          <h2>추강대엽+김</h2>
+          <p class="desc">추신수·강정호·이대호·이승엽, 그리고 김도영. 다섯 타자의 공식 기록으로 한국 야구 타자의 세대교체를 봅니다.</p>
+          <p class="desc2">MLB·NPB 기록을 KBO 기준으로 환산해 연차별로 나란히 비교하고, 원 기록으로도 바꿔 볼 수 있습니다.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="projects/baseball-legends/">자세히 보기</a>
+        <a class="btn-service" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
+      </div>
+    </article>
+
     <div class="series-head" data-series-head="other">
       <h3>그 밖의 프로젝트</h3>
-      <p>정치, 경제, 스포츠, 사회와 도구를 데이터로 풀어낸 프로젝트들입니다.</p>
+      <p>정치, 경제, 사회와 도구를 데이터로 풀어낸 프로젝트들입니다.</p>
     </div>
 
     <!-- 02 이재명 X 트래커 -->
@@ -573,23 +664,6 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 04 손흥민 골 기념관 -->
-    <article class="card" data-cat="스포츠" data-type="INTELLIGENCE">
-      <a class="card-inner" href="projects/son-goal-museum/">
-        <div class="shot"><img src="shots/son.png" alt="손흥민 골 기념관 메인 화면: SON HEUNG-MIN 대형 제목과 2018 월드컵 멕시코전 사진, 통산 302골 요약"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">스포츠</span></div>
-          <h2>손흥민 골 기념관</h2>
-          <p class="desc">프로 1군 공식 경기와 A매치에서 넣은 302골을 한 골씩, 출처와 함께 기록한 아카이브입니다.</p>
-          <p class="desc2">시즌별 추이, 득점 시간대와 발·머리, 슈팅 위치와 xG, 개별 골 영상까지 필터로 찾아볼 수 있습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/son-goal-museum/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/son7/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
     <!-- 05 경제학자의 도구상자 -->
     <article class="card" data-cat="경제" data-type="INTELLIGENCE">
       <a class="card-inner" href="projects/economist-toolkit/">
@@ -604,40 +678,6 @@ header .today { color: rgba(242,196,160,.6); }
       <div class="card-actions">
         <a class="btn-detail" href="projects/economist-toolkit/">자세히 보기</a>
         <a class="btn-service" href="https://nobel-world-economy.raspos.chatgpt.site/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 06 추강대엽+김 -->
-    <article class="card" data-cat="스포츠" data-type="EXPERIENCE">
-      <a class="card-inner" href="projects/baseball-legends/">
-        <div class="shot"><img src="shots/cgdy-v4.png" alt="추강대엽+김 메인 화면: 색색의 큰 글자와 다섯 선수의 야구 카드"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
-          <h2>추강대엽+김</h2>
-          <p class="desc">추신수·강정호·이대호·이승엽, 그리고 김도영. 다섯 타자의 공식 기록으로 한국 야구 타자의 세대교체를 봅니다.</p>
-          <p class="desc2">MLB·NPB 기록을 KBO 기준으로 환산해 연차별로 나란히 비교하고, 원 기록으로도 바꿔 볼 수 있습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/baseball-legends/">자세히 보기</a>
-        <a class="btn-service" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 16 E-WAR -->
-    <article class="card" data-cat="스포츠" data-type="DATA">
-      <a class="card-inner" href="projects/e-war/">
-        <div class="shot"><img src="shots/e-war.png" alt="E-WAR 메인 화면: KBO 2026 시즌 기대를 뛰어넘은 선수들 제목과 기대 기준 설정, 2026 시즌 E-WAR 랭킹 표" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag data">DATA</span><span class="cat">스포츠</span></div>
-          <h2>E-WAR</h2>
-          <p class="desc">기대를 뛰어넘은 선수들. 구단은 얼마를 기대했고, 선수는 얼마나 해냈을까?</p>
-          <p class="desc2">시즌 전 기대 WAR와 실제 WAR의 차이로 KBO 선수와 구단의 기대 대비 성과를 랭킹으로 봅니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/e-war/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
     </article>
 
@@ -709,23 +749,6 @@ header .today { color: rgba(242,196,160,.6); }
       </div>
     </article>
 
-    <!-- 11 올타임 베스트 11 -->
-    <article class="card" data-cat="스포츠" data-type="EXPERIENCE">
-      <a class="card-inner" href="projects/all-time-xi/">
-        <div class="shot"><img src="shots/all-time-xi.png" alt="올타임 베스트 11" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">스포츠</span></div>
-          <h2>올타임 베스트 11</h2>
-          <p class="desc">역대 최강의 국가대표를 만들어라. 나라별 역대 선수로 드림팀 전술판을 짜고 공유합니다.</p>
-          <p class="desc2">A매치 30경기 이상 출전 선수 3,864명의 공식 기록으로 FIFA 랭킹 상위 30개국 + 한국의 베스트11을 구성합니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/all-time-xi/">자세히 보기</a>
-        <a class="btn-service" href="https://all-time-xi.vercel.app/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
     <!-- 12 기업 모멘텀 랭킹 -->
     <article class="card" data-cat="경제" data-type="DATA">
       <a class="card-inner" href="projects/corporate-scorecard/">
@@ -757,23 +780,6 @@ header .today { color: rgba(242,196,160,.6); }
       <div class="card-actions">
         <a class="btn-detail" href="projects/honmaek-map/">자세히 보기</a>
         <a class="btn-service" href="https://raspos.github.io/honmaek-map/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
-      </div>
-    </article>
-
-    <!-- 15 THE SE YOUNG ARCHIVE -->
-    <article class="card" data-cat="스포츠" data-type="INTELLIGENCE">
-      <a class="card-inner" href="projects/se-young-archive/">
-        <div class="shot"><img src="shots/se-young-archive.png" alt="THE SE YOUNG ARCHIVE 메인 화면: 안세영은 역대 최고인가 질문과 역대 전설 비교, 안세영의 모든 경기, 나만의 GOAT 선정 메뉴" loading="lazy"></div>
-        <div class="body">
-          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">공개</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">스포츠</span></div>
-          <h2>THE SE YOUNG ARCHIVE</h2>
-          <p class="desc">안세영은 역대 최고인가? 평판이 아니라 기록으로 이어 가는 랠리.</p>
-          <p class="desc2">경기 390건, 세계랭킹 궤적, 역대 전설 15명과의 비교, 나만의 GOAT 선정까지 담았습니다.</p>
-        </div>
-      </a>
-      <div class="card-actions">
-        <a class="btn-detail" href="projects/se-young-archive/">자세히 보기</a>
-        <a class="btn-service" href="https://raspos.github.io/se-young-archive/" target="_blank" rel="noopener">서비스 체험하기 ↗</a>
       </div>
     </article>
 
