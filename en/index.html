@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>databrew — Independent data journalism projects</title>
+<meta name="description" content="A hub of 25 data journalism projects in three series: WATCH, CRAFT and SPORTS. Read markets in numbers, play out reality as games, and read sports through records.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/">
+<link rel="alternate" hreflang="x-default" href="https://raspos.github.io/databrew/">
+<meta name="robots" content="index, follow">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "databrew", "alternateName": ["데이터브루", "data BREW"], "url": "https://raspos.github.io/databrew/", "inLanguage": "en", "description": "A hub of 25 data journalism projects in three series: WATCH, CRAFT and SPORTS. Read markets in numbers, play out reality as games, and read sports through records.", "author": {"@type": "Person", "name": "프로딴짓러", "url": "https://www.facebook.com/rough1020"}}</script>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="databrew">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="databrew — Independent data journalism projects">
+<meta property="og:description" content="A hub of 25 data journalism projects in three series: WATCH, CRAFT and SPORTS. Read markets in numbers, play out reality as games, and read sports through records.">
+<meta property="og:url" content="https://raspos.github.io/databrew/en/">
+<meta property="og:image" content="https://raspos.github.io/databrew/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="databrew — Independent data journalism projects">
+<meta name="twitter:description" content="A hub of 25 data journalism projects in three series: WATCH, CRAFT and SPORTS. Read markets in numbers, play out reality as games, and read sports through records.">
+<meta name="twitter:image" content="https://raspos.github.io/databrew/og.png">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@700;800&display=swap">
+<style>
+:root {
+  --board: #f6f2ea;
+  --line: transparent;
+  --cell: #ffffff;
+  --cell-hover: #ffffff;
+  --shot: #ebe5d8;
+  --ink: #1c1812;
+  --muted: #7a6f5e;
+  --rule: #e8e1d2;
+  --accent: #8a4b1c;
+  --stone-b: #1d1a17;
+  --stone-w: #f6f3ec;
+  --open: #2f7a4a;
+  --lock: #a8641a;
+  --data-c: #1a5fa8;
+  --exp-c: #2f7a4a;
+  --intel-c: #6a3d9a;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --board: #1b1814; --line: rgba(230,200,150,.07); --cell: #25211c; --cell-hover: #2c2721;
+  --shot: #312b24; --ink: #efe8db; --muted: #a89c88; --rule: #3a342b; --accent: #e0a46a;
+  --stone-b: #0e0d0b; --stone-w: #ece6da; --open: #6cc28b; --lock: #e3a35a;
+  --data-c: #6aaee8; --exp-c: #6cc28b; --intel-c: #c09de8; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --board: #1b1814; --line: rgba(230,200,150,.07); --cell: #25211c; --cell-hover: #2c2721;
+  --shot: #312b24; --ink: #efe8db; --muted: #a89c88; --rule: #3a342b; --accent: #e0a46a;
+  --stone-b: #0e0d0b; --stone-w: #ece6da; --open: #6cc28b; --lock: #e3a35a;
+  --data-c: #6aaee8; --exp-c: #6cc28b; --intel-c: #c09de8; color-scheme: dark }
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background-color: var(--board);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 72px max(20px, env(safe-area-inset-left,0px)) 80px; }
+header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 48px; padding-bottom: 36px; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .16em; color: var(--accent); margin: 0 0 6px; }
+h1 { font-size: clamp(34px, 6.4vw, 64px); font-weight: 700; letter-spacing: -.03em; line-height: 1.08; margin: 0; text-wrap: balance; }
+h1 .acl { color: var(--accent); }
+.sub { color: var(--muted); margin: 16px 0 0; max-width: 54ch; font-size: 15px; line-height: 1.75; }
+.today { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+.about { background: var(--cell); border: 1px solid var(--rule); border-radius: 6px; padding: 18px 22px; margin-bottom: 22px; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.about strong { color: var(--ink); }
+
+/* Filters */
+.filter-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; align-items: center; }
+.filter-row + .filter-row { margin-bottom: 36px; }
+.filter-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; color: var(--muted); padding: 0 10px 0 0; min-width: 44px; }
+.filter-row button {
+  font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
+  padding: 5px 13px; border-radius: 999px;
+  border: 1px solid transparent; background: transparent; color: var(--muted);
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.filter-row button:hover { border-color: var(--rule); color: var(--ink); }
+.filter-row button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filter-row button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--cell); }
+.filter-row .count { font-family: var(--font-mono); font-size: 11px; font-weight: 500; opacity: .7; }
+.type-row button[data-type="DATA"][aria-pressed="true"] { background: var(--data-c); border-color: var(--data-c); color: #fff; }
+.type-row button[data-type="EXPERIENCE"][aria-pressed="true"] { background: var(--exp-c); border-color: var(--exp-c); color: #fff; }
+.type-row button[data-type="INTELLIGENCE"][aria-pressed="true"] { background: var(--intel-c); border-color: var(--intel-c); color: #fff; }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; }
+.filtered .card.wide { grid-column: auto; }
+.filtered .card.wide .shot { aspect-ratio: 16 / 10; }
+.card {
+  background: var(--cell);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  min-width: 0;
+  box-shadow: 0 1px 2px rgba(60,40,10,.04);
+  transition: box-shadow .2s, transform .2s;
+}
+.card:has(.card-inner:hover) { box-shadow: 0 12px 28px -12px rgba(60,40,10,.22); transform: translateY(-3px); }
+.card.wide { grid-column: span 2; }
+.card-inner {
+  display: flex; flex-direction: column; flex: 1;
+  text-decoration: none; color: inherit; min-width: 0;
+}
+.card-inner:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.shot { position: relative; aspect-ratio: 16 / 10; max-width: 100%; background: var(--shot); overflow: hidden; }
+.card.wide .shot { aspect-ratio: 16 / 7.2; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transition: transform .4s; }
+.card:has(.card-inner:hover) .shot img { transform: scale(1.02); }
+.shot.locked { display: grid; place-items: center; text-align: center; padding: 16px;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 24px 24px; }
+.shot.locked .ph { display: grid; gap: 8px; justify-items: center; color: var(--muted); font-size: 13px; }
+.shot.locked .ph b { font-size: 18px; color: var(--ink); font-weight: 700; }
+.body { padding: 22px 24px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.top { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.stone { width: 13px; height: 13px; border-radius: 50%; flex: none; background: var(--stone-b); box-shadow: inset -2px -2px 3px rgba(255,255,255,.12); }
+.stone.w { background: var(--stone-w); border: 1px solid var(--rule); box-shadow: inset -2px -2px 3px rgba(0,0,0,.08); }
+.access { font-size: 12px; font-weight: 600; }
+.access.open { color: var(--open); }
+.access.lock { color: var(--lock); }
+.type-tag { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: .1em; }
+.type-tag.data { color: var(--data-c); }
+.type-tag.experience { color: var(--exp-c); }
+.type-tag.intelligence { color: var(--intel-c); }
+.cat { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: auto; }
+.card h3 { font-size: 21px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 0; line-height: 1.3; }
+.card.wide h3 { font-size: 26px; }
+.desc { margin: 0; font-size: 14px; line-height: 1.65; }
+.desc.muted { color: var(--muted); }
+.desc2 { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* Card actions */
+.card-actions {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 24px 22px;
+}
+.btn-detail, .btn-service {
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  padding: 8px 16px; border-radius: 8px; text-decoration: none;
+  white-space: nowrap;
+  transition: background .15s, color .15s, border-color .15s;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.btn-detail {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+}
+.btn-detail:hover { border-color: var(--accent); color: var(--accent); }
+.btn-detail:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-service {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #fff;
+  margin-left: auto;
+}
+.btn-service:hover { opacity: .82; }
+.btn-service:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+footer a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+footer a:hover { color: var(--accent); }
+.legend { display: inline-flex; align-items: center; gap: 6px; }
+
+@media (max-width: 920px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .card.wide { grid-column: auto; }
+  .card.wide .shot { aspect-ratio: 16 / 10; }
+  .card h3 { font-size: 17px; }
+}
+.card[hidden] { display: none; }
+
+/* Coffee brewing */
+:root { --coffee: #5b3416; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --coffee: #d0a070; } }
+:root[data-theme="dark"] { --coffee: #d0a070; }
+.hright { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.drip { width: 104px; height: auto; overflow: visible; }
+.drip .line { fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.drip .level { fill: var(--coffee); animation: fillcup 12s ease-in-out infinite; }
+.drip .grounds text { font: 500 7.5px "IBM Plex Mono", monospace; fill: var(--muted); opacity: .55; animation: grounds 3s ease-in-out infinite; }
+.drip .grounds text:nth-child(2) { animation-delay: 1s; }
+.drip .grounds text:nth-child(3) { animation-delay: 2s; }
+.drip .dt { font: 600 9px "IBM Plex Mono", monospace; fill: var(--coffee); text-anchor: middle; opacity: 0; transform-box: fill-box; transform-origin: 50% 0; animation: dtfall 6s cubic-bezier(.5,0,.9,.6) infinite; }
+.drip .t2 { animation-delay: 1.5s; }
+.drip .t3 { animation-delay: 3s; }
+.drip .t4 { animation-delay: 4.5s; }
+.drip .ripple { fill: none; stroke: #fff; stroke-opacity: .7; stroke-width: 1; transform-box: fill-box; transform-origin: center; opacity: 0; animation: ripple 1.5s ease-out infinite; animation-delay: .62s; }
+@keyframes dtfall { 0% { opacity: 0; transform: translateY(0) scale(.6); } 4% { opacity: 1; transform: translateY(0) scale(1); } 20% { opacity: 1; transform: translateY(40px) scale(.85, 1.3); } 24% { opacity: 0; transform: translateY(44px) scale(.4, 1.5); } 100% { opacity: 0; transform: translateY(44px); } }
+@keyframes grounds { 0%, 100% { opacity: .55; } 50% { opacity: .15; transform: translateY(2px); } }
+.drip .steam path { fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-linecap: round; opacity: 0; stroke-dasharray: 14 40; animation: steam 4s ease-in-out infinite; }
+.drip .steam path:nth-child(2) { animation-delay: 1.3s; }
+.drip .steam path:nth-child(3) { animation-delay: 2.6s; }
+@keyframes drop { 0% { opacity: 0; transform: translateY(0) scale(.6, .6); } 12% { opacity: 1; transform: translateY(2px) scale(1, 1.2); } 80% { opacity: 1; transform: translateY(40px) scale(.9, 1.5); } 100% { opacity: 0; transform: translateY(46px) scale(.9, 1.5); } }
+@keyframes ripple { 0% { opacity: .9; transform: scale(.6); } 100% { opacity: 0; transform: scale(5, 3); } }
+@keyframes fillcup { 0% { transform: translateY(34px); } 78% { transform: translateY(2px); } 92% { transform: translateY(2px); opacity: 1; } 100% { transform: translateY(2px); opacity: 0; } }
+@keyframes steam { 0% { opacity: 0; stroke-dashoffset: 0; transform: translateY(6px); } 30% { opacity: .55; } 100% { opacity: 0; stroke-dashoffset: -40; transform: translateY(-10px); } }
+html.js header h1 .brw { background: linear-gradient(to bottom, #fff 50%, var(--coffee) 50%) 0 0 / 100% 200% no-repeat; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 1px var(--ink); animation: rise .7s ease-out .55s forwards, brewcycle 12s ease-in-out 0s infinite; }
+@keyframes brewcycle { 0% { background-position: 0 0; } 78%, 92% { background-position: 0 100%; } 100% { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .drip .dt, .drip .ripple { display: none; }
+  .drip .level, .drip .steam path, .drip .grounds text { animation: none; }
+  .drip .level { transform: translateY(8px); }
+  .drip .steam path { opacity: .4; }
+  html.js header h1 .brw { background-position: 0 100% !important; }
+}
+@media (max-width: 600px) { .drip { width: 80px; } }
+
+.card.flash { animation: flash 1.2s ease-out; }
+@keyframes flash { 0% { box-shadow: 0 0 0 0 var(--accent); } 30% { box-shadow: 0 0 0 8px rgba(138,75,28,.25); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.card:has(.card-inner:hover) .shot img { transform: scale(1.1) translate(-1.5%, -1.5%); transition: transform 4s cubic-bezier(.2,.6,.2,1); }
+
+/* Connectivity */
+.grid { position: relative; }
+.card { position: relative; z-index: 1; transition: box-shadow .2s, transform .2s, opacity .35s; }
+#net { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: visible; }
+#net path { fill: none; stroke-width: 1.5; stroke-linecap: round; }
+#net path.base { stroke: var(--muted); opacity: .22; stroke-dasharray: 1; stroke-dashoffset: 1; }
+#net path.base.on { stroke-dashoffset: 0; transition: stroke-dashoffset 1.1s ease-out; }
+#net path.hot { stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .9; animation: draw .5s ease-out forwards; }
+#net path.hot.cat { stroke: var(--accent); stroke-dasharray: 3 5; animation: fade .4s ease-out forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fade { from { opacity: 0; } to { opacity: .9; } }
+.card.rel-type { box-shadow: 0 0 0 2px var(--tc), 0 10px 24px -12px rgba(60,40,10,.2); }
+.card.rel-cat:not(.rel-type) { box-shadow: 0 0 0 1.5px var(--accent); }
+.card.dim { opacity: .42; }
+.card.self { box-shadow: 0 0 0 2px var(--ink), 0 12px 28px -12px rgba(60,40,10,.22); }
+.js .card.rv { opacity: 0; transform: translateY(18px); }
+.js header .eyebrow, .js header h1 .acl, .js header h1 .brw, .js header .sub { opacity: 0; transform: translateY(8px); animation: rise .7s ease-out forwards; }
+.js header h1 .acl, .js header h1 .brw { display: inline-block; }
+.js header .eyebrow { animation-delay: .05s; }
+.js header h1 .acl { animation-delay: .2s; }
+.js header h1 .brw { animation-delay: .55s; }
+.js header .sub { animation-delay: .85s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+.sub .w-data, .sub .w-exp, .sub .w-int { animation: tint 1s ease-out 1.2s both; }
+.sub .w-exp { animation-delay: 1.5s; }
+.sub .w-int { animation-delay: 1.8s; }
+@keyframes tint { from { color: inherit; } to { color: var(--c); } }
+.sub .w-data { --c: var(--data-c); }
+.sub .w-exp { --c: var(--exp-c); }
+.sub .w-int { --c: var(--intel-c); }
+@media (prefers-reduced-motion: reduce) {
+  .card, .shot img { transition: none; }
+  .js .card.rv, .js header * { opacity: 1 !important; transform: none !important; animation: none !important; }
+  #net path { animation: none !important; transition: none !important; stroke-dashoffset: 0 !important; }
+  .sub .w-data { color: var(--data-c); } .sub .w-exp { color: var(--exp-c); } .sub .w-int { color: var(--intel-c); }
+}
+@media (max-width: 600px) { .wrap { padding-top: 44px; } header { margin-bottom: 32px; padding-bottom: 24px; } }
+
+/* ===== Brand: data BREW (navy + peach + copper) ===== */
+:root { --navy: #062433; --peach: #f2c4a0; --copper: #b98558; }
+.wrap { padding-top: 0; }
+header { position: relative; overflow: hidden; isolation: isolate; background: var(--navy); color: var(--peach);
+  margin: 0 calc(50% - 50vw) 44px; padding: 72px max(20px, calc(50vw - 570px)) 56px; border-bottom: 0; align-items: flex-end; }
+body { overflow-x: hidden; }
+.hl { position: relative; z-index: 1; }
+.hright { position: relative; z-index: 1; }
+header .eyebrow { color: var(--peach); opacity: .75; margin: 0 0 22px; }
+.tagl { margin: 0 0 6px; font-weight: 600; font-size: 15px; color: var(--peach); letter-spacing: -.01em; }
+.tagl2 { margin: 18px 0 0; font-size: clamp(16px, 2.2vw, 20px); font-weight: 500; color: #fff; letter-spacing: -.01em; }
+header h1.wm { font-family: "Outfit", "IBM Plex Sans KR", sans-serif; font-weight: 800; letter-spacing: -.035em; line-height: .86; text-wrap: nowrap; }
+html.js header h1 .wm-data { display: block; position: relative; z-index: 0; clip-path: inset(0 0 .13em 0); margin-bottom: -.2em; font-size: clamp(46px, 8.6vw, 92px); text-transform: lowercase; color: var(--peach) !important; position: relative; width: max-content; }
+.wm-data .deg { display: inline-block; width: .17em; height: .17em; border-radius: 50%; background: var(--peach); margin-left: .06em; vertical-align: .78em; }
+html.js header h1 .brw { display: block; position: relative; z-index: 1; font-size: clamp(78px, 16.5vw, 178px); letter-spacing: -.03em; margin-top: .02em; width: max-content;
+  background: linear-gradient(to bottom, transparent 50%, var(--peach) 50%) 0 0 / 100% 200% no-repeat;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px var(--peach);
+  animation: rise .7s ease-out .55s forwards, brewcycle 12s ease-in-out 0s infinite; }
+header .sub { color: rgba(242,196,160,.82); max-width: 56ch; margin-top: 22px; }
+.sub .w-data { --c: #7db8ee; } .sub .w-exp { --c: #7fd3a0; } .sub .w-int { --c: #c9a8ee; }
+header .today { color: rgba(242,196,160,.6); }
+.drip .line { stroke: var(--peach); opacity: .85; }
+.drip .level { fill: var(--copper); }
+.drip .dt { fill: var(--peach); }
+.drip .grounds text { fill: var(--peach); opacity: .5; }
+.drip .steam path { stroke: var(--peach); }
+
+/* copper drip streams + bokeh (from the brand video) */
+.bars { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.bars i { position: absolute; top: 0; bottom: 0; width: 13px; background: repeating-linear-gradient(to bottom, var(--copper) 0 56px, transparent 56px 118px); opacity: .42;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%);
+  animation: flow 9s linear infinite; }
+.bars i:nth-child(1) { left: 54%; animation-duration: 11s; }
+.bars i:nth-child(2) { left: 58%; animation-duration: 8s; }
+.bars i:nth-child(3) { left: 62%; animation-duration: 13s; }
+.bars i:nth-child(4) { left: 66%; animation-duration: 9.5s; }
+.bars i:nth-child(5) { left: 70%; animation-duration: 12s; }
+@keyframes flow { to { background-position: 0 118px; } }
+.bars .bk { position: absolute; border-radius: 50%; background: var(--copper); filter: blur(2px); opacity: .22; animation: bokeh 14s ease-in-out infinite; }
+.bars .k1 { width: 74px; height: 74px; left: 46%; top: 10%; }
+.bars .k2 { width: 56px; height: 56px; left: 76%; top: 62%; animation-delay: -5s; }
+.bars .k3 { width: 90px; height: 90px; left: 88%; top: 14%; animation-delay: -9s; opacity: .14; }
+@keyframes bokeh { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(14px, -20px); } }
+.drip { width: 150px; }
+@media (max-width: 600px) {
+  .drip { width: 96px; }
+  header { padding-top: 48px; padding-bottom: 40px; margin-bottom: 28px; }
+  .bars i:nth-child(n+4) { display: none; }
+  .bars i:nth-child(1) { left: 60%; } .bars i:nth-child(2) { left: 70%; } .bars i:nth-child(3) { left: 80%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bars i, .bars .bk { animation: none !important; }
+  html.js header h1 .brw { background-position: 0 100% !important; }
+}
+
+
+/* ===== Series hub ===== */
+:root { --c-watch: #1f4e8c; --c-craft: #1f5f46; --c-sports: #7a2335; --on-series: #fff; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c-watch: #7fb2f2; --c-craft: #6fcaa1; --c-sports: #ec8fa1; --on-series: #12151a; } }
+:root[data-theme="dark"] { --c-watch: #7fb2f2; --c-craft: #6fcaa1; --c-sports: #ec8fa1; --on-series: #12151a; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.s-watch, .p-watch { --series: var(--c-watch); }
+.s-craft, .p-craft { --series: var(--c-craft); }
+.s-sports, .p-sports { --series: var(--c-sports); }
+.s-archive { --series: var(--muted); }
+
+.series-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0 0 14px; }
+.panel { position: relative; display: flex; flex-direction: column; gap: 6px; min-height: 210px; padding: 24px 24px 20px; border: 1px solid var(--rule); border-radius: 14px; background: var(--cell); color: inherit; text-decoration: none; overflow: hidden; transition: box-shadow .2s, transform .2s, border-color .2s; }
+.panel::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--series); }
+.panel::after { content: ""; position: absolute; right: -18px; bottom: -18px; width: 150px; height: 120px; opacity: .55; pointer-events: none; }
+.p-watch::after { background: repeating-linear-gradient(to right, transparent 0 9px, color-mix(in srgb, var(--series) 14%, transparent) 9px 11px), linear-gradient(to top, color-mix(in srgb, var(--series) 12%, transparent), transparent 70%); }
+.p-craft::after { background: conic-gradient(color-mix(in srgb, var(--series) 14%, transparent) 25%, transparent 0 50%, color-mix(in srgb, var(--series) 14%, transparent) 0 75%, transparent 0) 0 0 / 28px 28px; }
+.p-sports::after { background: repeating-linear-gradient(-55deg, transparent 0 12px, color-mix(in srgb, var(--series) 14%, transparent) 12px 15px); }
+.panel > * { position: relative; z-index: 1; }
+.panel:hover { border-color: var(--series); box-shadow: 0 14px 30px -16px rgba(40,30,10,.3); transform: translateY(-3px); }
+.panel:focus-visible { outline: 3px solid var(--series); outline-offset: 3px; }
+.panel-word { font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: .2em; color: var(--series); }
+.panel-title { font-size: 24px; font-weight: 700; letter-spacing: -.03em; line-height: 1.25; margin-top: 8px; }
+.panel-sub { color: var(--muted); font-size: 14px; line-height: 1.55; }
+.panel-foot { margin-top: auto; padding-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.panel-count { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; color: var(--muted); }
+.panel-go { font-size: 14px; font-weight: 700; color: var(--series); }
+.archive-link { margin: 0 0 18px; font-size: 14px; text-align: right; }
+.archive-link a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+.archive-link a:hover { color: var(--accent); }
+
+.filterbar { border: 1px solid var(--rule); border-radius: 12px; background: var(--cell); margin: 0 0 8px; }
+.filterbar > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-size: 14px; font-weight: 600; border-radius: 12px; }
+.filterbar > summary::-webkit-details-marker { display: none; }
+.filterbar > summary::after { content: "+"; margin-left: auto; font-family: var(--font-mono); font-size: 16px; color: var(--muted); }
+.filterbar[open] > summary::after { content: "−"; }
+.filterbar > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filter-hint { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; font-weight: 500; color: var(--muted); }
+.filter-body { padding: 4px 16px 14px; }
+.filter-status { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin: 0 0 8px; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 12px; font-size: 14px; }
+.filter-status[hidden] { display: none; }
+.filter-status button { font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--ink); background: var(--ink); color: var(--cell); }
+.filter-status button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.series { margin-top: 72px; scroll-margin-top: 20px; }
+.series[hidden] { display: none; }
+.series-head { display: grid; gap: 8px; margin: 0 0 26px; padding: 2px 0 2px 18px; border-left: 5px solid var(--series); }
+.series-kicker { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .16em; color: var(--series); }
+.series-title { margin: 0; font-size: clamp(26px, 4.2vw, 38px); font-weight: 700; letter-spacing: -.035em; line-height: 1.2; }
+.series-desc { margin: 0; max-width: 64ch; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.series .btn-service { background: var(--series); border-color: var(--series); color: var(--on-series); }
+.s-archive .btn-service { background: var(--accent); border-color: var(--accent); color: #fff; }
+.series .card:hover, .series .card:has(.card-inner:hover) { border-color: color-mix(in srgb, var(--series) 55%, var(--rule)); }
+.series-card .body { gap: 8px; }
+.series-card .q { margin: 2px 0 0; font-size: 16px; font-weight: 600; line-height: 1.5; letter-spacing: -.01em; }
+.series-card .sub { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55; }
+.s-craft .series-card .shot { aspect-ratio: 16 / 10.5; }
+
+@media (max-width: 920px) {
+  .series-nav { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .panel { min-height: 0; padding: 20px 20px 16px; }
+  .panel-foot { padding-top: 12px; }
+  .archive-link { text-align: left; }
+  .series { margin-top: 56px; }
+}
+@media (max-width: 600px) {
+  .series-head { padding-left: 14px; margin-bottom: 20px; }
+  .filter-row button { padding: 8px 14px; }
+  .series-card .q { font-size: 15px; }
+}
+@media (max-width: 380px) { .panel-title { font-size: 21px; } .btn-detail, .btn-service { padding: 8px 12px; } .card-actions { flex-wrap: wrap; } }
+.filter-body .filter-row + .filter-row { margin-bottom: 0; }
+.filter-body .filter-row { margin-bottom: 10px; }
+
+/* Craft live views */
+.series-live { margin: 2px 0 0; font-family: var(--font-mono); font-size: 13px; color: var(--series); display: flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; }
+.series-live b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.series-live .live-note { color: var(--muted); font-size: 11px; letter-spacing: .04em; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--series); display: inline-block; }
+@media (prefers-reduced-motion: no-preference) { .live-dot { animation: livepulse 2.4s ease-in-out infinite; } }
+@keyframes livepulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+.series-card .views { margin: 2px 0 0; font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .04em; color: var(--muted); }
+.series-card .views b { font-weight: 600; color: var(--series); font-variant-numeric: tabular-nums; }
+.panel-count b { font-weight: 600; color: var(--series); font-variant-numeric: tabular-nums; }
+
+/* language switch */
+.lang-switch { align-self: flex-end; font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; color: var(--peach); text-decoration: none; border: 1px solid rgba(242,196,160,.55); border-radius: 999px; padding: 5px 14px; transition: background .15s, color .15s; }
+.lang-switch:hover { background: var(--peach); color: var(--navy); }
+.lang-switch:focus-visible { outline: 2px solid var(--peach); outline-offset: 3px; }
+
+.panel-foot { flex-wrap: wrap; row-gap: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><b class="bk k1"></b><b class="bk k2"></b><b class="bk k3"></b></div>
+    <div class="hl">
+      <p class="eyebrow">An independent data journalism project</p>
+      <p class="tagl">:Facts, brewed strong</p>
+      <h1 class="wm" aria-label="data BREW"><span class="acl wm-data" aria-hidden="true">data<i class="deg"></i></span><span class="brw" aria-hidden="true">BREW</span></h1>
+      <p class="tagl2">News with depth, brewed from data</p>
+      <p class="sub">25 data journalism projects built by a reporter with AI. Explore data (<span class="w-data">DATA</span>),<br>experience it hands-on (<span class="w-exp">EXPERIENCE</span>), and build up records and knowledge (<span class="w-int">INTELLIGENCE</span>).<br>Every project is connected to the others.</p>
+    </div>
+    <div class="hright">
+      <svg class="drip" viewBox="0 0 120 150" role="img" aria-label="Animation: coffee drips from a dripper and fills a cup">
+        <defs><clipPath id="cupclip"><path d="M35,113 h50 v13 q0,17 -25,17 q-25,0 -25,-17 z"/></clipPath></defs>
+        <g class="steam"><path d="M48,98 q-6,-9 0,-17 t0,-17"/><path d="M60,98 q-6,-9 0,-17 t0,-17"/><path d="M72,98 q-6,-9 0,-17 t0,-17"/></g>
+        <g clip-path="url(#cupclip)"><rect class="level" x="30" y="108" width="60" height="40"/></g>
+        <path class="line" d="M35,113 h50 v13 q0,17 -25,17 q-25,0 -25,-17 z"/>
+        <path class="line" d="M85,118 q15,0 15,10 q0,10 -15,10" fill="none"/>
+        <path class="line" d="M18,14 h84 L72,56 h-24 Z" fill="none"/>
+        <path class="line" d="M48,56 h24 v5 h-24 z" fill="none"/>
+        <g class="grounds"><text x="36" y="27">3 0 2</text><text x="52" y="38">1,065</text><text x="46" y="49">3,864</text></g>
+        <text class="dt t1" x="60" y="66">302</text>
+        <text class="dt t2" x="60" y="66">1,065</text>
+        <text class="dt t3" x="60" y="66">53</text>
+        <text class="dt t4" x="60" y="66">%</text>
+        <ellipse class="ripple" cx="60" cy="108" rx="4" ry="1.4"/>
+      </svg>
+      <a class="lang-switch" href="../" hreflang="ko" lang="ko">한국어</a>
+      <div class="today" id="today"></div>
+    </div>
+  </header>
+
+  <nav class="series-nav" aria-label="Featured series">
+    <a class="panel p-watch" href="#watch" data-target="watch">
+      <span class="panel-word">WATCH SERIES</span>
+      <strong class="panel-title">Reading the world's changes in numbers</strong>
+      <span class="panel-sub">Rates, FX, debt, pay and the housing market</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="watch">5</span> PROJECTS</span><span class="panel-go">View series →</span></span>
+    </a>
+    <a class="panel p-craft" href="#craft" data-target="craft">
+      <span class="panel-word">CRAFT SERIES</span>
+      <strong class="panel-title">Playing out complicated reality</strong>
+      <span class="panel-sub">Reporter reshuffles, PR strategy, redevelopment bidding</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">3</span> PROJECTS · Total visits <b data-craft-total>Counting…</b></span><span class="panel-go">View series →</span></span>
+    </a>
+    <a class="panel p-sports" href="#sports" data-target="sports">
+      <span class="panel-word">SPORTS SERIES</span>
+      <strong class="panel-title">Reading sports through records</strong>
+      <span class="panel-sub">Football, baseball and badminton: records and legends</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="sports">5</span> PROJECTS</span><span class="panel-go">View series →</span></span>
+    </a>
+  </nav>
+  <p class="archive-link"><a href="#archive">See the <span data-panel-count="archive">12</span> other projects →</a></p>
+
+  <details class="filterbar" id="filterbar">
+    <summary>Filter by category and type <span class="filter-hint">FILTER</span></summary>
+    <div class="filter-body">
+      <nav class="filter-row" aria-label="Category filter">
+        <span class="filter-label">Category</span>
+          <button type="button" data-cat="all" aria-pressed="true">All <span class="count" data-cat-count="all"></span></button>
+          <button type="button" data-cat="경제" aria-pressed="false">Economy <span class="count" data-cat-count="경제"></span></button>
+          <button type="button" data-cat="정치" aria-pressed="false">Politics <span class="count" data-cat-count="정치"></span></button>
+          <button type="button" data-cat="스포츠" aria-pressed="false">Sports <span class="count" data-cat-count="스포츠"></span></button>
+          <button type="button" data-cat="사회" aria-pressed="false">Society <span class="count" data-cat-count="사회"></span></button>
+          <button type="button" data-cat="도구" aria-pressed="false">Tool <span class="count" data-cat-count="도구"></span></button>
+          <button type="button" data-cat="게임" aria-pressed="false">Game <span class="count" data-cat-count="게임"></span></button>
+      </nav>
+      <nav class="filter-row type-row" aria-label="Type filter">
+        <span class="filter-label">Type</span>
+          <button type="button" data-type="all" aria-pressed="true">All</button>
+          <button type="button" data-type="DATA" aria-pressed="false">DATA</button>
+          <button type="button" data-type="EXPERIENCE" aria-pressed="false">EXPERIENCE</button>
+          <button type="button" data-type="INTELLIGENCE" aria-pressed="false">INTELLIGENCE</button>
+      </nav>
+    </div>
+  </details>
+  <div class="filter-status" id="filterStatus" hidden role="status" aria-live="polite">
+    <span id="filterCount"></span>
+    <button type="button" id="filterReset">Show all</button>
+  </div>
+
+  <main id="main">
+
+  <section class="series s-watch" id="watch" aria-labelledby="h-watch" data-series-sec="watch">
+    <div class="series-head">
+      <p class="series-kicker">WATCH SERIES · <span data-live-count>5</span> PROJECTS</p>
+      <h2 class="series-title" id="h-watch">Reading the world's changes in numbers</h2>
+      <p class="series-desc">A series that keeps watch on economic, financial and real-estate markets and builds new indices and analysis tools. Five services form one observation network.</p>
+    </div>
+    <div class="grid">
+      <article class="card series-card wide" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="../projects/bokwatch/">
+          <div class="shot"><img src="../shots/bokwatch.png" alt="Preview of BOK Watch" loading="lazy"></div>
+          <div class="body">
+            <h3>BOK Watch</h3>
+            <p class="q">How will the Bank of Korea decide at its next meeting?</p>
+            <p class="sub">Rate-decision odds, governor remarks, expert forecasts</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/bokwatch/">Details (KR)</a>
+          <a class="btn-service" href="https://bokwatch.pages.dev/" target="_blank" rel="noopener">Open service ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="../projects/fx-odds/">
+          <div class="shot"><img src="../shots/fx-odds.png" alt="Preview of FX Watch" loading="lazy"></div>
+          <div class="body">
+            <h3>FX Watch</h3>
+            <p class="q">How far could the won–dollar rate move?</p>
+            <p class="sub">7- and 30-day ranges and market pressure</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/fx-odds/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/fx-odds/" target="_blank" rel="noopener">Open service ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="../projects/debt-watch/">
+          <div class="shot"><img src="../shots/debt-watch.png" alt="Preview of DEBT Watch" loading="lazy"></div>
+          <div class="body">
+            <h3>DEBT Watch</h3>
+            <p class="q">Can governments handle the debt coming due?</p>
+            <p class="sub">U.S. Treasury maturities and refinancing costs, world debt map</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/debt-watch/">Details (KR)</a>
+          <a class="btn-service" href="https://debtwatch.pages.dev/" target="_blank" rel="noopener">Open service ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="../projects/pay-watch/">
+          <div class="shot"><img src="../shots/pay-watch-corp.png" alt="Preview of PAY Watch" loading="lazy"></div>
+          <div class="body">
+            <h3>PAY Watch</h3>
+            <p class="q">How much do my friends earn?</p>
+            <p class="sub">Company average pay search, rankings and pay battles</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/pay-watch/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/pay-watch/" target="_blank" rel="noopener">Open service ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="경제" data-type="DATA" data-series="watch">
+        <a class="card-inner" href="../projects/apt-watch/">
+          <div class="shot"><img src="../shots/apt-watch.png" alt="Preview of APT Watch" loading="lazy"></div>
+          <div class="body">
+            <h3>APT Watch</h3>
+            <p class="q">How far above recent sales are sellers&#x27; asking prices?</p>
+            <p class="sub">Negotiation-pressure index and listings change across Seoul&#x27;s 25 districts</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/apt-watch/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/apt-watch/" target="_blank" rel="noopener">Open service ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="series s-craft" id="craft" aria-labelledby="h-craft" data-series-sec="craft">
+    <div class="series-head">
+      <p class="series-kicker">CRAFT SERIES · <span data-live-count>3</span> PROJECTS</p>
+      <h2 class="series-title" id="h-craft">Playing out complicated reality</h2>
+      <p class="series-live"><span class="live-dot" aria-hidden="true"></span>Total visits <b data-craft-total>Counting…</b> <span class="live-note" data-craft-updated></span></p>
+      <p class="series-desc">A series that recasts organizations, interests, competition and decision-making as games and simulations. You make the choices on fictional settings.</p>
+    </div>
+    <div class="grid">
+      <article class="card series-card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+        <a class="card-inner" href="../projects/personnel-craft/">
+          <div class="shot"><img src="../shots/personnel-craft.png" alt="Preview of Personnel Craft" loading="lazy"></div>
+          <div class="body">
+            <h3>Personnel Craft</h3>
+            <p class="q">Can you land the desk you want in this reshuffle?</p>
+            <p class="sub">A 3D block reporter, from lobbying to the final posting</p>
+            <p class="views">Total visits <b data-craft="personnel">–</b></p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/personnel-craft/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/personnel-craft/" target="_blank" rel="noopener">Play ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+        <a class="card-inner" href="../projects/hongdam-craft/">
+          <div class="shot"><img src="../shots/hongdam-craft.png" alt="Preview of Hongdam Craft" loading="lazy"></div>
+          <div class="body">
+            <h3>Hongdam Craft</h3>
+            <p class="q">As PR chief, can you survive six rounds of reporter scrutiny?</p>
+            <p class="sub">Six crisis stages and 12 reporter types</p>
+            <p class="views">Total visits <b data-craft="hongdam">–</b></p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/hongdam-craft/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/hongdam-craft/" target="_blank" rel="noopener">Play ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+        <a class="card-inner" href="../projects/reconstruction-craft/">
+          <div class="shot"><img src="../shots/recon-game.png" alt="Preview of Reconstruction Craft" loading="lazy"></div>
+          <div class="body">
+            <h3>Reconstruction Craft</h3>
+            <p class="q">Can you hit your target in the redevelopment bidding war?</p>
+            <p class="sub">15 complexes based on Mokdong redevelopment plans, 8 builders to choose from</p>
+            <p class="views">Total visits <b data-craft="recon">–</b></p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/reconstruction-craft/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/reconstruction-craft/" target="_blank" rel="noopener">Play ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="series s-sports" id="sports" aria-labelledby="h-sports" data-series-sec="sports">
+    <div class="series-head">
+      <p class="series-kicker">SPORTS SERIES · <span data-live-count>5</span> PROJECTS</p>
+      <h2 class="series-title" id="h-sports">Reading sports through records</h2>
+      <p class="series-desc">A series that collects and compares records and applies new analysis to the questions sports fans ask. Record halls, indices, comparisons and hands-on play sit side by side.</p>
+    </div>
+    <div class="grid">
+      <article class="card series-card wide" data-cat="스포츠" data-type="INTELLIGENCE" data-series="sports">
+        <a class="card-inner" href="../projects/son-goal-museum/">
+          <div class="shot"><img src="../shots/son.png" alt="Preview of Son Heung-min Goal Museum" loading="lazy"></div>
+          <div class="body">
+            <h3>Son Heung-min Goal Museum</h3>
+            <p class="q">Every goal Son Heung-min scored, on record.</p>
+            <p class="sub">Goal-by-goal filters, scoring patterns, shot locations and xG</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/son-goal-museum/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/son7/" target="_blank" rel="noopener">Open museum ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="DATA" data-series="sports">
+        <a class="card-inner" href="../projects/e-war/">
+          <div class="shot"><img src="../shots/e-war.png" alt="Preview of E-WAR" loading="lazy"></div>
+          <div class="body">
+            <h3>E-WAR</h3>
+            <p class="q">Who beat expectations the most?</p>
+            <p class="sub">KBO players ranked by actual versus expected performance</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/e-war/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/e-war/" target="_blank" rel="noopener">Open service ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="INTELLIGENCE" data-series="sports">
+        <a class="card-inner" href="../projects/se-young-archive/">
+          <div class="shot"><img src="../shots/se-young-archive.png" alt="Preview of The Se Young Archive" loading="lazy"></div>
+          <div class="body">
+            <h3>The Se Young Archive</h3>
+            <p class="q">Is An Se-young the greatest ever?</p>
+            <p class="sub">Match records, world ranking and comparison with all-time greats</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/se-young-archive/">Details (KR)</a>
+          <a class="btn-service" href="https://raspos.github.io/se-young-archive/" target="_blank" rel="noopener">Open archive ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="EXPERIENCE" data-series="sports">
+        <a class="card-inner" href="../projects/all-time-xi/">
+          <div class="shot"><img src="../shots/all-time-xi.png" alt="Preview of All-Time XI" loading="lazy"></div>
+          <div class="body">
+            <h3>All-Time XI</h3>
+            <p class="q">Build the greatest XI of all time.</p>
+            <p class="sub">Pick a formation and set up your own tactics board</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/all-time-xi/">Details (KR)</a>
+          <a class="btn-service" href="https://all-time-xi.vercel.app/" target="_blank" rel="noopener">Build your XI ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="스포츠" data-type="EXPERIENCE" data-series="sports">
+        <a class="card-inner" href="../projects/baseball-legends/">
+          <div class="shot"><img src="../shots/cgdy-v4.png" alt="Preview of Chu-Kang-Dae-Yeop + Kim" loading="lazy"></div>
+          <div class="body">
+            <h3>Chu-Kang-Dae-Yeop + Kim</h3>
+            <p class="q">Who is Korea&#x27;s greatest hitter?</p>
+            <p class="sub">Five hitters&#x27; records converted to the KBO scale</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="../projects/baseball-legends/">Details (KR)</a>
+          <a class="btn-service" href="https://claude.ai/artifact/5TfAtFKNjDAF9kJ1dWnPaa" target="_blank" rel="noopener">Open service ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="series s-archive" id="archive" aria-labelledby="h-archive" data-series-sec="archive">
+    <div class="series-head">
+      <p class="series-kicker">PROJECT ARCHIVE · <span data-live-count>12</span> PROJECTS</p>
+      <h2 class="series-title" id="h-archive">Other projects</h2>
+      <p class="series-desc">Standalone projects on politics, the economy, society and tools, built from data. They sit outside the three series above.</p>
+    </div>
+    <div class="grid">
+      <article class="card" data-cat="정치" data-type="INTELLIGENCE">
+      <a class="card-inner" href="../projects/lee-x-tracker/">
+        <div class="shot"><img src="../shots/lee-x.png" alt="Preview of Lee Jae-myung X Tracker"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">Politics</span></div>
+          <h3>Lee Jae-myung X Tracker</h3>
+          <p class="desc">The president&#x27;s posts on X and the reactions to them, with language and public-opinion trends alongside approval ratings.</p>
+          <p class="desc2">AI classifies 1,065 posts to trace shifts in topics and emotional tone.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/lee-x-tracker/">Details (KR)</a>
+        <a class="btn-service" href="https://lee-x-tracker.raspos.chatgpt.site/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="사회" data-type="INTELLIGENCE">
+      <a class="card-inner" href="../projects/ramen-genealogy/">
+        <div class="shot"><img src="../shots/ramen-genealogy.png" alt="Preview of Ramen Genealogy" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">Society</span></div>
+          <h3>Ramen Genealogy</h3>
+          <p class="desc">From 1963 to today, how did Korean ramen split apart? Sixty years of ramen drawn like a party family tree.</p>
+          <p class="desc2">A genealogy of broth and no-broth factions, plus a 199-product encyclopedia, rankings and a daily combination lab.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/ramen-genealogy/">Details (KR)</a>
+        <a class="btn-service" href="https://raspos.github.io/ramen-genealogy/#/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="경제" data-type="INTELLIGENCE">
+      <a class="card-inner" href="../projects/economist-toolkit/">
+        <div class="shot"><img src="../shots/nobel-v2.png" alt="Preview of Economists&#x27; Toolbox"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">Economy</span></div>
+          <h3>Economists&#x27; Toolbox</h3>
+          <p class="desc">The research and key works of 101 Nobel laureates in economics, and the theories and methods that explain the world economy.</p>
+          <p class="desc2">Start with a plain-language introduction and go as deep as a paper&#x27;s assumptions and identification strategy.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/economist-toolkit/">Details (KR)</a>
+        <a class="btn-service" href="https://nobel-world-economy.raspos.chatgpt.site/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="../projects/bibigo-index/">
+        <div class="shot"><img src="../shots/bibigo.png" alt="Preview of Bibigo Index"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag data">DATA</span><span class="cat">Economy</span></div>
+          <h3>Bibigo Index</h3>
+          <p class="desc">Compare country-by-country prices of 100g Bibigo dumplings alongside the Big Mac to read global prices and exchange rates.</p>
+          <p class="desc2">A world dumpling map, price rankings and PPP exchange-rate estimates, with retailer sources and collection dates disclosed.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/bibigo-index/">Details (KR)</a>
+        <a class="btn-service" href="https://bibigo-mandu-index.raspos.chatgpt.site/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="경제" data-type="EXPERIENCE">
+      <a class="card-inner" href="../projects/self-employed/">
+        <div class="shot"><img src="../shots/self-employed.png" alt="Preview of Surviving as a Small-Business Owner in Korea" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone w" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">Economy</span></div>
+          <h3>Surviving as a Small-Business Owner in Korea</h3>
+          <p class="desc muted">A 36-month simulation of starting and running a small business in Korea.</p>
+          <p class="desc2">Pick an industry and location, set rent, wages and sales conditions, and run the shop yourself.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/self-employed/">Details (KR)</a>
+        <a class="btn-service" href="https://self-employed-survival.raspos.chatgpt.site/#setup" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="../projects/chip-cycle/">
+        <div class="shot"><img src="../shots/chip-v2.png" alt="Preview of CHIP CYCLE"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag data">DATA</span><span class="cat">Economy</span></div>
+          <h3>CHIP CYCLE</h3>
+          <p class="desc">Chip export value surged while the number of units sold fell. Korea&#x27;s semiconductor exports over 20 years, traced through customs data.</p>
+          <p class="desc2">237 months of DRAM, flash and composite-chip records with the Bank of Korea export price index reveal the structure of the AI supercycle.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/chip-cycle/">Details (KR)</a>
+        <a class="btn-service" href="https://chip-cycle-3xdv.vercel.app/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="사회" data-type="DATA">
+      <a class="card-inner" href="../projects/korea-ranked/">
+        <div class="shot"><img src="../shots/korea.png" alt="Preview of The Science of K-Pride"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag data">DATA</span><span class="cat">Society</span></div>
+          <h3>The Science of K-Pride</h3>
+          <p class="desc">Where does Korea rank in the world? See how far the Korea we imagine is from the Korea the numbers show.</p>
+          <p class="desc2">53 indicators from the World Bank, OECD, UN and others, a 28-question quiz and a 50-year timeline on a world map and ranking.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/korea-ranked/">Details (KR)</a>
+        <a class="btn-service" href="https://korea-ranked.vercel.app/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="../projects/corporate-scorecard/">
+        <div class="shot"><img src="../shots/corporate-scorecard.png" alt="Preview of Corporate Momentum Ranking" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag data">DATA</span><span class="cat">Economy</span></div>
+          <h3>Corporate Momentum Ranking</h3>
+          <p class="desc">Which companies improved most over the past three years? Not the biggest, but the most changed.</p>
+          <p class="desc2">OpenDART financial statements measure changes in growth, profitability, soundness and cash generation, plotting strength against momentum on a map.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/corporate-scorecard/">Details (KR)</a>
+        <a class="btn-service" href="https://raspos.github.io/korea-corporate-scorecard/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="경제" data-type="INTELLIGENCE">
+      <a class="card-inner" href="../projects/honmaek-map/">
+        <div class="shot"><img src="../shots/honmaek-map.png" alt="Preview of Honmaek Map" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag intelligence">INTELLIGENCE</span><span class="cat">Economy</span></div>
+          <h3>Honmaek Map</h3>
+          <p class="desc">Korea&#x27;s corporate family network. Chaebol marriage ties and spin-off lineages on a single map.</p>
+          <p class="desc2">Explore family trees of 100 families and 2,439 people, and 58 cross-family marriage links, cross-checked against disclosures and Fair Trade Commission data.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/honmaek-map/">Details (KR)</a>
+        <a class="btn-service" href="https://raspos.github.io/honmaek-map/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="정치" data-type="EXPERIENCE">
+      <a class="card-inner" href="../projects/balchik-imagination/">
+        <div class="shot"><img src="../shots/balchik-imagination.png" alt="Preview of Bold Imagination" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag experience">EXPERIENCE</span><span class="cat">Politics</span></div>
+          <h3>Bold Imagination</h3>
+          <p class="desc">What if Korea and Japan became one country? Weighing the gap between adding two countries and becoming one.</p>
+          <p class="desc2">A thought experiment: see the combined scale, everyday differences, public sentiment and the EU&#x27;s experience, then design the community&#x27;s rules yourself.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/balchik-imagination/">Details (KR)</a>
+        <a class="btn-service" href="https://raspos.github.io/balchik-imagination/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="경제" data-type="DATA">
+      <a class="card-inner" href="../projects/seoul-apartment-tracker/">
+        <div class="shot"><img src="../shots/seoul-apartment-tracker.png" alt="Preview of Seoul Apartment New-High Tracker" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag data">DATA</span><span class="cat">Economy</span></div>
+          <h3>Seoul Apartment New-High Tracker</h3>
+          <p class="desc">How far have Seoul apartments fallen from their peak? New-high trades tracked daily.</p>
+          <p class="desc2">Using Ministry of Land transaction prices, it calculates new highs and distance from the peak by complex and floor area across Seoul&#x27;s 25 districts, down to your own apartment.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/seoul-apartment-tracker/">Details (KR)</a>
+        <a class="btn-service" href="https://raspos.github.io/seoul-apartment-tracker/" target="_blank" rel="noopener">Open service ↗</a>
+      </div>
+    </article>
+
+      <article class="card" data-cat="도구" data-type="DATA">
+      <a class="card-inner" href="../projects/korean-newsroom-hub/">
+        <div class="shot"><img src="../shots/newsroom-hub.png" alt="Preview of KOREAN NEWSROOM HUB" loading="lazy"></div>
+        <div class="body">
+          <div class="top"><span class="stone" aria-hidden="true"></span><span class="access open">Open</span><span class="type-tag data">DATA</span><span class="cat">Tool</span></div>
+          <h3>KOREAN NEWSROOM HUB</h3>
+          <p class="desc">Ask with official data, confirm with evidence. A ChatGPT tool for reporters to query official statistics.</p>
+          <p class="desc2">Connects Bank of Korea ECOS, KOSIS and OpenDART through MCP so figures, units, reference dates and sources come together.</p>
+        </div>
+      </a>
+      <div class="card-actions">
+        <a class="btn-detail" href="../projects/korean-newsroom-hub/">Details (KR)</a>
+        <a class="btn-service" href="https://raspos.github.io/korean-newsroom-hub/" target="_blank" rel="noopener">Open HUB ↗</a>
+      </div>
+    </article>
+
+    </div>
+  </section>
+  </main>
+
+  <footer>
+    <span class="legend"><span class="stone" aria-hidden="true"></span>Open to everyone</span>
+    <span class="legend"><span class="stone w" aria-hidden="true"></span>Login required</span>
+    <span id="capdate">Preview images show each service at the time of capture. Most services and detail pages are in Korean.</span>
+    <span>© <a href="https://www.facebook.com/rough1020" target="_blank" rel="noopener">프로딴짓러</a></span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var d = new Date();
+  var p = function (n) { return String(n).padStart(2, '0'); };
+  var today = document.getElementById('today');
+  if (today) today.textContent = 'as of ' + d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+
+  var main = document.getElementById('main');
+  var cards = Array.prototype.slice.call(main.querySelectorAll('.card'));
+  var sections = Array.prototype.slice.call(main.querySelectorAll('.series'));
+  var catBtns = document.querySelectorAll('.filter-row[aria-label="Category filter"] button');
+  var typeBtns = document.querySelectorAll('.type-row button');
+  var status = document.getElementById('filterStatus');
+  var statusText = document.getElementById('filterCount');
+  var resetBtn = document.getElementById('filterReset');
+  var bar = document.getElementById('filterbar');
+  var activeCat = 'all', activeType = 'all';
+  function activeCat_en(v) { return ({ '경제': 'Economy', '정치': 'Politics', '스포츠': 'Sports', '사회': 'Society', '도구': 'Tool', '게임': 'Game' })[v] || v; }
+
+  function count(sel) { return main.querySelectorAll(sel).length; }
+  sections.forEach(function (sec) {
+    var key = sec.dataset.seriesSec, n = sec.querySelectorAll('.card').length;
+    sec.querySelectorAll('[data-live-count]').forEach(function (e) { e.textContent = n; });
+    document.querySelectorAll('[data-panel-count="' + key + '"]').forEach(function (e) { e.textContent = n; });
+  });
+  catBtns.forEach(function (b) {
+    var v = b.dataset.cat, el = b.querySelector('.count');
+    if (el) el.textContent = v === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat === v; }).length;
+  });
+
+  function setPressed(btns, active, key) {
+    btns.forEach(function (x) { x.setAttribute('aria-pressed', x.dataset[key] === active ? 'true' : 'false'); });
+  }
+  function apply() {
+    var any = activeCat !== 'all' || activeType !== 'all';
+    var shown = 0;
+    main.classList.toggle('filtered', any);
+    cards.forEach(function (c) {
+      var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType);
+      c.hidden = !ok;
+      if (ok) shown++;
+    });
+    sections.forEach(function (sec) {
+      var n = sec.querySelectorAll('.card:not([hidden])').length, total = sec.querySelectorAll('.card').length;
+      sec.hidden = n === 0;
+      sec.querySelectorAll('[data-live-count]').forEach(function (e) { e.textContent = any ? n + ' / ' + total : total; });
+    });
+    status.hidden = !any;
+    if (any) {
+      var parts = [];
+      if (activeCat !== 'all') parts.push('Category: ' + activeCat_en(activeCat));
+      if (activeType !== 'all') parts.push('Type: ' + activeType);
+      statusText.textContent = parts.join(' · ') + ' — ' + shown + ' projects';
+    }
+  }
+  function reset() {
+    activeCat = 'all'; activeType = 'all';
+    setPressed(catBtns, 'all', 'cat'); setPressed(typeBtns, 'all', 'type');
+    apply();
+  }
+
+  catBtns.forEach(function (b) {
+    b.addEventListener('click', function () { activeCat = b.dataset.cat; setPressed(catBtns, activeCat, 'cat'); apply(); });
+  });
+  typeBtns.forEach(function (b) {
+    b.addEventListener('click', function () { activeType = b.dataset.type; setPressed(typeBtns, activeType, 'type'); apply(); });
+  });
+  resetBtn.addEventListener('click', function () { reset(); });
+
+  function goTo(id, e) {
+    var sec = document.getElementById(id);
+    if (!sec) return;
+    if (sec.hidden) reset();
+    if (e) e.preventDefault();
+    sec.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+    var h = sec.querySelector('.series-title');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  }
+  document.querySelectorAll('.panel, .archive-link a').forEach(function (a) {
+    a.addEventListener('click', function (e) { goTo(a.getAttribute('href').slice(1), e); });
+  });
+
+  /* ---- 크래프트 시리즈 누적 접속(읽기 전용 카운터 조회) ---- */
+  var CRAFT_KEYS = { personnel: 'raspos_personnel_craft_total_v2', hongdam: 'raspos_hongdam_craft_total_v1', recon: 'raspos_reconstruction_craft_total_v1' };
+  var CRAFT_API = 'https://countapi.mileshilliard.com/api/v1/get/';
+  var craftLast = {}, craftBusy = false;
+  function fmt(n) { return Number(n).toLocaleString('en-US'); }
+  function fetchCount(key) {
+    var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    var to = ctl ? setTimeout(function () { ctl.abort(); }, 8000) : null;
+    return fetch(CRAFT_API + key, { cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) { if (typeof j.value !== 'number') throw new Error('bad'); return j.value; })
+      .then(function (v) { if (to) clearTimeout(to); return v; }, function (e) { if (to) clearTimeout(to); throw e; });
+  }
+  function renderCraft() {
+    var names = Object.keys(CRAFT_KEYS), have = names.filter(function (k) { return typeof craftLast[k] === 'number'; });
+    names.forEach(function (k) {
+      document.querySelectorAll('[data-craft="' + k + '"]').forEach(function (e) { e.textContent = typeof craftLast[k] === 'number' ? fmt(craftLast[k]) : '–'; });
+    });
+    var total = have.reduce(function (a, k) { return a + craftLast[k]; }, 0);
+    var txt = have.length === 0 ? 'Counting…' : (have.length < names.length ? fmt(total) + '+' : fmt(total));
+    document.querySelectorAll('[data-craft-total]').forEach(function (e) { e.textContent = txt; });
+  }
+  function refreshCraft() {
+    if (craftBusy) return;
+    craftBusy = true;
+    var names = Object.keys(CRAFT_KEYS);
+    Promise.all(names.map(function (k) {
+      return fetchCount(CRAFT_KEYS[k]).then(function (v) { craftLast[k] = v; }, function () {});
+    })).then(function () {
+      craftBusy = false;
+      renderCraft();
+      var ok = names.every(function (k) { return typeof craftLast[k] === 'number'; });
+      var now = new Date(), pad = function (n) { return String(n).padStart(2, '0'); };
+      document.querySelectorAll('[data-craft-updated]').forEach(function (e) {
+        e.textContent = ok ? '· ' + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds()) + ' updated' : '· Some counters are unavailable';
+      });
+    });
+  }
+  refreshCraft();
+  setInterval(function () { if (!document.hidden) refreshCraft(); }, 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) refreshCraft(); });
+  if (location.hash.length > 1) { setTimeout(function () { var id = location.hash.slice(1); if (document.getElementById(id) && document.getElementById(id).classList.contains('series')) goTo(id); }, 50); }
+})();
+</script>
+</body>
+</html>
