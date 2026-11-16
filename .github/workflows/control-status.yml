@@ -1,0 +1,39 @@
+name: DataBREW CONTROL — public status refresh
+on:
+  schedule:
+    - cron: '30 22 * * *' # 07:30 Asia/Seoul (best effort)
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: databrew-control-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check public GitHub repository update status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python control/refresh_status.py
+      - name: Commit public metadata snapshot
+        run: |
+          git config user.name "databrew-control-bot"
+          git config user.email "databrew-control-bot@users.noreply.github.com"
+          git add control/status.json
+          if git diff --cached --quiet; then
+            echo "No change"
+            exit 0
+          fi
+          git commit -m "chore(control): refresh repository status"
+          git pull --rebase origin main
+          git push origin HEAD:main
