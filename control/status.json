@@ -1,9 +1,190 @@
 {
-  "generated_at": null,
-  "repositories": {},
-  "coverage": {
-    "public_repositories_checked": 0,
-    "public_repositories_reported": 0
+  "generated_at": "2026-11-17T04:43:29+00:00",
+  "repositories": {
+    "raspos/all-time-xi": {
+      "pushed_at": "2026-10-27T12:32:30Z",
+      "default_branch": "main",
+      "last_workflow": null
+    },
+    "raspos/apt-watch": {
+      "pushed_at": "2026-11-17T02:24:44Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "Deploy to GitHub Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-17T02:24:45Z",
+        "html_url": "https://github.com/raspos/apt-watch/actions/runs/44002781077"
+      }
+    },
+    "raspos/balchik-imagination": {
+      "pushed_at": "2026-11-01T17:25:12Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "Deploy GitHub Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-01T17:25:14Z",
+        "html_url": "https://github.com/raspos/balchik-imagination/actions/runs/41331370041"
+      }
+    },
+    "raspos/bokwatch": {
+      "pushed_at": "2026-11-17T01:38:10Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-17T01:38:12Z",
+        "html_url": "https://github.com/raspos/bokwatch/actions/runs/43997071698"
+      }
+    },
+    "raspos/chip-cycle": {
+      "pushed_at": "2026-10-23T14:59:58Z",
+      "default_branch": "main",
+      "last_workflow": null
+    },
+    "raspos/e-war": {
+      "pushed_at": "2026-11-10T07:49:50Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "pages build and deployment",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-10T07:49:51Z",
+        "html_url": "https://github.com/raspos/e-war/actions/runs/42778034520"
+      }
+    },
+    "raspos/fx-odds": {
+      "pushed_at": "2026-11-16T19:53:52Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "daily",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-16T19:48:03Z",
+        "html_url": "https://github.com/raspos/fx-odds/actions/runs/43943097386"
+      }
+    },
+    "raspos/hongdam-craft": {
+      "pushed_at": "2026-11-05T10:16:13Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "Deploy to GitHub Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-05T10:15:54Z",
+        "html_url": "https://github.com/raspos/hongdam-craft/actions/runs/42009256775"
+      }
+    },
+    "raspos/honmaek-map": {
+      "pushed_at": "2026-10-26T02:38:16Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "pages build and deployment",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-26T02:38:17Z",
+        "html_url": "https://github.com/raspos/honmaek-map/actions/runs/40260082941"
+      }
+    },
+    "raspos/korea-corporate-scorecard": {
+      "pushed_at": "2026-10-24T13:43:55Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "Publish GitHub Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-24T13:43:57Z",
+        "html_url": "https://github.com/raspos/korea-corporate-scorecard/actions/runs/40099402446"
+      }
+    },
+    "raspos/korea-ranked": {
+      "pushed_at": "2026-10-19T04:58:22Z",
+      "default_branch": "main",
+      "last_workflow": null
+    },
+    "raspos/korean-newsroom-hub": {
+      "pushed_at": "2026-11-10T00:22:09Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "pages build and deployment",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-10T00:22:11Z",
+        "html_url": "https://github.com/raspos/korean-newsroom-hub/actions/runs/42727763741"
+      }
+    },
+    "raspos/pay-watch": {
+      "pushed_at": "2026-11-07T02:25:24Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "pages build and deployment",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-07T02:25:25Z",
+        "html_url": "https://github.com/raspos/pay-watch/actions/runs/42329176667"
+      }
+    },
+    "raspos/personnel-craft": {
+      "pushed_at": "2026-11-05T09:46:06Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "Deploy to GitHub Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-05T09:46:08Z",
+        "html_url": "https://github.com/raspos/personnel-craft/actions/runs/42005100139"
+      }
+    },
+    "raspos/ramen-genealogy": {
+      "pushed_at": "2026-11-11T07:35:26Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "pages build and deployment",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-11T07:35:28Z",
+        "html_url": "https://github.com/raspos/ramen-genealogy/actions/runs/42980606645"
+      }
+    },
+    "raspos/reconstruction-craft": {
+      "pushed_at": "2026-11-14T13:47:36Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "pages build and deployment",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-14T13:47:37Z",
+        "html_url": "https://github.com/raspos/reconstruction-craft/actions/runs/43601537133"
+      }
+    },
+    "raspos/se-young-archive": {
+      "pushed_at": "2026-11-16T09:53:50Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "Refresh derived badminton data",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-16T09:53:27Z",
+        "html_url": "https://github.com/raspos/se-young-archive/actions/runs/43843837965"
+      }
+    },
+    "raspos/seoul-apartment-tracker": {
+      "pushed_at": "2026-11-15T01:07:25Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "pages build and deployment",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-15T01:07:26Z",
+        "html_url": "https://github.com/raspos/seoul-apartment-tracker/actions/runs/43661559671"
+      }
+    }
   },
-  "disclaimer": "Initial state; run scheduled GitHub Actions refresh to populate."
+  "coverage": {
+    "public_repositories_checked": 19,
+    "public_repositories_reported": 18
+  },
+  "disclaimer": "Last workflow status is not a data quality certification."
 }
