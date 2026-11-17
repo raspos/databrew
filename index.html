@@ -4,25 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>databrew — 독립 데이터저널리즘 프로젝트</title>
-<meta name="description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
+<meta name="description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 26개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
 <link rel="canonical" href="https://raspos.github.io/databrew/">
 <link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/">
 <link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/">
 <link rel="alternate" hreflang="x-default" href="https://raspos.github.io/databrew/">
 <meta name="robots" content="index, follow">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "databrew", "alternateName": ["데이터브루", "data BREW"], "url": "https://raspos.github.io/databrew/", "inLanguage": "ko-KR", "description": "WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.", "author": {"@type": "Person", "name": "프로딴짓러", "url": "https://www.facebook.com/rough1020"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "databrew", "alternateName": ["데이터브루", "data BREW"], "url": "https://raspos.github.io/databrew/", "inLanguage": "ko-KR", "description": "WATCH·CRAFT·SPORTS 세 시리즈로 만든 26개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.", "author": {"@type": "Person", "name": "프로딴짓러", "url": "https://www.facebook.com/rough1020"}}</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="databrew">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:title" content="databrew — 데이터로 내린 풍미깊은 뉴스">
-<meta property="og:description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
+<meta property="og:description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 26개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
 <meta property="og:url" content="https://raspos.github.io/databrew/">
 <meta property="og:image" content="https://raspos.github.io/databrew/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="databrew — 데이터로 내린 풍미깊은 뉴스">
-<meta name="twitter:description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 25개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
+<meta name="twitter:description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 26개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
 <meta name="twitter:image" content="https://raspos.github.io/databrew/og.png">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -380,6 +380,8 @@ html { scroll-behavior: smooth; }
 .series-card .q { margin: 2px 0 0; font-size: 16px; font-weight: 600; line-height: 1.5; letter-spacing: -.01em; }
 .series-card .sub { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.55; }
 .s-craft .series-card .shot { aspect-ratio: 16 / 7.2; }
+.s-craft .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 600px) { .s-craft .grid { grid-template-columns: minmax(0, 1fr); } }
 
 @media (max-width: 920px) {
   .series-nav { grid-template-columns: minmax(0, 1fr); gap: 12px; }
@@ -425,7 +427,7 @@ html { scroll-behavior: smooth; }
       <p class="tagl">:사실은 진하다</p>
       <h1 class="wm" aria-label="data BREW"><span class="acl wm-data" aria-hidden="true">data<i class="deg"></i></span><span class="brw" aria-hidden="true">BREW</span></h1>
       <p class="tagl2">데이터로 내린 풍미깊은 뉴스</p>
-      <p class="sub">기자가 AI로 만든 데이터 저널리즘 프로젝트 25개. 데이터를 탐색하고(<span class="w-data">DATA</span>),<br>직접 경험하며(<span class="w-exp">EXPERIENCE</span>), 기록과 지식을 쌓아 간다(<span class="w-int">INTELLIGENCE</span>).<br>모든 프로젝트는 서로 이어져 있습니다.</p>
+      <p class="sub">기자가 AI로 만든 데이터 저널리즘 프로젝트 26개. 데이터를 탐색하고(<span class="w-data">DATA</span>),<br>직접 경험하며(<span class="w-exp">EXPERIENCE</span>), 기록과 지식을 쌓아 간다(<span class="w-int">INTELLIGENCE</span>).<br>모든 프로젝트는 서로 이어져 있습니다.</p>
     </div>
     <div class="hright">
       <svg class="drip" viewBox="0 0 120 150" role="img" aria-label="커피가 드리퍼에서 한 방울씩 떨어져 잔에 차오르는 애니메이션">
@@ -459,7 +461,7 @@ html { scroll-behavior: smooth; }
       <span class="panel-word">CRAFT SERIES</span>
       <strong class="panel-title">복잡한 현실을 직접 플레이하다</strong>
       <span class="panel-sub">기자 인사·홍보전략·재건축 수주전</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">3</span> PROJECTS · 누적 접속 <b data-craft-total>집계 중</b></span><span class="panel-go">시리즈 보기 →</span></span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">4</span> PROJECTS · 누적 접속 <b data-craft-total>집계 중</b></span><span class="panel-go">시리즈 보기 →</span></span>
     </a>
     <a class="panel p-sports" href="#sports" data-target="sports">
       <span class="panel-word">SPORTS SERIES</span>
@@ -581,7 +583,7 @@ html { scroll-behavior: smooth; }
 
   <section class="series s-craft" id="craft" aria-labelledby="h-craft" data-series-sec="craft">
     <div class="series-head">
-      <p class="series-kicker">CRAFT SERIES · <span data-live-count>3</span> PROJECTS</p>
+      <p class="series-kicker">CRAFT SERIES · <span data-live-count>4</span> PROJECTS</p>
       <h2 class="series-title" id="h-craft">복잡한 현실을 직접 플레이하다</h2>
       <p class="series-live"><span class="live-dot" aria-hidden="true"></span>누적 접속 <b data-craft-total>집계 중</b> <span class="live-note" data-craft-updated></span></p>
       <p class="series-desc">조직과 이해관계, 경쟁과 의사결정이 얽힌 현실을 게임과 시뮬레이션으로 재구성하는 시리즈입니다. 가상 설정 위에서 직접 선택해 봅니다.</p>
@@ -630,6 +632,20 @@ html { scroll-behavior: smooth; }
         <div class="card-actions">
           <a class="btn-detail" href="projects/reconstruction-craft/">자세히 보기</a>
           <a class="btn-service" href="https://raspos.github.io/reconstruction-craft/" target="_blank" rel="noopener">게임 시작 ↗</a>
+        </div>
+      </article>
+      <article class="card series-card" data-cat="게임" data-type="EXPERIENCE" data-series="craft">
+        <a class="card-inner" href="projects/bok-governor/">
+          <div class="shot"><img src="thumbs/bok-governor.png" alt="" loading="lazy"></div>
+          <div class="body">
+            <h3>한은 총재</h3>
+            <p class="q">금리는 당신이 결정한다. 그 대가는 경제가 치른다.</p>
+            <p class="desc">한은 총재가 되어 2027년 여덟 차례 금통위에서 기준금리를 결정하는 통화정책 전략 시뮬레이션입니다. 기자회견 답변과 위원 설득, 시장 반응을 거쳐 임기 말 2029년 평가까지 이어집니다. 경제 수치는 가상 설정입니다.</p>
+          </div>
+        </a>
+        <div class="card-actions">
+          <a class="btn-detail" href="projects/bok-governor/">자세히 보기</a>
+          <a class="btn-service" href="https://raspos.github.io/bok-governor/" target="_blank" rel="noopener">게임 시작 ↗</a>
         </div>
       </article>
     </div>
