@@ -416,6 +416,14 @@ html { scroll-behavior: smooth; }
 .lang-switch:focus-visible { outline: 2px solid var(--peach); outline-offset: 3px; }
 
 .panel-foot { flex-wrap: wrap; row-gap: 6px; }
+
+/* Search across the existing project cards. */
+.project-search { margin: 0 0 10px; }
+.project-search label { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 600; }
+.project-search input { display: block; width: 100%; padding: 13px 16px; min-height: 46px; border: 1px solid var(--rule); border-radius: 12px; background: var(--cell); color: var(--ink); font: inherit; font-size: 15px; }
+.project-search input::placeholder { color: var(--muted); opacity: .9; }
+.project-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.project-search .hint { margin: 6px 2px 0; font-size: 12px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -472,6 +480,11 @@ html { scroll-behavior: smooth; }
   </nav>
   <p class="archive-link"><a href="#archive">See the <span data-panel-count="archive">12</span> other projects →</a></p>
 
+  <div class="project-search" role="search" aria-label="Search projects">
+    <label for="projectSearch">Search projects</label>
+    <input id="projectSearch" type="search" placeholder="Search name or description (e.g. exchange, housing)" autocomplete="off" aria-describedby="searchHint">
+    <p class="hint" id="searchHint">Search project names and descriptions. Combine with the category and type filters.</p>
+  </div>
   <details class="filterbar" id="filterbar">
     <summary>Filter by category and type <span class="filter-hint">FILTER</span></summary>
     <div class="filter-body">
@@ -960,6 +973,13 @@ html { scroll-behavior: smooth; }
   var resetBtn = document.getElementById('filterReset');
   var bar = document.getElementById('filterbar');
   var activeCat = 'all', activeType = 'all';
+  var searchInput = document.getElementById('projectSearch');
+  var searchText = '';
+  var searchIndex = cards.map(function (c) {
+    var shot = c.querySelector('.shot img');
+    return (c.textContent + ' ' + (c.dataset.cat || '') + ' ' + (c.dataset.type || '') + ' ' + (shot ? shot.alt : '')).normalize('NFKC').toLocaleLowerCase();
+  });
+
   function activeCat_en(v) { return ({ '경제': 'Economy', '정치': 'Politics', '스포츠': 'Sports', '사회': 'Society', '도구': 'Tool', '게임': 'Game' })[v] || v; }
 
   function count(sel) { return main.querySelectorAll(sel).length; }
@@ -977,11 +997,12 @@ html { scroll-behavior: smooth; }
     btns.forEach(function (x) { x.setAttribute('aria-pressed', x.dataset[key] === active ? 'true' : 'false'); });
   }
   function apply() {
-    var any = activeCat !== 'all' || activeType !== 'all';
+    var terms = searchText.normalize('NFKC').toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+    var any = activeCat !== 'all' || activeType !== 'all' || terms.length > 0;
     var shown = 0;
     main.classList.toggle('filtered', any);
-    cards.forEach(function (c) {
-      var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType);
+    cards.forEach(function (c, i) {
+      var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType) && terms.every(function (term) { return searchIndex[i].indexOf(term) !== -1; });
       c.hidden = !ok;
       if (ok) shown++;
     });
@@ -995,14 +1016,20 @@ html { scroll-behavior: smooth; }
       var parts = [];
       if (activeCat !== 'all') parts.push('Category: ' + activeCat_en(activeCat));
       if (activeType !== 'all') parts.push('Type: ' + activeType);
+      if (searchText.trim()) parts.push('Search: ' + searchText.trim());
       statusText.textContent = parts.join(' · ') + ' — ' + shown + ' projects';
     }
   }
   function reset() {
-    activeCat = 'all'; activeType = 'all';
+    activeCat = 'all'; activeType = 'all'; searchText = '';
+    searchInput.value = '';
     setPressed(catBtns, 'all', 'cat'); setPressed(typeBtns, 'all', 'type');
     apply();
   }
+  searchInput.addEventListener('input', function () { searchText = searchInput.value; apply(); });
+  searchInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && searchInput.value) { searchInput.value = ''; searchText = ''; apply(); }
+  });
 
   catBtns.forEach(function (b) {
     b.addEventListener('click', function () { activeCat = b.dataset.cat; setPressed(catBtns, activeCat, 'cat'); apply(); });
