@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>databrew — 독립 데이터저널리즘 프로젝트</title>
+<title>dataBREW(데이터브루) — AI·데이터 저널리즘 프로젝트 26개</title>
 <meta name="description" content="WATCH·CRAFT·SPORTS 세 시리즈로 만든 26개 데이터저널리즘 프로젝트 허브. 시장을 숫자로 읽고, 현실을 게임으로 플레이하고, 스포츠를 기록으로 읽습니다.">
 <link rel="canonical" href="https://raspos.github.io/databrew/">
 <link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/">
@@ -416,6 +416,14 @@ html { scroll-behavior: smooth; }
 .lang-switch:focus-visible { outline: 2px solid var(--peach); outline-offset: 3px; }
 
 .panel-foot { flex-wrap: wrap; row-gap: 6px; }
+
+/* Search across the existing project cards. */
+.project-search { margin: 0 0 10px; }
+.project-search label { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 600; }
+.project-search input { display: block; width: 100%; padding: 13px 16px; min-height: 46px; border: 1px solid var(--rule); border-radius: 12px; background: var(--cell); color: var(--ink); font: inherit; font-size: 15px; }
+.project-search input::placeholder { color: var(--muted); opacity: .9; }
+.project-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.project-search .hint { margin: 6px 2px 0; font-size: 12px; color: var(--muted); }
 </style>
 </head>
 <body>
@@ -472,6 +480,11 @@ html { scroll-behavior: smooth; }
   </nav>
   <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
 
+  <div class="project-search" role="search" aria-label="프로젝트 검색">
+    <label for="projectSearch">프로젝트 검색</label>
+    <input id="projectSearch" type="search" placeholder="이름·설명 검색 (예: 환율, 아파트, 금통위)" autocomplete="off" aria-describedby="searchHint">
+    <p class="hint" id="searchHint">프로젝트 이름과 설명을 검색합니다. 분야·유형 필터와 함께 사용할 수 있습니다.</p>
+  </div>
   <details class="filterbar" id="filterbar">
     <summary>분야·유형으로 좁혀 보기 <span class="filter-hint">필터</span></summary>
     <div class="filter-body">
@@ -961,6 +974,13 @@ html { scroll-behavior: smooth; }
   var resetBtn = document.getElementById('filterReset');
   var bar = document.getElementById('filterbar');
   var activeCat = 'all', activeType = 'all';
+  var searchInput = document.getElementById('projectSearch');
+  var searchText = '';
+  var searchIndex = cards.map(function (c) {
+    var shot = c.querySelector('.shot img');
+    return (c.textContent + ' ' + (c.dataset.cat || '') + ' ' + (c.dataset.type || '') + ' ' + (shot ? shot.alt : '')).normalize('NFKC').toLocaleLowerCase();
+  });
+
 
   function count(sel) { return main.querySelectorAll(sel).length; }
   sections.forEach(function (sec) {
@@ -977,11 +997,12 @@ html { scroll-behavior: smooth; }
     btns.forEach(function (x) { x.setAttribute('aria-pressed', x.dataset[key] === active ? 'true' : 'false'); });
   }
   function apply() {
-    var any = activeCat !== 'all' || activeType !== 'all';
+    var terms = searchText.normalize('NFKC').toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+    var any = activeCat !== 'all' || activeType !== 'all' || terms.length > 0;
     var shown = 0;
     main.classList.toggle('filtered', any);
-    cards.forEach(function (c) {
-      var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType);
+    cards.forEach(function (c, i) {
+      var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType) && terms.every(function (term) { return searchIndex[i].indexOf(term) !== -1; });
       c.hidden = !ok;
       if (ok) shown++;
     });
@@ -995,14 +1016,20 @@ html { scroll-behavior: smooth; }
       var parts = [];
       if (activeCat !== 'all') parts.push('분야: ' + activeCat);
       if (activeType !== 'all') parts.push('유형: ' + activeType);
+      if (searchText.trim()) parts.push('검색: ' + searchText.trim());
       statusText.textContent = parts.join(' · ') + ' — ' + shown + '개 프로젝트';
     }
   }
   function reset() {
-    activeCat = 'all'; activeType = 'all';
+    activeCat = 'all'; activeType = 'all'; searchText = '';
+    searchInput.value = '';
     setPressed(catBtns, 'all', 'cat'); setPressed(typeBtns, 'all', 'type');
     apply();
   }
+  searchInput.addEventListener('input', function () { searchText = searchInput.value; apply(); });
+  searchInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && searchInput.value) { searchInput.value = ''; searchText = ''; apply(); }
+  });
 
   catBtns.forEach(function (b) {
     b.addEventListener('click', function () { activeCat = b.dataset.cat; setPressed(catBtns, activeCat, 'cat'); apply(); });
