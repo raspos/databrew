@@ -641,6 +641,7 @@ html { scroll-behavior: smooth; }
             <h3>한은 총재</h3>
             <p class="q">금리는 당신이 결정한다. 그 대가는 경제가 치른다.</p>
             <p class="desc">한은 총재가 되어 2027년 여덟 차례 금통위에서 기준금리를 결정하는 통화정책 전략 시뮬레이션입니다. 기자회견 답변과 위원 설득, 시장 반응을 거쳐 임기 말 2029년 평가까지 이어집니다. 경제 수치는 가상 설정입니다.</p>
+            <p class="views">누적 접속 <b data-craft="governor">–</b></p>
           </div>
         </a>
         <div class="card-actions">
@@ -1026,7 +1027,7 @@ html { scroll-behavior: smooth; }
   });
 
   /* ---- 크래프트 시리즈 누적 접속(읽기 전용 카운터 조회) ---- */
-  var CRAFT_KEYS = { personnel: 'raspos_personnel_craft_total_v2', hongdam: 'raspos_hongdam_craft_total_v1', recon: 'raspos_reconstruction_craft_total_v1' };
+  var CRAFT_KEYS = { personnel: 'raspos_personnel_craft_total_v2', hongdam: 'raspos_hongdam_craft_total_v1', recon: 'raspos_reconstruction_craft_total_v1', governor: 'raspos_bok_governor_total_v1' };
   var CRAFT_API = 'https://countapi.mileshilliard.com/api/v1/get/';
   var craftLast = {}, craftBusy = false;
   function fmt(n) { return Number(n).toLocaleString('en-US'); }

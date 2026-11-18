@@ -641,6 +641,7 @@ html { scroll-behavior: smooth; }
             <h3>BOK Governor</h3>
             <p class="q">You set the rate. The economy pays the price.</p>
             <p class="desc">Become the Bank of Korea governor and set the policy rate at eight monetary policy meetings in 2027 in this strategy simulation. Press-conference answers, persuading board members and market reactions carry through to a 2029 evaluation of your term. The economic figures are fictional.</p>
+            <p class="views">Total visits <b data-craft="governor">–</b></p>
           </div>
         </a>
         <div class="card-actions">
@@ -1026,7 +1027,7 @@ html { scroll-behavior: smooth; }
   });
 
   /* ---- 크래프트 시리즈 누적 접속(읽기 전용 카운터 조회) ---- */
-  var CRAFT_KEYS = { personnel: 'raspos_personnel_craft_total_v2', hongdam: 'raspos_hongdam_craft_total_v1', recon: 'raspos_reconstruction_craft_total_v1' };
+  var CRAFT_KEYS = { personnel: 'raspos_personnel_craft_total_v2', hongdam: 'raspos_hongdam_craft_total_v1', recon: 'raspos_reconstruction_craft_total_v1', governor: 'raspos_bok_governor_total_v1' };
   var CRAFT_API = 'https://countapi.mileshilliard.com/api/v1/get/';
   var craftLast = {}, craftBusy = false;
   function fmt(n) { return Number(n).toLocaleString('en-US'); }
