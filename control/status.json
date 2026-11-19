@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-18T03:49:39+00:00",
+  "generated_at": "2026-11-19T03:46:53+00:00",
   "repositories": {
     "raspos/all-time-xi": {
       "pushed_at": "2026-10-27T12:32:30Z",
@@ -29,14 +29,14 @@
       }
     },
     "raspos/bokwatch": {
-      "pushed_at": "2026-11-18T01:52:38Z",
+      "pushed_at": "2026-11-18T07:47:20Z",
       "default_branch": "main",
       "last_workflow": {
-        "name": "deploy",
+        "name": "daily",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-18T01:52:41Z",
-        "html_url": "https://github.com/raspos/bokwatch/actions/runs/44219113806"
+        "created_at": "2026-11-18T08:29:42Z",
+        "html_url": "https://github.com/raspos/bokwatch/actions/runs/44267454297"
       }
     },
     "raspos/chip-cycle": {
@@ -56,14 +56,14 @@
       }
     },
     "raspos/fx-odds": {
-      "pushed_at": "2026-11-17T18:49:53Z",
+      "pushed_at": "2026-11-18T18:28:24Z",
       "default_branch": "main",
       "last_workflow": {
         "name": "daily",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-17T18:44:14Z",
-        "html_url": "https://github.com/raspos/fx-odds/actions/runs/44151046339"
+        "created_at": "2026-11-18T18:21:13Z",
+        "html_url": "https://github.com/raspos/fx-odds/actions/runs/44368767127"
       }
     },
     "raspos/hongdam-craft": {
