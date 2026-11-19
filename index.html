@@ -438,6 +438,28 @@ html { scroll-behavior: smooth; }
 .project-search input::placeholder { color: var(--muted); opacity: .9; }
 .project-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .project-search .hint { margin: 6px 2px 0; font-size: 12px; color: var(--muted); }
+
+/* ---- 서비스에서 나온 기사 (articles.json, 최대 5개) ---- */
+.stories { margin: 0 0 28px; }
+.stories[hidden] { display: none; }
+.stories-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 0 0 12px; }
+.stories-kicker { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .16em; color: var(--accent); }
+.stories-title { margin: 0; font-size: clamp(20px, 3vw, 26px); font-weight: 700; letter-spacing: -.03em; }
+.stories-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--rule); border-radius: 12px; background: var(--cell); overflow: hidden; }
+.stories-list li { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 4px 16px; align-items: start; padding: 14px 18px; border-top: 1px solid var(--rule); }
+.stories-list li:first-child { border-top: 0; }
+.story-date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 4px; font-variant-numeric: tabular-nums; }
+.story-main a { color: var(--ink); font-weight: 700; font-size: 16px; line-height: 1.45; text-decoration: none; letter-spacing: -.01em; }
+.story-main a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.story-main a:focus-visible, .story-proj:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.story-meta { margin: 3px 0 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
+.story-proj { align-self: start; margin-top: 2px; font-size: 12px; font-weight: 600; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 999px; padding: 3px 11px; text-decoration: none; white-space: nowrap; }
+.story-proj:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+@media (max-width: 600px) {
+  .stories-list li { grid-template-columns: minmax(0, 1fr); padding: 14px 16px; }
+  .story-date { padding-top: 0; }
+  .story-proj { justify-self: start; margin-top: 6px; }
+}
 </style>
 </head>
 <body>
@@ -493,6 +515,11 @@ html { scroll-behavior: smooth; }
     </a>
   </nav>
   <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
+
+  <section class="stories" id="stories" aria-labelledby="h-stories" hidden>
+    <div class="stories-head"><p class="stories-kicker">STORIES · 서비스에서 나온 기사</p><h2 class="stories-title" id="h-stories">서비스에서 나온 기사</h2></div>
+    <ul class="stories-list" aria-label="서비스에서 나온 기사 목록"></ul>
+  </section>
 
   <div class="project-search" role="search" aria-label="프로젝트 검색">
     <label for="projectSearch">프로젝트 검색</label>
@@ -1128,6 +1155,36 @@ html { scroll-behavior: smooth; }
       els.forEach(function (e) { e.textContent = Number(j.value).toLocaleString('en-US'); });
     })
     .catch(function () {});
+})();
+</script>
+<script>
+/* 서비스에서 나온 기사: articles.json(최신순 최대 5개)을 읽어 표시. 항목이 없으면 영역을 숨김 */
+(function () {
+  var sec = document.getElementById('stories'); if (!sec || typeof fetch !== 'function') return;
+  var EN = document.documentElement.lang === 'en', MAX = 5;
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fdate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); if (!m) return ''; return EN ? MON[+m[2] - 1] + ' ' + (+m[3]) + ', ' + m[1] : m[1] + '.' + m[2] + '.' + m[3]; }
+  function pick(a, k) { return (EN && a.en && a.en[k]) || a[k] || ''; }
+  fetch('articles.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
+    if (!Array.isArray(list)) return;
+    list = list.filter(function (a) { return a && /^https?:\/\//i.test(a.url || '') && pick(a, 'title'); })
+      .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')); }).slice(0, MAX);
+    var ul = sec.querySelector('.stories-list'); ul.textContent = '';
+    list.forEach(function (a) {
+      var li = document.createElement('li'), d = document.createElement('span'), main = document.createElement('div'), t = document.createElement('a');
+      d.className = 'story-date'; d.textContent = fdate(a.date);
+      main.className = 'story-main'; t.href = a.url; t.target = '_blank'; t.rel = 'noopener'; t.textContent = pick(a, 'title') + ' ↗'; main.appendChild(t);
+      var meta = [pick(a, 'outlet'), pick(a, 'summary')].filter(Boolean).join(' · ');
+      if (meta) { var p = document.createElement('p'); p.className = 'story-meta'; p.textContent = meta; main.appendChild(p); }
+      li.appendChild(d); li.appendChild(main);
+      if (a.project && /^[a-z0-9-]+$/.test(a.project)) {
+        var h = document.querySelector('a.card-inner[href="projects/' + a.project + '/"] h3');
+        if (h) { var c = document.createElement('a'); c.className = 'story-proj'; c.href = 'projects/' + a.project + '/'; c.textContent = h.textContent; li.appendChild(c); }
+      }
+      ul.appendChild(li);
+    });
+    sec.hidden = list.length === 0;
+  }).catch(function () {});
 })();
 </script>
 </body>
