@@ -143,6 +143,20 @@ h1 .acl { color: var(--accent); }
 .cat { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: auto; }
 .card h3 { font-size: 21px; font-weight: 700; letter-spacing: -.02em; margin: 4px 0 0; line-height: 1.3; }
 .card.wide h3 { font-size: 26px; }
+/* Thumbnail artwork includes the project title. Keep the semantic heading for
+   search and assistive technology without repeating it visually below the art. */
+.card .body > h3 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 .desc { margin: 0; font-size: 14px; line-height: 1.65; }
 .desc.muted { color: var(--muted); }
 .desc2 { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.6; }
