@@ -13,5 +13,20 @@
       "outlet": "databrew",
       "summary": "This analysis examines the relationship between player salaries and on-field performance during the 2026 Korea Baseball Organization (KBO) season using E-WAR, an independent baseball analytics platform I developed.  E-WAR measures how much a player exceeds or falls short of preseason expectations by comparing actual Wins Above Replacement (WAR) with projected WAR.  Among 49 high-paid players across the league's 10 teams, average performance closely matched expectations. However, several lower-paid players significantly outperformed their projections.  To explore the implications for salary negotiations, I developed an interactive \"Negotiation Assistant\" that compares players with similar performance levels, projects their 2027 WAR, and presents evidence-based arguments from both players' and teams' perspectives.  An analysis of 240 domestic players also found that salaries were more strongly correlated with preseason expected WAR (0.57) than with actual 2026 WAR (0.38).  The project demonstrates how predictive analytics and interactive data journalism can offer new perspectives on player valuation, contract negotiations, and performance assessment in professional baseball."
     }
+  },
+  {
+    "id": "20261119-v4aj",
+    "title": "라면에도 계보가 있다? 60년 한국 라면의 역사를 데이터로 그리다",
+    "url": "articles/20261119-v4aj/",
+    "outlet": "프로딴짓러",
+    "date": "2026-11-19",
+    "project": "ramen-genealogy",
+    "tag": "라면의 계보",
+    "tagAuto": true,
+    "en": {
+      "title": "The Family Tree of Korean Ramen: Visualizing 60 Years of Noodle History",
+      "outlet": "databrew",
+      "summary": "This interactive data journalism project explores six decades of South Korean instant noodle history, tracing the evolution of ramen from its introduction in 1963 to today's globally popular products.  Inspired by the factional politics of Korea's Joseon Dynasty, I created \"The Ramen Genealogy,\" an interactive family tree that visualizes how different ramen styles emerged, competed, and influenced one another. From traditional beef-based broths and seafood noodles to black bean noodles and the global phenomenon of Buldak, the project reveals how changing tastes have shaped Korea's ramen industry.  Beyond the historical visualization, the platform offers three interactive features: a Ramen Combination Lab that suggests recipes by analyzing flavor compatibility, a data-driven ranking system comparing spiciness, sodium, calories, and other nutritional characteristics, and a searchable encyclopedia covering major manufacturers, discontinued products, and historical releases.  Drawing on manufacturer disclosures, consumer testing data, and historical records, the project transforms an everyday Korean comfort food into an accessible, interactive exploration of culinary history, consumer preferences, and product innovation."
+    }
   }
 ]
