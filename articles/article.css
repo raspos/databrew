@@ -16,9 +16,9 @@
 .art-body blockquote{margin:1.4em 0;padding:2px 18px;border-left:3px solid var(--accent);color:var(--muted)}
 .art-body a{color:var(--accent)}
 .svc-box{margin:40px 0 0}
-.svc-link{display:flex;gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--cell);text-decoration:none;color:inherit}
+.svc-link{display:flex;align-items:center;gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--cell);text-decoration:none;color:inherit}
 .svc-link:hover{border-color:var(--accent)}
-.svc-link img{width:42%;max-width:280px;min-height:150px;object-fit:cover;display:block;border-radius:0!important;margin:0}
+.svc-link img{flex:0 0 300px;width:300px;height:auto;aspect-ratio:20/9;object-fit:contain;display:block;border-radius:0!important;margin:0;background:var(--shot)}
 .svc-text{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:16px 20px;min-width:0}
 .svc-kicker{font:11px var(--font-mono,monospace);letter-spacing:.14em;color:var(--muted)}
 .svc-text strong{font-size:19px;line-height:1.35}
@@ -34,6 +34,6 @@
   .art-head{flex-direction:column;align-items:stretch;gap:2px}
   .art-head h1{flex:0 0 auto}
   .art .byline{align-self:flex-end;padding-bottom:0}
-  .svc-link{flex-direction:column}.svc-link img{width:100%;max-width:none}
+  .svc-link{flex-direction:column;align-items:stretch}.svc-link img{flex:0 0 auto;width:100%;max-width:none}
 }
 .topnav .breadcrumb a{color:inherit;text-decoration:none}.topnav .breadcrumb a:hover{color:var(--accent)}

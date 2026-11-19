@@ -445,6 +445,7 @@ html { scroll-behavior: smooth; }
 .stories-head { display: grid; gap: 4px; margin: 0 0 8px; padding: 2px 0 2px 16px; border-left: 5px solid var(--accent); }
 .stories-kicker { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .16em; color: var(--accent); }
 .stories-title { margin: 0; font-size: clamp(22px, 3.4vw, 30px); font-weight: 700; letter-spacing: -.035em; line-height: 1.2; }
+.stories-sub { margin: 2px 0 0; font-size: 14px; color: var(--muted); letter-spacing: -.01em; }
 .stories-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
 .stories-list li { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 0 14px; align-items: baseline; padding: 10px 2px; border-bottom: 1px solid var(--rule); }
 .story-date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -520,7 +521,7 @@ html { scroll-behavior: smooth; }
   <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
 
   <section class="stories" id="stories" aria-labelledby="h-stories" hidden>
-    <div class="stories-head"><p class="stories-kicker">STORIES</p><h2 class="stories-title" id="h-stories">프로딴짓러</h2></div>
+    <div class="stories-head"><p class="stories-kicker">STORIES</p><h2 class="stories-title" id="h-stories">프로딴짓러</h2><p class="stories-sub">숫자 뒤의 이야기를 진하게 내립니다</p></div>
     <ul class="stories-list" aria-label="프로딴짓러 STORIES"></ul>
     <p class="stories-more" hidden><a href="stories/">전체 기사 보기 →</a></p>
   </section>
