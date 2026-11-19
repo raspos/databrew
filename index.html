@@ -953,6 +953,7 @@ html { scroll-behavior: smooth; }
     <span class="legend"><span class="stone w" aria-hidden="true"></span>로그인해야 열림</span>
     <span id="capdate">미리보기 화면은 캡처 시점 기준</span>
     <span><a href="control/" aria-label="DataBREW CONTROL 프로젝트 운영 현황">프로젝트 운영 현황 ↗</a></span>
+    <span class="hub-views">누적 방문 <b data-hub-views>–</b></span>
     <span>© <a href="https://www.facebook.com/rough1020" target="_blank" rel="noopener">프로딴짓러</a></span>
   </footer>
 </div>
@@ -1095,6 +1096,24 @@ html { scroll-behavior: smooth; }
   setInterval(function () { if (!document.hidden) refreshCraft(); }, 60000);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) refreshCraft(); });
   if (location.hash.length > 1) { setTimeout(function () { var id = location.hash.slice(1); if (document.getElementById(id) && document.getElementById(id).classList.contains('series')) goTo(id); }, 50); }
+})();
+</script>
+<script>
+/* 허브 누적 방문: 세션당 1회 hit, 나머지는 읽기 전용 get. 배포 도메인이 아니면 올리지 않음 */
+(function () {
+  var KEY = 'raspos_databrew_hub_total_v1', API = 'https://countapi.mileshilliard.com/api/v1/';
+  var els = document.querySelectorAll('[data-hub-views]');
+  if (!els.length || typeof fetch !== 'function') return;
+  var hit = location.hostname === 'raspos.github.io';
+  try { if (sessionStorage.getItem('databrew_hub_counted')) hit = false; } catch (e) {}
+  fetch(API + (hit ? 'hit/' : 'get/') + KEY, { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (typeof j.value !== 'number') return;
+      try { if (hit) sessionStorage.setItem('databrew_hub_counted', '1'); } catch (e) {}
+      els.forEach(function (e) { e.textContent = Number(j.value).toLocaleString('en-US'); });
+    })
+    .catch(function () {});
 })();
 </script>
 </body>

@@ -43,3 +43,20 @@
   }, { rootMargin: '0px 0px -8% 0px' });
   items.forEach(function (el) { io.observe(el); });
 })();
+
+/* 사이트 누적 방문: 세션당 1회 hit(허브와 같은 키), 배포 도메인이 아니면 읽기만 */
+(function () {
+  var els = document.querySelectorAll('[data-hub-views]');
+  if (!els.length || typeof fetch !== 'function') return;
+  var KEY = 'raspos_databrew_hub_total_v1', API = 'https://countapi.mileshilliard.com/api/v1/';
+  var hit = location.hostname === 'raspos.github.io';
+  try { if (sessionStorage.getItem('databrew_hub_counted')) hit = false; } catch (e) {}
+  fetch(API + (hit ? 'hit/' : 'get/') + KEY, { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (typeof j.value !== 'number') return;
+      try { if (hit) sessionStorage.setItem('databrew_hub_counted', '1'); } catch (e) {}
+      els.forEach(function (e) { e.textContent = Number(j.value).toLocaleString('en-US'); });
+    })
+    .catch(function () {});
+})();
