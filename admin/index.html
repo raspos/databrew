@@ -63,8 +63,12 @@ td.act button{padding:5px 10px;font-size:13px}
     <li>만료일은 짧게(예: 90일) 정하고, 생성된 토큰을 아래에 붙여 넣으세요.</li>
   </ol>
   <label for="tok">GitHub 토큰</label>
-  <input id="tok" type="password" autocomplete="off" placeholder="github_pat_…">
-  <p style="margin:12px 0 0"><button id="btnLogin" class="primary">연결</button></p>
+  <form id="loginForm" autocomplete="on">
+    <input type="text" name="username" value="databrew-admin" autocomplete="username" hidden>
+    <input id="tok" name="password" type="password" autocomplete="current-password" placeholder="github_pat_…">
+    <p style="margin:12px 0 0;display:flex;gap:8px;flex-wrap:wrap"><button id="btnLogin" type="submit" class="primary">연결</button><button id="btnRetry" type="button" hidden>저장된 토큰으로 다시 시도</button></p>
+  </form>
+  <p class="hint">연결 후 브라우저가 "비밀번호를 저장할까요?"라고 물으면 저장하세요. 다음부터 이 칸이 자동으로 채워집니다.</p>
   <div id="loginMsg"></div>
 </section>
 
@@ -365,9 +369,20 @@ td.act button{padding:5px 10px;font-size:13px}
   /* ---------- 이벤트 ---------- */
   function start() {
     $('who').textContent = OWNER + '/' + REPO; $('logout').hidden = false;
-    return Promise.all([loadProjects(), refreshList()]).then(function () { renderList(); }).catch(function (e) { localStorage.removeItem('databrew_gh_token'); token = ''; $('logout').hidden = true; show('vLogin'); say('loginMsg', 'bad', '연결 실패: ' + e.message + ' — 토큰과 권한(Contents: Read and write, 저장소 raspos/databrew)을 확인하세요.'); });
+    return Promise.all([loadProjects(), refreshList()]).then(function () { renderList(); }).catch(function (e) {
+      show('vLogin'); $('logout').hidden = false;
+      if (e && (e.status === 401 || e.status === 403 && /bad credentials|expired|revoked/i.test(e.message || ''))) {
+        try { localStorage.removeItem('databrew_gh_token'); } catch (x) {} token = ''; $('logout').hidden = true; $('btnRetry').hidden = true;
+        say('loginMsg', 'bad', '저장된 토큰이 만료됐거나 취소됐습니다. 새 토큰을 만들어 다시 연결하세요(안내 링크: github.com/settings/personal-access-tokens).');
+      } else {
+        $('btnRetry').hidden = false;
+        say('loginMsg', 'bad', '연결하지 못했습니다(' + (e && e.message || '네트워크 오류') + '). 저장된 토큰은 지우지 않았습니다. 인터넷 연결을 확인하고 다시 시도하세요.');
+      }
+    });
   }
-  $('btnLogin').onclick = function () { var t = $('tok').value.trim(); if (!t) return say('loginMsg', 'bad', '토큰을 입력하세요.'); token = t; say('loginMsg', 'info', '확인 중…'); gh('').then(function (j) { if (!j.permissions || !j.permissions.push) throw new Error('이 토큰에는 쓰기 권한이 없습니다.'); try { localStorage.setItem('databrew_gh_token', t); } catch (e) {} $('tok').value = ''; return start(); }).catch(function (e) { token = ''; say('loginMsg', 'bad', '연결 실패: ' + e.message); }); };
+  $('btnRetry').onclick = function () { say('loginMsg', 'info', '다시 연결하는 중…'); start(); };
+  $('loginForm').addEventListener('submit', function (e) { e.preventDefault(); doLogin(); });
+  function doLogin() { var t = $('tok').value.trim(); if (!t) return say('loginMsg', 'bad', '토큰을 입력하세요.'); token = t; say('loginMsg', 'info', '확인 중…'); gh('').then(function (j) { if (!j.permissions || !j.permissions.push) throw new Error('이 토큰에는 쓰기 권한이 없습니다.'); try { localStorage.setItem('databrew_gh_token', t); } catch (e) {} $('tok').value = ''; return start(); }).catch(function (e) { token = ''; say('loginMsg', 'bad', '연결 실패: ' + e.message + (e.status === 401 ? ' — 토큰이 올바르지 않습니다.' : '')); }); }
   $('logout').onclick = function () { try { localStorage.removeItem('databrew_gh_token'); } catch (e) {} token = ''; $('logout').hidden = true; show('vLogin'); };
   $('btnNew').onclick = function () { edit(null); };
   $('btnStats').onclick = loadStats;
