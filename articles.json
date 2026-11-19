@@ -28,5 +28,15 @@
       "outlet": "databrew",
       "summary": "This interactive data journalism project explores six decades of South Korean instant noodle history, tracing the evolution of ramen from its introduction in 1963 to today's globally popular products.  Inspired by the factional politics of Korea's Joseon Dynasty, I created \"The Ramen Genealogy,\" an interactive family tree that visualizes how different ramen styles emerged, competed, and influenced one another. From traditional beef-based broths and seafood noodles to black bean noodles and the global phenomenon of Buldak, the project reveals how changing tastes have shaped Korea's ramen industry.  Beyond the historical visualization, the platform offers three interactive features: a Ramen Combination Lab that suggests recipes by analyzing flavor compatibility, a data-driven ranking system comparing spiciness, sodium, calories, and other nutritional characteristics, and a searchable encyclopedia covering major manufacturers, discontinued products, and historical releases.  Drawing on manufacturer disclosures, consumer testing data, and historical records, the project transforms an everyday Korean comfort food into an accessible, interactive exploration of culinary history, consumer preferences, and product innovation."
     }
+  },
+  {
+    "id": "20261119-8xxm",
+    "title": "수출 1조 달러 시대…강달러에도 꿋꿋한 원화, 1300원 아래로 내려갈까",
+    "url": "articles/20261119-8xxm/",
+    "outlet": "프로딴짓러",
+    "date": "2026-11-19",
+    "project": "fx-odds",
+    "tag": "FX워치",
+    "tagAuto": true
   }
 ]
