@@ -1,4 +1,4 @@
-# 서비스에서 나온 기사 넣는 법
+# STORIES 기사 넣는 법
 
 허브 맨 위 프로젝트 검색 바로 위에 `articles.json`의 기사가 최신순으로 최대 5개 표시됩니다.
 기사가 하나도 없으면 영역 전체가 숨겨집니다. 6개 이상 적어 두면 날짜가 가장 최근인 5개만 보입니다.
@@ -42,3 +42,17 @@
 - 모든 페이지(허브, 상세, 기사)가 `analytics.js`로 페이지별 조회수를 셉니다. 같은 탭에서 같은 페이지를 다시 열어도 한 번만 세고, 배포 주소가 아닌 곳(로컬 테스트)에서는 올리지 않습니다.
 - 글쓰기 도구의 "조회수 보기"에서 페이지별 조회수와 사이트 누적 방문을 한 번에 볼 수 있습니다. 직접 쓴 기사 페이지에는 조회수가 함께 표시됩니다.
 - GoatCounter도 함께 쓰려면 `analytics.js` 맨 위의 `GC_CODE`에 사이트 코드를 넣으세요(PAY워치처럼 쿠키 없이 방문 통계를 따로 봅니다). 지금은 꺼져 있습니다.
+
+## 댓글 (giscus)
+
+기사 페이지(`/articles/<id>/`) 맨 아래에 댓글이 붙도록 `comments.js`가 준비돼 있습니다. GitHub Discussions를 쓰는 giscus 방식이고, 기사마다 고정 ID(`article-<id>`)로 토론이 하나씩 연결되므로 기사를 수정해 다시 게시해도 댓글이 유지됩니다. 기존에 올린 기사에도 자동으로 붙습니다.
+아직 저장소에서 Discussions가 꺼져 있고 giscus 앱이 설치되지 않아, **아래 설정을 마치기 전에는 댓글 영역이 보이지 않습니다**(기사 읽기에는 영향 없음).
+
+1. 저장소 `raspos/databrew` → Settings → General → Features → **Discussions** 체크
+2. Discussions 탭에서 카테고리 하나 만들기(이름 예: `댓글`, 형식은 **Announcements** 권장: 새 토론은 관리자와 giscus만 만들 수 있어 스팸이 줄어듭니다)
+3. https://github.com/apps/giscus 에서 **Install** → `raspos/databrew` 선택
+4. https://giscus.app 에서 저장소 `raspos/databrew`와 위 카테고리를 고르면 화면 아래 코드에 `data-category-id="DIC_…"` 값이 나옵니다. 그 값을 `comments.js`의 `categoryId`에 넣으면 됩니다(저에게 알려 주셔도 됩니다). `repoId`(`R_kgDOVUoIRA`)는 이미 들어 있습니다.
+
+- 댓글 작성은 GitHub 로그인이 필요합니다. 읽기는 로그인 없이 됩니다. GitHub 계정이 없는 독자도 쓰게 하려면 별도 인증·저장 시스템이 필요해 이번 범위에는 넣지 않았습니다.
+- 삭제·숨김·차단은 저장소 Discussions 화면에서 관리자가 합니다.
+- 댓글 서비스가 응답하지 않으면 "댓글을 불러오지 못했습니다" 안내만 나오고 기사는 그대로 보입니다.

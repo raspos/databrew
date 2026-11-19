@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>databrew 기사 관리</title>
+<link rel="stylesheet" href="../articles/article.css">
 <style>
 :root{--board:#f6f2ea;--cell:#fff;--ink:#1c1812;--muted:#7a6f5e;--rule:#e2dac8;--accent:#8a4b1c;--ok:#2f7a4a;--bad:#b3261e;--font:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:ui-monospace,Consolas,monospace}
 @media (prefers-color-scheme:dark){:root{--board:#1b1814;--cell:#25211c;--ink:#efe8db;--muted:#a89c88;--rule:#3a342b;--accent:#e0a46a;--ok:#6cc28b;--bad:#f08a80;color-scheme:dark}}
@@ -42,7 +43,7 @@ td.act button{padding:5px 10px;font-size:13px}
 .pv h2{font-size:20px;margin:1.2em 0 .4em}.pv h3{font-size:17px;margin:1.1em 0 .3em}
 .pv img{max-width:100%;height:auto;border-radius:6px}.pv figure{margin:1em 0}.pv figcaption{font-size:12.5px;color:var(--muted);margin-top:4px}
 .pv blockquote{margin:1em 0;padding:4px 14px;border-left:3px solid var(--accent);color:var(--muted)}
-.pv a{color:var(--accent)}.pv a.svc-link,.pv a.svc-detail{color:inherit}/*SVC*/
+.pv a{color:var(--accent)}.pvwrap.art{padding:0;max-width:none}.pvwrap .art-body{font-size:15.5px}.pvwrap h1{font-size:24px}.pv a.svc-link,.pv a.svc-detail{color:inherit}/*SVC*/
 .seg{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}.seg label{display:flex;gap:6px;align-items:center;margin:0;font-weight:500}
 [hidden]{display:none!important}
 @media (max-width:760px){.row,.split{grid-template-columns:1fr}.preview{min-height:160px}}
@@ -70,7 +71,7 @@ td.act button{padding:5px 10px;font-size:13px}
 <section id="vList" hidden>
   <div class="card">
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h2 style="margin:0">기사 목록</h2><span class="sp" style="flex:1"></span><button id="btnStats">조회수 보기</button><button id="btnNew" class="primary">+ 새 기사</button></div>
-    <p class="hint">허브에는 날짜가 가장 최근인 기사 5개가 표시되고, 6개 이상이면 "기사 전체 보기" 링크로 모든 기사가 게시판 형태로 쌓인 페이지(/articles/)로 이동합니다.</p>
+    <p class="hint">허브에는 날짜가 가장 최근인 기사 5개가 표시되고, 6개 이상이면 "전체 기사 보기"로 모든 기사가 게시판 형태로 쌓인 페이지(/stories/)로 이동합니다.</p>
     <table><thead><tr><th>날짜</th><th>제목</th><th>종류</th><th>서비스</th><th></th></tr></thead><tbody id="rows"></tbody></table>
     <div id="listMsg"></div>
   </div>
@@ -92,19 +93,18 @@ td.act button{padding:5px 10px;font-size:13px}
     <label for="fTitle">제목</label><input id="fTitle" type="text" maxlength="120">
     <div class="row">
       <div><label for="fDate">날짜</label><input id="fDate" type="date"></div>
-      <div><label for="fOutlet">매체·작성자 (선택)</label><input id="fOutlet" type="text" placeholder="예: 프로딴짓러"></div>
+      <div><label for="fOutlet">글쓴이 (바이라인)</label><input id="fOutlet" type="text" placeholder="프로딴짓러"></div>
     </div>
     <div class="row">
       <div><label for="fProject">파생된 서비스 (선택)</label><select id="fProject"><option value="">선택 안 함</option></select></div>
       <div><label for="fSummary">한 줄 설명 (선택)</label><input id="fSummary" type="text" maxlength="160"></div>
     </div>
-    <label for="fTag">말머리 (선택)</label>
-    <div class="row" style="grid-template-columns:1fr auto;align-items:center">
-      <input id="fTag" type="text" maxlength="20" list="tagList" placeholder="예: BOK워치, 단독, 해설">
-      <label style="display:flex;gap:6px;align-items:center;margin:0;font-weight:500"><input id="fTagAuto" type="checkbox" checked> 서비스 이름 자동</label>
+    <label for="fTagSel">말머리 (선택)</label>
+    <div class="row" style="grid-template-columns:1fr 1fr;align-items:center">
+      <select id="fTagSel"></select>
+      <input id="fTag" type="text" maxlength="20" placeholder="말머리 직접 입력" hidden>
     </div>
-    <datalist id="tagList"><option value="단독"><option value="해설"><option value="분석"><option value="인터뷰"><option value="후기"><option value="업데이트"></datalist>
-    <p class="hint">제목 앞에 <b id="tagPrev">[말머리] 제목</b> 처럼 붙습니다. "서비스 이름 자동"을 켜면 선택한 서비스 이름이 말머리가 되고, 끄면 직접 정할 수 있습니다.</p>
+    <p class="hint">제목 앞에 <b id="tagPrev">[말머리] 제목</b> 처럼 붙습니다. 서비스 이름을 고르면 위의 "파생된 서비스"가 자동으로 같은 서비스로 연결되고 기사 맨 아래에 서비스 링크 박스가 붙습니다. 단독·해설 같은 일반 말머리는 서비스에 강제로 연결하지 않습니다.</p>
     <label>기사 종류</label>
     <div class="seg">
       <label><input type="radio" name="mode" value="local" checked> 이 사이트에 직접 쓰기</label>
@@ -176,24 +176,26 @@ td.act button{padding:5px 10px;font-size:13px}
       '<span class="svc-text"><span class="svc-kicker">이 기사가 나온 서비스</span><strong>' + esc(i.name) + '</strong>' + (i.line ? '<span class="svc-line">' + esc(i.line) + '</span>' : '') + '<span class="svc-go">' + esc(i.go) + '</span></span></a>' +
       '<a class="svc-detail" href="' + esc(prefix + 'projects/' + slug + '/') + '">프로젝트 소개 보기</a></aside>';
   }
-  var SVC_CSS = '.svc-box{margin:44px 0 0}.svc-link{display:flex;gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--cell);text-decoration:none;color:inherit}.svc-link:hover{border-color:var(--accent)}.svc-link img{width:42%;max-width:280px;min-height:150px;object-fit:cover;display:block;border-radius:0!important;margin:0}.svc-text{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:16px 20px;min-width:0}.svc-kicker{font:11px var(--font-mono,monospace);letter-spacing:.14em;color:var(--muted)}.svc-text strong{font-size:19px;line-height:1.35}.svc-line{font-size:14px;color:var(--muted);line-height:1.6}.svc-go{font-size:13px;font-weight:700;color:var(--accent)}.svc-detail{display:inline-block;margin-top:10px;font-size:13px;color:var(--muted)}@media (max-width:560px){.svc-link{flex-direction:column}.svc-link img{width:100%;max-width:none}}';
-  (function () { var st = document.createElement('style'); st.textContent = SVC_CSS; document.head.appendChild(st); })();
 
   /* ---------- 기사 페이지 생성 ---------- */
   function fdate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); return m ? m[1] + '.' + m[2] + '.' + m[3] : ''; }
   function firstImg(body) { var m = /!\[[^\]]*\]\(([^)\s]+)\)/.exec(body || ''); return m ? imgSrc(m[1], '') : null; }
+  function byline(a) { return a.outlet || '프로딴짓러'; }
+  function headHtml(a, proj) {
+    var tg = a.tag ? '<span class="tag">[' + esc(a.tag) + ']</span> ' : '';
+    return '<div class="art-head">\n<h1>' + tg + esc(a.title) + '</h1>\n<span class="byline">' + esc(byline(a)) + '</span>\n</div>\n<p class="meta">' +
+      [esc(fdate(a.date)), proj ? '<a href="../../projects/' + esc(proj[0]) + '/">' + esc(proj[1]) + '</a>' : ''].filter(Boolean).join(' · ') + '<span class="pv" hidden> · 조회 <b data-pv></b></span></p>';
+  }
   function renderPage(a, body) {
     var url = SITE + 'articles/' + a.id + '/', tg = a.tag ? '[' + a.tag + '] ' : '', img = firstImg(body), desc = a.summary || String(body || '').replace(/[#>*`!\[\]()\-]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
     var og = img ? (/^https:/i.test(img) ? img : url + img) : SITE + 'shots/bokwatch.png';
     var proj = a.project ? projects.filter(function (p) { return p[0] === a.project; })[0] : null;
-    var meta = [fdate(a.date), a.outlet].filter(Boolean).map(esc).join(' · ');
     return '<!doctype html>\n<html lang="ko">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
       '<title>' + esc(tg + a.title) + ' — databrew</title>\n<meta name="description" content="' + esc(desc) + '">\n<link rel="canonical" href="' + url + '">\n' +
       '<meta property="og:type" content="article">\n<meta property="og:site_name" content="databrew">\n<meta property="og:locale" content="ko_KR">\n<meta property="og:title" content="' + esc(tg + a.title) + '">\n<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + url + '">\n<meta property="og:image" content="' + esc(og) + '">\n' +
       '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="' + esc(tg + a.title) + '">\n<meta name="twitter:description" content="' + esc(desc) + '">\n<meta name="twitter:image" content="' + esc(og) + '">\n' +
-      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">\n<link rel="stylesheet" href="../../detail.css">\n' +
-      '<style>.art{max-width:720px;margin:0 auto;padding:48px max(20px,4vw) 60px}.art h1{font-size:clamp(26px,4.4vw,38px);line-height:1.3;letter-spacing:-.03em;margin:0 0 10px}.art h1 .tag{color:var(--accent);font-weight:700}.art .meta{font:12.5px var(--font-mono);color:var(--muted);margin:0 0 28px}.art .meta a{color:var(--accent)}.art-body{font-size:17px;line-height:1.9}.art-body h2{font-size:24px;margin:1.8em 0 .5em}.art-body h3{font-size:19px;margin:1.6em 0 .4em}.art-body img{max-width:100%;height:auto;border-radius:6px;display:block}.art-body figure{margin:1.6em 0}.art-body figcaption{font-size:13px;color:var(--muted);margin-top:6px}.art-body blockquote{margin:1.4em 0;padding:2px 18px;border-left:3px solid var(--accent);color:var(--muted)}.art-body a{color:var(--accent)}' + SVC_CSS + '</style>\n</head>\n<body>\n' +
-      '<nav class="topnav">\n  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>\n  <span class="breadcrumb">서비스에서 나온 기사</span>\n</nav>\n<main class="art">\n<h1>' + (a.tag ? '<span class="tag">[' + esc(a.tag) + ']</span> ' : '') + esc(a.title) + '</h1>\n<p class="meta">' + meta + (proj ? ' · <a href="../../projects/' + esc(proj[0]) + '/">' + esc(proj[1]) + '</a>' : '') + '<span class="pv" hidden> · 조회 <b data-pv></b></span></p>\n<div class="art-body">\n' + md(body, '') + '\n</div>\n' + (a.project ? svcBox(a.project, '../../') + '\n' : '') + '</main>\n' +
+      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">\n<link rel="stylesheet" href="../../detail.css">\n<link rel="stylesheet" href="../article.css">\n</head>\n<body>\n' +
+      '<nav class="topnav">\n  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>\n  <span class="breadcrumb"><a href="../../stories/">STORIES</a></span>\n</nav>\n<main class="art">\n' + headHtml(a, proj) + '\n<div class="art-body">\n' + md(body, '') + '\n</div>\n' + (a.project ? svcBox(a.project, '../../') + '\n' : '') + '</main>\n' +
       '<footer class="foot">\n  <a href="../../">databrew</a>\n  <span>독립 데이터저널리즘 프로젝트</span>\n  <span>누적 방문 <b data-hub-views>–</b></span>\n</footer>\n<script src="../../detail.js" defer><\/script>\n</body>\n</html>\n';
   }
 
@@ -226,7 +228,7 @@ td.act button{padding:5px 10px;font-size:13px}
         var nm = /<h3>([\s\S]*?)<\/h3>/.exec(b), im = /<img src="([^"]+)"/.exec(b), q = /<p class="q">([\s\S]*?)<\/p>/.exec(b) || /<p class="desc">([\s\S]*?)<\/p>/.exec(b), sv = /<a class="btn-service" href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/.exec(b), name = nm ? nm[1].replace(/<[^>]+>/g, '').trim() : sl[1];
         projects.push([sl[1], name]);
         projInfo[sl[1]] = { name: name, thumb: im ? im[1] : '', line: q ? q[1].replace(/<[^>]+>/g, '').trim() : '', url: sv ? sv[1] : '', go: sv ? sv[2].replace(/<[^>]+>/g, '').trim() : '서비스 열기 ↗' };
-      } var sel = $('fProject'); projects.forEach(function (p) { var o = document.createElement('option'); o.value = p[0]; o.textContent = p[1]; sel.appendChild(o); }); }).catch(function () {}); }
+      } var sel = $('fProject'); projects.forEach(function (p) { var o = document.createElement('option'); o.value = p[0]; o.textContent = p[1]; sel.appendChild(o); }); buildTagSel(); }).catch(function () {}); }
   function renderList() {
     var tb = $('rows'); tb.textContent = '';
     articles.slice().sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); }).forEach(function (a, i) {
@@ -241,24 +243,42 @@ td.act button{padding:5px 10px;font-size:13px}
     if (!articles.length) { var tr = document.createElement('tr'), td = document.createElement('td'); td.colSpan = 5; td.textContent = '아직 기사가 없습니다. "+ 새 기사"로 시작하세요.'; tr.appendChild(td); tb.appendChild(tr); }
   }
   function refreshList() { say('listMsg', 'info', '불러오는 중…'); return getFile('articles.json').then(function (f) { articles = JSON.parse(f.text || '[]'); renderList(); say('listMsg', '', ''); show('vList'); }); }
-  function tagText() { return $('fTag').value.trim().replace(/[\[\]]/g, ''); }
+  var GENERAL = ['단독', '해설', '분석', '인터뷰', '후기', '업데이트'];
+  function buildTagSel() {
+    var sel = $('fTagSel'); if (sel.getAttribute('data-n') === String(projects.length) && sel.options.length) return; sel.setAttribute('data-n', projects.length); sel.textContent = '';
+    function opt(v, t, g) { var o = document.createElement('option'); o.value = v; o.textContent = t; (g || sel).appendChild(o); }
+    opt('', '말머리 없음');
+    var g1 = document.createElement('optgroup'); g1.label = '서비스 (자동 연결)'; projects.forEach(function (p) { opt('s:' + p[0], p[1], g1); }); sel.appendChild(g1);
+    var g2 = document.createElement('optgroup'); g2.label = '일반'; GENERAL.forEach(function (t) { opt('g:' + t, t, g2); }); opt('c:', '직접 입력…', g2); sel.appendChild(g2);
+  }
+  function tagText() {
+    var v = $('fTagSel').value; if (v.indexOf('s:') === 0) { var p = projects.filter(function (x) { return x[0] === v.slice(2); })[0]; return p ? p[1] : ''; }
+    if (v.indexOf('g:') === 0) return v.slice(2); if (v === 'c:') return $('fTag').value.trim().replace(/[\[\]]/g, ''); return '';
+  }
+  function tagIsService() { return $('fTagSel').value.indexOf('s:') === 0; }
   function syncTag() {
-    var auto = $('fTagAuto').checked, pr = projects.filter(function (p) { return p[0] === $('fProject').value; })[0];
-    $('fTag').readOnly = auto && !!pr; if (auto && pr) $('fTag').value = pr[1];
-    if (auto && !pr) $('fTag').readOnly = false;
+    $('fTag').hidden = $('fTagSel').value !== 'c:';
     var t = tagText(), ti = $('fTitle').value.trim() || '제목'; $('tagPrev').textContent = (t ? '[' + t + '] ' : '') + ti;
   }
+  function onTagSel() { var v = $('fTagSel').value; if (v.indexOf('s:') === 0) $('fProject').value = v.slice(2); syncTag(); preview(); }
+  function onProject() { var v = $('fTagSel').value, pr = $('fProject').value; if (v === '' || v.indexOf('s:') === 0) $('fTagSel').value = pr ? 's:' + pr : ''; syncTag(); preview(); }
   function mode() { return document.querySelector('input[name=mode]:checked').value; }
   function setMode(m) { document.querySelector('input[name=mode][value=' + m + ']').checked = true; $('boxExt').hidden = m !== 'external'; $('boxLocal').hidden = m !== 'local'; }
+  function curDraft() {
+    return { id: cur && cur.id || '', title: $('fTitle').value.trim() || '제목', date: $('fDate').value, outlet: $('fOutlet').value.trim(), project: $('fProject').value, tag: tagText() };
+  }
   function preview() {
-    var base = cur && cur.id ? '../articles/' + cur.id + '/' : '';
-    var html = md($('fBody').value, '') + (cur && $('fProject').value ? svcBox($('fProject').value, '../') : ''); var pv = $('pv'); pv.innerHTML = html;
-    pv.querySelectorAll('img').forEach(function (im) { var n = im.getAttribute('src'); if (pending[n]) im.src = pending[n].url; else if (base && /^[\w.-]+\.(jpe?g|png|webp|gif)$/i.test(n)) im.src = base + n; });
+    var base = cur && cur.id ? '../articles/' + cur.id + '/' : '', d = curDraft(), proj = d.project ? projects.filter(function (p) { return p[0] === d.project; })[0] : null;
+    var pv = $('pv'); pv.innerHTML = '<div class="art pvwrap">' + headHtml(d, proj).replace(/(href=")\.\.\/\.\.\//g, '$1../').replace(/<span class="pv" hidden>.*?<\/span>/, '') + '<div class="art-body">' + md($('fBody').value, '') + '</div>' + (d.project ? svcBox(d.project, '../') : '') + '</div>';
+    pv.querySelectorAll('.art-body img').forEach(function (im) { var n = im.getAttribute('src'); if (pending[n]) im.src = pending[n].url; else if (base && /^[\w.-]+\.(jpe?g|png|webp|gif)$/i.test(n)) im.src = base + n; });
   }
   function edit(a) {
     cur = a ? JSON.parse(JSON.stringify(a)) : { id: '' }; pending = {}; nextImg = 1; say('editMsg', '', '');
     $('editTitle').textContent = a ? '기사 수정' : '새 기사';
-    $('fTitle').value = cur.title || ''; $('fDate').value = cur.date || new Date().toISOString().slice(0, 10); $('fOutlet').value = a ? (cur.outlet || '') : '프로딴짓러'; $('fProject').value = cur.project || ''; $('fSummary').value = cur.summary || ''; $('fTag').value = cur.tag || ''; $('fTagAuto').checked = a ? !!cur.tagAuto : true; syncTag();
+    $('fTitle').value = cur.title || ''; $('fDate').value = cur.date || new Date().toISOString().slice(0, 10); $('fOutlet').value = a ? (cur.outlet || '') : '프로딴짓러'; $('fProject').value = cur.project || ''; $('fSummary').value = cur.summary || ''; buildTagSel(); $('fTag').value = '';
+    $('fTagSel').value = !cur.tag ? '' : (cur.tagAuto && cur.project ? 's:' + cur.project : (GENERAL.indexOf(cur.tag) >= 0 ? 'g:' + cur.tag : 'c:'));
+    if ($('fTagSel').value === 'c:') $('fTag').value = cur.tag || ''; if (!$('fTagSel').value) $('fTagSel').value = '';
+    syncTag();
     var en = cur.en || {}; $('fTitleEn').value = en.title || ''; $('fOutletEn').value = en.outlet || ''; $('fSummaryEn').value = en.summary || '';
     var local = a && /^articles\//.test(a.url || ''); $('fUrl').value = a && !local ? a.url : ''; $('fBody').value = ''; setMode(a && !local ? 'external' : 'local');
     show('vEdit'); preview();
@@ -282,7 +302,8 @@ td.act button{padding:5px 10px;font-size:13px}
     if (m === 'external' && !/^https?:\/\/\S+$/i.test(url)) return say('editMsg', 'bad', '기사 주소는 http:// 또는 https://로 시작해야 합니다.');
     if (m === 'local' && !body.trim()) return say('editMsg', 'bad', '본문을 입력하세요.');
     var a = { id: cur.id || newId(date), title: title, url: '', outlet: $('fOutlet').value.trim(), date: date, project: $('fProject').value, summary: $('fSummary').value.trim(), tag: tagText() };
-    if (a.tag && $('fTagAuto').checked && a.project) a.tagAuto = true;
+    if (a.tag && tagIsService() && a.project) a.tagAuto = true;
+    if (cur.id) a.updated = new Date().toISOString().slice(0, 10);
     var en = { title: $('fTitleEn').value.trim(), outlet: $('fOutletEn').value.trim(), summary: $('fSummaryEn').value.trim() };
     if (en.title || en.outlet || en.summary) { a.en = {}; Object.keys(en).forEach(function (k) { if (en[k]) a.en[k] = en[k]; }); }
     Object.keys(a).forEach(function (k) { if (a[k] === '' && k !== 'url') delete a[k]; });
@@ -296,9 +317,19 @@ td.act button{padding:5px 10px;font-size:13px}
            .then(function () { return put(dir + 'source.md', b64s(body), 'CMS: 기사 원본 ' + a.id); });
     }
     p = p.then(function () { return saveIndex(function (list) { var i = list.findIndex(function (x) { return x.id === a.id; }); if (i >= 0) list[i] = a; else list.push(a); return list; }, 'CMS: 기사 ' + (cur.id ? '수정' : '추가') + ' - ' + title); });
-    if (m === 'external' && wasLocal) p = p.then(function () { return removeDir('articles/' + cur.id); });
+    if (m === 'local') p = p.then(function () { return sitemapSet(a.id, true); });
+    if (m === 'external' && wasLocal) p = p.then(function () { return removeDir('articles/' + cur.id); }).then(function () { return sitemapSet(cur.id, false); });
     p.then(function () { $('btnSave').disabled = false; renderList(); show('vList'); say('listMsg', 'ok', '게시했습니다. 허브에는 1~2분 뒤 반영됩니다.'); })
      .catch(function (e) { $('btnSave').disabled = false; say('editMsg', 'bad', '실패: ' + e.message + ' (토큰 권한·만료를 확인하세요. 이미 올라간 일부 파일은 다시 게시하면 덮어씁니다.)'); });
+  }
+  function sitemapSet(id, add) {
+    var loc = SITE + 'articles/' + id + '/', line = '  <url><loc>' + loc + '</loc></url>\n';
+    return getFile('sitemap.xml').then(function (f) {
+      var t = f.text, has = t.indexOf('<loc>' + loc + '</loc>') >= 0;
+      if (add === has) return;
+      t = add ? t.replace('</urlset>', line + '</urlset>') : t.replace(line, '');
+      return gh('/contents/sitemap.xml', { method: 'PUT', body: { message: 'CMS: 사이트맵 ' + (add ? '추가' : '삭제') + ' ' + id, content: b64s(t), sha: f.sha, branch: BRANCH } });
+    }).catch(function () {});
   }
   function removeDir(dir) {
     return gh('/contents/' + dir + '?ref=' + BRANCH).then(function (items) { var p = Promise.resolve(); items.forEach(function (it) { p = p.then(function () { return gh('/contents/' + it.path, { method: 'DELETE', body: { message: 'CMS: 삭제 ' + it.path, sha: it.sha, branch: BRANCH } }); }); }); return p; }, function (e) { if (e.status !== 404) throw e; });
@@ -307,7 +338,7 @@ td.act button{padding:5px 10px;font-size:13px}
     if (!confirm('"' + a.title + '" 기사를 삭제할까요? 직접 쓴 기사는 페이지와 사진도 함께 지워집니다.')) return;
     say('listMsg', 'info', '삭제 중…');
     var p = saveIndex(function (list) { return list.filter(function (x) { return x.id !== a.id; }); }, 'CMS: 기사 삭제 - ' + a.title);
-    if (/^articles\//.test(a.url || '')) p = p.then(function () { return removeDir('articles/' + a.id); });
+    if (/^articles\//.test(a.url || '')) p = p.then(function () { return removeDir('articles/' + a.id); }).then(function () { return sitemapSet(a.id, false); });
     p.then(function () { renderList(); say('listMsg', 'ok', '삭제했습니다.'); }).catch(function (e) { say('listMsg', 'bad', '실패: ' + e.message); });
   }
 
@@ -344,7 +375,7 @@ td.act button{padding:5px 10px;font-size:13px}
   $('btnCancel').onclick = function () { say('listMsg', '', ''); show('vList'); };
   $('btnSave').onclick = save;
   $('fBody').addEventListener('input', preview);
-  ['fTitle', 'fTag'].forEach(function (i) { $(i).addEventListener('input', syncTag); }); $('fProject').addEventListener('change', function () { syncTag(); preview(); }); $('fTagAuto').addEventListener('change', syncTag);
+  ['fTitle', 'fTag', 'fOutlet', 'fDate'].forEach(function (i) { $(i).addEventListener('input', function () { syncTag(); preview(); }); }); $('fTagSel').addEventListener('change', onTagSel); $('fProject').addEventListener('change', onProject);
   document.querySelectorAll('input[name=mode]').forEach(function (r) { r.onchange = function () { setMode(mode()); }; });
   document.querySelector('.tools').addEventListener('click', function (e) {
     var t = e.target.getAttribute && e.target.getAttribute('data-t'); if (!t) return;

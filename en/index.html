@@ -439,34 +439,30 @@ html { scroll-behavior: smooth; }
 .project-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .project-search .hint { margin: 6px 2px 0; font-size: 12px; color: var(--muted); }
 
-/* ---- 서비스에서 나온 기사 (articles.json, 최대 5개) ---- */
-.stories { margin: 0 0 28px; }
+/* ---- STORIES (articles.json, 메인에는 최신 5개) ---- */
+.stories { margin: 0 0 22px; }
 .stories[hidden] { display: none; }
-.stories-head { display: grid; gap: 8px; margin: 0 0 18px; padding: 2px 0 2px 18px; border-left: 5px solid var(--accent); }
+.stories-head { display: grid; gap: 4px; margin: 0 0 8px; padding: 2px 0 2px 16px; border-left: 5px solid var(--accent); }
 .stories-kicker { margin: 0; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .16em; color: var(--accent); }
-.stories-title { margin: 0; font-size: clamp(26px, 4.2vw, 38px); font-weight: 700; letter-spacing: -.035em; line-height: 1.2; }
-@media (max-width: 600px) { .stories-head { padding-left: 14px; margin-bottom: 14px; } }
-.stories-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--rule); border-radius: 12px; background: var(--cell); overflow: hidden; }
-.stories-list li { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 2px 16px; align-items: start; padding: 10px 18px; border-top: 1px solid var(--rule); }
-.stories-list li:first-child { border-top: 0; }
-.story-date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
-.story-tag { color: var(--accent); font-weight: 700; font-size: 16px; line-height: 1.35; }
-.story-main a { color: var(--ink); font-weight: 700; font-size: 16px; line-height: 1.35; text-decoration: none; letter-spacing: -.01em; }
-.story-main a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-.story-main a:focus-visible, .story-proj:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-.story-meta { margin: 1px 0 0; font-size: 13px; color: var(--muted); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.story-by { margin-left: 4px; font-size: 13px; font-weight: 500; color: var(--muted); white-space: nowrap; }
-.story-by::before { content: "· "; }
-.story-proj { align-self: start; margin-top: 0; font-size: 12px; font-weight: 600; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 999px; padding: 3px 11px; text-decoration: none; white-space: nowrap; }
+.stories-title { margin: 0; font-size: clamp(22px, 3.4vw, 30px); font-weight: 700; letter-spacing: -.035em; line-height: 1.2; }
+.stories-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.stories-list li { display: grid; grid-template-columns: 88px minmax(0, 1fr) auto; gap: 0 14px; align-items: baseline; padding: 10px 2px; border-bottom: 1px solid var(--rule); }
+.story-date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.story-main { min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; }
+.story-tag { color: var(--accent); font-weight: 700; font-size: 16px; line-height: 1.4; }
+.story-main a.story-title-link { color: var(--ink); font-weight: 700; font-size: 16px; line-height: 1.4; text-decoration: none; letter-spacing: -.01em; }
+.story-main a.story-title-link:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.story-main a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.story-proj { font-size: 11.5px; font-weight: 600; color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 999px; padding: 1px 9px; text-decoration: none; white-space: nowrap; }
 .story-proj:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); }
-@media (max-width: 600px) {
-  .stories-list li { grid-template-columns: minmax(0, 1fr); padding: 14px 16px; }
-  .story-date { padding-top: 0; }
-  .story-proj { justify-self: start; margin-top: 6px; }
-}
+.story-views { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .stories-more { margin: 10px 2px 0; font-size: 14px; font-weight: 600; }
 .stories-more a { color: var(--accent); text-decoration: none; }
 .stories-more a:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 600px) {
+  .stories-list li { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "main main" "date views"; gap: 2px 10px; padding: 9px 2px; }
+  .story-main { grid-area: main; } .story-date { grid-area: date; } .story-views { grid-area: views; text-align: right; }
+}
 </style>
 </head>
 <body>
@@ -524,9 +520,9 @@ html { scroll-behavior: smooth; }
   <p class="archive-link"><a href="#archive">See the <span data-panel-count="archive">12</span> other projects →</a></p>
 
   <section class="stories" id="stories" aria-labelledby="h-stories" hidden>
-    <div class="stories-head"><p class="stories-kicker">STORIES · <span data-stories-count>0</span> <span data-stories-unit>ARTICLES</span></p><h2 class="stories-title" id="h-stories">Stories from the services</h2></div>
-    <ul class="stories-list" aria-label="Stories from the services"></ul>
-    <p class="stories-more" hidden><a href="articles/">See all stories (<span data-more-count>0</span>) →</a></p>
+    <div class="stories-head"><p class="stories-kicker">STORIES</p><h2 class="stories-title" id="h-stories">프로딴짓러</h2></div>
+    <ul class="stories-list" aria-label="프로딴짓러 STORIES"></ul>
+    <p class="stories-more" hidden><a href="stories/">See all stories →</a></p>
   </section>
 
   <div class="project-search" role="search" aria-label="Search projects">
@@ -1166,42 +1162,38 @@ html { scroll-behavior: smooth; }
 })();
 </script>
 <script>
-/* 서비스에서 나온 기사: articles.json(최신순 최대 5개)을 읽어 표시. 항목이 없으면 영역을 숨김 */
+/* STORIES: articles.json(최신순)을 읽어 메인에는 5개만 표시. 6개 이상이면 전체 기사 보기 링크. 항목이 없으면 영역을 숨김 */
 (function () {
   var sec = document.getElementById('stories'); if (!sec || typeof fetch !== 'function') return;
-  var EN = document.documentElement.lang === 'en', MAX = 5;
+  var EN = document.documentElement.lang === 'en', MAX = 5, PRE = EN ? '../' : '';
   var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function fdate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); if (!m) return ''; return EN ? MON[+m[2] - 1] + ' ' + (+m[3]) + ', ' + m[1] : m[1] + '.' + m[2] + '.' + m[3]; }
   function pick(a, k) { return (EN && a.en && a.en[k]) || a[k] || ''; }
-  fetch('../articles.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
+  function pvKey(id) { return 'databrew_pv_articles_' + String(id).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, ''); }
+  fetch(PRE + 'articles.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
     if (!Array.isArray(list)) return;
     list = list.filter(function (a) { return a && (/^https?:\/\//i.test(a.url || '') || /^articles\/[\w-]+\/$/.test(a.url || '')) && pick(a, 'title'); })
       .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')); });
     var total = list.length; list = list.slice(0, MAX);
     var ul = sec.querySelector('.stories-list'); ul.textContent = '';
     list.forEach(function (a) {
-      var li = document.createElement('li'), d = document.createElement('span'), main = document.createElement('div'), t = document.createElement('a');
+      var li = document.createElement('li'), d = document.createElement('span'), main = document.createElement('div'), t = document.createElement('a'), v = document.createElement('span');
       d.className = 'story-date'; d.textContent = fdate(a.date);
       main.className = 'story-main';
-      var ext = /^https?:/i.test(a.url); t.href = ext ? a.url : '../' + a.url; if (ext) { t.target = '_blank'; t.rel = 'noopener'; }
+      var ext = /^https?:/i.test(a.url); t.className = 'story-title-link'; t.href = ext ? a.url : PRE + a.url; if (ext) { t.target = '_blank'; t.rel = 'noopener'; }
       t.textContent = pick(a, 'title') + (ext ? ' ↗' : '');
-      var tg = pick(a, 'tag'); if (a.tagAuto && a.project) { var ph = document.querySelector('a.card-inner[href="projects/' + a.project + '/"] h3'); if (ph) tg = ph.textContent; }
-      if (tg) { var sp = document.createElement('span'); sp.className = 'story-tag'; sp.textContent = '[' + tg + '] '; main.appendChild(sp); }
+      var tg = a.tagAuto ? '' : pick(a, 'tag');
+      if (tg) { var sp = document.createElement('span'); sp.className = 'story-tag'; sp.textContent = '[' + tg + ']'; main.appendChild(sp); }
       main.appendChild(t);
-      var by = pick(a, 'outlet');
-      if (by) { var sb = document.createElement('span'); sb.className = 'story-by'; sb.textContent = by; main.appendChild(document.createTextNode(' ')); main.appendChild(sb); }
-      var sm = pick(a, 'summary');
-      if (sm) { var p = document.createElement('p'); p.className = 'story-meta'; p.textContent = sm; main.appendChild(p); }
-      li.appendChild(d); li.appendChild(main);
       if (a.project && /^[a-z0-9-]+$/.test(a.project)) {
         var h = document.querySelector('a.card-inner[href="projects/' + a.project + '/"] h3');
-        if (h) { var c = document.createElement('a'); c.className = 'story-proj'; c.href = 'projects/' + a.project + '/'; c.textContent = h.textContent; li.appendChild(c); }
+        if (h) { var c = document.createElement('a'); c.className = 'story-proj'; c.href = 'projects/' + a.project + '/'; c.textContent = h.textContent; main.appendChild(c); }
       }
-      ul.appendChild(li);
+      v.className = 'story-views';
+      li.appendChild(d); li.appendChild(main); li.appendChild(v); ul.appendChild(li);
+      if (!ext && a.id) fetch('https://countapi.mileshilliard.com/api/v1/get/' + pvKey(a.id), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : { value: 0 }; }).then(function (j) { if (typeof j.value === 'number') v.textContent = (EN ? 'Views ' : '조회 ') + j.value.toLocaleString('en-US'); }).catch(function () {});
     });
-    sec.querySelectorAll('[data-stories-count]').forEach(function (e) { e.textContent = total; });
-    sec.querySelectorAll('[data-stories-unit]').forEach(function (e) { e.textContent = total === 1 ? 'ARTICLE' : 'ARTICLES'; });
-    var more = sec.querySelector('.stories-more'); if (more) { more.hidden = total <= MAX; more.querySelectorAll('[data-more-count]').forEach(function (e) { e.textContent = total; }); }
+    var more = sec.querySelector('.stories-more'); if (more) more.hidden = total <= MAX;
     sec.hidden = list.length === 0;
   }).catch(function () {});
 })();

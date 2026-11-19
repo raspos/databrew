@@ -11,6 +11,8 @@
     if (!p) return 'home';
     return p.replace(/[^a-z0-9]+/gi, '_').toLowerCase().replace(/^_|_$/g, '') || 'home';
   }
+  var me = document.currentScript;
+  if (me && me.src && document.querySelector('main.art')) { var c = document.createElement('script'); c.src = me.src.replace(/analytics\.js(\?.*)?$/, 'comments.js'); c.defer = true; document.head.appendChild(c); }
   window.DatabrewAnalytics = { pageKey: pageKey, prefix: 'databrew_pv_' };
   if (GC_CODE && /^[a-z0-9][a-z0-9-]{1,29}$/.test(GC_CODE) && !document.querySelector('script[data-goatcounter]')) {
     var g = document.createElement('script'); g.async = true; g.src = 'https://gc.zgo.at/count.js';

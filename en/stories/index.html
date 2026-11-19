@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로딴짓러 STORIES — databrew</title>
+<meta name="description" content="Stories by 프로딴짓러, written from databrew services.">
+<link rel="canonical" href="https://raspos.github.io/databrew/en/stories/">
+<link rel="alternate" hreflang="ko" href="https://raspos.github.io/databrew/stories/">
+<link rel="alternate" hreflang="en" href="https://raspos.github.io/databrew/en/stories/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="databrew"><meta property="og:title" content="프로딴짓러 STORIES — databrew"><meta property="og:url" content="https://raspos.github.io/databrew/en/stories/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../detail.css">
+<style>.ar-wrap{max-width:900px;margin:0 auto;padding:36px max(16px,4vw) 70px}
+.ar-head{display:grid;gap:4px;margin:0 0 16px;padding:2px 0 2px 16px;border-left:5px solid var(--accent)}
+.ar-kicker{font:12px var(--font-mono);letter-spacing:.16em;color:var(--accent);margin:0}
+.ar-head h1{font-size:clamp(26px,4.4vw,38px);letter-spacing:-.035em;line-height:1.2;margin:0}
+.ar-total{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.bd-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 10px}
+.bd-bar input,.bd-bar select{border:1px solid var(--rule);background:var(--cell);color:var(--ink);border-radius:8px;padding:8px 12px;font:inherit;font-size:14px}
+.bd-bar input{flex:1 1 220px;min-width:0}
+.bd-bar input:focus-visible,.bd-bar select:focus-visible,.bd-bar button:focus-visible,.bd-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.bd-bar button{border:1px solid var(--rule);background:var(--cell);color:var(--ink);border-radius:8px;padding:8px 12px;font:inherit;font-size:13px;cursor:pointer}
+.bd{width:100%;border-collapse:collapse;border-top:2px solid var(--ink);font-size:14px}
+.bd caption{position:absolute;left:-9999px}
+.bd th{font-size:12px;font-weight:600;color:var(--muted);padding:9px 8px;border-bottom:1px solid var(--rule);text-align:center;white-space:nowrap}
+.bd td{padding:10px 8px;border-bottom:1px solid var(--rule);vertical-align:middle;text-align:center;color:var(--muted);font-size:13px}
+.bd td.bd-t,.bd th.bd-t{text-align:left}
+.bd td.bd-t{color:var(--ink);font-size:15.5px;line-height:1.5}
+.bd td.bd-t a{color:var(--ink);font-weight:600;text-decoration:none}.bd td.bd-t a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.bd-tag{color:var(--accent);font-weight:700}
+.bd-m{display:none;margin:2px 0 0;font-size:12px;color:var(--muted)}
+.bd-chip{font:inherit;font-size:12px;font-weight:600;color:var(--accent);background:none;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:999px;padding:2px 10px;cursor:pointer;white-space:nowrap}
+.bd-chip:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.bd-n{width:56px;font-variant-numeric:tabular-nums}.bd-svc{width:140px}.bd-d{width:104px;white-space:nowrap;font-variant-numeric:tabular-nums}.bd-v{width:64px;font-variant-numeric:tabular-nums}
+.bd-empty{padding:36px 8px!important;color:var(--muted)}
+.bd-pager{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:22px 0 0}
+.bd-pager button{min-width:40px;height:40px;border:1px solid var(--rule);background:var(--cell);color:var(--ink);border-radius:8px;font:inherit;font-size:14px;cursor:pointer}
+.bd-pager button[aria-current]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.bd-pager button:disabled{opacity:.4;cursor:default}
+@media (max-width:640px){.bd th.bd-n,.bd td.bd-n,.bd th.bd-svc,.bd td.bd-svc,.bd th.bd-d,.bd td.bd-d{display:none}.bd-m{display:block}.bd-v{width:44px}}</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="brand" href="../">←&nbsp; <strong>data</strong>brew</a>
+  <span class="breadcrumb">STORIES</span>
+  <a class="lang-switch-detail" href="../../stories/" hreflang="ko" lang="ko">한국어</a>
+</nav>
+<main class="ar-wrap">
+  <div class="ar-head">
+    <p class="ar-kicker">STORIES</p>
+    <h1>프로딴짓러</h1>
+    <p class="ar-total">Total <b id="arCount">0</b></p>
+  </div>
+  <div class="bd-bar">
+    <select id="bdS" aria-label="Filter by service" hidden><option value="">All services</option></select>
+    <input id="bdQ" type="search" placeholder="Search titles" aria-label="Search stories" autocomplete="off">
+    <button id="bdReset" type="button" hidden>Clear</button>
+  </div>
+  <table class="bd">
+    <caption>프로딴짓러 STORIES</caption>
+    <thead><tr><th class="bd-n" scope="col">No.</th><th class="bd-t" scope="col">Title</th><th class="bd-svc" scope="col">Service</th><th class="bd-d" scope="col">Date</th><th class="bd-v" scope="col">Views</th></tr></thead>
+    <tbody id="bdBody"><tr><td class="bd-empty" colspan="5">Loading…</td></tr></tbody>
+  </table>
+  <div class="bd-pager" id="bdPager"></div>
+</main>
+<footer class="foot">
+  <a href="../">databrew</a>
+  <span>An independent data journalism project</span>
+  <span>Total visits <b data-hub-views>–</b></span>
+</footer>
+<script>
+(function () {
+  var EN = document.documentElement.lang === 'en', UP = '../', ROOT = '../../', PER = 15;
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fdate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); if (!m) return ''; return EN ? MON[+m[2] - 1] + ' ' + (+m[3]) + ', ' + m[1] : m[1] + '.' + m[2] + '.' + m[3]; }
+  function pick(a, k) { return (EN && a.en && a.en[k]) || a[k] || ''; }
+  var body = document.getElementById('bdBody'), pager = document.getElementById('bdPager'), cnt = document.getElementById('arCount'), qi = document.getElementById('bdQ'), sf = document.getElementById('bdS'), reset = document.getElementById('bdReset');
+  var names = {}, rows = [], page = 1, q = '', svc = '';
+  function pvKey(id) { return 'databrew_pv_articles_' + String(id).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, ''); }
+  function msg(t) { body.textContent = ''; var tr = document.createElement('tr'), td = document.createElement('td'); td.colSpan = 5; td.className = 'bd-empty'; td.textContent = t; tr.appendChild(td); body.appendChild(tr); pager.textContent = ''; }
+  function writeHash() { var p = []; if (page > 1) p.push('p=' + page); if (svc) p.push('s=' + encodeURIComponent(svc)); if (q) p.push('q=' + encodeURIComponent(q)); try { history.replaceState(null, '', p.length ? '#' + p.join('&') : location.pathname + location.search); } catch (e) {} }
+  function readHash() { (location.hash || '').slice(1).split('&').forEach(function (kv) { var m = /^(\w+)=(.*)$/.exec(kv); if (!m) return; var v = decodeURIComponent(m[2]); if (m[1] === 'p') page = parseInt(v, 10) || 1; else if (m[1] === 's' && /^[a-z0-9-]+$/.test(v)) svc = v; else if (m[1] === 'q') q = v; }); }
+  function render() {
+    var f = rows.filter(function (a) {
+      if (svc && a.project !== svc) return false; if (!q) return true;
+      return [pick(a, 'title'), a.tagAuto ? '' : pick(a, 'tag'), names[a.project] || '', pick(a, 'summary')].join(' ').toLowerCase().indexOf(q.toLowerCase()) >= 0;
+    });
+    var pages = Math.max(1, Math.ceil(f.length / PER)); if (page > pages) page = pages; if (page < 1) page = 1;
+    reset.hidden = !(svc || q); sf.value = svc; qi.value = q;
+    if (!f.length) return msg(EN ? 'No stories found.' : '검색 결과가 없습니다.');
+    body.textContent = '';
+    f.slice((page - 1) * PER, page * PER).forEach(function (a) {
+      var tr = document.createElement('tr'), n = document.createElement('td'), t = document.createElement('td'), sv = document.createElement('td'), d = document.createElement('td'), v = document.createElement('td');
+      var ext = /^https?:/i.test(a.url), link = document.createElement('a'), tg = a.tagAuto ? '' : pick(a, 'tag');
+      n.className = 'bd-n'; n.textContent = a._n; t.className = 'bd-t';
+      if (tg) { var s = document.createElement('span'); s.className = 'bd-tag'; s.textContent = '[' + tg + '] '; t.appendChild(s); }
+      link.href = ext ? a.url : ROOT + a.url; link.textContent = pick(a, 'title') + (ext ? ' ↗' : ''); if (ext) { link.target = '_blank'; link.rel = 'noopener'; } t.appendChild(link);
+      var nm = names[a.project] || '', m = document.createElement('p'); m.className = 'bd-m'; m.textContent = [nm, fdate(a.date)].filter(Boolean).join(' · '); t.appendChild(m);
+      sv.className = 'bd-svc'; if (nm) { var b = document.createElement('button'); b.type = 'button'; b.className = 'bd-chip'; b.textContent = nm; b.title = EN ? 'Show only this service' : '이 서비스의 기사만 보기'; b.onclick = function () { svc = a.project; page = 1; writeHash(); render(); }; sv.appendChild(b); }
+      d.className = 'bd-d'; d.textContent = fdate(a.date); v.className = 'bd-v'; v.setAttribute('data-id', ext ? '' : a.id);
+      [n, t, sv, d, v].forEach(function (c) { tr.appendChild(c); }); body.appendChild(tr);
+    });
+    body.querySelectorAll('td.bd-v').forEach(function (td) { var id = td.getAttribute('data-id'); if (!id) return; fetch('https://countapi.mileshilliard.com/api/v1/get/' + pvKey(id), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : { value: 0 }; }).then(function (j) { if (typeof j.value === 'number') td.textContent = j.value.toLocaleString('en-US'); }).catch(function () {}); });
+    pager.textContent = '';
+    if (pages > 1) {
+      var mk = function (label, p, cur, dis, aria) { var b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.setAttribute('aria-label', aria || (EN ? 'Page ' : '') + label + (EN ? '' : '쪽')); if (cur) b.setAttribute('aria-current', 'page'); if (dis) b.disabled = true; b.onclick = function () { page = p; writeHash(); render(); window.scrollTo(0, 0); }; pager.appendChild(b); };
+      mk('‹', page - 1, false, page === 1, EN ? 'Previous page' : '이전 쪽');
+      for (var i = 1; i <= pages; i++) mk(String(i), i, i === page, false);
+      mk('›', page + 1, false, page === pages, EN ? 'Next page' : '다음 쪽');
+    }
+  }
+  fetch(UP + 'index.html', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) {
+    var re = /<a class="card-inner" href="projects\/([^\/"]+)\/">[\s\S]*?<h3>([\s\S]*?)<\/h3>/g, m;
+    while ((m = re.exec(t))) names[m[1]] = m[2].replace(/<[^>]+>/g, '').trim();
+  }).catch(function () {}).then(function () { return fetch(ROOT + 'articles.json', { cache: 'no-cache' }); })
+  .then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (all) {
+    all = (Array.isArray(all) ? all : []).filter(function (a) { return a && (/^https?:\/\//i.test(a.url || '') || /^articles\/[\w-]+\/$/.test(a.url || '')) && pick(a, 'title'); })
+      .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')); });
+    all.forEach(function (a, i) { a._n = all.length - i; });
+    rows = all; cnt.textContent = all.length;
+    var seen = {}; all.forEach(function (a) { if (a.project && names[a.project] && !seen[a.project]) { seen[a.project] = 1; var o = document.createElement('option'); o.value = a.project; o.textContent = names[a.project]; sf.appendChild(o); } });
+    sf.hidden = Object.keys(seen).length === 0;
+    readHash();
+    if (!all.length) return msg(EN ? 'No stories yet.' : '아직 기사가 없습니다.');
+    render();
+  }).catch(function () { msg(EN ? 'Could not load the stories.' : '기사를 불러오지 못했습니다.'); });
+  qi.addEventListener('input', function () { q = qi.value.trim(); page = 1; writeHash(); render(); });
+  sf.addEventListener('change', function () { svc = sf.value; page = 1; writeHash(); render(); });
+  reset.addEventListener('click', function () { svc = ''; q = ''; page = 1; writeHash(); render(); });
+})();
+</script>
+<script src="../../detail.js" defer></script>
+</body>
+</html>
