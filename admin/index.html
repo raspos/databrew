@@ -42,7 +42,7 @@ td.act button{padding:5px 10px;font-size:13px}
 .pv h2{font-size:20px;margin:1.2em 0 .4em}.pv h3{font-size:17px;margin:1.1em 0 .3em}
 .pv img{max-width:100%;height:auto;border-radius:6px}.pv figure{margin:1em 0}.pv figcaption{font-size:12.5px;color:var(--muted);margin-top:4px}
 .pv blockquote{margin:1em 0;padding:4px 14px;border-left:3px solid var(--accent);color:var(--muted)}
-.pv a{color:var(--accent)}
+.pv a{color:var(--accent)}.pv a.svc-link,.pv a.svc-detail{color:inherit}/*SVC*/
 .seg{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}.seg label{display:flex;gap:6px;align-items:center;margin:0;font-weight:500}
 [hidden]{display:none!important}
 @media (max-width:760px){.row,.split{grid-template-columns:1fr}.preview{min-height:160px}}
@@ -136,7 +136,7 @@ td.act button{padding:5px 10px;font-size:13px}
   'use strict';
   var OWNER = 'raspos', REPO = 'databrew', BRANCH = 'main', SITE = 'https://raspos.github.io/databrew/';
   var $ = function (id) { return document.getElementById(id); };
-  var token = '', articles = [], projects = [], cur = null, pending = {}, nextImg = 1;
+  var token = '', articles = [], projects = [], projInfo = {}, cur = null, pending = {}, nextImg = 1;
 
   /* ---------- 안전한 마크다운(제한된 문법) ---------- */
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -168,6 +168,17 @@ td.act button{padding:5px 10px;font-size:13px}
     return out.join('\n');
   }
 
+  /* ---------- 서비스 링크 박스 (파생된 서비스를 고르면 본문 맨 아래에 자동으로 붙음) ---------- */
+  function svcBox(slug, prefix) {
+    var i = projInfo[slug]; if (!i) return '';
+    var okUrl = /^https?:\/\//i.test(i.url || ''), thumb = i.thumb && /^[\w\/.-]+$/.test(i.thumb) ? '<img src="' + esc(prefix + i.thumb) + '" alt="" loading="lazy">' : '';
+    return '<aside class="svc-box"><a class="svc-link" href="' + (okUrl ? esc(i.url) : esc(prefix + 'projects/' + slug + '/')) + '"' + (okUrl ? ' target="_blank" rel="noopener"' : '') + '>' + thumb +
+      '<span class="svc-text"><span class="svc-kicker">이 기사가 나온 서비스</span><strong>' + esc(i.name) + '</strong>' + (i.line ? '<span class="svc-line">' + esc(i.line) + '</span>' : '') + '<span class="svc-go">' + esc(i.go) + '</span></span></a>' +
+      '<a class="svc-detail" href="' + esc(prefix + 'projects/' + slug + '/') + '">프로젝트 소개 보기</a></aside>';
+  }
+  var SVC_CSS = '.svc-box{margin:44px 0 0}.svc-link{display:flex;gap:0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--cell);text-decoration:none;color:inherit}.svc-link:hover{border-color:var(--accent)}.svc-link img{width:42%;max-width:280px;min-height:150px;object-fit:cover;display:block;border-radius:0!important;margin:0}.svc-text{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:16px 20px;min-width:0}.svc-kicker{font:11px var(--font-mono,monospace);letter-spacing:.14em;color:var(--muted)}.svc-text strong{font-size:19px;line-height:1.35}.svc-line{font-size:14px;color:var(--muted);line-height:1.6}.svc-go{font-size:13px;font-weight:700;color:var(--accent)}.svc-detail{display:inline-block;margin-top:10px;font-size:13px;color:var(--muted)}@media (max-width:560px){.svc-link{flex-direction:column}.svc-link img{width:100%;max-width:none}}';
+  (function () { var st = document.createElement('style'); st.textContent = SVC_CSS; document.head.appendChild(st); })();
+
   /* ---------- 기사 페이지 생성 ---------- */
   function fdate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); return m ? m[1] + '.' + m[2] + '.' + m[3] : ''; }
   function firstImg(body) { var m = /!\[[^\]]*\]\(([^)\s]+)\)/.exec(body || ''); return m ? imgSrc(m[1], '') : null; }
@@ -181,8 +192,8 @@ td.act button{padding:5px 10px;font-size:13px}
       '<meta property="og:type" content="article">\n<meta property="og:site_name" content="databrew">\n<meta property="og:locale" content="ko_KR">\n<meta property="og:title" content="' + esc(tg + a.title) + '">\n<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + url + '">\n<meta property="og:image" content="' + esc(og) + '">\n' +
       '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="' + esc(tg + a.title) + '">\n<meta name="twitter:description" content="' + esc(desc) + '">\n<meta name="twitter:image" content="' + esc(og) + '">\n' +
       '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">\n<link rel="stylesheet" href="../../detail.css">\n' +
-      '<style>.art{max-width:720px;margin:0 auto;padding:48px max(20px,4vw) 60px}.art h1{font-size:clamp(26px,4.4vw,38px);line-height:1.3;letter-spacing:-.03em;margin:0 0 10px}.art h1 .tag{color:var(--accent);font-weight:700}.art .meta{font:12.5px var(--font-mono);color:var(--muted);margin:0 0 28px}.art .meta a{color:var(--accent)}.art-body{font-size:17px;line-height:1.9}.art-body h2{font-size:24px;margin:1.8em 0 .5em}.art-body h3{font-size:19px;margin:1.6em 0 .4em}.art-body img{max-width:100%;height:auto;border-radius:6px;display:block}.art-body figure{margin:1.6em 0}.art-body figcaption{font-size:13px;color:var(--muted);margin-top:6px}.art-body blockquote{margin:1.4em 0;padding:2px 18px;border-left:3px solid var(--accent);color:var(--muted)}.art-body a{color:var(--accent)}</style>\n</head>\n<body>\n' +
-      '<nav class="topnav">\n  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>\n  <span class="breadcrumb">서비스에서 나온 기사</span>\n</nav>\n<main class="art">\n<h1>' + (a.tag ? '<span class="tag">[' + esc(a.tag) + ']</span> ' : '') + esc(a.title) + '</h1>\n<p class="meta">' + meta + (proj ? ' · <a href="../../projects/' + esc(proj[0]) + '/">' + esc(proj[1]) + '</a>' : '') + ' · <span class="pv" hidden>조회 <b data-pv></b></span></p>\n<div class="art-body">\n' + md(body, '') + '\n</div>\n</main>\n' +
+      '<style>.art{max-width:720px;margin:0 auto;padding:48px max(20px,4vw) 60px}.art h1{font-size:clamp(26px,4.4vw,38px);line-height:1.3;letter-spacing:-.03em;margin:0 0 10px}.art h1 .tag{color:var(--accent);font-weight:700}.art .meta{font:12.5px var(--font-mono);color:var(--muted);margin:0 0 28px}.art .meta a{color:var(--accent)}.art-body{font-size:17px;line-height:1.9}.art-body h2{font-size:24px;margin:1.8em 0 .5em}.art-body h3{font-size:19px;margin:1.6em 0 .4em}.art-body img{max-width:100%;height:auto;border-radius:6px;display:block}.art-body figure{margin:1.6em 0}.art-body figcaption{font-size:13px;color:var(--muted);margin-top:6px}.art-body blockquote{margin:1.4em 0;padding:2px 18px;border-left:3px solid var(--accent);color:var(--muted)}.art-body a{color:var(--accent)}' + SVC_CSS + '</style>\n</head>\n<body>\n' +
+      '<nav class="topnav">\n  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>\n  <span class="breadcrumb">서비스에서 나온 기사</span>\n</nav>\n<main class="art">\n<h1>' + (a.tag ? '<span class="tag">[' + esc(a.tag) + ']</span> ' : '') + esc(a.title) + '</h1>\n<p class="meta">' + meta + (proj ? ' · <a href="../../projects/' + esc(proj[0]) + '/">' + esc(proj[1]) + '</a>' : '') + '<span class="pv" hidden> · 조회 <b data-pv></b></span></p>\n<div class="art-body">\n' + md(body, '') + '\n</div>\n' + (a.project ? svcBox(a.project, '../../') + '\n' : '') + '</main>\n' +
       '<footer class="foot">\n  <a href="../../">databrew</a>\n  <span>독립 데이터저널리즘 프로젝트</span>\n  <span>누적 방문 <b data-hub-views>–</b></span>\n</footer>\n<script src="../../detail.js" defer><\/script>\n</body>\n</html>\n';
   }
 
@@ -209,7 +220,13 @@ td.act button{padding:5px 10px;font-size:13px}
   /* ---------- 화면 ---------- */
   function show(v) { ['vLogin', 'vList', 'vEdit', 'vStats'].forEach(function (x) { $(x).hidden = x !== v; }); window.scrollTo(0, 0); }
   function say(id, kind, text) { var e = $(id); e.innerHTML = ''; if (!text) return; var d = document.createElement('div'); d.className = 'msg ' + kind; d.textContent = text; e.appendChild(d); }
-  function loadProjects() { return fetch('../index.html', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) { var re = /<a class="card-inner" href="projects\/([^\/"]+)\/">[\s\S]*?<h3>([\s\S]*?)<\/h3>/g, m; projects = []; while ((m = re.exec(t))) projects.push([m[1], m[2].replace(/<[^>]+>/g, '').trim()]); var sel = $('fProject'); projects.forEach(function (p) { var o = document.createElement('option'); o.value = p[0]; o.textContent = p[1]; sel.appendChild(o); }); }).catch(function () {}); }
+  function loadProjects() { return fetch('../index.html', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) { var re = /<article class="card[^"]*"[^>]*>([\s\S]*?)<\/article>/g, m; projects = []; projInfo = {};
+      while ((m = re.exec(t))) {
+        var b = m[1], sl = /<a class="card-inner" href="projects\/([^\/"]+)\/"/.exec(b); if (!sl) continue;
+        var nm = /<h3>([\s\S]*?)<\/h3>/.exec(b), im = /<img src="([^"]+)"/.exec(b), q = /<p class="q">([\s\S]*?)<\/p>/.exec(b) || /<p class="desc">([\s\S]*?)<\/p>/.exec(b), sv = /<a class="btn-service" href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/.exec(b), name = nm ? nm[1].replace(/<[^>]+>/g, '').trim() : sl[1];
+        projects.push([sl[1], name]);
+        projInfo[sl[1]] = { name: name, thumb: im ? im[1] : '', line: q ? q[1].replace(/<[^>]+>/g, '').trim() : '', url: sv ? sv[1] : '', go: sv ? sv[2].replace(/<[^>]+>/g, '').trim() : '서비스 열기 ↗' };
+      } var sel = $('fProject'); projects.forEach(function (p) { var o = document.createElement('option'); o.value = p[0]; o.textContent = p[1]; sel.appendChild(o); }); }).catch(function () {}); }
   function renderList() {
     var tb = $('rows'); tb.textContent = '';
     articles.slice().sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); }).forEach(function (a, i) {
@@ -235,7 +252,7 @@ td.act button{padding:5px 10px;font-size:13px}
   function setMode(m) { document.querySelector('input[name=mode][value=' + m + ']').checked = true; $('boxExt').hidden = m !== 'external'; $('boxLocal').hidden = m !== 'local'; }
   function preview() {
     var base = cur && cur.id ? '../articles/' + cur.id + '/' : '';
-    var html = md($('fBody').value, ''); var pv = $('pv'); pv.innerHTML = html;
+    var html = md($('fBody').value, '') + (cur && $('fProject').value ? svcBox($('fProject').value, '../') : ''); var pv = $('pv'); pv.innerHTML = html;
     pv.querySelectorAll('img').forEach(function (im) { var n = im.getAttribute('src'); if (pending[n]) im.src = pending[n].url; else if (base && /^[\w.-]+\.(jpe?g|png|webp|gif)$/i.test(n)) im.src = base + n; });
   }
   function edit(a) {
@@ -327,7 +344,7 @@ td.act button{padding:5px 10px;font-size:13px}
   $('btnCancel').onclick = function () { say('listMsg', '', ''); show('vList'); };
   $('btnSave').onclick = save;
   $('fBody').addEventListener('input', preview);
-  ['fTitle', 'fTag'].forEach(function (i) { $(i).addEventListener('input', syncTag); }); $('fProject').addEventListener('change', syncTag); $('fTagAuto').addEventListener('change', syncTag);
+  ['fTitle', 'fTag'].forEach(function (i) { $(i).addEventListener('input', syncTag); }); $('fProject').addEventListener('change', function () { syncTag(); preview(); }); $('fTagAuto').addEventListener('change', syncTag);
   document.querySelectorAll('input[name=mode]').forEach(function (r) { r.onchange = function () { setMode(mode()); }; });
   document.querySelector('.tools').addEventListener('click', function (e) {
     var t = e.target.getAttribute && e.target.getAttribute('data-t'); if (!t) return;
