@@ -449,6 +449,7 @@ html { scroll-behavior: smooth; }
 .stories-list li { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 4px 16px; align-items: start; padding: 14px 18px; border-top: 1px solid var(--rule); }
 .stories-list li:first-child { border-top: 0; }
 .story-date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding-top: 4px; font-variant-numeric: tabular-nums; }
+.story-tag { color: var(--accent); font-weight: 700; font-size: 16px; }
 .story-main a { color: var(--ink); font-weight: 700; font-size: 16px; line-height: 1.45; text-decoration: none; letter-spacing: -.01em; }
 .story-main a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .story-main a:focus-visible, .story-proj:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
@@ -1167,13 +1168,18 @@ html { scroll-behavior: smooth; }
   function pick(a, k) { return (EN && a.en && a.en[k]) || a[k] || ''; }
   fetch('articles.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
     if (!Array.isArray(list)) return;
-    list = list.filter(function (a) { return a && /^https?:\/\//i.test(a.url || '') && pick(a, 'title'); })
+    list = list.filter(function (a) { return a && (/^https?:\/\//i.test(a.url || '') || /^articles\/[\w-]+\/$/.test(a.url || '')) && pick(a, 'title'); })
       .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')); }).slice(0, MAX);
     var ul = sec.querySelector('.stories-list'); ul.textContent = '';
     list.forEach(function (a) {
       var li = document.createElement('li'), d = document.createElement('span'), main = document.createElement('div'), t = document.createElement('a');
       d.className = 'story-date'; d.textContent = fdate(a.date);
-      main.className = 'story-main'; t.href = a.url; t.target = '_blank'; t.rel = 'noopener'; t.textContent = pick(a, 'title') + ' ↗'; main.appendChild(t);
+      main.className = 'story-main';
+      var ext = /^https?:/i.test(a.url); t.href = ext ? a.url : '' + a.url; if (ext) { t.target = '_blank'; t.rel = 'noopener'; }
+      t.textContent = pick(a, 'title') + (ext ? ' ↗' : '');
+      var tg = pick(a, 'tag'); if (a.tagAuto && a.project) { var ph = document.querySelector('a.card-inner[href="projects/' + a.project + '/"] h3'); if (ph) tg = ph.textContent; }
+      if (tg) { var sp = document.createElement('span'); sp.className = 'story-tag'; sp.textContent = '[' + tg + '] '; main.appendChild(sp); }
+      main.appendChild(t);
       var meta = [pick(a, 'outlet'), pick(a, 'summary')].filter(Boolean).join(' · ');
       if (meta) { var p = document.createElement('p'); p.className = 'story-meta'; p.textContent = meta; main.appendChild(p); }
       li.appendChild(d); li.appendChild(main);
@@ -1187,5 +1193,6 @@ html { scroll-behavior: smooth; }
   }).catch(function () {});
 })();
 </script>
+<script src="analytics.js" defer></script>
 </body>
 </html>

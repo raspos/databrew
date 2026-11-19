@@ -1,3 +1,5 @@
+/* 페이지별 조회수(analytics.js)를 detail.js와 같은 폴더 기준으로 불러옵니다 */
+(function () { var cs = document.currentScript; if (!cs || !cs.src) return; var s = document.createElement('script'); s.src = cs.src.replace(/detail\.js(\?.*)?$/, 'analytics.js'); s.defer = true; document.head.appendChild(s); })();
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var root = document.documentElement;

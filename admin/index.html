@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>databrew 기사 관리</title>
+<style>
+:root{--board:#f6f2ea;--cell:#fff;--ink:#1c1812;--muted:#7a6f5e;--rule:#e2dac8;--accent:#8a4b1c;--ok:#2f7a4a;--bad:#b3261e;--font:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:ui-monospace,Consolas,monospace}
+@media (prefers-color-scheme:dark){:root{--board:#1b1814;--cell:#25211c;--ink:#efe8db;--muted:#a89c88;--rule:#3a342b;--accent:#e0a46a;--ok:#6cc28b;--bad:#f08a80;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--board);color:var(--ink);font:15px/1.6 var(--font)}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 80px}
+header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+header.top h1{margin:0;font-size:20px;letter-spacing:-.02em}
+header.top .sp{flex:1}
+.card{background:var(--cell);border:1px solid var(--rule);border-radius:12px;padding:18px}
+.card h2{margin:0 0 10px;font-size:17px}
+label{display:block;font-size:13px;font-weight:600;margin:12px 0 5px}
+input[type=text],input[type=date],input[type=password],select,textarea{width:100%;border:1px solid var(--rule);background:var(--board);color:var(--ink);border-radius:8px;padding:9px 11px;font:inherit}
+textarea{min-height:360px;resize:vertical;font-family:var(--mono);font-size:14px;line-height:1.65}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit;cursor:pointer;border:1px solid var(--rule);background:var(--cell);color:var(--ink);border-radius:8px;padding:8px 14px}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+button.danger{color:var(--bad);border-color:var(--bad)}
+button:disabled{opacity:.5;cursor:default}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hint{font-size:12.5px;color:var(--muted);margin:4px 0 0}
+.msg{margin:12px 0 0;padding:10px 12px;border-radius:8px;font-size:14px}
+.msg.ok{background:color-mix(in srgb,var(--ok) 14%,transparent);color:var(--ok)}
+.msg.bad{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
+.msg.info{background:var(--board);color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 8px;border-top:1px solid var(--rule);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;border-top:0}
+td.act{white-space:nowrap;text-align:right}
+td.act button{padding:5px 10px;font-size:13px}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.tools button{padding:5px 11px;font-size:13px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.preview{border:1px solid var(--rule);border-radius:8px;padding:14px 18px;background:var(--board);min-height:360px;overflow:auto}
+.pv h2{font-size:20px;margin:1.2em 0 .4em}.pv h3{font-size:17px;margin:1.1em 0 .3em}
+.pv img{max-width:100%;height:auto;border-radius:6px}.pv figure{margin:1em 0}.pv figcaption{font-size:12.5px;color:var(--muted);margin-top:4px}
+.pv blockquote{margin:1em 0;padding:4px 14px;border-left:3px solid var(--accent);color:var(--muted)}
+.pv a{color:var(--accent)}
+.seg{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}.seg label{display:flex;gap:6px;align-items:center;margin:0;font-weight:500}
+[hidden]{display:none!important}
+@media (max-width:760px){.row,.split{grid-template-columns:1fr}.preview{min-height:160px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><h1>databrew 기사 관리</h1><span class="sp"></span><span id="who" class="hint"></span><button id="logout" hidden>로그아웃</button></header>
+
+<section id="vLogin" class="card" hidden>
+  <h2>처음 한 번만 연결하세요</h2>
+  <p class="hint" style="margin:0 0 6px">이 화면은 GitHub 저장소에 글과 사진을 올려 주는 도구입니다. 접근 토큰을 넣어야만 동작하며, 토큰은 이 브라우저에만 저장되고 서버로 보내지 않습니다.</p>
+  <ol class="hint" style="margin:6px 0 0;padding-left:20px">
+    <li>GitHub → Settings → Developer settings → Personal access tokens → <b>Fine-grained tokens</b> → Generate new token</li>
+    <li>Repository access: <b>Only select repositories → raspos/databrew</b></li>
+    <li>Permissions → Repository permissions → <b>Contents: Read and write</b> (다른 권한은 필요 없음)</li>
+    <li>만료일은 짧게(예: 90일) 정하고, 생성된 토큰을 아래에 붙여 넣으세요.</li>
+  </ol>
+  <label for="tok">GitHub 토큰</label>
+  <input id="tok" type="password" autocomplete="off" placeholder="github_pat_…">
+  <p style="margin:12px 0 0"><button id="btnLogin" class="primary">연결</button></p>
+  <div id="loginMsg"></div>
+</section>
+
+<section id="vList" hidden>
+  <div class="card">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h2 style="margin:0">기사 목록</h2><span class="sp" style="flex:1"></span><button id="btnStats">조회수 보기</button><button id="btnNew" class="primary">+ 새 기사</button></div>
+    <p class="hint">허브에는 날짜가 가장 최근인 기사 5개만 표시됩니다. 나머지는 목록에 남아 있다가 새 기사가 밀려나면 다시 나타나지 않으니, 필요 없으면 삭제하세요.</p>
+    <table><thead><tr><th>날짜</th><th>제목</th><th>종류</th><th>서비스</th><th></th></tr></thead><tbody id="rows"></tbody></table>
+    <div id="listMsg"></div>
+  </div>
+</section>
+
+<section id="vStats" hidden>
+  <div class="card">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h2 style="margin:0">조회수</h2><span style="flex:1"></span><button id="btnStatsBack">← 목록</button></div>
+    <p class="hint">페이지별 누적 조회수입니다. 같은 사람이 한 탭에서 같은 페이지를 다시 열어도 한 번만 세고, 이 기능을 켠 이후부터 쌓입니다. 사이트 누적 방문은 허브와 상세 페이지를 통틀어 탭 단위로 센 합계입니다.</p>
+    <p id="statsTotal" style="font-size:18px;font-weight:700;margin:10px 0"></p>
+    <table><thead><tr><th>페이지</th><th style="text-align:right">조회수</th></tr></thead><tbody id="statsRows"></tbody></table>
+    <div id="statsMsg"></div>
+  </div>
+</section>
+
+<section id="vEdit" hidden>
+  <div class="card">
+    <h2 id="editTitle">새 기사</h2>
+    <label for="fTitle">제목</label><input id="fTitle" type="text" maxlength="120">
+    <div class="row">
+      <div><label for="fDate">날짜</label><input id="fDate" type="date"></div>
+      <div><label for="fOutlet">매체·작성자 (선택)</label><input id="fOutlet" type="text" placeholder="예: 프로딴짓러"></div>
+    </div>
+    <div class="row">
+      <div><label for="fProject">파생된 서비스 (선택)</label><select id="fProject"><option value="">선택 안 함</option></select></div>
+      <div><label for="fSummary">한 줄 설명 (선택)</label><input id="fSummary" type="text" maxlength="160"></div>
+    </div>
+    <label for="fTag">말머리 (선택)</label>
+    <div class="row" style="grid-template-columns:1fr auto;align-items:center">
+      <input id="fTag" type="text" maxlength="20" list="tagList" placeholder="예: BOK워치, 단독, 해설">
+      <label style="display:flex;gap:6px;align-items:center;margin:0;font-weight:500"><input id="fTagAuto" type="checkbox" checked> 서비스 이름 자동</label>
+    </div>
+    <datalist id="tagList"><option value="단독"><option value="해설"><option value="분석"><option value="인터뷰"><option value="후기"><option value="업데이트"></datalist>
+    <p class="hint">제목 앞에 <b id="tagPrev">[말머리] 제목</b> 처럼 붙습니다. "서비스 이름 자동"을 켜면 선택한 서비스 이름이 말머리가 되고, 끄면 직접 정할 수 있습니다.</p>
+    <label>기사 종류</label>
+    <div class="seg">
+      <label><input type="radio" name="mode" value="local" checked> 이 사이트에 직접 쓰기</label>
+      <label><input type="radio" name="mode" value="external"> 다른 매체의 기사 링크만 걸기</label>
+    </div>
+    <div id="boxExt" hidden><label for="fUrl">기사 주소</label><input id="fUrl" type="text" placeholder="https://"></div>
+    <div id="boxLocal">
+      <label for="fBody">본문</label>
+      <div class="tools">
+        <button type="button" data-t="h">제목</button><button type="button" data-t="b">굵게</button><button type="button" data-t="i">기울임</button>
+        <button type="button" data-t="q">인용</button><button type="button" data-t="l">목록</button><button type="button" data-t="a">링크</button>
+        <button type="button" id="btnPhoto">사진 넣기</button><input id="fPhoto" type="file" accept="image/*" multiple hidden>
+      </div>
+      <div class="split"><textarea id="fBody" placeholder="본문을 쓰세요. 빈 줄로 문단을 나눕니다."></textarea><div class="preview pv" id="pv"></div></div>
+      <p class="hint">사진은 올릴 때 가로 1600px 이하로 줄여 JPEG로 저장합니다. 사진 줄 <code>![설명](1.jpg)</code>의 설명은 사진 아래 캡션이 됩니다.</p>
+    </div>
+    <details style="margin-top:14px"><summary class="hint" style="cursor:pointer">영어 허브에 보일 문구 (선택)</summary>
+      <div class="row"><div><label for="fTitleEn">English title</label><input id="fTitleEn" type="text"></div><div><label for="fOutletEn">English outlet</label><input id="fOutletEn" type="text"></div></div>
+      <label for="fSummaryEn">English summary</label><input id="fSummaryEn" type="text">
+    </details>
+    <p style="margin:16px 0 0;display:flex;gap:10px;flex-wrap:wrap"><button id="btnSave" class="primary">게시</button><button id="btnCancel">취소</button></p>
+    <div id="editMsg"></div>
+  </div>
+</section>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var OWNER = 'raspos', REPO = 'databrew', BRANCH = 'main', SITE = 'https://raspos.github.io/databrew/';
+  var $ = function (id) { return document.getElementById(id); };
+  var token = '', articles = [], projects = [], cur = null, pending = {}, nextImg = 1;
+
+  /* ---------- 안전한 마크다운(제한된 문법) ---------- */
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function imgSrc(src, base) {
+    if (/^https:\/\//i.test(src)) return src;
+    if (/^[\w.-]+\.(jpe?g|png|webp|gif)$/i.test(src)) return (base || '') + src;
+    return null;
+  }
+  function inline(t, base) {
+    t = esc(t);
+    t = t.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (m, alt, src) { var u = imgSrc(src.replace(/&amp;/g, '&'), base); return u ? '<img src="' + esc(u) + '" alt="' + alt + '">' : m; });
+    t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, function (m, txt, url) { return '<a href="' + url + '" target="_blank" rel="noopener">' + txt + '</a>'; });
+    t = t.replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+    return t;
+  }
+  function md(src, base) {
+    var blocks = String(src || '').replace(/\r/g, '').split(/\n{2,}/), out = [];
+    blocks.forEach(function (b) {
+      b = b.replace(/^\n+|\n+$/g, ''); if (!b.trim()) return;
+      var m;
+      if ((m = /^(#{1,2})\s+(.+)$/.exec(b)) && b.indexOf('\n') < 0) { out.push('<h' + (m[1].length + 1) + '>' + inline(m[2], base) + '</h' + (m[1].length + 1) + '>'); return; }
+      if (/^---+$/.test(b.trim())) { out.push('<hr>'); return; }
+      if (/^>\s?/.test(b)) { out.push('<blockquote><p>' + inline(b.replace(/^>\s?/gm, '').replace(/\n/g, '<br>'), base) + '</p></blockquote>'); return; }
+      if (/^[-*]\s+/.test(b)) { out.push('<ul>' + b.split('\n').map(function (l) { return '<li>' + inline(l.replace(/^[-*]\s+/, ''), base) + '</li>'; }).join('') + '</ul>'); return; }
+      if (/^\d+\.\s+/.test(b)) { out.push('<ol>' + b.split('\n').map(function (l) { return '<li>' + inline(l.replace(/^\d+\.\s+/, ''), base) + '</li>'; }).join('') + '</ol>'); return; }
+      if ((m = /^!\[([^\]]*)\]\(([^)\s]+)\)$/.exec(b.trim()))) { var u = imgSrc(m[2], base); if (u) { out.push('<figure><img src="' + esc(u) + '" alt="' + esc(m[1]) + '">' + (m[1] ? '<figcaption>' + esc(m[1]) + '</figcaption>' : '') + '</figure>'); return; } }
+      out.push('<p>' + inline(b, base).replace(/\n/g, '<br>') + '</p>');
+    });
+    return out.join('\n');
+  }
+
+  /* ---------- 기사 페이지 생성 ---------- */
+  function fdate(d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); return m ? m[1] + '.' + m[2] + '.' + m[3] : ''; }
+  function firstImg(body) { var m = /!\[[^\]]*\]\(([^)\s]+)\)/.exec(body || ''); return m ? imgSrc(m[1], '') : null; }
+  function renderPage(a, body) {
+    var url = SITE + 'articles/' + a.id + '/', tg = a.tag ? '[' + a.tag + '] ' : '', img = firstImg(body), desc = a.summary || String(body || '').replace(/[#>*`!\[\]()\-]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+    var og = img ? (/^https:/i.test(img) ? img : url + img) : SITE + 'shots/bokwatch.png';
+    var proj = a.project ? projects.filter(function (p) { return p[0] === a.project; })[0] : null;
+    var meta = [fdate(a.date), a.outlet].filter(Boolean).map(esc).join(' · ');
+    return '<!doctype html>\n<html lang="ko">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+      '<title>' + esc(tg + a.title) + ' — databrew</title>\n<meta name="description" content="' + esc(desc) + '">\n<link rel="canonical" href="' + url + '">\n' +
+      '<meta property="og:type" content="article">\n<meta property="og:site_name" content="databrew">\n<meta property="og:locale" content="ko_KR">\n<meta property="og:title" content="' + esc(tg + a.title) + '">\n<meta property="og:description" content="' + esc(desc) + '">\n<meta property="og:url" content="' + url + '">\n<meta property="og:image" content="' + esc(og) + '">\n' +
+      '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="' + esc(tg + a.title) + '">\n<meta name="twitter:description" content="' + esc(desc) + '">\n<meta name="twitter:image" content="' + esc(og) + '">\n' +
+      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">\n<link rel="stylesheet" href="../../detail.css">\n' +
+      '<style>.art{max-width:720px;margin:0 auto;padding:48px max(20px,4vw) 60px}.art h1{font-size:clamp(26px,4.4vw,38px);line-height:1.3;letter-spacing:-.03em;margin:0 0 10px}.art h1 .tag{color:var(--accent);font-weight:700}.art .meta{font:12.5px var(--font-mono);color:var(--muted);margin:0 0 28px}.art .meta a{color:var(--accent)}.art-body{font-size:17px;line-height:1.9}.art-body h2{font-size:24px;margin:1.8em 0 .5em}.art-body h3{font-size:19px;margin:1.6em 0 .4em}.art-body img{max-width:100%;height:auto;border-radius:6px;display:block}.art-body figure{margin:1.6em 0}.art-body figcaption{font-size:13px;color:var(--muted);margin-top:6px}.art-body blockquote{margin:1.4em 0;padding:2px 18px;border-left:3px solid var(--accent);color:var(--muted)}.art-body a{color:var(--accent)}</style>\n</head>\n<body>\n' +
+      '<nav class="topnav">\n  <a class="brand" href="../../">←&nbsp; <strong>data</strong>brew</a>\n  <span class="breadcrumb">서비스에서 나온 기사</span>\n</nav>\n<main class="art">\n<h1>' + (a.tag ? '<span class="tag">[' + esc(a.tag) + ']</span> ' : '') + esc(a.title) + '</h1>\n<p class="meta">' + meta + (proj ? ' · <a href="../../projects/' + esc(proj[0]) + '/">' + esc(proj[1]) + '</a>' : '') + ' · <span class="pv" hidden>조회 <b data-pv></b></span></p>\n<div class="art-body">\n' + md(body, '') + '\n</div>\n</main>\n' +
+      '<footer class="foot">\n  <a href="../../">databrew</a>\n  <span>독립 데이터저널리즘 프로젝트</span>\n  <span>누적 방문 <b data-hub-views>–</b></span>\n</footer>\n<script src="../../detail.js" defer><\/script>\n</body>\n</html>\n';
+  }
+
+  /* ---------- GitHub API ---------- */
+  function b64s(s) { return btoa(unescape(encodeURIComponent(s))); }
+  function b64buf(buf) { var u = new Uint8Array(buf), s = '', i; for (i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); }
+  function gh(path, opt) {
+    opt = opt || {};
+    return fetch('https://api.github.com/repos/' + OWNER + '/' + REPO + path, { method: opt.method || 'GET', headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json' }, body: opt.body ? JSON.stringify(opt.body) : undefined, cache: 'no-store' })
+      .then(function (r) { if (r.status === 204) return {}; return r.json().then(function (j) { if (!r.ok) { var e = new Error(j.message || r.status); e.status = r.status; throw e; } return j; }); });
+  }
+  function getFile(p) { return gh('/contents/' + p + '?ref=' + BRANCH).then(function (j) { return { sha: j.sha, text: decodeURIComponent(escape(atob(j.content.replace(/\n/g, '')))) }; }); }
+  function exists(p) { return gh('/contents/' + p + '?ref=' + BRANCH).then(function (j) { return j.sha; }, function (e) { if (e.status === 404) return null; throw e; }); }
+  function put(p, b64, msg) { return exists(p).then(function (sha) { var body = { message: msg, content: b64, branch: BRANCH }; if (sha) body.sha = sha; return gh('/contents/' + p, { method: 'PUT', body: body }); }); }
+  function del(p, msg) { return exists(p).then(function (sha) { if (!sha) return; return gh('/contents/' + p, { method: 'DELETE', body: { message: msg, sha: sha, branch: BRANCH } }); }); }
+  function saveIndex(mut, msg, tries) {
+    tries = tries === undefined ? 2 : tries;
+    return getFile('articles.json').then(function (f) {
+      var list = JSON.parse(f.text || '[]'); list = mut(list);
+      return gh('/contents/articles.json', { method: 'PUT', body: { message: msg, content: b64s(JSON.stringify(list, null, 2) + '\n'), sha: f.sha, branch: BRANCH } }).then(function () { articles = list; });
+    }).catch(function (e) { if (e.status === 409 && tries > 0) return saveIndex(mut, msg, tries - 1); throw e; });
+  }
+
+  /* ---------- 화면 ---------- */
+  function show(v) { ['vLogin', 'vList', 'vEdit', 'vStats'].forEach(function (x) { $(x).hidden = x !== v; }); window.scrollTo(0, 0); }
+  function say(id, kind, text) { var e = $(id); e.innerHTML = ''; if (!text) return; var d = document.createElement('div'); d.className = 'msg ' + kind; d.textContent = text; e.appendChild(d); }
+  function loadProjects() { return fetch('../index.html', { cache: 'no-cache' }).then(function (r) { return r.text(); }).then(function (t) { var re = /<a class="card-inner" href="projects\/([^\/"]+)\/">[\s\S]*?<h3>([\s\S]*?)<\/h3>/g, m; projects = []; while ((m = re.exec(t))) projects.push([m[1], m[2].replace(/<[^>]+>/g, '').trim()]); var sel = $('fProject'); projects.forEach(function (p) { var o = document.createElement('option'); o.value = p[0]; o.textContent = p[1]; sel.appendChild(o); }); }).catch(function () {}); }
+  function renderList() {
+    var tb = $('rows'); tb.textContent = '';
+    articles.slice().sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); }).forEach(function (a, i) {
+      var tr = document.createElement('tr'), local = /^articles\//.test(a.url || '');
+      var proj = projects.filter(function (p) { return p[0] === a.project; })[0];
+      [fdate(a.date), (a.tag ? '[' + a.tag + '] ' : '') + a.title, local ? '직접 작성' : '외부 링크', proj ? proj[1] : ''].forEach(function (t) { var td = document.createElement('td'); td.textContent = t; tr.appendChild(td); });
+      var td = document.createElement('td'); td.className = 'act';
+      var be = document.createElement('button'); be.textContent = '수정'; be.onclick = function () { edit(a); };
+      var bd = document.createElement('button'); bd.className = 'danger'; bd.textContent = '삭제'; bd.onclick = function () { remove(a); };
+      td.appendChild(be); td.appendChild(document.createTextNode(' ')); td.appendChild(bd); tr.appendChild(td); tb.appendChild(tr);
+    });
+    if (!articles.length) { var tr = document.createElement('tr'), td = document.createElement('td'); td.colSpan = 5; td.textContent = '아직 기사가 없습니다. "+ 새 기사"로 시작하세요.'; tr.appendChild(td); tb.appendChild(tr); }
+  }
+  function refreshList() { say('listMsg', 'info', '불러오는 중…'); return getFile('articles.json').then(function (f) { articles = JSON.parse(f.text || '[]'); renderList(); say('listMsg', '', ''); show('vList'); }); }
+  function tagText() { return $('fTag').value.trim().replace(/[\[\]]/g, ''); }
+  function syncTag() {
+    var auto = $('fTagAuto').checked, pr = projects.filter(function (p) { return p[0] === $('fProject').value; })[0];
+    $('fTag').readOnly = auto && !!pr; if (auto && pr) $('fTag').value = pr[1];
+    if (auto && !pr) $('fTag').readOnly = false;
+    var t = tagText(), ti = $('fTitle').value.trim() || '제목'; $('tagPrev').textContent = (t ? '[' + t + '] ' : '') + ti;
+  }
+  function mode() { return document.querySelector('input[name=mode]:checked').value; }
+  function setMode(m) { document.querySelector('input[name=mode][value=' + m + ']').checked = true; $('boxExt').hidden = m !== 'external'; $('boxLocal').hidden = m !== 'local'; }
+  function preview() {
+    var base = cur && cur.id ? '../articles/' + cur.id + '/' : '';
+    var html = md($('fBody').value, ''); var pv = $('pv'); pv.innerHTML = html;
+    pv.querySelectorAll('img').forEach(function (im) { var n = im.getAttribute('src'); if (pending[n]) im.src = pending[n].url; else if (base && /^[\w.-]+\.(jpe?g|png|webp|gif)$/i.test(n)) im.src = base + n; });
+  }
+  function edit(a) {
+    cur = a ? JSON.parse(JSON.stringify(a)) : { id: '' }; pending = {}; nextImg = 1; say('editMsg', '', '');
+    $('editTitle').textContent = a ? '기사 수정' : '새 기사';
+    $('fTitle').value = cur.title || ''; $('fDate').value = cur.date || new Date().toISOString().slice(0, 10); $('fOutlet').value = cur.outlet || ''; $('fProject').value = cur.project || ''; $('fSummary').value = cur.summary || ''; $('fTag').value = cur.tag || ''; $('fTagAuto').checked = a ? !!cur.tagAuto : true; syncTag();
+    var en = cur.en || {}; $('fTitleEn').value = en.title || ''; $('fOutletEn').value = en.outlet || ''; $('fSummaryEn').value = en.summary || '';
+    var local = a && /^articles\//.test(a.url || ''); $('fUrl').value = a && !local ? a.url : ''; $('fBody').value = ''; setMode(a && !local ? 'external' : 'local');
+    show('vEdit'); preview();
+    if (local) getFile('articles/' + cur.id + '/source.md').then(function (f) { $('fBody').value = f.text; var mx = 0; f.text.replace(/\((\d+)\.jpg\)/g, function (m, n) { mx = Math.max(mx, +n); }); nextImg = mx + 1; preview(); }, function () { say('editMsg', 'bad', '본문 원본을 불러오지 못했습니다.'); });
+  }
+  function resize(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), im = new Image();
+      im.onload = function () { var w = Math.min(1600, im.naturalWidth), h = Math.round(im.naturalHeight * w / im.naturalWidth), c = document.createElement('canvas'); c.width = w; c.height = h; var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, w, h); x.drawImage(im, 0, 0, w, h); URL.revokeObjectURL(url); c.toBlob(function (b) { b ? res(b) : rej(new Error('이미지 변환 실패')); }, 'image/jpeg', 0.85); };
+      im.onerror = function () { rej(new Error('이미지를 읽을 수 없습니다.')); }; im.src = url;
+    });
+  }
+  function insertAtCursor(text) { var t = $('fBody'), s = t.selectionStart, e = t.selectionEnd; t.value = t.value.slice(0, s) + text + t.value.slice(e); t.selectionStart = t.selectionEnd = s + text.length; t.focus(); preview(); }
+  function wrapSel(a, b, ph) { var t = $('fBody'), s = t.selectionStart, e = t.selectionEnd, sel = t.value.slice(s, e) || ph; t.value = t.value.slice(0, s) + a + sel + b + t.value.slice(e); t.selectionStart = s + a.length; t.selectionEnd = s + a.length + sel.length; t.focus(); preview(); }
+  function lineStart(prefix) { var t = $('fBody'), s = t.selectionStart, ls = t.value.lastIndexOf('\n', s - 1) + 1; t.value = t.value.slice(0, ls) + prefix + t.value.slice(ls); t.selectionStart = t.selectionEnd = s + prefix.length; t.focus(); preview(); }
+  function newId(date) { return (date || new Date().toISOString().slice(0, 10)).replace(/-/g, '') + '-' + Math.random().toString(36).slice(2, 6); }
+  function save() {
+    var title = $('fTitle').value.trim(), date = $('fDate').value, m = mode(), url = $('fUrl').value.trim(), body = $('fBody').value;
+    if (!title) return say('editMsg', 'bad', '제목을 입력하세요.');
+    if (!date) return say('editMsg', 'bad', '날짜를 입력하세요.');
+    if (m === 'external' && !/^https?:\/\/\S+$/i.test(url)) return say('editMsg', 'bad', '기사 주소는 http:// 또는 https://로 시작해야 합니다.');
+    if (m === 'local' && !body.trim()) return say('editMsg', 'bad', '본문을 입력하세요.');
+    var a = { id: cur.id || newId(date), title: title, url: '', outlet: $('fOutlet').value.trim(), date: date, project: $('fProject').value, summary: $('fSummary').value.trim(), tag: tagText() };
+    if (a.tag && $('fTagAuto').checked && a.project) a.tagAuto = true;
+    var en = { title: $('fTitleEn').value.trim(), outlet: $('fOutletEn').value.trim(), summary: $('fSummaryEn').value.trim() };
+    if (en.title || en.outlet || en.summary) { a.en = {}; Object.keys(en).forEach(function (k) { if (en[k]) a.en[k] = en[k]; }); }
+    Object.keys(a).forEach(function (k) { if (a[k] === '' && k !== 'url') delete a[k]; });
+    a.url = m === 'external' ? url : 'articles/' + a.id + '/';
+    var wasLocal = cur.url && /^articles\//.test(cur.url);
+    $('btnSave').disabled = true; say('editMsg', 'info', '올리는 중… 창을 닫지 마세요.');
+    var dir = 'articles/' + a.id + '/', p = Promise.resolve(), names = Object.keys(pending).filter(function (n) { return body.indexOf('(' + n + ')') >= 0; });
+    if (m === 'local') {
+      names.forEach(function (n) { p = p.then(function () { return pending[n].blob.arrayBuffer(); }).then(function (buf) { return put(dir + n, b64buf(buf), 'CMS: 사진 ' + n + ' (' + a.id + ')'); }); });
+      p = p.then(function () { return put(dir + 'index.html', b64s(renderPage(a, body)), 'CMS: 기사 페이지 ' + a.id); })
+           .then(function () { return put(dir + 'source.md', b64s(body), 'CMS: 기사 원본 ' + a.id); });
+    }
+    p = p.then(function () { return saveIndex(function (list) { var i = list.findIndex(function (x) { return x.id === a.id; }); if (i >= 0) list[i] = a; else list.push(a); return list; }, 'CMS: 기사 ' + (cur.id ? '수정' : '추가') + ' - ' + title); });
+    if (m === 'external' && wasLocal) p = p.then(function () { return removeDir('articles/' + cur.id); });
+    p.then(function () { $('btnSave').disabled = false; renderList(); show('vList'); say('listMsg', 'ok', '게시했습니다. 허브에는 1~2분 뒤 반영됩니다.'); })
+     .catch(function (e) { $('btnSave').disabled = false; say('editMsg', 'bad', '실패: ' + e.message + ' (토큰 권한·만료를 확인하세요. 이미 올라간 일부 파일은 다시 게시하면 덮어씁니다.)'); });
+  }
+  function removeDir(dir) {
+    return gh('/contents/' + dir + '?ref=' + BRANCH).then(function (items) { var p = Promise.resolve(); items.forEach(function (it) { p = p.then(function () { return gh('/contents/' + it.path, { method: 'DELETE', body: { message: 'CMS: 삭제 ' + it.path, sha: it.sha, branch: BRANCH } }); }); }); return p; }, function (e) { if (e.status !== 404) throw e; });
+  }
+  function remove(a) {
+    if (!confirm('"' + a.title + '" 기사를 삭제할까요? 직접 쓴 기사는 페이지와 사진도 함께 지워집니다.')) return;
+    say('listMsg', 'info', '삭제 중…');
+    var p = saveIndex(function (list) { return list.filter(function (x) { return x.id !== a.id; }); }, 'CMS: 기사 삭제 - ' + a.title);
+    if (/^articles\//.test(a.url || '')) p = p.then(function () { return removeDir('articles/' + a.id); });
+    p.then(function () { renderList(); say('listMsg', 'ok', '삭제했습니다.'); }).catch(function (e) { say('listMsg', 'bad', '실패: ' + e.message); });
+  }
+
+  /* ---------- 조회수 ---------- */
+  var CAPI = 'https://countapi.mileshilliard.com/api/v1/get/';
+  function pvKey(path) { var p = String(path).replace(/\/+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, ''); return 'databrew_pv_' + (p || 'home'); }
+  function count(key) { return fetch(CAPI + key, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : { value: 0 }; }).then(function (j) { return typeof j.value === 'number' ? j.value : 0; }, function () { return null; }); }
+  function pool(items, n, fn) { var i = 0, out = new Array(items.length); function w() { if (i >= items.length) return Promise.resolve(); var k = i++; return fn(items[k]).then(function (v) { out[k] = v; return w(); }); } var ws = []; for (var t = 0; t < n; t++) ws.push(w()); return Promise.all(ws).then(function () { return out; }); }
+  function loadStats() {
+    var pages = [['허브 (한국어)', ''], ['허브 (영어)', 'en']];
+    projects.forEach(function (p) { pages.push([p[1], 'projects/' + p[0]]); pages.push([p[1] + ' (영어)', 'en/projects/' + p[0]]); });
+    articles.forEach(function (a) { if (/^articles\//.test(a.url || '')) pages.push([(a.tag ? '[' + a.tag + '] ' : '') + a.title + ' (기사)', 'articles/' + a.id]); });
+    $('statsRows').textContent = ''; $('statsTotal').textContent = ''; say('statsMsg', 'info', pages.length + '개 페이지 조회수를 불러오는 중…'); show('vStats');
+    return Promise.all([count('raspos_databrew_hub_total_v1'), pool(pages, 6, function (pg) { return count(pvKey(pg[1])); })]).then(function (r) {
+      var rows = pages.map(function (pg, i) { return [pg[0], r[1][i]]; }), sum = rows.reduce(function (a, x) { return a + (x[1] || 0); }, 0), fail = rows.filter(function (x) { return x[1] === null; }).length;
+      rows.sort(function (a, b) { return (b[1] || 0) - (a[1] || 0); });
+      $('statsTotal').textContent = '사이트 누적 방문 ' + (r[0] === null ? '–' : r[0].toLocaleString('en-US')) + ' · 페이지 조회수 합계 ' + sum.toLocaleString('en-US');
+      rows.forEach(function (x) { var tr = document.createElement('tr'), a = document.createElement('td'), b = document.createElement('td'); a.textContent = x[0]; b.style.textAlign = 'right'; b.textContent = x[1] === null ? '–' : x[1].toLocaleString('en-US'); tr.appendChild(a); tr.appendChild(b); $('statsRows').appendChild(tr); });
+      say('statsMsg', fail ? 'bad' : '', fail ? fail + '개 페이지는 불러오지 못했습니다(–로 표시).' : '');
+    });
+  }
+  window.__cmsStats = { pvKey: pvKey };
+
+  /* ---------- 이벤트 ---------- */
+  function start() {
+    $('who').textContent = OWNER + '/' + REPO; $('logout').hidden = false;
+    return Promise.all([loadProjects(), refreshList()]).then(function () { renderList(); }).catch(function (e) { localStorage.removeItem('databrew_gh_token'); token = ''; $('logout').hidden = true; show('vLogin'); say('loginMsg', 'bad', '연결 실패: ' + e.message + ' — 토큰과 권한(Contents: Read and write, 저장소 raspos/databrew)을 확인하세요.'); });
+  }
+  $('btnLogin').onclick = function () { var t = $('tok').value.trim(); if (!t) return say('loginMsg', 'bad', '토큰을 입력하세요.'); token = t; say('loginMsg', 'info', '확인 중…'); gh('').then(function (j) { if (!j.permissions || !j.permissions.push) throw new Error('이 토큰에는 쓰기 권한이 없습니다.'); try { localStorage.setItem('databrew_gh_token', t); } catch (e) {} $('tok').value = ''; return start(); }).catch(function (e) { token = ''; say('loginMsg', 'bad', '연결 실패: ' + e.message); }); };
+  $('logout').onclick = function () { try { localStorage.removeItem('databrew_gh_token'); } catch (e) {} token = ''; $('logout').hidden = true; show('vLogin'); };
+  $('btnNew').onclick = function () { edit(null); };
+  $('btnStats').onclick = loadStats;
+  $('btnStatsBack').onclick = function () { show('vList'); };
+  $('btnCancel').onclick = function () { say('listMsg', '', ''); show('vList'); };
+  $('btnSave').onclick = save;
+  $('fBody').addEventListener('input', preview);
+  ['fTitle', 'fTag'].forEach(function (i) { $(i).addEventListener('input', syncTag); }); $('fProject').addEventListener('change', syncTag); $('fTagAuto').addEventListener('change', syncTag);
+  document.querySelectorAll('input[name=mode]').forEach(function (r) { r.onchange = function () { setMode(mode()); }; });
+  document.querySelector('.tools').addEventListener('click', function (e) {
+    var t = e.target.getAttribute && e.target.getAttribute('data-t'); if (!t) return;
+    if (t === 'b') wrapSel('**', '**', '굵은 글씨'); else if (t === 'i') wrapSel('*', '*', '기울인 글씨');
+    else if (t === 'h') lineStart('## '); else if (t === 'q') lineStart('> '); else if (t === 'l') lineStart('- ');
+    else if (t === 'a') { var u = prompt('링크 주소 (https://…)'); if (!u) return; if (!/^https?:\/\//i.test(u)) return alert('주소는 http:// 또는 https://로 시작해야 합니다.'); wrapSel('[', '](' + u.trim() + ')', '링크 글자'); }
+  });
+  $('btnPhoto').onclick = function () { $('fPhoto').click(); };
+  $('fPhoto').onchange = function () {
+    var files = Array.prototype.slice.call(this.files); this.value = '';
+    files.reduce(function (p, f) { return p.then(function () { return resize(f).then(function (blob) { var name = (nextImg++) + '.jpg', cap = prompt('사진 설명(캡션, 비워도 됨)', '') || ''; pending[name] = { blob: blob, url: URL.createObjectURL(blob) }; insertAtCursor('\n\n![' + cap.replace(/[\[\]]/g, '') + '](' + name + ')\n\n'); }); }); }, Promise.resolve())
+      .catch(function (e) { say('editMsg', 'bad', e.message); });
+  };
+  window.__cms = { md: md, renderPage: renderPage, setProjects: function (p) { projects = p; } };
+  try { token = localStorage.getItem('databrew_gh_token') || ''; } catch (e) {}
+  if (token) start(); else show('vLogin');
+})();
+</script>
+</body>
+</html>
