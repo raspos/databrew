@@ -187,7 +187,7 @@ td.act button{padding:5px 10px;font-size:13px}
   function byline(a) { return a.outlet || '프로딴짓러'; }
   function headHtml(a, proj) {
     var tg = a.tag ? '<span class="tag">[' + esc(a.tag) + ']</span> ' : '';
-    return '<div class="art-head">\n<h1>' + tg + esc(a.title) + '</h1>\n<span class="byline">' + esc(byline(a)) + '</span>\n</div>\n<p class="meta">' +
+    return '<div class="art-head">\n<h1>' + tg + esc(a.title) + '</h1>\n' + (byline(a) === '프로딴짓러' ? '<a class="byline" href="https://www.facebook.com/rough1020" target="_blank" rel="noopener">프로딴짓러</a>' : '<span class="byline">' + esc(byline(a)) + '</span>') + '\n</div>\n<p class="meta">' +
       [esc(fdate(a.date)), proj ? '<a href="../../projects/' + esc(proj[0]) + '/">' + esc(proj[1]) + '</a>' : ''].filter(Boolean).join(' · ') + '<span class="pv" hidden> · 조회 <b data-pv></b></span></p>';
   }
   function renderPage(a, body) {
