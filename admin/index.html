@@ -235,7 +235,7 @@ td.act button{padding:5px 10px;font-size:13px}
       } var sel = $('fProject'); projects.forEach(function (p) { var o = document.createElement('option'); o.value = p[0]; o.textContent = p[1]; sel.appendChild(o); }); buildTagSel(); }).catch(function () {}); }
   function renderList() {
     var tb = $('rows'); tb.textContent = '';
-    articles.slice().sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); }).forEach(function (a, i) {
+    articles.map(function (a, i) { return { a: a, i: i }; }).sort(function (x, y) { return String(y.a.date).localeCompare(String(x.a.date)) || (y.i - x.i); }).map(function (w) { return w.a; }).forEach(function (a, i) {
       var tr = document.createElement('tr'), local = /^articles\//.test(a.url || '');
       var proj = projects.filter(function (p) { return p[0] === a.project; })[0];
       [fdate(a.date), (a.tag ? '[' + a.tag + '] ' : '') + a.title, local ? '직접 작성' : '외부 링크', proj ? proj[1] : ''].forEach(function (t) { var td = document.createElement('td'); td.textContent = t; tr.appendChild(td); });

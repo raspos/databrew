@@ -1173,8 +1173,8 @@ html { scroll-behavior: smooth; }
   function pvKey(id) { return 'databrew_pv_articles_' + String(id).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, ''); }
   fetch(PRE + 'articles.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (list) {
     if (!Array.isArray(list)) return;
-    list = list.filter(function (a) { return a && (/^https?:\/\//i.test(a.url || '') || /^articles\/[\w-]+\/$/.test(a.url || '')) && pick(a, 'title'); })
-      .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')); });
+    list = list.map(function (a, i) { if (a) a._i = i; return a; }).filter(function (a) { return a && (/^https?:\/\//i.test(a.url || '') || /^articles\/[\w-]+\/$/.test(a.url || '')) && pick(a, 'title'); })
+      .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')) || (y._i - x._i); });
     var total = list.length; list = list.slice(0, MAX);
     var ul = sec.querySelector('.stories-list'); ul.textContent = '';
     list.forEach(function (a) {

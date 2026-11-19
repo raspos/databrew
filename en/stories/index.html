@@ -115,8 +115,8 @@
     while ((m = re.exec(t))) names[m[1]] = m[2].replace(/<[^>]+>/g, '').trim();
   }).catch(function () {}).then(function () { return fetch(ROOT + 'articles.json', { cache: 'no-cache' }); })
   .then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (all) {
-    all = (Array.isArray(all) ? all : []).filter(function (a) { return a && (/^https?:\/\//i.test(a.url || '') || /^articles\/[\w-]+\/$/.test(a.url || '')) && pick(a, 'title'); })
-      .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')); });
+    all = (Array.isArray(all) ? all : []).map(function (a, i) { if (a) a._i = i; return a; }).filter(function (a) { return a && (/^https?:\/\//i.test(a.url || '') || /^articles\/[\w-]+\/$/.test(a.url || '')) && pick(a, 'title'); })
+      .sort(function (x, y) { return String(y.date || '').localeCompare(String(x.date || '')) || (y._i - x._i); });
     all.forEach(function (a, i) { a._n = all.length - i; });
     rows = all; cnt.textContent = all.length;
     var seen = {}; all.forEach(function (a) { if (a.project && names[a.project] && !seen[a.project]) { seen[a.project] = 1; var o = document.createElement('option'); o.value = a.project; o.textContent = names[a.project]; sf.appendChild(o); } });
