@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "20261119-t0xh",
+    "title": "3600만원 연봉에 3.66승 기여…몸값 뛰어넘은 선수들",
+    "url": "articles/20261119-t0xh/",
+    "outlet": "프로딴짓러",
+    "date": "2026-11-19",
+    "project": "e-war",
+    "tag": "E-WAR",
+    "tagAuto": true,
+    "en": {
+      "title": "Did KBO’s Highest-Paid Players Live Up to Their Salaries? A Data-Driven Analysis Using E-WAR",
+      "outlet": "databrew",
+      "summary": "This analysis examines the relationship between player salaries and on-field performance during the 2026 Korea Baseball Organization (KBO) season using E-WAR, an independent baseball analytics platform I developed.  E-WAR measures how much a player exceeds or falls short of preseason expectations by comparing actual Wins Above Replacement (WAR) with projected WAR.  Among 49 high-paid players across the league's 10 teams, average performance closely matched expectations. However, several lower-paid players significantly outperformed their projections.  To explore the implications for salary negotiations, I developed an interactive \"Negotiation Assistant\" that compares players with similar performance levels, projects their 2027 WAR, and presents evidence-based arguments from both players' and teams' perspectives.  An analysis of 240 domestic players also found that salaries were more strongly correlated with preseason expected WAR (0.57) than with actual 2026 WAR (0.38).  The project demonstrates how predictive analytics and interactive data journalism can offer new perspectives on player valuation, contract negotiations, and performance assessment in professional baseball."
+    }
+  }
+]
