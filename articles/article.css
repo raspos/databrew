@@ -10,9 +10,9 @@
 .art-body>:first-child{margin-top:0}
 .art-body h2{font-size:24px;margin:1.6em 0 .5em}
 .art-body h3{font-size:19px;margin:1.5em 0 .4em}
-.art-body img{max-width:100%;height:auto;border-radius:6px;display:block}
-.art-body figure{margin:1.5em 0}
-.art-body figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+.art-body img{max-width:100%;height:auto;border-radius:6px;display:block;margin-left:auto;margin-right:auto}
+.art-body figure{margin:1.5em 0;text-align:center}
+.art-body figcaption{font-size:13px;color:var(--muted);margin-top:6px;text-align:center}
 .art-body blockquote{margin:1.4em 0;padding:2px 18px;border-left:3px solid var(--accent);color:var(--muted)}
 .art-body a{color:var(--accent)}
 .svc-box{margin:40px 0 0}
