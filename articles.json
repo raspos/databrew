@@ -37,6 +37,12 @@
     "date": "2026-11-19",
     "project": "fx-odds",
     "tag": "FX워치",
-    "tagAuto": true
+    "tagAuto": true,
+    "updated": "2026-11-19",
+    "en": {
+      "title": "Korea’s $1 Trillion Export Boom Bolsters Won Despite Strong Dollar, Easing Costs for Households",
+      "outlet": "databrew",
+      "summary": "South Korea’s record-breaking $1 trillion exports, driven by a semiconductor boom, have helped strengthen the Korean won despite a strong U.S. dollar and heavy foreign stock selling. According to the Bank of Korea, a 10% appreciation of the won could reduce annual household living expenses by an average of 165,000 won, while improving profitability and investment among domestic-oriented businesses. FX WATCH, an independent data journalism platform, shows that both news-based and market-based indicators currently point toward further won strength, with the exchange rate potentially falling below 1,300 won per dollar."
+    }
   }
 ]
