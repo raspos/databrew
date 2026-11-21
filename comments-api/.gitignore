@@ -1,0 +1,8 @@
+# Local Wrangler/Node deployment artifacts — never commit generated bindings.
+node_modules/
+.wrangler/
+wrangler.deploy.toml
+.env
+.env.*
+.dev.vars
+.dev.vars.*

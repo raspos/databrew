@@ -1,0 +1,71 @@
+name: Deploy databrew NOW guest comments
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: databrew-comments-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate required owner credentials without exposing secrets
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          DATABREW_COMMENTS_ADMIN_TOKEN: ${{ secrets.DATABREW_COMMENTS_ADMIN_TOKEN }}
+        shell: bash
+        run: |
+          for key in CLOUDFLARE_ACCOUNT_ID CLOUDFLARE_API_TOKEN DATABREW_COMMENTS_ADMIN_TOKEN; do
+            if [[ -z "${!key}" ]]; then
+              echo "::error title=Missing credential::Please add the GitHub Actions secret $key."
+              exit 1
+            fi
+          done
+          echo "Credential names present. Values will not be logged."
+      - name: Unit-test Worker API and NOW guest form
+        run: |
+          cd comments-api
+          npm test
+          cd ..
+          python -m unittest discover -s tests -p 'test_now_engagement.py' -v
+          python -m unittest discover -s comments-api/tests -p 'test_provision.py' -v
+      - name: Install Wrangler in ephemeral runner
+        working-directory: comments-api
+        run: npm install --no-save --no-package-lock --no-audit --no-fund wrangler@4
+      - name: Provision D1 + Turnstile and deploy Worker
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          DATABREW_COMMENTS_ADMIN_TOKEN: ${{ secrets.DATABREW_COMMENTS_ADMIN_TOKEN }}
+        run: python comments-api/scripts/provision.py
+      - name: Save verified public endpoint to GitHub Pages configuration
+        shell: bash
+        run: |
+          if git diff --quiet -- now/comments-config.json; then
+            echo "Public comments endpoint has not changed."
+            exit 0
+          fi
+          git config user.name "databrew-comments-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add now/comments-config.json
+          git commit -m "chore(now): activate verified guest comments endpoint"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "Guest comment endpoint published to databrew NOW."

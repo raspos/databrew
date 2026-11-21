@@ -3,7 +3,8 @@
  * No Github account, user login, or browser-exposed write credential.
  * All comments start pending; only admin-approved comments are public.
  */
-const MAX_BODY = 3500;
+// Turnstile responses can be several kilobytes; still cap request size.
+const MAX_BODY = 8192;
 const POST_KEY = /^(watch|stories|projects):[A-Za-z0-9_:.%-]{1,180}$/;
 
 function cors(origin, env) {
