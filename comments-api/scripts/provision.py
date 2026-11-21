@@ -203,8 +203,6 @@ def main() -> int:
 
     db_id = d1_database(account, token)
     sitekey, turnstile_secret = turnstile(account, token)
-    subdomain = worker_subdomain(account, token)
-    url = f"https://{WORKER}.{subdomain}.workers.dev"
     config_file(db_id)
 
     print("Initializing remote D1 schema.")
@@ -222,6 +220,8 @@ def main() -> int:
         set_secret(key, value)
         print("Installed protected Worker secret:", key)
 
+    subdomain = worker_subdomain(account, token)
+    url = f"https://{WORKER}.{subdomain}.workers.dev"
     health(url)
     PUBLIC.write_text(
         json.dumps({"api_base": url, "turnstile_site_key": sitekey}, ensure_ascii=False, indent=2) + "\n",
