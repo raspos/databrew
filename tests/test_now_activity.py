@@ -56,13 +56,13 @@ class NowBuildTests(unittest.TestCase):
                                    ["2026-11-26", "2027-01-14", "2027-02-25"])
         self.assertAlmostEqual(prob, 0.8049, places=4)
 
-    def test_project_stories_are_reviewed_400_to_500_chars(self):
+    def test_project_stories_are_concise_3_to_4_line_intros(self):
         projects = mod.parse_projects()
         self.assertEqual(len(projects), 26)
         for project in projects:
             with self.subTest(project=project["id"]):
-                self.assertGreaterEqual(len(project["story"]), 400)
-                self.assertLessEqual(len(project["story"]), 500)
+                self.assertGreaterEqual(len(project["story"]), 90)
+                self.assertLessEqual(len(project["story"]), 150)
 
     def test_fx_uses_reference_rate_not_1530_spot(self):
         item = {
