@@ -72,7 +72,6 @@ class NowEngagementTests(unittest.TestCase):
         moderator = (ROOT / "now" / "moderate" / "index.html").read_text(encoding="utf-8")
         self.assertIn("name=\"viewport\"", moderator)
         self.assertIn('content="noindex,nofollow,noarchive"', moderator)
-        self.assertIn("now/moderate/", "now/moderate/")
         self.assertIn("Authorization", moderator)
         self.assertIn("Bearer ", moderator)
         self.assertIn("DATABREW_COMMENTS_ADMIN_TOKEN", moderator)
