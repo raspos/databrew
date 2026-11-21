@@ -464,6 +464,15 @@ html { scroll-behavior: smooth; }
   .stories-list li { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "main main" "date views"; gap: 2px 10px; padding: 9px 2px; }
   .story-main { grid-area: main; } .story-date { grid-area: date; } .story-views { grid-area: views; text-align: right; }
 }
+/* NOW pilot: compact editorial entry point, not a fourth project series. */
+.now-promo{display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;background:var(--cell);border:1px solid var(--rule);border-radius:12px;padding:22px 26px;margin:0 0 28px}
+.now-promo .now-kicker{margin:0 0 4px;font:600 11px var(--font-mono);letter-spacing:.12em;color:var(--accent)}
+.now-promo h2{font:700 clamp(21px,3vw,28px)/1.25 var(--font-body);margin:0 0 5px;letter-spacing:-.03em}
+.now-promo p.now-desc{margin:0;color:var(--muted);font-size:13px}
+.now-promo a.now-go{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;min-height:44px;border-radius:9px;background:var(--ink);color:var(--cell);text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap}
+.now-promo a.now-go:hover{opacity:.82}
+.now-promo a.now-go:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:600px){.now-promo{padding:18px;margin-bottom:22px}.now-promo a.now-go{width:100%}}
 </style>
 </head>
 <body>
@@ -519,6 +528,15 @@ html { scroll-behavior: smooth; }
     </a>
   </nav>
   <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
+
+  <section class="now-promo" aria-labelledby="h-now">
+    <div>
+      <p class="now-kicker">NEW · EXPERIMENT</p>
+      <h2 id="h-now">databrew NOW</h2>
+      <p class="now-desc">기사가 나오기 전과 그 후. 짧은 기록과 Threads, 프로젝트 이야기를 잇습니다.</p>
+    </div>
+    <a class="now-go" href="now/">NOW 피드 보기 →</a>
+  </section>
 
   <section class="stories" id="stories" aria-labelledby="h-stories" hidden>
     <div class="stories-head"><h2 class="stories-title" id="h-stories">STORIES</h2><p class="stories-sub">숫자 뒤의 이야기를 진하게 내립니다</p></div>
