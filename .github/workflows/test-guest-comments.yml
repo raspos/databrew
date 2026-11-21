@@ -36,4 +36,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: NOW guest-comment interface regression
-        run: python -m unittest discover -s tests -p 'test_now_engagement.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_now_engagement.py' -v
+          python -m unittest discover -s comments-api/tests -p 'test_provision.py' -v
