@@ -1,6 +1,12 @@
 name: Publish databrew NOW to Meta Threads
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/publish_now_threads.py
+      - tests/test_publish_now_threads.py
+      - .github/workflows/publish-now-threads.yml
   workflow_run:
     workflows: ["Build databrew NOW daily feed"]
     types: [completed]
