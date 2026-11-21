@@ -10,7 +10,8 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import secrets
+import re
+import time
 import subprocess
 import sys
 import urllib.error
@@ -121,7 +122,7 @@ def turnstile(account: str, token: str) -> tuple[str, str]:
 def worker_subdomain(account: str, token: str) -> str:
     result = api("GET", f"/accounts/{account}/workers/subdomain", token).get("result") or {}
     value = str(result.get("subdomain") or "")
-    if not value or not value.replace("-", "").isalnum():
+    if not value or re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", value) is None:
         raise RuntimeError("workers.dev subdomain not configured in Cloudflare account")
     return value
 
@@ -167,20 +168,25 @@ def set_secret(key: str, value: str) -> None:
 
 
 def health(url: str) -> None:
-    # Only expose public config when the deployed Worker can read D1 schema.
-    for path in ("/health", "/api/comments?post=watch%3Asetup-check"):
-        req = urllib.request.Request(url + path, headers={
-            "Accept": "application/json", "Origin": ORIGIN,
-        })
+    # Secrets and Cloudflare DNS sometimes propagate behind the deploy response.
+    # Never expose a public endpoint until both health and D1 query succeed.
+    for attempt in range(5):
         try:
-            with urllib.request.urlopen(req, timeout=25) as response:
-                payload = json.load(response)
+            for path in ("/health", "/api/comments?post=watch%3Asetup-check"):
+                req = urllib.request.Request(url + path, headers={
+                    "Accept": "application/json", "Origin": ORIGIN,
+                })
+                with urllib.request.urlopen(req, timeout=20) as response:
+                    payload = json.load(response)
+                if path == "/health" and (payload.get("status") != "ok" or payload.get("storage") is not True):
+                    raise ValueError("healthy D1 binding was not reported")
+                if path.startswith("/api/comments") and not isinstance(payload.get("comments"), list):
+                    raise ValueError("comments table is not readable")
+            return
         except (urllib.error.URLError, ValueError, TimeoutError, OSError):
-            raise RuntimeError("Deployed Worker health/D1 check failed; public config unchanged") from None
-        if path == "/health" and (payload.get("status") != "ok" or payload.get("storage") is not True):
-            raise RuntimeError("Deployed Worker did not report a healthy D1 binding")
-        if path.startswith("/api/comments") and not isinstance(payload.get("comments"), list):
-            raise RuntimeError("Deployed Worker cannot query the comments table")
+            if attempt == 4:
+                raise RuntimeError("Worker health/D1 check failed; public config unchanged") from None
+            time.sleep(4)
 
 
 def main() -> int:
