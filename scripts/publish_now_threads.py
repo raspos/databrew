@@ -322,10 +322,13 @@ def run(activity_path: Path = SOURCE, state_path: Path = STATE,
 
 def main() -> int:
     try:
+        max_items = int(os.environ.get("THREADS_MAX_ITEMS", str(MAX_ITEMS)))
+        if not 1 <= max_items <= MAX_ITEMS:
+            raise ValueError("THREADS_MAX_ITEMS must be between 1 and 4")
         return run(
             dry_run=enabled(os.environ.get("THREADS_DRY_RUN")),
             backfill_latest=enabled(os.environ.get("THREADS_BACKFILL_LATEST")),
-            max_items=MAX_ITEMS,
+            max_items=max_items,
         )
     except Exception as exc:
         print("NOW→Threads stopped:", str(exc), file=sys.stderr)

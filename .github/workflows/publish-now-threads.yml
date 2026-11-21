@@ -21,10 +21,16 @@ on:
         type: boolean
         default: true
       backfill_latest:
-        description: "On first live run only, post up to 4 latest NOW entries"
+        description: "Deliberately publish recent NOW entries, including previously checkpointed items"
         required: true
         type: boolean
         default: false
+      max_items:
+        description: "Maximum NOW items per manual run (start with 1 for a smoke test)"
+        required: true
+        type: choice
+        options: ["1", "2", "4"]
+        default: "1"
 
 permissions:
   contents: write
@@ -56,6 +62,7 @@ jobs:
           THREADS_EXPECTED_USERNAME: ${{ vars.THREADS_EXPECTED_USERNAME }}
           THREADS_DRY_RUN: ${{ inputs.dry_run || 'false' }}
           THREADS_BACKFILL_LATEST: ${{ inputs.backfill_latest || 'false' }}
+          THREADS_MAX_ITEMS: ${{ inputs.max_items || '4' }}
         run: python scripts/publish_now_threads.py
       - name: Persist idempotency checkpoint even if Meta publication was interrupted
         if: always() && steps.publish.outcome != 'skipped'
