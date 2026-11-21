@@ -139,7 +139,7 @@ projects.forEach(function(p){
   if(!p||!p.name||!p.id)return;
   var url=safe(p.url,false),detail=safe(p.project_url,false);
   if(!url)return;
-  all.push({type:'projects',date:p.first_seen||'',isNew:!!p.first_seen,title:p.name,text:p.description||'',url:url,detailUrl:detail,media:p.thumbnail||'',paused:!!p.paused});
+  all.push({type:'projects',date:p.first_seen||'',isNew:!!p.first_seen,title:p.name,text:p.story||p.description||'',url:url,detailUrl:detail,media:p.thumbnail||'',paused:!!p.paused});
 });
 if(Array.isArray(articles))articles.forEach(function(p){
   var url=safe(/^https?:\/\//i.test(p.url||'')?p.url:'../'+p.url,false);
