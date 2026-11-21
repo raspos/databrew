@@ -362,10 +362,9 @@ def records_update() -> dict:
     prev = total(previous_start, previous_end)
     if prev:
         diff = n - prev
-        comparator = (f"직전 30일 계약 신고가 {prev:,}건보다 {abs(diff):,}건 "
-                      + ("많은" if diff > 0 else "적은" if diff < 0 else "같은")
-                      + f" 수치, 차이 {diff / prev * 100:+.1f}%"
-                      + "이나 신고 시차가 달라 단순 시장 변화로 볼 수 없는 비교")
+        comparator = (f"직전 30일 계약 신고가 {prev:,}건 대비 {diff:+,}건"
+                      + f"({diff / prev * 100:+.1f}%)의 장부상 차이, "
+                      + "최근 계약의 신고 지연을 고려하면 실제 시장 변화로 단정하기 어려운 비교")
     else:
         comparator = "직전 30일 계약 신고가와 비교할 기록이 부족한 상태"
     covered = len({x.get("district") for x in meta.get("coverage", [])
