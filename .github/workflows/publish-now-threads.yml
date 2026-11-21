@@ -53,6 +53,7 @@ jobs:
         env:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           THREADS_PUBLISH_ENABLED: ${{ vars.THREADS_PUBLISH_ENABLED }}
+          THREADS_EXPECTED_USERNAME: ${{ vars.THREADS_EXPECTED_USERNAME }}
           THREADS_DRY_RUN: ${{ inputs.dry_run || 'false' }}
           THREADS_BACKFILL_LATEST: ${{ inputs.backfill_latest || 'false' }}
         run: python scripts/publish_now_threads.py
