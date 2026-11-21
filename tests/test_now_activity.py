@@ -108,7 +108,10 @@ class NowBuildTests(unittest.TestCase):
         import json
         payload = json.loads((ROOT / "now" / "activity.json").read_text(encoding="utf-8"))
         self.assertEqual(payload["schema_version"], 3)
-        self.assertEqual(len(payload["stories"]), 3)
+        self.assertGreaterEqual(len(payload["stories"]), 4)
+        story = next((s for s in payload["stories"] if s["id"] == "20261121-atls"), None)
+        self.assertIsNotNone(story, "사회과부도 기사가 NOW에 반영되지 않음")
+        self.assertEqual(len(story["summary_lines"]), 5)
         for item in payload["stories"]:
             self.assertTrue(4 <= len(item["summary_lines"]) <= 5)
         self.assertEqual({w["service"] for w in payload["watch"]},
