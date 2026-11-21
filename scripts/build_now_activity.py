@@ -322,7 +322,7 @@ def apt_update() -> dict:
                 qualifier = f", 공통 비교 그룹 {int(count)}개" if count is not None else ""
                 pieces.append(f"{label} 대비 같은 비교 그룹의 괴리 변화 {delta:+.2f}%p{qualifier}")
         if len(pieces) < 5:
-            pieces.append("비교 가능한 관측일이 부족한 변화 항목은 임의 계산 없이 미표시")
+            pieces.append("전일 변화는 두 날짜에 공통으로 잡힌 비교 그룹만을 반영한 값으로 당일 지수 수준 자체의 단순 차이와 구분")
     valid = number(asking.get("successes"))
     listings = number(asking.get("listings"))
     if valid is not None and listings is not None:
@@ -360,12 +360,20 @@ def records_update() -> dict:
     previous_start = start - dt.timedelta(days=30)
     previous_end = start - dt.timedelta(days=1)
     prev = total(previous_start, previous_end)
+    if prev:
+        diff = n - prev
+        comparator = (f"직전 30일 계약 신고가 {prev:,}건보다 {abs(diff):,}건 "
+                      + ("많은" if diff > 0 else "적은" if diff < 0 else "같은")
+                      + f" 수치, 차이 {diff / prev * 100:+.1f}%"
+                      + "이나 신고 시차가 달라 단순 시장 변화로 볼 수 없는 비교")
+    else:
+        comparator = "직전 30일 계약 신고가와 비교할 기록이 부족한 상태"
     covered = len({x.get("district") for x in meta.get("coverage", [])
                    if x.get("month") == day[:7].replace("-", "")})
     pieces = [
         f"{day} 공개 자료 기준 최근 30일 계약 신고가 {n:,}건",
         f"집계 계약 기간 {start.isoformat()}~{day}, 계약일 기준 지난 30일의 신고가 기록",
-        f"그 직전 30일 계약 신고가 {prev:,}건, 계약일 기준 두 기간의 직접 비교" if prev else "직전 30일 계약 신고가와 비교할 기록이 부족한 상태",
+        comparator,
         "같은 단지·전용면적 그룹의 2019년 이후 과거 가격을 넘긴 매매를 신고가로 판정",
         f"국토교통부 서울 {covered if covered else 25}개 구 공개 실거래자료를 수집한 자료",
         "실거래 신고 지연으로 최근 계약일의 건수는 시간이 지나면서 추가될 수 있는 잠정 집계",
