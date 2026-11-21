@@ -18,14 +18,43 @@ class NowBuildTests(unittest.TestCase):
         self.assertTrue(any(p["name"] == "서울 아파트 신고가 트래커" for p in projects))
         self.assertTrue(any(p["name"] == "이재명 X 트래커" and p["paused"] for p in projects))
 
-    def test_bok_preserves_source_day_and_wording(self):
-        item = {"generated": "2026-11-20T16:50+09:00",
-                "text": "BOK워치: 11월 인상확률 68.0%→68.0%\n- 시장 확률(11월 20일 종가): 68.0%."}
-        with patch.object(mod, "read_url", return_value=item):
+    def test_bok_uses_ois_snapshot_not_mislabeled_cd_memo(self):
+        dates = ["2026-11-13", "2026-11-19", "2026-11-20"]
+        meta = {"latest": "2026-11-20", "built": "2026-11-20T16:50+09:00",
+                "snapshots": dates}
+        def snapshot(date, probability):
+            return {
+                "asof": date,
+                "scenarios": {"0": {"meetings": [{
+                    "date": "2026-11-26", "p_hike": probability,
+                    "p_hold": 1 - probability, "expected": 3.17,
+                    "source": "KOFR OIS(자체 산출)", "method": "kofr_ois",
+                    "ois_source": "1개월 OIS", "in_range": True,
+                    "cd91": {"p_hike": 0.8049}
+                }]}}
+            }
+        sources = {
+            mod.BASE["bok"] + "data/meta.json": meta,
+            mod.BASE["bok"] + "data/snapshots/2026-11-20.json": snapshot("2026-11-20", 0.68),
+            mod.BASE["bok"] + "data/snapshots/2026-11-19.json": snapshot("2026-11-19", 0.68),
+            mod.BASE["bok"] + "data/snapshots/2026-11-13.json": snapshot("2026-11-13", 0.7767),
+        }
+        with patch.object(mod, "read_url", side_effect=lambda url: sources[url]):
             result = mod.bok_update()
         self.assertEqual(result["day"], "2026-11-20")
         self.assertIn("68.0%", result["title"])
-        self.assertNotIn("2026-11-21", result["title"])
+        self.assertIn("9.7%p 하락", result["title"])
+        self.assertIn("KOFR OIS", result["source"])
+        self.assertNotIn("CD 91일", result["text"])
+        self.assertNotIn("68.0%→68.0%", result["title"])
+
+    def test_project_stories_are_reviewed_400_to_500_chars(self):
+        projects = mod.parse_projects()
+        self.assertEqual(len(projects), 26)
+        for project in projects:
+            with self.subTest(project=project["id"]):
+                self.assertGreaterEqual(len(project["story"]), 400)
+                self.assertLessEqual(len(project["story"]), 500)
 
     def test_fx_uses_reference_rate_not_1530_spot(self):
         item = {
