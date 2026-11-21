@@ -14,6 +14,9 @@ concurrency:
 
 jobs:
   sync:
+    # Do not inadvertently mirror all personal Meta posts into public NOW
+    # merely because a token was configured for outbound publishing.
+    if: vars.THREADS_SYNC_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

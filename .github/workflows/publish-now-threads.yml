@@ -1,0 +1,73 @@
+name: Publish databrew NOW to Meta Threads
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/publish_now_threads.py
+      - tests/test_publish_now_threads.py
+      - .github/workflows/publish-now-threads.yml
+  workflow_run:
+    workflows: ["Build databrew NOW daily feed"]
+    types: [completed]
+  schedule:
+    # Safety-net runs after the 11:00 and 23:00 KST NOW builds.
+    - cron: "20 2,14 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview pending NOW posts without publishing"
+        required: true
+        type: boolean
+        default: true
+      backfill_latest:
+        description: "On first live run only, post up to 4 latest NOW entries"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: databrew-now-to-threads
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # Do not publish when an upstream NOW build failed.
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test NOW-to-Threads adapter (no network)
+        run: python -m unittest discover -s tests -p 'test_publish_now_threads.py' -v
+      - name: Publish new verified NOW content
+        id: publish
+        env:
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_PUBLISH_ENABLED: ${{ vars.THREADS_PUBLISH_ENABLED }}
+          THREADS_EXPECTED_USERNAME: ${{ vars.THREADS_EXPECTED_USERNAME }}
+          THREADS_DRY_RUN: ${{ inputs.dry_run || 'false' }}
+          THREADS_BACKFILL_LATEST: ${{ inputs.backfill_latest || 'false' }}
+        run: python scripts/publish_now_threads.py
+      - name: Persist idempotency checkpoint even if Meta publication was interrupted
+        if: always() && steps.publish.outcome != 'skipped'
+        shell: bash
+        run: |
+          if git diff --quiet -- now/threads-publication.json; then
+            echo "No publication checkpoint changes."
+            exit 0
+          fi
+          git config user.name "databrew-now-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add now/threads-publication.json
+          git commit -m "chore(now): checkpoint Meta Threads publication state"
+          git pull --rebase origin main
+          git push origin HEAD:main
