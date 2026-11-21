@@ -367,7 +367,7 @@ if(Array.isArray(articles))articles.forEach(function(p){
   var url=safe(/^https?:\/\//i.test(p.url||'')?p.url:'../'+p.url,false);
   if(url&&p.title&&p.date){
     var related=projectMap[p.project]||{};
-    all.push({type:'stories',id:p.id,date:p.date,title:p.title,url:url,project:p.tagAuto?(related.name||p.project):(p.tag||related.name||p.project||''),text:'',media:''})
+    all.push({type:'stories',id:p.id,date:p.date,title:p.title,url:url,project:p.tagAuto?(related.name||p.project):(p.tag||related.name||p.project||''),text:String(p.summary||'').trim(),media:''})
   }
 });
 all.sort(function(a,b){
