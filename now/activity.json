@@ -210,6 +210,19 @@
       "is_new": false
     },
     {
+      "id": "sahoegwabudo",
+      "name": "사회과부도",
+      "description": "세계지도 위에서 나라를 찾고, 도감과 랭킹으로 비교하고, 게임으로 확인합니다.",
+      "series": "archive",
+      "project_url": "https://raspos.github.io/databrew/projects/sahoegwabudo/",
+      "url": "https://raspos.github.io/sahoegwabudo/",
+      "thumbnail": "../thumbs/magazine/sahoegwabudo.webp",
+      "paused": false,
+      "story": "어린 시절 사회과 부도를 펼쳐 세계 각국의 지리와 특산물, 산업을 찾아보던 기억을 웹서비스로 되살렸습니다. 세계지도에서 195개국을 탐험하며 기후와 경제·사회통계, 수출품, 세계 랭킹을 비교하고 나라별 이야기를 읽습니다. 게임과 탐험일지는 계속 보강 중입니다.",
+      "first_seen": "2026-11-21T21:54:48+09:00",
+      "is_new": true
+    },
+    {
       "id": "economist-toolkit",
       "name": "경제학자의 도구상자",
       "description": "노벨 경제학상 수상자 101명의 연구와 대표 저작으로 세계경제를 설명해 온 이론과 방법을 살펴봅니다.",
@@ -474,5 +487,5 @@
       "summary_source": "editorial"
     }
   ],
-  "updated_at": "2026-11-21T11:22:49+09:00"
+  "updated_at": "2026-11-21T21:54:48+09:00"
 }
