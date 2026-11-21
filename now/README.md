@@ -1,20 +1,20 @@
 # NOW — databrew rolling data-journalism feed
 
-The NOW feed combines `../articles.json` (real databrew STORIES) with `now/threads.json` (posts from the account owner). No demo posts are invented, and the existing databrew home page stays intact.
+The NOW feed combines official WATCH updates, real databrew STORIES, project introductions, and an optional inbound Meta Threads mirror. A separate opt-in automation can now publish new NOW content to Meta Threads; there are no fabricated posts.
 
 ## Connect an actual Meta Threads account
 
 1. Create/configure a Meta Threads developer app for the Threads account and authorize it with the read permission (`threads_basic`).
 2. Exchange for a valid access token as described in [Meta's Threads API documentation](https://www.postman.com/meta/threads/collection/dht3nzz/threads-api).
 3. Add the token as the `THREADS_ACCESS_TOKEN` GitHub **Actions repository secret** (not a variable, not a committed file). Never share it in a chat or put it in GitHub Pages JavaScript.
-4. Run the GitHub Action **Sync Threads to databrew NOW** manually once. On the default branch it also runs about every four hours, subject to GitHub Actions scheduler variability.
+4. To enable inbound mirroring separately, set the GitHub Actions repository variable `THREADS_SYNC_ENABLED=true`, then run **Sync Threads to databrew NOW** manually. Its recurring schedule is approximately every four hours.
 5. Check `now/threads.json` for an `updated_at`, a Threads profile URL, and an array of publicly viewable posts. The frontend then displays a real Threads follow link and per-post links to comments/conversation on Threads.
 
 Authentication and long-lived token refresh/rotation remain administrator duties. Expired token errors appear in the GitHub Action logs, not on the public site. The script never guesses a profile URL. Do not add credentials in files or browser scripts.
 
 ### Current scope and limitations
 
-- One-way synchronization: Threads → NOW. NOW never auto-publishes to Meta.
+- Optional inbound sync: Threads → NOW. Separately opt-in to NOW → Threads posting with `THREADS_PUBLISH_ENABLED=true`; these two directions can be enabled independently.
 - The Threads conversation, replies, likes and follows remain on Meta; no fake counts or local reply forms.
 - The same NOW page also displays existing articles, with clear STORY/THREADS labels.
 - Scheduled runs only change the file when the actual post list changes, to avoid noisy commits.
@@ -67,8 +67,41 @@ BOK WATCH NOW uses a **user-specified 50/50 ensemble** rather than copying the B
 
 ## Frontend and STORY rendering (v3)
 
-The databrew home page presents **NOW** (not 'databrew NOW') with the tagline **오늘의 숫자와 그 뒤의 이야기를 진하게 내립니다.** Under it, the latest eight actual WATCH/STORIES/new-project/connected-Threads posts rotate through a one-line preview, moving about every 5 seconds. Hover, keyboard focus and reduced-motion accessibility suppress automatic movement. Clicking opens the exact NOW item. The now/threads.json feed is empty until the owner authorizes Meta; no fake Threads entries are generated.
+The databrew home page presents a slim **NOW** ticker with no introductory marketing copy. The latest eight actual WATCH/STORIES/new-project/connected-Threads posts rotate through the one-line preview, moving about every 5 seconds. Hover, keyboard focus and reduced-motion accessibility suppress automatic movement. Clicking opens the exact NOW item. The now/threads.json feed is empty until the owner authorizes Meta; no fake Threads entries are generated.
 
 NOW displays full WATCH reports as 5+ fact-based, news-fragment clauses. Source-day, observation window, 1d/7d changes if verifiable, methodological caveat and unusual supporting moves are kept in prose, not '했습니다/입니다' sentences. STORIES use five curated lines from actual source articles where available; newly published articles can provide `now_summary` in `articles.json`, and otherwise the generator extracts 4–5 actual source paragraphs without inventing new claims. Editing summaries belongs in `now/story-summaries.json`. Existing project stories remain individually edited at 90–150 Korean characters (roughly three to four displayed lines).
 
-Auto-publishing FROM NOW TO Meta Threads is **not enabled**: it requires a Threads app, `threads_content_publish` authorization and a private server-side token/queue. The current Meta connector is inbound only; the unconnected account must not be represented as running cross-posts.
+Auto-publishing FROM NOW TO Meta Threads is implemented but **not live until explicitly authorized** using a long-lived token in GitHub Actions Secrets and `THREADS_PUBLISH_ENABLED=true` in repository Variables. Follow the configuration and safety procedure below.
+
+
+## NOW → Meta Threads: guarded automatic publishing
+
+The workflow `.github/workflows/publish-now-threads.yml` runs after a successful **Build databrew NOW daily feed** workflow. It also checks at approximately **11:20 and 23:20 Korea time** as a fallback. Actions jobs may be delayed by GitHub. No service logs token values.
+
+### Activate
+
+1. In **Meta for Developers**, create a Threads API app and authorize the correct Threads account with `threads_basic` and `threads_content_publish`. The token must be a **Threads user token**, not an Instagram/Facebook Page token. Use Meta's [official Threads Postman collection](https://www.postman.com/meta/threads/collection/dht3nzz/threads-api) to verify credentials and request a long-lived token. The user must authorize the account; an app registration alone does not grant publishing rights.
+2. In the **raspos/databrew** GitHub repo, go to **Settings → Secrets and variables → Actions → Secrets** and create the repository secret **`THREADS_ACCESS_TOKEN`**. Never paste the token into issues, PRs, chat or public JavaScript.
+3. Under **Settings → Secrets and variables → Actions → Variables**, create **`THREADS_PUBLISH_ENABLED`** with value **`true`**. Without both the variable and the secret, automatic publishing does nothing.
+4. Under **Actions → Publish databrew NOW to Meta Threads → Run workflow**, leave **dry_run=true** to preview the eligible posts with no network publishing and no checkpoint change. A second manual run with **dry_run=false**, **backfill_latest=false** validates the token and creates a baseline checkpoint. Historic WATCH/STORIES/project posts are **not broadcast** in bulk.
+5. After initialization, newly released or revised WATCH entries, published STORIES and genuinely new projects cross-post automatically. The source item is linked back to its exact NOW page. To publish up to **four** of the most recent eligible items on first activation, use **backfill_latest=true** on the *first* live manual run only; don't expect this option to backfill once the baseline already exists.
+
+### Publishing behavior and limits
+
+- The eligible sources are the latest source-dated **WATCH** (up to 3 days old), freshly published **STORIES** (up to 14 days) and newly detected **PROJECTS** with a real `first_seen` (up to 14 days). The 26 pre-existing projects are never marketed as new. Inbound Meta Threads posts cannot loop back into outbound publication.
+- Maximum **four NOW items per workflow run**. Article and WATCH texts are sent in full, not replaced by AI paraphrases. If they exceed Threads' 500-character post limit, the script creates up to **four linked text posts**; part one includes the source title and exact NOW URL.
+- Publication records live in `now/threads-publication.json` and store only public post IDs, item fingerprints and timestamps—not credentials. Identical item editions are suppressed on subsequent runs. Revised source text can result in a new Threads post, but source observation dates remain intact.
+- The **first enabled run** defaults to checkpoint-only (zero Meta posts). Manual `dry_run=true` never posts or changes the checkpoint.
+- Failed or uncertain Graph API POSTs are deliberately **not blindly retried**. The checkpoint records an `inflight` marker so an administrator can compare the real Threads account with the run before resolving it. The workflow commits checkpoint updates even after a failed publish; the next run refuses to duplicate a potentially successful request. A partially posted reply chain can remain visible until resolved.
+- The access token is subject to Meta expiration/refresh requirements. The workflow does **not** pretend to rotate the repository secret automatically: renew/replace it as needed, ideally before the 60-day long-lived token expiry. Configure a separate renewal process before unattended long-term operation.
+- `THREADS_PUBLISH_ENABLED=false` immediately disables outbound posting at the next run. Inbound collection stays disabled unless `THREADS_SYNC_ENABLED=true` is configured independently, to avoid accidentally mirroring personal Threads history onto the public NOW page.
+- To revert/delete a published Threads post, use Threads itself. Removing a NOW item locally does not automatically delete a previously published Meta post.
+
+### Local verification
+
+```bash
+python -m unittest discover -s tests -p 'test_publish_now_threads.py' -v
+THREADS_DRY_RUN=true python scripts/publish_now_threads.py
+```
+
+Meta API references: [Threads official collection](https://www.postman.com/meta/threads/collection/dht3nzz/threads-api) and [text-container/reply publishing request](https://www.postman.com/meta/threads/documentation/dht3nzz/threads-api?entity=request-34203612-f8bf85ba-a2a2-47f8-9183-f94cd3e9c9d3).
