@@ -28,7 +28,7 @@ BASE = {
     "apt": "https://raspos.github.io/apt-watch/",
     "records": "https://raspos.github.io/seoul-apartment-tracker/",
 }
-SOURCE_LIMIT = 8 * 1024 * 1024
+SOURCE_LIMIT = 32 * 1024 * 1024
 
 
 def read_url(url: str, *, compressed: bool = False) -> Any:
