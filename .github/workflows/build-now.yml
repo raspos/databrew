@@ -1,6 +1,14 @@
 name: Build databrew NOW daily feed
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/build_now_activity.py
+      - now/project-stories.json
+      - now/index.html
+      - tests/test_now_activity.py
+      - .github/workflows/build-now.yml
   workflow_dispatch:
   schedule:
     # Two passes pick up early apartment figures and evening market close releases.

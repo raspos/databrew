@@ -21,6 +21,7 @@ from typing import Any
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "now" / "activity.json"
 INDEX = ROOT / "index.html"
+PROJECT_STORIES = ROOT / "now" / "project-stories.json"
 KST = dt.timezone(dt.timedelta(hours=9))
 BASE = {
     "bok": "https://bokwatch.pages.dev/",
@@ -67,6 +68,9 @@ def clean(value: str) -> str:
 
 def parse_projects() -> list[dict]:
     source = INDEX.read_text(encoding="utf-8")
+    editorial = json.loads(PROJECT_STORIES.read_text(encoding="utf-8"))
+    if not isinstance(editorial, dict):
+        raise ValueError("project-stories.json must be an object")
     cards = re.findall(r'<article\b[^>]*class="[^"]*\bcard\b[^"]*"[^>]*>.*?</article>', source, re.S)
     projects = []
     seen = set()
@@ -94,26 +98,132 @@ def parse_projects() -> list[dict]:
             "url": html.unescape(service.group(1)) if service else "https://raspos.github.io/databrew/projects/" + slug + "/",
             "thumbnail": ("../" + html.unescape(art.group(1))) if art else "",
             "paused": slug == "lee-jae-myung-x" or name == "이재명 X 트래커",
+            "story": editorial.get(slug, ""),
         })
     if len(projects) < 10:
         raise ValueError("project card parsing failed; refusing to erase project history")
+    for project in projects:
+        if project["id"] in editorial:
+            story = project["story"]
+            if not isinstance(story, str) or not 400 <= len(story) <= 500:
+                raise ValueError("400–500 character story requirement failed: " + project["id"])
+    # New projects can appear automatically with a card-length introduction;
+    # they will receive a reviewed 400–500 character story before the next editorial release.
+
     return projects
 
 
+def _bok_meeting(snapshot: dict, meeting_date: str | None = None) -> dict:
+    """Read the model's *primary* published scenario, never the CD sensitivity.
+
+    The BOK memo summary can say "CD 91일" even when the top-line model
+    actually uses KOFR OIS. Snapshot scenario 0 is the source of truth.
+    """
+    matches = (snapshot.get("scenarios") or {}).get("0", {}).get("meetings") or []
+    reference_date = day_of(snapshot["asof"])
+    for meeting in matches:
+        meeting_day = meeting.get("date")
+        if not meeting_day or meeting_day <= reference_date:
+            continue
+        if meeting_date and meeting_day != meeting_date:
+            continue
+        probability = number(meeting.get("p_hike"))
+        if probability is None or not 0 <= probability <= 1:
+            continue
+        if meeting.get("in_range") is False:
+            continue
+        if not meeting.get("source") or not meeting.get("method"):
+            continue
+        return meeting
+    raise ValueError("No published, in-range next-meeting market probability")
+
+
+def _bok_comparison(day: str, date: str, current_method: str,
+                    current_meeting: str) -> float | None:
+    """Fetch a dated archived snapshot; ignore changed model methodologies."""
+    if not date or date >= day:
+        return None
+    try:
+        prior = read_url(BASE["bok"] + "data/snapshots/" + date + ".json")
+        if day_of(prior.get("asof")) != date:
+            return None
+        meeting = _bok_meeting(prior, current_meeting)
+        if meeting.get("method") != current_method:
+            return None
+        return number(meeting.get("p_hike"))
+    except (KeyError, ValueError, TypeError, urllib.error.URLError, TimeoutError,
+            json.JSONDecodeError):
+        return None
+
+
 def bok_update() -> dict:
-    payload = read_url(BASE["bok"] + "data/memo.json")
-    day = day_of(payload["generated"])
-    lines = [s.strip() for s in str(payload.get("text", "")).splitlines() if s.strip()]
-    if not lines or not lines[0].startswith("BOK워치"):
-        raise ValueError("BOK WATCH memo structure unknown")
-    title = lines[0][:150]
-    # Memo is already an existing published calculation; never independently reinterpret probabilities.
-    summary = (lines[1].lstrip("- ") if len(lines) > 1 else "")[:330]
+    # Read the public BOK WATCH *model snapshot*. memo.json is an internal
+    # briefing and its headline/methodology must not be copied into a feed.
+    meta = read_url(BASE["bok"] + "data/meta.json")
+    day = day_of(meta["latest"])
+    snapshot = read_url(BASE["bok"] + "data/snapshots/" + day + ".json")
+    if day_of(snapshot["asof"]) != day:
+        raise ValueError("BOK WATCH meta/snapshot date mismatch")
+    meeting = _bok_meeting(snapshot)
+    prob = number(meeting["p_hike"])
+    meeting_day = day_of(meeting["date"])
+    method = meeting["method"]
+    origin = meeting["source"]
+    if method == "kofr_ois":
+        origin = "KOFR OIS(" + str(meeting.get("ois_source") or "자체 산출") + "·자체 산출)"
+    elif not origin:
+        raise ValueError("BOK WATCH primary source missing")
+
+    # Previous observation and exact week-ago comparison are optional: omit
+    # changes if the source archive is missing or used a different method.
+    dates = sorted(d for d in meta.get("snapshots", []) if isinstance(d, str) and d < day)
+    previous_day = dates[-1] if dates else None
+    week_day = (dt.date.fromisoformat(day) - dt.timedelta(days=7)).isoformat()
+    week_snapshot = week_day if week_day in dates else None
+    previous = _bok_comparison(day, previous_day, method, meeting_day) if previous_day else None
+    weekly = _bok_comparison(day, week_snapshot, method, meeting_day) if week_snapshot else None
+
+    value = f"{prob * 100:.1f}%"
+    meeting_label = f"{int(meeting_day[5:7])}월 {int(meeting_day[8:10])}일"
+    title = f"BOK워치 | {meeting_label} 금통위 인상확률 {value}"
+    if weekly is not None:
+        change = round((prob - weekly) * 100, 1)
+        if change < 0:
+            title += f"…1주 새 {abs(change):.1f}%p 하락"
+        elif change > 0:
+            title += f"…1주 새 {change:.1f}%p 상승"
+        else:
+            title += "…1주 전과 동일"
+    elif previous is not None:
+        change = round((prob - previous) * 100, 1)
+        title += (f"…직전 관측일보다 {abs(change):.1f}%p "
+                  + ("상승" if change > 0 else "하락")) if change else "…직전 관측일과 동일"
+
+    pieces = [f"{day[5:7].lstrip('0')}월 {day[8:10].lstrip('0')}일 관측 기준. "
+              f"{origin}를 반영했습니다."]
+    if previous is not None:
+        previous_change = round((prob - previous) * 100, 1)
+        previous_label = f"{int(previous_day[5:7])}월 {int(previous_day[8:10])}일"
+        pieces.append(f"직전 관측일({previous_label}) 대비 "
+                      + (f"{previous_change:+.1f}%p." if previous_change else "변동이 없습니다."))
+    if weekly is not None:
+        weekly_label = f"{int(week_day[5:7])}월 {int(week_day[8:10])}일"
+        weekly_change = round((prob - weekly) * 100, 1)
+        pieces.append(f"1주 전({weekly_label}, {weekly * 100:.1f}%) 대비 {weekly_change:+.1f}%p.")
+    hold = number(meeting.get("p_hold"))
+    if hold is not None:
+        pieces.append(f"동결 확률은 {hold * 100:.1f}%입니다.")
+    expected = number(meeting.get("expected"))
+    if expected is not None:
+        pieces.append(f"회의 후 기대 기준금리는 {expected:.2f}%입니다.")
+    text = " ".join(pieces)
     return {
-        "id": "watch:bok:" + day, "service": "bok", "day": day, "source_at": payload["generated"],
-        "title": title, "text": summary,
-        "source": "BOK워치 · 시장확률", "url": BASE["bok"],
-        "note": "모형 추정치이며 기준금리 결정의 확정적 예측은 아닙니다.",
+        "id": "watch:bok:" + day, "service": "bok", "day": day,
+        "source_at": str(meta.get("built") or day),
+        "title": title, "text": text,
+        "source": "BOK워치 · " + origin,
+        "url": BASE["bok"],
+        "note": "시장금리에 기반한 모형 추정치이며 실제 금통위 결정과 다를 수 있습니다.",
     }
 
 
