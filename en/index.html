@@ -465,34 +465,98 @@ html { scroll-behavior: smooth; }
   .stories-list li { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "main main" "date views"; gap: 2px 10px; padding: 9px 2px; }
   .story-main { grid-area: main; } .story-date { grid-area: date; } .story-views { grid-area: views; text-align: right; }
 }
-/* NOW pilot: compact editorial entry point, not a fourth project series. */
-.now-promo{display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;background:var(--cell);border:1px solid var(--rule);border-radius:12px;padding:22px 26px;margin:0 0 28px}
-.now-promo .now-kicker{margin:0 0 4px;font:600 11px var(--font-mono);letter-spacing:.12em;color:var(--accent)}
-.now-promo h2{font:700 clamp(21px,3vw,28px)/1.25 var(--font-body);margin:0 0 5px;letter-spacing:-.03em}
-.now-promo p.now-desc{margin:0;color:var(--muted);font-size:13px}
-.now-promo a.now-go{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;min-height:44px;border-radius:9px;background:var(--ink);color:var(--cell);text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap}
-.now-promo a.now-go:hover{opacity:.82}
+/* Compact NOW ticker — latest reporting is the focal point, not a promo card. */
+.now-promo{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  column-gap:17px;
+  min-height:60px;
+  padding:10px 17px;
+  margin:0 0 18px;
+  background:var(--cell);
+  border:1px solid var(--rule);
+  border-left:3px solid var(--accent);
+  border-radius:9px;
+}
+.now-promo h2{
+  font:750 19px/1.1 var(--font-body);
+  letter-spacing:-.04em;
+  margin:0;
+  white-space:nowrap;
+}
+.now-promo h2 a{text-decoration:none;color:var(--ink)}
+.now-promo h2 a:hover{color:var(--accent)}
+.now-promo h2 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.now-promo a.now-go{
+  font-size:12px;
+  font-weight:650;
+  color:var(--muted);
+  text-decoration:none;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  padding:0 0 0 8px;
+}
+.now-promo a.now-go:hover{color:var(--accent)}
 .now-promo a.now-go:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-@media(max-width:600px){.now-promo{padding:18px;margin-bottom:22px}.now-promo a.now-go{width:100%}}
-/* NOW teaser: a one-line rotating strip of actual, source-dated posts. */
-.now-promo-head{flex:1 1 260px;min-width:0}
-.now-roll{flex:1 0 100%;width:100%;display:flex;align-items:center;gap:13px;border-top:1px solid var(--rule);padding-top:14px;min-width:0}
+.now-roll{display:flex;align-items:center;gap:10px;min-width:0}
 .now-roll[hidden]{display:none}
-.now-roll-label{font:600 10px var(--font-mono);letter-spacing:.04em;color:var(--muted);white-space:nowrap;flex:none}
 .now-roll-view{flex:1 1 auto;min-width:0;overflow:hidden}
-.now-roll-link{display:flex;align-items:center;gap:9px;min-width:0;text-decoration:none;color:var(--ink);transition:opacity .18s ease,transform .18s ease}
+.now-roll-link{
+  display:flex;align-items:center;gap:10px;min-width:0;
+  text-decoration:none;color:var(--ink);
+  transition:opacity .18s ease,transform .18s ease;
+}
 .now-roll-link:hover .now-roll-text{text-decoration:underline;text-underline-offset:3px}
 .now-roll-link:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-.now-roll-type{font:600 10px var(--font-mono);color:var(--accent);border:1px solid var(--rule);border-radius:4px;padding:2px 5px;white-space:nowrap;flex:none}
-.now-roll-text{display:block;min-width:0;flex:1 1 auto;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:13px;font-weight:600}
-.now-roll-date{font:500 11px var(--font-mono);color:var(--muted);white-space:nowrap;flex:none}
-.now-roll-actions{display:flex;gap:3px;flex:none}
-.now-roll-nav{background:transparent;color:var(--muted);border:1px solid var(--rule);border-radius:6px;width:27px;height:27px;padding:0;font:700 12px var(--font-mono);cursor:pointer}
-.now-roll-nav:hover{background:var(--ink);color:var(--cell)}
+.now-roll-type{
+  font:600 10px var(--font-mono);
+  color:var(--accent);
+  border:1px solid var(--rule);
+  border-radius:4px;
+  padding:2px 6px;
+  white-space:nowrap;
+  flex:none;
+}
+.now-roll-text{
+  display:block;min-width:0;flex:1 1 auto;
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+  font-size:14px;font-weight:650;line-height:1.5;
+}
+.now-roll-date{
+  font:500 11px var(--font-mono);
+  color:var(--muted);
+  white-space:nowrap;
+  flex:none;
+}
+.now-roll-actions{display:flex;gap:2px;flex:none}
+.now-roll-nav{
+  width:27px;height:29px;padding:0;
+  border:0;border-radius:5px;
+  background:transparent;color:var(--muted);
+  font:700 12px var(--font-mono);
+  cursor:pointer;
+}
+.now-roll-nav:hover{background:var(--soft);color:var(--ink)}
 .now-roll-nav:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.now-roll-changing .now-roll-link{opacity:0;transform:translateY(-6px)}
-@media(max-width:780px){.now-roll-label{display:none}}
-@media(max-width:600px){.now-roll{gap:7px}.now-roll-date{display:none}.now-roll-nav{width:25px;height:27px}.now-roll-text{font-size:12px}}
+.now-roll-changing .now-roll-link{opacity:0;transform:translateY(-5px)}
+@media(max-width:800px){
+  .now-promo{gap:12px;padding:9px 13px;min-height:56px}
+  .now-roll-date{display:none}
+}
+@media(max-width:600px){
+  .now-promo{gap:9px;padding:8px 11px;min-height:54px;margin-bottom:15px}
+  .now-promo h2{font-size:17px}
+  .now-promo a.now-go{font-size:0;padding-left:0;min-width:23px;justify-content:center}
+  .now-promo a.now-go::after{content:"→";font-size:18px;color:var(--muted)}
+  .now-roll{gap:4px}
+  .now-roll-link{gap:6px}
+  .now-roll-type{font-size:9px;padding:2px 4px}
+  .now-roll-text{font-size:12px}
+  .now-roll-actions{display:none}
+}
 @media(prefers-reduced-motion:reduce){.now-roll-link{transition:none}}
 </style>
 </head>
@@ -529,14 +593,8 @@ html { scroll-behavior: smooth; }
   </header>
 
   <section class="now-promo" aria-labelledby="h-now">
-    <div class="now-promo-head">
-      <p class="now-kicker">DATABREW / THE RUNNING FEED</p>
-      <h2 id="h-now">NOW</h2>
-      <p class="now-desc">Today's numbers and the stories behind them, brewed strong.</p>
-    </div>
-    <a class="now-go" href="../now/">Explore NOW →</a>
-    <div class="now-roll" id="now-roll" aria-label="Latest posts from NOW" hidden>
-      <span class="now-roll-label">LATEST FROM NOW</span>
+    <h2 id="h-now"><a href="../now/">NOW</a></h2>
+    <div class="now-roll" id="now-roll" aria-label="Recent updates from NOW" hidden>
       <div class="now-roll-view">
         <a id="now-roll-link" class="now-roll-link" href="../now/">
           <span id="now-roll-type" class="now-roll-type"></span>
@@ -544,11 +602,12 @@ html { scroll-behavior: smooth; }
         </a>
       </div>
       <time id="now-roll-date" class="now-roll-date"></time>
-      <div class="now-roll-actions" aria-label="Browse recent NOW posts">
+      <div class="now-roll-actions" aria-label="Browse recent posts">
         <button type="button" class="now-roll-nav" data-roll-prev aria-label="Previous NOW post">↑</button>
         <button type="button" class="now-roll-nav" data-roll-next aria-label="Next NOW post">↓</button>
       </div>
     </div>
+    <a class="now-go" href="../now/" aria-label="See all NOW posts">View all →</a>
   </section>
 
   <section class="stories" id="stories" aria-labelledby="h-stories" hidden>
