@@ -1,5 +1,21 @@
 [
   {
+    "id": "20261121-atls",
+    "title": "오스트리아는 뭘로 먹고살까…어린 시절 사회과 부도를 다시 펼쳤다",
+    "url": "articles/20261121-atls/",
+    "outlet": "프로딴짓러",
+    "date": "2026-11-21",
+    "project": "sahoegwabudo",
+    "summary": "오스트리아의 경제를 찾아보다 어린 시절 즐겨 읽던 사회과 부도가 떠올랐다. 세계 195개국을 지도·통계·기후·산업으로 탐험하는 웹서비스를 AI와 함께 만들었다.",
+    "tag": "사회과부도",
+    "tagAuto": true,
+    "en": {
+      "title": "What Does Austria Make a Living From? Reimagining a Childhood World Atlas With AI",
+      "outlet": "databrew",
+      "summary": "A question about Austria’s economy revived a childhood fascination with school atlases. With ChatGPT for planning and Claude Code for implementation, I built an interactive atlas of 195 countries, combining maps, comparable statistics, climate, production, and trade data. The project also reflects how AI has shifted my focus from whether an idea can be built to how it should be designed, verified, and made worthwhile for readers."
+    }
+  },
+  {
     "id": "20261119-t0xh",
     "title": "3600만원 연봉에 3.66승 기여…몸값 뛰어넘은 선수들",
     "url": "articles/20261119-t0xh/",
