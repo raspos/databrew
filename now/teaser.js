@@ -4,6 +4,9 @@
  */
 (function () {
   'use strict';
+  // Resolve from the script itself, so both /databrew/ and /databrew/en/ work.
+  var scriptSource = document.currentScript && document.currentScript.src;
+  var nowBase = new URL('.', scriptSource || new URL('now/', document.baseURI).href);
   var root = document.getElementById('now-roll');
   if (!root || typeof fetch !== 'function') return;
 
@@ -48,7 +51,7 @@
       text: text,
       date: readableDate(when),
       time: at,
-      path: 'now/?filter=' + encodeURIComponent(filter) + (key ? '&item=' + encodeURIComponent(String(key)) : ''),
+      path: new URL('?filter=' + encodeURIComponent(filter) + (key ? '&item=' + encodeURIComponent(String(key)) : ''), nowBase).href,
       key: key || tag + ':' + when + ':' + text
     });
   }
@@ -90,9 +93,9 @@
   }
 
   Promise.allSettled([
-    load('now/activity.json'),
-    load('articles.json'),
-    load('now/threads.json')
+    load(new URL('activity.json', nowBase).href),
+    load(new URL('../articles.json', nowBase).href),
+    load(new URL('threads.json', nowBase).href)
   ]).then(function (responses) {
     var activity = responses[0].status === 'fulfilled' ? responses[0].value : {};
     var articles = responses[1].status === 'fulfilled' ? responses[1].value : [];
