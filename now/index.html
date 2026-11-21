@@ -73,8 +73,8 @@ var threads=results[0].status==='fulfilled'&&results[0].value||{},articles=resul
 if(threads.profile_url){var profile=safe(threads.profile_url,true);if(profile){var follow=document.getElementById('follow');follow.href=profile;follow.hidden=false}}
 var status=document.getElementById('sync-status');
 if(threads.updated_at&&threads.profile_url){status.replaceChildren(el('span','dot'));status.appendChild(document.createTextNode('Threads 최근 동기화: '+fmt(threads.updated_at)))}
-threadPosts.forEach(function(p){var u=safe(p.permalink,true);if(u&&p.text&&p.timestamp)all.push({type:'threads',date:p.timestamp,text:String(p.text),url:u,media:safe(p.media_url||p.thumbnail_url||'',false)})});
-if(Array.isArray(articles))articles.forEach(function(p){var url=safe('../'+p.url,false);if(url&&p.title&&p.date)all.push({type:'stories',date:p.date+'T12:00:00+09:00',title:p.title,url:url,project:p.tagAuto?p.project:(p.tag||p.project||'')})});
+threadPosts.forEach(function(p){var u=safe(p.permalink,true);if(u&&p.timestamp){var mediaSrc=p.media_type==='VIDEO'?p.thumbnail_url:(p.thumbnail_url||p.media_url);if(p.text||mediaSrc)all.push({type:'threads',date:p.timestamp,text:String(p.text||''),url:u,media:safe(mediaSrc||'',false)})}});
+if(Array.isArray(articles))articles.forEach(function(p){var url=safe(/^https?:\/\//i.test(p.url||'')?p.url:'../'+p.url,false);if(url&&p.title&&p.date)all.push({type:'stories',date:p.date+'T12:00:00+09:00',title:p.title,url:url,project:p.tagAuto?p.project:(p.tag||p.project||'')})});
 all.sort(function(a,b){return Date.parse(b.date)-Date.parse(a.date)});
 document.querySelector('[data-count="all"]').textContent=all.length;document.querySelector('[data-count="threads"]').textContent=all.filter(function(x){return x.type==='threads'}).length;document.querySelector('[data-count="stories"]').textContent=all.filter(function(x){return x.type==='stories'}).length;
 render();
