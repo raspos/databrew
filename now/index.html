@@ -27,6 +27,7 @@
 .tabs{overflow-x:auto;scrollbar-width:none;white-space:nowrap}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex:none}
+.entry .summary-project{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;line-clamp:4;overflow:hidden}
 .entry .summary-stories{white-space:pre-line;line-height:1.85;color:var(--ink);font-size:14px}
 .entry .copy-watch{line-height:1.9;white-space:normal}
 .entry .source{font:500 11px "IBM Plex Mono",monospace;letter-spacing:.01em;color:var(--muted);margin-top:11px}
@@ -88,7 +89,7 @@ if(post.type==='threads'){
 var h=el('h2'),title=el('a','',post.title||'');
 title.href=safe(post.url,false)||'#';h.appendChild(title);node.appendChild(h);
 if(post.type==='projects'&&post.media)imageMedia(node,post.media,'project-shot','');
-if(post.text)node.appendChild(el('p',post.type==='stories'?'summary summary-stories':post.type==='watch'?'summary copy-watch':'summary',post.text));
+if(post.text)node.appendChild(el('p',post.type==='stories'?'summary summary-stories':post.type==='watch'?'summary copy-watch':post.type==='projects'?'summary summary-project':'summary',post.text));
 if(post.type==='watch'&&post.note)node.appendChild(el('p','note',post.note));
 if(post.type==='projects'&&post.paused)node.appendChild(el('p','paused','이 프로젝트의 자동 수집은 중단돼 있습니다. X API 인증이 필요합니다.'));
 if(post.type==='stories'&&post.project)node.appendChild(el('p','small',post.project));
