@@ -249,10 +249,15 @@ def run(activity_path: Path = SOURCE, state_path: Path = STATE,
     if state.get("version") != 1 or not isinstance(state.get("seen"), dict) or not isinstance(state.get("pending"), dict):
         raise ValueError("Threads publication state is corrupt")
     posts = candidates(activity, today)
-    pending = [key for key, value in state["pending"].items() if value.get("inflight") is not None]
-    if pending and not dry_run:
-        raise RuntimeError("Publication blocked by uncertain in-flight request; audit Threads first: " + ", ".join(pending))
     new = [post for post in posts if digest(post) not in state["seen"].get(source_key(post), [])]
+    if backfill_latest and state.get("initialized_at"):
+        # An explicit admin backfill may recover previously checkpointed but
+        # *never published* recent entries. Published digests remain immutable.
+        already_sent = {(r["key"], r["digest"]) for r in state["published"]}
+        for post in posts[:max_items]:
+            if (source_key(post), digest(post)) not in already_sent and post not in new:
+                new.append(post)
+        new.sort(key=lambda p: (p["day"], {"watch": 2, "stories": 1, "projects": 0}[p["kind"]], p["id"]), reverse=True)
     print("NOW candidate count:", len(posts), "unseen editions:", len(new))
     for post in new[:max_items]:
         parts = chunks_for(post)
@@ -273,6 +278,12 @@ def run(activity_path: Path = SOURCE, state_path: Path = STATE,
             print("Threads access token not configured; no publication attempted.")
             return 0
         client = GraphClient(token)
+
+    # Check the uncertain-request guard only when live publication is enabled.
+    # Turning the feature off must never create failing scheduled actions.
+    pending = [key for key, value in state["pending"].items() if value.get("inflight") is not None]
+    if pending:
+        raise RuntimeError("Publication blocked by uncertain in-flight request; audit Threads first: " + ", ".join(pending))
 
     if not state.get("initialized_at"):
         # Validate token BEFORE creating any durable state or posting content.
