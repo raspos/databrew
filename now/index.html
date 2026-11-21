@@ -69,18 +69,7 @@
 .comment-note{font-size:12px;line-height:1.6;color:var(--muted);margin:7px 0 14px}
 .comment-slot{min-height:60px;overflow:hidden}
 .comment-slot .utterances{max-width:100%;margin:0}
-.guest-comment-form{display:grid;gap:10px;margin:15px 0 12px}.guest-comment-form[hidden]{display:none}
-.guest-comment-form label{display:grid;gap:5px;font-size:12px;font-weight:600}
-.guest-comment-form input:not(.honeypot),.guest-comment-form textarea{width:100%;border:1px solid var(--line);border-radius:7px;padding:9px 11px;background:var(--bg);color:var(--ink);font:inherit;font-size:13px}
-.guest-comment-form textarea{resize:vertical;min-height:85px}
-.guest-comment-form .honeypot{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.guest-turnstile{min-height:40px}.guest-submit{justify-self:start;padding:8px 18px;border:0;border-radius:8px;background:var(--ink);color:var(--paper);font-size:13px;font-weight:700}
-.guest-submit:disabled{opacity:.5;cursor:not-allowed}
-.guest-status{margin:0;min-height:16px;font-size:12px;color:var(--muted)}
-.guest-comment{border-top:1px solid var(--line);padding:12px 0}.guest-comment-meta{display:flex;justify-content:space-between;gap:10px;font-size:12px}
-.guest-comment-meta time{font-size:11px;color:var(--muted)}
-.guest-comment-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:13px;margin:6px 0 0}
-.comment-empty{font-size:12px;color:var(--muted);margin:0}
+.comment-slot .utterances-frame{max-width:100%}
 @media(max-width:570px){.entry-actions{gap:7px}.entry-action{min-height:38px;padding:7px 12px}.share-menu{min-width:196px}.comment-panel{padding:14px 11px 4px}}
 </style>
 </head>
@@ -121,23 +110,15 @@ function postLink(post){
 function postLabel(post){
   return String(post.title||post.name||post.text||'databrew NOW').replace(/\s+/g,' ').trim().slice(0,100);
 }
-// Public configuration contains no secrets; comments need deployed Cloudflare Worker.
-var guestSettings=fetch('comments-config.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('no config');return r.json()}).then(function(c){
-  var url=String(c.api_base||'').trim(),sitekey=String(c.turnstile_site_key||'').trim();
-  if(!url||!sitekey||new URL(url).protocol!=='https:')return null;
-  return {url:url.replace(/\/$/,''),sitekey:sitekey};
-}).catch(function(){return null});
-var tsLoader=null;
-function loadTurnstile(){
-  if(window.turnstile&&window.turnstile.render)return Promise.resolve(window.turnstile);
-  if(!tsLoader)tsLoader=new Promise(function(resolve,reject){
-    var js=document.createElement('script');js.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';js.async=true;
-    js.onload=function(){window.turnstile&&window.turnstile.render?resolve(window.turnstile):reject(Error('Turnstile unavailable'))};
-    js.onerror=function(){reject(Error('Turnstile unavailable'))};document.head.appendChild(js);
-  });
-  return tsLoader;
+function utterancesTheme(){
+  var override=document.documentElement.dataset.theme;
+  var dark=override==='dark'||(!override&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+  return dark?'github-dark':'github-light';
 }
-function syncCommentTheme(){} // Guest form uses the page's dark/light CSS theme.
+function syncCommentTheme(){
+  var iframe=document.querySelector('.comment-panel:not([hidden]) iframe.utterances-frame');
+  if(iframe&&iframe.contentWindow)iframe.contentWindow.postMessage({type:'set-theme',theme:utterancesTheme()},'https://utteranc.es');
+}
 function closeComments(){
   if(!activeComments)return;
   activeComments.pane.hidden=true;
@@ -176,77 +157,53 @@ function addInteractions(node,post){
     metaComments.rel='noopener noreferrer';
     toolbar.appendChild(metaComments);
   }else{
-    var commentButton=interactionButton('댓글'),commentPane=el('section','comment-panel');
-    var key=post.type+':'+String(post.id);
-    commentPane.id='now-comments-'+encodeURIComponent(key);commentPane.hidden=true;
-    commentButton.setAttribute('aria-controls',commentPane.id);commentButton.setAttribute('aria-expanded','false');
-    var headingBox=el('div','comment-head');
-    headingBox.appendChild(el('h3','','댓글'));
-    var refreshButton=interactionButton('새로고침');headingBox.appendChild(refreshButton);
-    var note=el('p','comment-note','로그인 없이 닉네임으로 댓글을 남길 수 있습니다. 관리자 승인 후 공개됩니다.');
-    var state=el('p','comment-note');state.setAttribute('role','status');state.setAttribute('aria-live','polite');
-    var list=el('div','comment-slot');
-    var form=el('form','guest-comment-form');form.hidden=true;
-    var nl=el('label','','닉네임 (2~24자)'),ni=el('input','guest-input');ni.name='nickname';ni.maxLength=24;ni.minLength=2;ni.required=true;nl.appendChild(ni);
-    var tl=el('label','','댓글 (2~1000자)'),ti=el('textarea','guest-input');ti.name='comment';ti.maxLength=1000;ti.minLength=2;ti.required=true;ti.rows=3;tl.appendChild(ti);
-    var trap=el('input','honeypot');trap.name='website';trap.setAttribute('aria-hidden','true');trap.tabIndex=-1;trap.autocomplete='off';
-    var cap=el('div','guest-turnstile'),send=el('button','guest-submit','댓글 등록');send.type='submit';
-    var formState=el('p','guest-status');formState.setAttribute('role','status');formState.setAttribute('aria-live','polite');
-    form.append(nl,tl,trap,cap,send,formState);commentPane.append(headingBox,note,state,list,form);
-    var settings=null,widget=null;
-    function renderGuests(rows){
-      list.replaceChildren();
-      if(!rows.length)list.appendChild(el('p','comment-empty','공개된 댓글이 없습니다.'));
-      rows.forEach(function(row){
-        var box=el('div','guest-comment'),metadata=el('div','guest-comment-meta');
-        metadata.append(el('strong','',row.nickname||'독자'),el('time','',String(row.created_at||'').slice(0,16)));
-        box.append(metadata,el('p','guest-comment-text',row.content||''));list.appendChild(box);
-      });
-    }
-    async function refreshGuests(){
-      settings=await guestSettings;
-      if(!settings){state.textContent='비회원 댓글 서비스를 연결하는 중입니다.';form.hidden=true;return;}
-      state.textContent='댓글을 불러오는 중입니다.';
-      try{
-        var url=new URL(settings.url+'/api/comments');url.searchParams.set('post',key);
-        var result=await fetch(url.href,{cache:'no-store'});
-        if(!result.ok)throw Error('failed');
-        var payload=await result.json();
-        renderGuests(Array.isArray(payload.comments)?payload.comments:[]);
-        commentButton.textContent='댓글'+(payload.count?' '+payload.count:'');
-        form.hidden=false;state.textContent='';
-        if(widget===null){
-          try{var ts=await loadTurnstile();widget=ts.render(cap,{sitekey:settings.sitekey,theme:'auto'});}
-          catch(e){send.disabled=true;formState.textContent='스팸 방지 서비스를 불러오지 못했습니다.';}
-        }
-      }catch(e){state.textContent='댓글을 불러오지 못했습니다.';form.hidden=true;}
-    }
-    refreshButton.addEventListener('click',refreshGuests);
-    form.addEventListener('submit',async function(event){
-      event.preventDefault();
-      if(!settings||widget===null||!window.turnstile){formState.textContent='댓글 시스템이 준비되지 않았습니다.';return;}
-      var token=window.turnstile.getResponse(widget);
-      if(!token){formState.textContent='스팸 방지 확인을 완료해 주세요.';return;}
-      send.disabled=true;formState.textContent='댓글 등록 중…';
-      try{
-        var response=await fetch(settings.url+'/api/comments',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-          post_key:key,nickname:ni.value,content:ti.value,website:trap.value,turnstile_token:token
-        })});
-        var result=await response.json();
-        if(!response.ok)throw Error(result.error||'등록 실패');
-        formState.textContent=result.message||'댓글이 접수됐습니다. 승인 후 공개됩니다.';
-        ti.value='';trap.value='';
-      }catch(e){formState.textContent=e.message||'등록하지 못했습니다.';}
-      finally{window.turnstile.reset(widget);send.disabled=false;}
-    });
+    var commentButton=interactionButton('댓글');
+    var commentPane=el('section','comment-panel');
+    var commentId='now-comments-'+encodeURIComponent(post.type+':'+post.id);
+    commentPane.id=commentId;
+    commentPane.hidden=true;
+    commentButton.setAttribute('aria-expanded','false');
+    commentButton.setAttribute('aria-controls',commentId);
+    commentButton.setAttribute('aria-label',heading+' 댓글 보기');
+    var ch=el('div','comment-head');
+    ch.appendChild(el('h3','', '이 글의 댓글'));
+    var note=el('p','comment-note','GitHub 계정으로 댓글을 남길 수 있습니다. 댓글은 GitHub Issues에 공개됩니다.');
+    var slot=el('div','comment-slot');
+    var issueSearch=new URL('https://github.com/raspos/databrew/issues');
+    issueSearch.searchParams.set('q','is:issue databrew-now:'+post.type+':'+String(post.id));
+    var issueLink=el('a','small','GitHub에서 보기 ↗');
+    issueLink.href=issueSearch.href;
+    issueLink.target='_blank';
+    issueLink.rel='noopener noreferrer';
+    ch.appendChild(issueLink);
+    commentPane.append(ch,note,slot);
     commentButton.addEventListener('click',function(){
       closeShare();
       if(activeComments&&activeComments.pane===commentPane){closeComments();return;}
-      closeComments();commentPane.hidden=false;
+      closeComments();
+      commentPane.hidden=false;
       commentButton.setAttribute('aria-expanded','true');
-      activeComments={pane:commentPane,button:commentButton};refreshGuests();
+      activeComments={pane:commentPane,button:commentButton};
+      if(!slot.dataset.loaded){
+        slot.dataset.loaded='true';
+        var script=document.createElement('script');
+        script.src='https://utteranc.es/client.js';
+        script.setAttribute('repo','raspos/databrew');
+        script.setAttribute('issue-term','databrew-now:'+post.type+':'+String(post.id));
+        script.setAttribute('theme',utterancesTheme());
+        script.setAttribute('crossorigin','anonymous');
+        script.async=true;
+        script.addEventListener('error',function(){
+          slot.replaceChildren(el('p','comment-note','댓글 서비스를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'));
+          delete slot.dataset.loaded;
+        });
+        slot.appendChild(script);
+      }
     });
-    toolbar.appendChild(commentButton);node.appendChild(commentPane);node.insertBefore(toolbar,commentPane);
+    toolbar.appendChild(commentButton);
+    node.appendChild(commentPane);
+    // Toolbar stays above the lazy-loaded comments panel.
+    node.insertBefore(toolbar,commentPane);
   }
   var wrap=el('div','share-wrap'),shareButton=interactionButton('공유');
   var shareId='now-share-'+encodeURIComponent(post.type+':'+post.id);
