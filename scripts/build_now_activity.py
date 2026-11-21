@@ -208,6 +208,14 @@ def bok_update() -> dict:
     if cd_reference is None or abs(control - cd_reference) > 0.005:
         raise ValueError("91-day inference changed relative to original BOK model")
     blend = 0.5 * ois + 0.5 * msb_p
+    ois_hold = number(next_meeting.get("p_hold"))
+    if ois_hold is None:
+        raise ValueError("OIS hold probability missing")
+    msb_hold = (1 - msb_p) if msb_expected >= r0 else max(
+        0.0, 1 - min(1.0, abs(msb_expected - r0) / 0.25))
+    blend_hold = 0.5 * ois_hold + 0.5 * msb_hold
+    direction = ("인상 기대가 동결 기대보다 큰 구간" if blend > blend_hold
+                 else "동결 기대가 인상 기대와 같거나 더 큰 구간")
     expected_ois = number(next_meeting.get("expected"))
     title = (f"BOK워치 | {int(meeting_day[5:7])}월 {int(meeting_day[8:10])}일 "
              f"인상확률 {blend * 100:.1f}% · KOFR OIS·통안채 91일 50:50")
@@ -216,7 +224,7 @@ def bok_update() -> dict:
         f"1개월 KOFR OIS의 단독 인상확률 {ois * 100:.1f}%",
         f"통안증권 91일물의 금리경로 역산 인상확률 {msb_p * 100:.1f}%",
         f"통안채 91일 수익률 {float(msb['rate']):.3f}%, 정상 스프레드 {float(msb['spread']) * 100:+.1f}bp 적용",
-        f"두 모형을 혼합한 동결확률 {(1 - blend) * 100:.1f}%, 인상 전망이 우세한 구간",
+        f"두 모형을 혼합한 동결확률 {blend_hold * 100:.1f}%, {direction}",
     ]
     if expected_ois is not None:
         pieces.append(f"KOFR OIS 단독 기대 기준금리 {expected_ois:.2f}%, 통안채 모형 기대 기준금리 {msb_expected:.2f}%")
