@@ -58,7 +58,8 @@ class NowBuildTests(unittest.TestCase):
 
     def test_project_stories_are_concise_3_to_4_line_intros(self):
         projects = mod.parse_projects()
-        self.assertEqual(len(projects), 26)
+        self.assertEqual(len(projects), 27)
+        self.assertTrue(any(p['id'] == 'sahoegwabudo' for p in projects))
         for project in projects:
             with self.subTest(project=project["id"]):
                 self.assertGreaterEqual(len(project["story"]), 90)
