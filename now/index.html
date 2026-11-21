@@ -27,6 +27,8 @@
 .tabs{overflow-x:auto;scrollbar-width:none;white-space:nowrap}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex:none}
+.entry .summary-stories{white-space:pre-line;line-height:1.85;color:var(--ink);font-size:14px}
+.entry .copy-watch{line-height:1.9;white-space:normal}
 .entry .source{font:500 11px "IBM Plex Mono",monospace;letter-spacing:.01em;color:var(--muted);margin-top:11px}
 .entry .note{color:var(--muted);font-size:12px;line-height:1.65;margin:9px 0 0}
 .entry .project-shot{aspect-ratio:16/6;object-fit:cover;width:100%;border-radius:9px;display:block;background:var(--soft);margin:14px 0 5px}
@@ -86,7 +88,7 @@ if(post.type==='threads'){
 var h=el('h2'),title=el('a','',post.title||'');
 title.href=safe(post.url,false)||'#';h.appendChild(title);node.appendChild(h);
 if(post.type==='projects'&&post.media)imageMedia(node,post.media,'project-shot','');
-if(post.text)node.appendChild(el('p','summary',post.text));
+if(post.text)node.appendChild(el('p',post.type==='stories'?'summary summary-stories':post.type==='watch'?'summary copy-watch':'summary',post.text));
 if(post.type==='watch'&&post.note)node.appendChild(el('p','note',post.note));
 if(post.type==='projects'&&post.paused)node.appendChild(el('p','paused','이 프로젝트의 자동 수집은 중단돼 있습니다. X API 인증이 필요합니다.'));
 if(post.type==='stories'&&post.project)node.appendChild(el('p','small',post.project));
@@ -143,7 +145,18 @@ projects.forEach(function(p){
   if(!url)return;
   all.push({type:'projects',id:p.id,date:p.first_seen||'',isNew:!!p.first_seen,title:p.name,text:p.story||p.description||'',url:url,detailUrl:detail,media:p.thumbnail||'',paused:!!p.paused});
 });
+var summaries=Array.isArray(activity.stories)?activity.stories:[];
+var summarized={};
+summaries.forEach(function(p){
+  if(!p||!p.id||!p.title||!p.day||!Array.isArray(p.summary_lines))return;
+  var url=safe(p.url,false);
+  if(!url||p.summary_lines.length<4||p.summary_lines.length>5)return;
+  var related=projectMap[p.project]||{};
+  summarized[p.id]=true;
+  all.push({type:'stories',id:p.id,date:p.day,title:p.title,url:url,project:related.name||p.project||'',text:p.summary_lines.join('\n'),media:''});
+});
 if(Array.isArray(articles))articles.forEach(function(p){
+  if(summarized[p.id])return;
   var url=safe(/^https?:\/\//i.test(p.url||'')?p.url:'../'+p.url,false);
   if(url&&p.title&&p.date){
     var related=projectMap[p.project]||{};
