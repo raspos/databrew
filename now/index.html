@@ -23,9 +23,12 @@
 @media(max-width:570px){.shell{padding:0 17px 50px}.hero{display:block}.hero h1{margin-bottom:9px}.intro{font-size:14px}.stamp{display:none}.aside{grid-template-columns:1fr}.tabs{padding-top:9px}.tab{flex:1;padding:8px 10px}.entry{padding:21px 0}.date{font-size:10px}footer{margin-top:33px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 /* Auto-updated, source-dated NOW feed */
+.entry:target{outline:2px solid var(--accent);outline-offset:3px}
 .tabs{overflow-x:auto;scrollbar-width:none;white-space:nowrap}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex:none}
+.entry .summary-stories{white-space:pre-line;line-height:1.85;color:var(--ink);font-size:14px}
+.entry .copy-watch{line-height:1.9;white-space:normal}
 .entry .source{font:500 11px "IBM Plex Mono",monospace;letter-spacing:.01em;color:var(--muted);margin-top:11px}
 .entry .note{color:var(--muted);font-size:12px;line-height:1.65;margin:9px 0 0}
 .entry .project-shot{aspect-ratio:16/6;object-fit:cover;width:100%;border-radius:9px;display:block;background:var(--soft);margin:14px 0 5px}
@@ -40,7 +43,7 @@
 <div class="shell">
 <nav class="top" aria-label="사이트 이동"><a class="back" href="../">← databrew</a><div class="topright"><a href="../articles/">STORIES</a><a href="../#watch">PROJECTS</a><button class="theme" id="theme" type="button" aria-label="색상 모드 전환">화면 모드</button></div></nav>
 <header class="hero">
- <div><div class="eyebrow">DATABREW / LIVE NOTES</div><h1>NOW<span>.</span></h1><p class="intro">날마다 바뀌는 숫자, 새 프로젝트, 새로 쓴 기사.<br>databrew에서 일어나는 일을 하나의 피드로 모읍니다.</p></div>
+ <div><div class="eyebrow">DATABREW / THE RUNNING FEED</div><h1>NOW<span>.</span></h1><p class="intro">숫자 뒤의 이야기를 진하게 내립니다.<br>WATCH의 오늘, 프로젝트, STORIES와 짧은 기록을 한데 모았습니다.</p></div>
  <dl class="stamp"><dt>WHAT'S HERE</dt><dd>WATCH · 프로젝트 · STORIES</dd><dt>SOURCE</dt><dd>databrew + Threads</dd></dl>
 </header>
 <div class="layout">
@@ -69,6 +72,7 @@ function addLink(parent,label,url,external){var href=safe(url,false);if(!href)re
 function imageMedia(parent,url,css,alt){var src=safe(url,false);if(!src)return;var img=el('img',css);img.src=src;img.alt=alt||'';img.loading='lazy';img.referrerPolicy='no-referrer';img.onerror=function(){img.remove()};parent.appendChild(img)}
 function entry(post){
 var node=el('article','entry'+(post.type==='projects'&&!post.date?' is-archive':'')),meta=el('div','meta');
+if(post.id)node.id='now-item-'+encodeURIComponent(String(post.id));
 var mark=el('span','mark',post.type==='watch'?String(post.service||'db').slice(0,3).toUpperCase():'db');
 var author=el('span','author',post.type==='watch'?(post.source||'databrew'): 'databrew');
 var tag=post.type==='watch'?'WATCH':post.type==='projects'?(post.isNew?'NEW PROJECT':'PROJECT'):post.type==='threads'?'THREADS':'STORY';
@@ -84,7 +88,7 @@ if(post.type==='threads'){
 var h=el('h2'),title=el('a','',post.title||'');
 title.href=safe(post.url,false)||'#';h.appendChild(title);node.appendChild(h);
 if(post.type==='projects'&&post.media)imageMedia(node,post.media,'project-shot','');
-if(post.text)node.appendChild(el('p','summary',post.text));
+if(post.text)node.appendChild(el('p',post.type==='stories'?'summary summary-stories':post.type==='watch'?'summary copy-watch':'summary',post.text));
 if(post.type==='watch'&&post.note)node.appendChild(el('p','note',post.note));
 if(post.type==='projects'&&post.paused)node.appendChild(el('p','paused','이 프로젝트의 자동 수집은 중단돼 있습니다. X API 인증이 필요합니다.'));
 if(post.type==='stories'&&post.project)node.appendChild(el('p','small',post.project));
@@ -128,24 +132,35 @@ else if(watch.length){wstatus.textContent='WATCH 초기 자료 · 다음 자동 
 threadPosts.forEach(function(p){
   var u=safe(p.permalink,true);
   if(u&&p.timestamp){var mediaSrc=p.media_type==='VIDEO'?p.thumbnail_url:(p.thumbnail_url||p.media_url);
-    if(p.text||mediaSrc)all.push({type:'threads',date:p.timestamp,text:String(p.text||''),url:u,media:safe(mediaSrc||'',false)})}
+    if(p.text||mediaSrc)all.push({type:'threads',id:p.id,date:p.timestamp,text:String(p.text||''),url:u,media:safe(mediaSrc||'',false)})}
 });
 watch.forEach(function(p){
   if(!p||!p.day||!p.title||!p.url)return;
   var url=safe(p.url,false);if(!url)return;
-  all.push({type:'watch',service:p.service,date:p.day,title:String(p.title),text:String(p.text||''),url:url,source:String(p.source||''),note:String(p.note||'')});
+  all.push({type:'watch',id:p.id,service:p.service,date:p.day,title:String(p.title),text:String(p.text||''),url:url,source:String(p.source||''),note:String(p.note||'')});
 });
 projects.forEach(function(p){
   if(!p||!p.name||!p.id)return;
   var url=safe(p.url,false),detail=safe(p.project_url,false);
   if(!url)return;
-  all.push({type:'projects',date:p.first_seen||'',isNew:!!p.first_seen,title:p.name,text:p.story||p.description||'',url:url,detailUrl:detail,media:p.thumbnail||'',paused:!!p.paused});
+  all.push({type:'projects',id:p.id,date:p.first_seen||'',isNew:!!p.first_seen,title:p.name,text:p.story||p.description||'',url:url,detailUrl:detail,media:p.thumbnail||'',paused:!!p.paused});
+});
+var summaries=Array.isArray(activity.stories)?activity.stories:[];
+var summarized={};
+summaries.forEach(function(p){
+  if(!p||!p.id||!p.title||!p.day||!Array.isArray(p.summary_lines))return;
+  var url=safe(p.url,false);
+  if(!url||p.summary_lines.length<4||p.summary_lines.length>5)return;
+  var related=projectMap[p.project]||{};
+  summarized[p.id]=true;
+  all.push({type:'stories',id:p.id,date:p.day,title:p.title,url:url,project:related.name||p.project||'',text:p.summary_lines.join('\n'),media:''});
 });
 if(Array.isArray(articles))articles.forEach(function(p){
+  if(summarized[p.id])return;
   var url=safe(/^https?:\/\//i.test(p.url||'')?p.url:'../'+p.url,false);
   if(url&&p.title&&p.date){
     var related=projectMap[p.project]||{};
-    all.push({type:'stories',date:p.date,title:p.title,url:url,project:p.tagAuto?(related.name||p.project):(p.tag||related.name||p.project||''),text:'',media:''})
+    all.push({type:'stories',id:p.id,date:p.date,title:p.title,url:url,project:p.tagAuto?(related.name||p.project):(p.tag||related.name||p.project||''),text:'',media:''})
   }
 });
 all.sort(function(a,b){
@@ -158,7 +173,20 @@ all.sort(function(a,b){
   var elc=document.querySelector('[data-count="'+name+'"]');
   if(elc)elc.textContent=(name==='all'?all.length:all.filter(function(x){return x.type===name}).length);
 });
+var query=new URLSearchParams(location.search);
+var requested=query.get('filter');
+if(['all','watch','projects','stories','threads'].indexOf(requested)>=0)filter=requested;
+var item=query.get('item');
+if(item && all.some(function(p){return String(p.id||'')===item && (filter==='all'||p.type===filter)})){
+  // If a linked post falls beyond the first 24 records, reveal it first.
+  var position=all.filter(function(p){return filter==='all'||p.type===filter}).findIndex(function(p){return String(p.id||'')===item});
+  limit=Math.max(limit,position+1);
+}
 render();
+if(item){
+  var target=document.getElementById('now-item-'+encodeURIComponent(item));
+  if(target){window.requestAnimationFrame(function(){target.scrollIntoView({block:'center',behavior:'instant'});target.setAttribute('tabindex','-1');target.focus({preventScroll:true})})}
+}
 }).catch(function(){feed.textContent='게시물을 불러오지 못했습니다.'});
 })();
 </script>

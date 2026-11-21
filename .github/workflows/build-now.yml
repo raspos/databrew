@@ -6,14 +6,17 @@ on:
     paths:
       - scripts/build_now_activity.py
       - now/project-stories.json
+      - now/story-summaries.json
+      - articles.json
+      - articles/**
       - now/index.html
       - tests/test_now_activity.py
       - .github/workflows/build-now.yml
   workflow_dispatch:
   schedule:
-    # Two passes pick up early apartment figures and evening market close releases.
-    # 09:35 KST and 21:35 KST; sources keep their own source observation dates.
-    - cron: "35 0,12 * * *"
+    # Twice daily at 11:00 and 23:00 KST (02:00 and 14:00 UTC).
+    # Actions cron may start late; displayed timestamps come from source.
+    - cron: "0 2,14 * * *"
 
 permissions:
   contents: write
