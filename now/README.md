@@ -114,58 +114,17 @@ NOW's WATCH/STORIES/PROJECTS cards now display `댓글` and `공유`. Comments a
 
 The public GitHub Pages site cannot itself save comments. The backend in `../comments-api/` is a Cloudflare Worker that uses D1 as the comment database, Turnstile for bot checks and an admin-only moderation API. Its source is deployed with the owner's Cloudflare account, not GitHub Pages. The checked-in `now/comments-config.json` deliberately has blank values: **do not claim guest comments already work publicly until the Worker, D1 and site key are configured**. With blank configuration the button gives a clear "service being connected" notice. Existing sharing continues to work.
 
-### One-time Cloudflare setup
+### 자동 배포 (추천)
 
-1. Sign in at [Cloudflare dashboard](https://dash.cloudflare.com/) and install Cloudflare's Wrangler CLI, or run the commands below from a shell with Node.js installed.
-2. Navigate to the repo's `comments-api` folder and run `npx wrangler login`.
-3. Create a D1 database:
-   `npx wrangler d1 create databrew-now-comments`
-   Copy the generated `database_id` into the **`comments-api/wrangler.toml`** field `REPLACE_WITH_D1_DATABASE_ID`. (This is an identifier, not a password.)
-4. Initialize the remote database using the **existing schema**:
-   `npx wrangler d1 execute DB --remote --file=./schema.sql`
-   Run this command **after** `wrangler.toml` contains the correct D1 database ID. A local-only database would not save real readers' comments.
-5. In [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile), create a widget for `raspos.github.io`. Copy its **public site key** and separately note the **secret key**. Turnstile runs on the static NOW page; the Worker checks every token via Cloudflare's server-side Siteverify API. Do not use the Turnstile secret in NOW JavaScript.
-6. Set three private Worker secrets, one at a time (Wrangler prompts for the value):
-   ```sh
-   npx wrangler secret put TURNSTILE_SECRET
-   npx wrangler secret put COMMENT_HASH_SALT
-   npx wrangler secret put ADMIN_TOKEN
-   ```
-   `COMMENT_HASH_SALT` and `ADMIN_TOKEN` should be independent long random strings (prefer at least 32 random bytes). Keep them away from Git commits, chats, and web code. These tokens are separate from Meta Threads or GitHub Actions credentials.
-7. Deploy:
-   `npx wrangler deploy`
-   Note the HTTPS Worker endpoint reported by Cloudflare, e.g. `https://databrew-now-comments.<your-subdomain>.workers.dev`. This is an example, not a configured or verified URL.
-8. Edit the publicly readable **`now/comments-config.json`**:
-   ```json
-   {
-     "api_base": "https://databrew-now-comments.YOUR-SUBDOMAIN.workers.dev",
-     "turnstile_site_key": "YOUR-PUBLIC-TURNSTILE-SITE-KEY"
-   }
-   ```
-   Commit that file. **Only** the public Worker URL and public site key belong there; none of the three secrets does.
-9. Open [NOW](https://raspos.github.io/databrew/now/) on mobile and desktop. Click `댓글` on a WATCH/STORY/PROJECT, enter a nickname and comment, complete Turnstile, and check that the form says the comment is awaiting moderation. On the same card, `공유` should still offer Threads, X, Facebook, link copy, and device sharing when supported.
+이제 Cloudflare 대시보드에서 D1, Turnstile 위젯, Worker를 하나씩 수동으로 만들 필요가 없습니다. [GitHub Actions Secrets](https://github.com/raspos/databrew/settings/secrets/actions)에 `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, `DATABREW_COMMENTS_ADMIN_TOKEN` 3개를 등록하고 [Deploy databrew NOW guest comments](https://github.com/raspos/databrew/actions/workflows/deploy-guest-comments.yml)를 수동 실행하면 됩니다. 이 작업은 댓글 저장소·Turnstile 위젯·Worker를 만들고 배포한 뒤 실제 DB 읽기까지 확인합니다. 성공한 경우에만 `now/comments-config.json`에 검증된 공개 API URL/사이트 키가 반영됩니다.
 
-Cloudflare's [D1 database API](https://developers.cloudflare.com/d1/worker-api/), [D1 execute commands](https://developers.cloudflare.com/workers/wrangler/commands/d1/), and [Turnstile verification](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/) document the underlying features.
+인증정보는 GitHub Secret/Cloudflare Worker Secret에만 보관합니다. API 토큰에는 사용할 Cloudflare 계정 하나로 범위를 제한한 Workers Scripts Edit·D1 Edit·Turnstile Edit 권한이 필요합니다. 자세한 과정은 [comments-api/README.md](../comments-api/README.md)에 정리했습니다. 실제 배포는 계정 소유자의 Cloudflare 인증이 필요한 단계이므로 **코드만 병합된 상태를 댓글 서비스 개통으로 간주하면 안 됩니다.**
 
-### Moderate submitted comments
+### 댓글 관리자 화면
 
-All newly submitted comments have status `pending`; **nothing appears publicly until an administrator approves it**. Use the Worker URL and private `ADMIN_TOKEN` (never entered into a public NOW browser window):
+[databrew 댓글 관리](https://raspos.github.io/databrew/now/moderate/)에서 `DATABREW_COMMENTS_ADMIN_TOKEN`을 입력하면 대기·승인·반려 댓글을 관리할 수 있습니다. 댓글 삭제도 가능합니다. 이 페이지는 관리자 토큰을 브라우저 저장소에 보관하지 않습니다.
 
-```sh
-# List unpublished comments.
-curl -H "Authorization: Bearer $ADMIN_TOKEN" \
-  "https://YOUR-WORKER-URL/api/admin/comments?status=pending"
-
-# Approve a single comment.
-curl -X POST -H "Authorization: Bearer $ADMIN_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"action":"approve"}' \
-  "https://YOUR-WORKER-URL/api/admin/comments/COMMENT-ID"
-
-# Reject or delete: action = reject or delete.
-```
-
-After approval a reader opening or refreshing the same NOW comment panel can see the newly published comment.
+모든 새 댓글은 기본적으로 `pending` 상태이므로 관리자가 승인한 글만 공개합니다.
 
 ### Abuse controls and privacy
 
