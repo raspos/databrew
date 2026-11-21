@@ -285,21 +285,21 @@ html.js header h1 .brw { background: linear-gradient(to bottom, #fff 50%, var(--
 :root { --navy: #062433; --peach: #f2c4a0; --copper: #b98558; }
 .wrap { padding-top: 0; }
 header { position: relative; overflow: hidden; isolation: isolate; background: var(--navy); color: var(--peach);
-  margin: 0 calc(50% - 50vw) 44px; padding: 72px max(20px, calc(50vw - 570px)) 56px; border-bottom: 0; align-items: flex-end; }
+  margin: 0 calc(50% - 50vw) 24px; padding: 48px max(20px, calc(50vw - 570px)) 38px; border-bottom: 0; align-items: flex-end; }
 body { overflow-x: hidden; }
 .hl { position: relative; z-index: 1; }
 .hright { position: relative; z-index: 1; }
-header .eyebrow { color: var(--peach); opacity: .75; margin: 0 0 22px; }
+header .eyebrow { color: var(--peach); opacity: .75; margin: 0 0 12px; }
 .tagl { margin: 0 0 6px; font-weight: 600; font-size: 15px; color: var(--peach); letter-spacing: -.01em; }
-.tagl2 { margin: 18px 0 0; font-size: clamp(16px, 2.2vw, 20px); font-weight: 500; color: #fff; letter-spacing: -.01em; }
+.tagl2 { margin: 12px 0 0; font-size: clamp(15px, 1.8vw, 17px); font-weight: 500; color: #fff; letter-spacing: -.01em; }
 header h1.wm { font-family: "Outfit", "IBM Plex Sans KR", sans-serif; font-weight: 800; letter-spacing: -.035em; line-height: .86; text-wrap: nowrap; }
-html.js header h1 .wm-data { display: block; position: relative; z-index: 0; clip-path: inset(0 0 .13em 0); margin-bottom: -.2em; font-size: clamp(46px, 8.6vw, 92px); text-transform: lowercase; color: var(--peach) !important; position: relative; width: max-content; }
+html.js header h1 .wm-data { display: block; position: relative; z-index: 0; clip-path: inset(0 0 .13em 0); margin-bottom: -.2em; font-size: clamp(32px, 5.6vw, 64px); text-transform: lowercase; color: var(--peach) !important; position: relative; width: max-content; }
 .wm-data .deg { display: inline-block; width: .17em; height: .17em; border-radius: 50%; background: var(--peach); margin-left: .06em; vertical-align: .78em; }
-html.js header h1 .brw { display: block; position: relative; z-index: 1; font-size: clamp(78px, 16.5vw, 178px); letter-spacing: -.03em; margin-top: .02em; width: max-content;
+html.js header h1 .brw { display: block; position: relative; z-index: 1; font-size: clamp(54px, 11vw, 120px); letter-spacing: -.03em; margin-top: .02em; width: max-content;
   background: linear-gradient(to bottom, transparent 50%, var(--peach) 50%) 0 0 / 100% 200% no-repeat;
   -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px var(--peach);
   animation: rise .7s ease-out .55s forwards, brewcycle 12s ease-in-out 0s infinite; }
-header .sub { color: rgba(242,196,160,.82); max-width: 56ch; margin-top: 22px; }
+header .sub { color: rgba(242,196,160,.82); max-width: 56ch; margin-top: 14px; }
 .sub .w-data { --c: #7db8ee; } .sub .w-exp { --c: #7fd3a0; } .sub .w-int { --c: #c9a8ee; }
 header .today { color: rgba(242,196,160,.6); }
 .drip .line { stroke: var(--peach); opacity: .85; }
@@ -324,10 +324,10 @@ header .today { color: rgba(242,196,160,.6); }
 .bars .k2 { width: 56px; height: 56px; left: 76%; top: 62%; animation-delay: -5s; }
 .bars .k3 { width: 90px; height: 90px; left: 88%; top: 14%; animation-delay: -9s; opacity: .14; }
 @keyframes bokeh { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(14px, -20px); } }
-.drip { width: 150px; }
+.drip { width: 108px; }
 @media (max-width: 600px) {
-  .drip { width: 96px; }
-  header { padding-top: 48px; padding-bottom: 40px; margin-bottom: 28px; }
+  .drip { width: 74px; }
+  header { padding-top: 28px; padding-bottom: 26px; margin-bottom: 18px; }
   .bars i:nth-child(n+4) { display: none; }
   .bars i:nth-child(1) { left: 60%; } .bars i:nth-child(2) { left: 70%; } .bars i:nth-child(3) { left: 80%; }
 }
@@ -348,26 +348,15 @@ html { scroll-behavior: smooth; }
 .s-sports, .p-sports { --series: var(--c-sports); }
 .s-archive { --series: var(--muted); }
 
-.series-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 20px 0 14px; }
-.series-nav[hidden], .archive-link[hidden] { display: none; }
-.panel { position: relative; display: flex; flex-direction: column; gap: 6px; min-height: 210px; padding: 24px 24px 20px; border: 1px solid var(--rule); border-radius: 14px; background: var(--cell); color: inherit; text-decoration: none; overflow: hidden; transition: box-shadow .2s, transform .2s, border-color .2s; }
-.panel::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--series); }
-.panel::after { content: ""; position: absolute; right: -18px; bottom: -18px; width: 150px; height: 120px; opacity: .55; pointer-events: none; }
-.p-watch::after { background: repeating-linear-gradient(to right, transparent 0 9px, color-mix(in srgb, var(--series) 14%, transparent) 9px 11px), linear-gradient(to top, color-mix(in srgb, var(--series) 12%, transparent), transparent 70%); }
-.p-craft::after { background: conic-gradient(color-mix(in srgb, var(--series) 14%, transparent) 25%, transparent 0 50%, color-mix(in srgb, var(--series) 14%, transparent) 0 75%, transparent 0) 0 0 / 28px 28px; }
-.p-sports::after { background: repeating-linear-gradient(-55deg, transparent 0 12px, color-mix(in srgb, var(--series) 14%, transparent) 12px 15px); }
-.panel > * { position: relative; z-index: 1; }
-.panel:hover { border-color: var(--series); box-shadow: 0 14px 30px -16px rgba(40,30,10,.3); transform: translateY(-3px); }
-.panel:focus-visible { outline: 3px solid var(--series); outline-offset: 3px; }
-.panel-word { font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: .2em; color: var(--series); }
-.panel-title { font-size: 24px; font-weight: 700; letter-spacing: -.03em; line-height: 1.25; margin-top: 8px; }
-.panel-sub { color: var(--muted); font-size: 14px; line-height: 1.55; }
-.panel-foot { margin-top: auto; padding-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.panel-count { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; color: var(--muted); }
-.panel-go { font-size: 14px; font-weight: 700; color: var(--series); }
-.archive-link { margin: 0 0 18px; font-size: 14px; text-align: right; }
-.archive-link a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
-.archive-link a:hover { color: var(--accent); }
+.series-nav{display:flex;align-items:center;gap:8px;overflow-x:auto;flex-wrap:nowrap;padding:1px 1px 6px;margin:12px 0 14px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.series-chip{display:inline-flex;align-items:center;justify-content:center;gap:7px;flex:0 0 auto;min-height:40px;padding:9px 15px;border:1px solid var(--rule);border-radius:999px;background:var(--cell);color:var(--ink);font:600 13px/1.1 var(--font-body);text-decoration:none;white-space:nowrap;transition:border-color .15s}
+.series-chip span{color:var(--muted);font:600 11px var(--font-mono);font-variant-numeric:tabular-nums}
+.series-chip:hover{border-color:var(--accent)}
+.series-chip:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.series-chip-all{background:var(--ink);border-color:var(--ink);color:var(--cell)}
+.series-chip-all span{color:var(--cell);opacity:.75}
+.series-chip-all:hover{border-color:var(--accent)}
+@media(max-width:600px){.series-nav{gap:6px;margin:10px 0 12px;padding-bottom:5px}.series-chip{min-height:38px;padding:8px 12px;font-size:12px}.series-chip span{font-size:10px}}
 
 .filterbar { border: 1px solid var(--rule); border-radius: 12px; background: var(--cell); margin: 0 0 8px; }
 .filterbar > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-size: 14px; font-weight: 600; border-radius: 12px; }
@@ -399,10 +388,6 @@ html { scroll-behavior: smooth; }
 @media (max-width: 600px) { .s-craft .grid { grid-template-columns: minmax(0, 1fr); } }
 
 @media (max-width: 920px) {
-  .series-nav { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .panel { min-height: 0; padding: 20px 20px 16px; }
-  .panel-foot { padding-top: 12px; }
-  .archive-link { text-align: left; }
   .series { margin-top: 56px; }
 }
 @media (max-width: 600px) {
@@ -410,7 +395,7 @@ html { scroll-behavior: smooth; }
   .filter-row button { padding: 8px 14px; }
   .series-card .q { font-size: 15px; }
 }
-@media (max-width: 380px) { .panel-title { font-size: 21px; } .btn-detail, .btn-service { padding: 8px 12px; } .card-actions { flex-wrap: wrap; } }
+@media (max-width: 380px) { .btn-detail, .btn-service { padding: 8px 12px; } .card-actions { flex-wrap: wrap; } }
 .filter-body .filter-row + .filter-row { margin-bottom: 0; }
 .filter-body .filter-row { margin-bottom: 10px; }
 
@@ -621,6 +606,14 @@ html { scroll-behavior: smooth; }
     <input id="projectSearch" type="search" placeholder="이름·설명 검색 (예: 환율, 아파트, 금통위)" autocomplete="off" aria-describedby="searchHint">
     <p class="hint" id="searchHint">프로젝트 이름과 설명을 검색합니다. 분야·유형 필터와 함께 사용할 수 있습니다.</p>
   </div>
+  <nav class="series-nav" aria-label="프로젝트 시리즈 바로가기">
+    <a class="series-chip series-chip-all" href="#main" data-target="main">전체 <span data-panel-count="all">26</span></a>
+    <a class="series-chip" href="#watch" data-target="watch">WATCH <span data-panel-count="watch">5</span></a>
+    <a class="series-chip" href="#craft" data-target="craft">CRAFT <span data-panel-count="craft">4</span></a>
+    <a class="series-chip" href="#sports" data-target="sports">SPORTS <span data-panel-count="sports">5</span></a>
+    <a class="series-chip" href="#archive" data-target="archive">기타 <span data-panel-count="archive">12</span></a>
+  </nav>
+
   <details class="filterbar" id="filterbar">
     <summary>분야·유형으로 좁혀 보기 <span class="filter-hint">필터</span></summary>
     <div class="filter-body">
@@ -647,28 +640,6 @@ html { scroll-behavior: smooth; }
     <span id="filterCount"></span>
     <button type="button" id="filterReset">전체 보기</button>
   </div>
-
-  <nav class="series-nav" aria-label="대표 시리즈">
-    <a class="panel p-watch" href="#watch" data-target="watch">
-      <span class="panel-word">WATCH SERIES</span>
-      <strong class="panel-title">세상의 변화를 숫자로 읽다</strong>
-      <span class="panel-sub">금리·환율·부채·연봉·아파트 시장</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="watch">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
-    </a>
-    <a class="panel p-craft" href="#craft" data-target="craft">
-      <span class="panel-word">CRAFT SERIES</span>
-      <strong class="panel-title">복잡한 현실을 직접 플레이하다</strong>
-      <span class="panel-sub">기자 인사·홍보전략·재건축 수주전</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">4</span> PROJECTS · 누적 접속 <b data-craft-total>집계 중</b></span><span class="panel-go">시리즈 보기 →</span></span>
-    </a>
-    <a class="panel p-sports" href="#sports" data-target="sports">
-      <span class="panel-word">SPORTS SERIES</span>
-      <strong class="panel-title">스포츠를 기록으로 읽다</strong>
-      <span class="panel-sub">축구·야구·배드민턴의 기록과 전설</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="sports">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
-    </a>
-  </nav>
-  <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
 
   <main id="main">
 
@@ -1147,6 +1118,7 @@ html { scroll-behavior: smooth; }
     sec.querySelectorAll('[data-live-count]').forEach(function (e) { e.textContent = n; });
     document.querySelectorAll('[data-panel-count="' + key + '"]').forEach(function (e) { e.textContent = n; });
   });
+  document.querySelectorAll('[data-panel-count="all"]').forEach(function (el) { el.textContent = cards.length; });
   catBtns.forEach(function (b) {
     var v = b.dataset.cat, el = b.querySelector('.count');
     if (el) el.textContent = v === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat === v; }).length;
@@ -1160,11 +1132,6 @@ html { scroll-behavior: smooth; }
     var any = activeCat !== 'all' || activeType !== 'all' || terms.length > 0;
     var shown = 0;
     main.classList.toggle('filtered', any);
-    // Show results without the large series-navigation cards when filtering.
-    var featuredNav = document.querySelector('.series-nav');
-    var archiveJump = document.querySelector('.archive-link');
-    if (featuredNav) featuredNav.hidden = any;
-    if (archiveJump) archiveJump.hidden = any;
     cards.forEach(function (c, i) {
       var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType) && terms.every(function (term) { return searchIndex[i].indexOf(term) !== -1; });
       c.hidden = !ok;
@@ -1206,14 +1173,14 @@ html { scroll-behavior: smooth; }
   function goTo(id, e) {
     var sec = document.getElementById(id);
     if (!sec) return;
-    if (sec.hidden) reset();
+    if (activeCat !== 'all' || activeType !== 'all' || searchText.trim() || sec.hidden) reset();
     if (e) e.preventDefault();
     sec.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     if (history.replaceState) history.replaceState(null, '', '#' + id);
     var h = sec.querySelector('.series-title');
     if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
   }
-  document.querySelectorAll('.panel, .archive-link a').forEach(function (a) {
+  document.querySelectorAll('.series-chip').forEach(function (a) {
     a.addEventListener('click', function (e) { goTo(a.getAttribute('href').slice(1), e); });
   });
 
