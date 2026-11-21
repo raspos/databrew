@@ -106,26 +106,75 @@ THREADS_DRY_RUN=true python scripts/publish_now_threads.py
 
 Meta API references: [Threads official collection](https://www.postman.com/meta/threads/collection/dht3nzz/threads-api) and [text-container/reply publishing request](https://www.postman.com/meta/threads/documentation/dht3nzz/threads-api?entity=request-34203612-f8bf85ba-a2a2-47f8-9183-f94cd3e9c9d3).
 
-## Per-post sharing and discussion (NOW cards)
+## Guest comments and per-post sharing on NOW
 
-Every WATCH, STORY and PROJECT entry now has a `댓글` button and a `공유` button. Threads-sourced entries use their original Threads conversation for comments, rather than duplicating that conversation in GitHub.
+NOW's WATCH/STORIES/PROJECTS cards now display `댓글` and `공유`. Comments are **nickname-only with no GitHub login, no other user login and no email field**. Imported Threads posts still link to their original Threads discussion; there is no duplicate third-party conversation.
 
-### Share
+### Status: source code prepared; public backend must be deployed separately
 
-- `공유` opens per-post links to **Threads, X, Facebook** and a **copy-link** action; mobile browsers that support the Web Share API also show `다른 앱으로 공유` (which can offer KakaoTalk when available).
-- Shared links point to the exact NOW entry, e.g. `https://raspos.github.io/databrew/now/?filter=watch&item=watch%3Abok%3A2026-11-20`. The existing NOW deep-link handler selects the correct tab, expands the feed if needed and scrolls to the entry.
-- No Threads, X, Facebook or Kakao SDK keys are needed to display these links. All third-party share composers require the **reader** to complete posting; databrew does not publish using the reader's account.
-- Open Graph crawlers on this static GitHub Pages site see the general NOW page metadata rather than a different title/image for every query-parameter deep link. Per-post social cards require generated static permalinks or a server-side OG metadata endpoint. The title is still prefilled for Threads and X.
+The public GitHub Pages site cannot itself save comments. The backend in `../comments-api/` is a Cloudflare Worker that uses D1 as the comment database, Turnstile for bot checks and an admin-only moderation API. Its source is deployed with the owner's Cloudflare account, not GitHub Pages. The checked-in `now/comments-config.json` deliberately has blank values: **do not claim guest comments already work publicly until the Worker, D1 and site key are configured**. With blank configuration the button gives a clear "service being connected" notice. Existing sharing continues to work.
 
-### Reader comments (utterances/GitHub Issues)
+### One-time Cloudflare setup
 
-This is a GitHub Pages static site with no authenticated database. Instead of displaying an unprotected fake comment form or exposing write tokens in JavaScript, NOW uses [utterances](https://utteranc.es/), an open-source GitHub-Issues-backed comment service.
+1. Sign in at [Cloudflare dashboard](https://dash.cloudflare.com/) and install Cloudflare's Wrangler CLI, or run the commands below from a shell with Node.js installed.
+2. Navigate to the repo's `comments-api` folder and run `npx wrangler login`.
+3. Create a D1 database:
+   `npx wrangler d1 create databrew-now-comments`
+   Copy the generated `database_id` into the **`comments-api/wrangler.toml`** field `REPLACE_WITH_D1_DATABASE_ID`. (This is an identifier, not a password.)
+4. Initialize the remote database using the **existing schema**:
+   `npx wrangler d1 execute DB --remote --file=./schema.sql`
+   Run this command **after** `wrangler.toml` contains the correct D1 database ID. A local-only database would not save real readers' comments.
+5. In [Cloudflare Turnstile](https://dash.cloudflare.com/?to=/:account/turnstile), create a widget for `raspos.github.io`. Copy its **public site key** and separately note the **secret key**. Turnstile runs on the static NOW page; the Worker checks every token via Cloudflare's server-side Siteverify API. Do not use the Turnstile secret in NOW JavaScript.
+6. Set three private Worker secrets, one at a time (Wrangler prompts for the value):
+   ```sh
+   npx wrangler secret put TURNSTILE_SECRET
+   npx wrangler secret put COMMENT_HASH_SALT
+   npx wrangler secret put ADMIN_TOKEN
+   ```
+   `COMMENT_HASH_SALT` and `ADMIN_TOKEN` should be independent long random strings (prefer at least 32 random bytes). Keep them away from Git commits, chats, and web code. These tokens are separate from Meta Threads or GitHub Actions credentials.
+7. Deploy:
+   `npx wrangler deploy`
+   Note the HTTPS Worker endpoint reported by Cloudflare, e.g. `https://databrew-now-comments.<your-subdomain>.workers.dev`. This is an example, not a configured or verified URL.
+8. Edit the publicly readable **`now/comments-config.json`**:
+   ```json
+   {
+     "api_base": "https://databrew-now-comments.YOUR-SUBDOMAIN.workers.dev",
+     "turnstile_site_key": "YOUR-PUBLIC-TURNSTILE-SITE-KEY"
+   }
+   ```
+   Commit that file. **Only** the public Worker URL and public site key belong there; none of the three secrets does.
+9. Open [NOW](https://raspos.github.io/databrew/now/) on mobile and desktop. Click `댓글` on a WATCH/STORY/PROJECT, enter a nickname and comment, complete Turnstile, and check that the form says the comment is awaiting moderation. On the same card, `공유` should still offer Threads, X, Facebook, link copy, and device sharing when supported.
 
-1. The repository owner must install and authorize the [utterances GitHub App](https://github.com/apps/utterances) for **`raspos/databrew`** (select only this repository). This action requires an interactive GitHub administrator approval; the deployment cannot silently install an app on the owner's behalf.
-2. Confirm **GitHub Issues** are enabled under the [repository's General settings](https://github.com/raspos/databrew/settings) (Features → Issues).
-3. Open [NOW](https://raspos.github.io/databrew/now/), choose any WATCH, STORY or PROJECT card and press `댓글`. The first real reader comment creates an issue automatically. Each item is mapped by the permanent identity `databrew-now:<post type>:<post id>`, **not** by the changing order of the feed or the shared page pathname.
-4. Visitors must authorize GitHub through utterances before posting. The discussion and replies are stored publicly as GitHub issues. Moderation is available in [databrew Issues](https://github.com/raspos/databrew/issues), including removing inappropriate comments and locking threads. Anonymous comments are not supported.
-5. The external utterances script and iframe are **lazy-loaded only when a user clicks** a comment button; they are not loaded for every card or on initial page view. At most one comment drawer is open at a time. Theme changes update the active iframe.
-6. Share buttons work immediately without the GitHub App. Until steps 1–2 are completed, the comments area may show an utterances access/configuration error: **do not claim live comment submission has been verified**. The GitHub App installation and a real end-to-end comment test are still required.
+Cloudflare's [D1 database API](https://developers.cloudflare.com/d1/worker-api/), [D1 execute commands](https://developers.cloudflare.com/workers/wrangler/commands/d1/), and [Turnstile verification](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/) document the underlying features.
 
-Discussion data is handled by GitHub, and login is required. A future anonymous/non-GitHub commenting experience would need a separate backend, moderation, anti-spam and privacy policy.
+### Moderate submitted comments
+
+All newly submitted comments have status `pending`; **nothing appears publicly until an administrator approves it**. Use the Worker URL and private `ADMIN_TOKEN` (never entered into a public NOW browser window):
+
+```sh
+# List unpublished comments.
+curl -H "Authorization: Bearer $ADMIN_TOKEN" \
+  "https://YOUR-WORKER-URL/api/admin/comments?status=pending"
+
+# Approve a single comment.
+curl -X POST -H "Authorization: Bearer $ADMIN_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"action":"approve"}' \
+  "https://YOUR-WORKER-URL/api/admin/comments/COMMENT-ID"
+
+# Reject or delete: action = reject or delete.
+```
+
+After approval a reader opening or refreshing the same NOW comment panel can see the newly published comment.
+
+### Abuse controls and privacy
+
+- Nicknames are 2–24 characters; comments are 2–1,000 characters. No password, email or account required.
+- Cloudflare Turnstile is mandatory and validated **server-side**, including the expected site hostname. A hidden honeypot, rate limit (up to three submissions per 10 minutes or 12 per 24 hours per privacy-preserving IP hash), repeated-text check and owner moderation reduce spam.
+- The Worker does **not store plain IP addresses**. It stores HMAC-hashed IP data for abuse throttling with a private salt. Treat even hashed metadata as privacy-relevant and define a retention/deletion policy before a large public launch. Only nickname, comment and submission date are exposed on approved public posts.
+- The browser only accepts API results as text (`textContent`), never evaluates comment HTML or allows comment scripts. Worker endpoints use parameterized D1 queries and origin restrictions.
+- A short-lived D1/service outage should show a normal error state; no fake local comments are created. No real user data is claimed until Cloudflare has been deployed and tested.
+
+### Per-post sharing
+
+The `공유` menu remains available without Cloudflare or GitHub: Threads, X, Facebook, copy link, and optional native sharing for mobile apps. The shared URL points to a specific NOW item using the stable `?filter=...&item=...` query parameters. Individual article Open Graph previews require future pre-rendered public URLs; query parameters alone share the NOW page's overall OG image/title.

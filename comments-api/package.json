@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "description": "Cloudflare Workers API for moderated, login-free databrew NOW comments"
+}

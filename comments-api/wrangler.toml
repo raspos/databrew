@@ -1,0 +1,21 @@
+name = "databrew-now-comments"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+# Create your own database first:
+#   npx wrangler d1 create databrew-now-comments
+# Paste the returned database_id below, replacing REPLACE_WITH_D1_DATABASE_ID.
+[[d1_databases]]
+binding = "DB"
+database_name = "databrew-now-comments"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[vars]
+ALLOWED_ORIGIN = "https://raspos.github.io"
+TURNSTILE_HOSTNAME = "raspos.github.io"
+
+# Required secrets (never commit values):
+#   npx wrangler secret put TURNSTILE_SECRET
+#   npx wrangler secret put COMMENT_HASH_SALT
+#   npx wrangler secret put ADMIN_TOKEN
