@@ -48,7 +48,7 @@
       text: text,
       date: readableDate(when),
       time: at,
-      path: 'now/?filter=' + encodeURIComponent(filter),
+      path: 'now/?filter=' + encodeURIComponent(filter) + (key ? '&item=' + encodeURIComponent(String(key)) : ''),
       key: key || tag + ':' + when + ':' + text
     });
   }
