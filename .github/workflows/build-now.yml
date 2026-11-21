@@ -11,6 +11,7 @@ on:
       - articles/**
       - now/index.html
       - tests/test_now_activity.py
+      - tests/test_now_engagement.py
       - .github/workflows/build-now.yml
   workflow_dispatch:
   schedule:
@@ -37,6 +38,8 @@ jobs:
           python-version: "3.12"
       - name: Verify NOW adapters without network access
         run: python -m unittest discover -s tests -p 'test_now_activity.py' -v
+      - name: Verify NOW per-article comments and sharing markup
+        run: python -m unittest discover -s tests -p 'test_now_engagement.py' -v
       - name: Collect WATCH, project and Seoul apartment public releases
         run: python scripts/build_now_activity.py
       - name: Commit new snapshots only if actually changed
