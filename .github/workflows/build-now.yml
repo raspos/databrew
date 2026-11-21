@@ -24,6 +24,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Verify NOW adapters without network access
+        run: python -m unittest discover -s tests -p 'test_now_activity.py' -v
       - name: Collect WATCH, project and Seoul apartment public releases
         run: python scripts/build_now_activity.py
       - name: Commit new snapshots only if actually changed
