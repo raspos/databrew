@@ -105,3 +105,27 @@ THREADS_DRY_RUN=true python scripts/publish_now_threads.py
 ```
 
 Meta API references: [Threads official collection](https://www.postman.com/meta/threads/collection/dht3nzz/threads-api) and [text-container/reply publishing request](https://www.postman.com/meta/threads/documentation/dht3nzz/threads-api?entity=request-34203612-f8bf85ba-a2a2-47f8-9183-f94cd3e9c9d3).
+
+## Per-post sharing and discussion (NOW cards)
+
+Every WATCH, STORY and PROJECT entry now has a `댓글` button and a `공유` button. Threads-sourced entries use their original Threads conversation for comments, rather than duplicating that conversation in GitHub.
+
+### Share
+
+- `공유` opens per-post links to **Threads, X, Facebook** and a **copy-link** action; mobile browsers that support the Web Share API also show `다른 앱으로 공유` (which can offer KakaoTalk when available).
+- Shared links point to the exact NOW entry, e.g. `https://raspos.github.io/databrew/now/?filter=watch&item=watch%3Abok%3A2026-11-20`. The existing NOW deep-link handler selects the correct tab, expands the feed if needed and scrolls to the entry.
+- No Threads, X, Facebook or Kakao SDK keys are needed to display these links. All third-party share composers require the **reader** to complete posting; databrew does not publish using the reader's account.
+- Open Graph crawlers on this static GitHub Pages site see the general NOW page metadata rather than a different title/image for every query-parameter deep link. Per-post social cards require generated static permalinks or a server-side OG metadata endpoint. The title is still prefilled for Threads and X.
+
+### Reader comments (utterances/GitHub Issues)
+
+This is a GitHub Pages static site with no authenticated database. Instead of displaying an unprotected fake comment form or exposing write tokens in JavaScript, NOW uses [utterances](https://utteranc.es/), an open-source GitHub-Issues-backed comment service.
+
+1. The repository owner must install and authorize the [utterances GitHub App](https://github.com/apps/utterances) for **`raspos/databrew`** (select only this repository). This action requires an interactive GitHub administrator approval; the deployment cannot silently install an app on the owner's behalf.
+2. Confirm **GitHub Issues** are enabled under the [repository's General settings](https://github.com/raspos/databrew/settings) (Features → Issues).
+3. Open [NOW](https://raspos.github.io/databrew/now/), choose any WATCH, STORY or PROJECT card and press `댓글`. The first real reader comment creates an issue automatically. Each item is mapped by the permanent identity `databrew-now:<post type>:<post id>`, **not** by the changing order of the feed or the shared page pathname.
+4. Visitors must authorize GitHub through utterances before posting. The discussion and replies are stored publicly as GitHub issues. Moderation is available in [databrew Issues](https://github.com/raspos/databrew/issues), including removing inappropriate comments and locking threads. Anonymous comments are not supported.
+5. The external utterances script and iframe are **lazy-loaded only when a user clicks** a comment button; they are not loaded for every card or on initial page view. At most one comment drawer is open at a time. Theme changes update the active iframe.
+6. Share buttons work immediately without the GitHub App. Until steps 1–2 are completed, the comments area may show an utterances access/configuration error: **do not claim live comment submission has been verified**. The GitHub App installation and a real end-to-end comment test are still required.
+
+Discussion data is handled by GitHub, and login is required. A future anonymous/non-GitHub commenting experience would need a separate backend, moderation, anti-spam and privacy policy.
