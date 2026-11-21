@@ -152,10 +152,11 @@ def chunks_for(post: dict) -> list[str]:
 
 
 class GraphClient:
-    def __init__(self, access_token: str):
+    def __init__(self, access_token: str, expected_username: str = ""):
         if not access_token:
             raise ValueError("Missing Threads access token")
         self.access_token = access_token
+        self.expected_username = expected_username.lstrip("@").strip().casefold()
 
     def request(self, path: str, form: dict | None = None) -> dict:
         url = API + "/" + path.lstrip("/")
@@ -179,9 +180,11 @@ class GraphClient:
 
     def identity(self) -> str:
         result = self.request("me?fields=id,username")
-        ident = result.get("id")
-        if not ident:
-            raise RuntimeError("Meta Threads identity is missing")
+        ident, actual = result.get("id"), str(result.get("username") or "").casefold()
+        if not ident or not actual:
+            raise RuntimeError("Meta Threads identity or username missing")
+        if self.expected_username and actual != self.expected_username:
+            raise RuntimeError("Meta Threads token belongs to a different account; publication blocked")
         return str(ident)
 
     def publish_text(self, text: str, reply_to_id: str | None = None) -> str:
@@ -277,7 +280,11 @@ def run(activity_path: Path = SOURCE, state_path: Path = STATE,
         if not token:
             print("Threads access token not configured; no publication attempted.")
             return 0
-        client = GraphClient(token)
+        expected = os.environ.get("THREADS_EXPECTED_USERNAME", "").strip().lstrip("@")
+        if not expected:
+            print("Target Threads username not configured; no publication attempted.")
+            return 0
+        client = GraphClient(token, expected)
 
     # Check the uncertain-request guard only when live publication is enabled.
     # Turning the feature off must never create failing scheduled actions.
