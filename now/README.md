@@ -37,7 +37,7 @@ The `Build databrew NOW daily feed` GitHub Action runs twice a day (09:35 and 21
 
 | NOW item | Input | Observation-date rule |
 | --- | --- | --- |
-| BOK워치 | `https://bokwatch.pages.dev/data/memo.json` | `generated` calendar date; copy model disclaimer |
+| BOK워치 | `https://bokwatch.pages.dev/data/meta.json` + `data/snapshots/YYYY-MM-DD.json` | actual `asof` model snapshot; next meeting uses primary KOFR OIS scenario when selected, never internal memo's incorrect CD 91-day summary |
 | FX워치 | `https://raspos.github.io/fx-odds/data/latest.json` | `base_date` (ECOS reference rate; never call it the 15:30 closing price) |
 | APT워치 | `https://raspos.github.io/apt-watch/data.json` | `negoIndex.asOf` or asking last success; withhold numeric index if verification is held |
 | 서울 아파트 신고가 | `https://raspos.github.io/seoul-apartment-tracker/data/{meta.json,daily.json.gz}` | `snapshotDate`; show the last 30 *contract dates*' records and delayed-reporting caveat |
@@ -58,3 +58,9 @@ python -m http.server 8080
 ```
 
 The script needs network access to read published source data; GitHub Actions provides it. The released `now/activity.json` may initially include only the verified BOK item and the existing 26 projects until the first successful scheduled/manual collection.
+
+## Editorial project stories
+
+Every one of the 26 previously existing projects has an individually edited 400–500 character narrative in `now/project-stories.json`. The NOW feed shows this `story` instead of the one-line archive teaser, with the original project thumbnail and direct service link. The content is grounded in each project's existing detail page. The generator validates the supplied story length on each run and retains it when revising project metadata. Newly detected projects can enter the feed automatically with their ordinary card teaser; a reviewed 400–500 character story should be added to the same file for full publication. No fictional launch dates are assigned to existing projects.
+
+BOK WATCH NOW headline is intentionally short: next meeting date, probability, genuine week-over-week change (if a comparable historical snapshot exists), correct primary model source, observation date and expected policy rate. The long internal `memo.json` is not an appropriate social post, and its currently misleading `CD 91일` label must not propagate to NOW. Source snapshot for 2026-11-20 reports 68.0% under **1-month synthetic KOFR OIS**, 77.67% on 2026-11-13, and an expected policy rate of 3.17%.
