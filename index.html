@@ -348,7 +348,8 @@ html { scroll-behavior: smooth; }
 .s-sports, .p-sports { --series: var(--c-sports); }
 .s-archive { --series: var(--muted); }
 
-.series-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0 0 14px; }
+.series-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 20px 0 14px; }
+.series-nav[hidden], .archive-link[hidden] { display: none; }
 .panel { position: relative; display: flex; flex-direction: column; gap: 6px; min-height: 210px; padding: 24px 24px 20px; border: 1px solid var(--rule); border-radius: 14px; background: var(--cell); color: inherit; text-decoration: none; overflow: hidden; transition: box-shadow .2s, transform .2s, border-color .2s; }
 .panel::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--series); }
 .panel::after { content: ""; position: absolute; right: -18px; bottom: -18px; width: 150px; height: 120px; opacity: .55; pointer-events: none; }
@@ -527,28 +528,6 @@ html { scroll-behavior: smooth; }
     </div>
   </header>
 
-  <nav class="series-nav" aria-label="대표 시리즈">
-    <a class="panel p-watch" href="#watch" data-target="watch">
-      <span class="panel-word">WATCH SERIES</span>
-      <strong class="panel-title">세상의 변화를 숫자로 읽다</strong>
-      <span class="panel-sub">금리·환율·부채·연봉·아파트 시장</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="watch">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
-    </a>
-    <a class="panel p-craft" href="#craft" data-target="craft">
-      <span class="panel-word">CRAFT SERIES</span>
-      <strong class="panel-title">복잡한 현실을 직접 플레이하다</strong>
-      <span class="panel-sub">기자 인사·홍보전략·재건축 수주전</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">4</span> PROJECTS · 누적 접속 <b data-craft-total>집계 중</b></span><span class="panel-go">시리즈 보기 →</span></span>
-    </a>
-    <a class="panel p-sports" href="#sports" data-target="sports">
-      <span class="panel-word">SPORTS SERIES</span>
-      <strong class="panel-title">스포츠를 기록으로 읽다</strong>
-      <span class="panel-sub">축구·야구·배드민턴의 기록과 전설</span>
-      <span class="panel-foot"><span class="panel-count"><span data-panel-count="sports">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
-    </a>
-  </nav>
-  <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
-
   <section class="now-promo" aria-labelledby="h-now">
     <div class="now-promo-head">
       <p class="now-kicker">DATABREW / THE RUNNING FEED</p>
@@ -609,6 +588,28 @@ html { scroll-behavior: smooth; }
     <span id="filterCount"></span>
     <button type="button" id="filterReset">전체 보기</button>
   </div>
+
+  <nav class="series-nav" aria-label="대표 시리즈">
+    <a class="panel p-watch" href="#watch" data-target="watch">
+      <span class="panel-word">WATCH SERIES</span>
+      <strong class="panel-title">세상의 변화를 숫자로 읽다</strong>
+      <span class="panel-sub">금리·환율·부채·연봉·아파트 시장</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="watch">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
+    </a>
+    <a class="panel p-craft" href="#craft" data-target="craft">
+      <span class="panel-word">CRAFT SERIES</span>
+      <strong class="panel-title">복잡한 현실을 직접 플레이하다</strong>
+      <span class="panel-sub">기자 인사·홍보전략·재건축 수주전</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="craft">4</span> PROJECTS · 누적 접속 <b data-craft-total>집계 중</b></span><span class="panel-go">시리즈 보기 →</span></span>
+    </a>
+    <a class="panel p-sports" href="#sports" data-target="sports">
+      <span class="panel-word">SPORTS SERIES</span>
+      <strong class="panel-title">스포츠를 기록으로 읽다</strong>
+      <span class="panel-sub">축구·야구·배드민턴의 기록과 전설</span>
+      <span class="panel-foot"><span class="panel-count"><span data-panel-count="sports">5</span> PROJECTS</span><span class="panel-go">시리즈 보기 →</span></span>
+    </a>
+  </nav>
+  <p class="archive-link"><a href="#archive">그 밖의 프로젝트 <span data-panel-count="archive">12</span>개 보기 →</a></p>
 
   <main id="main">
 
@@ -1100,6 +1101,11 @@ html { scroll-behavior: smooth; }
     var any = activeCat !== 'all' || activeType !== 'all' || terms.length > 0;
     var shown = 0;
     main.classList.toggle('filtered', any);
+    // Show results without the large series-navigation cards when filtering.
+    var featuredNav = document.querySelector('.series-nav');
+    var archiveJump = document.querySelector('.archive-link');
+    if (featuredNav) featuredNav.hidden = any;
+    if (archiveJump) archiveJump.hidden = any;
     cards.forEach(function (c, i) {
       var ok = (activeCat === 'all' || c.dataset.cat === activeCat) && (activeType === 'all' || c.dataset.type === activeType) && terms.every(function (term) { return searchIndex[i].indexOf(term) !== -1; });
       c.hidden = !ok;
