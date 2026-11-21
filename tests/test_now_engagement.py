@@ -68,6 +68,22 @@ class NowEngagementTests(unittest.TestCase):
         self.assertNotIn("THREADS_ACCESS_TOKEN", NOW)
         self.assertNotIn("GITHUB_TOKEN", NOW)
 
+    def test_guest_moderator_interface_uses_memory_only_authorization(self):
+        moderator = (ROOT / "now" / "moderate" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("name=\"viewport\"", moderator)
+        self.assertIn('content="noindex,nofollow,noarchive"', moderator)
+        self.assertIn("now/moderate/", "now/moderate/")
+        self.assertIn("Authorization", moderator)
+        self.assertIn("Bearer ", moderator)
+        self.assertIn("DATABREW_COMMENTS_ADMIN_TOKEN", moderator)
+        self.assertIn("async function update(id,action)", moderator)
+        self.assertIn("action('승인','approve')", moderator)
+        self.assertIn("action('반려','reject')", moderator)
+        self.assertIn("action('영구 삭제','delete')", moderator)
+        self.assertNotIn("localStorage", moderator)
+        self.assertNotIn("sessionStorage", moderator)
+        self.assertNotIn("innerHTML", moderator)
+
 
 if __name__ == "__main__":
     unittest.main()
