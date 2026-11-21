@@ -391,12 +391,12 @@ def _auto_story_lines(article: dict) -> list[str]:
     if not match:
         return []
     text = match.group(1)
-    candidates = [clean(t) for t in re.findall(r"<p(?:\\s[^>]*)?>([\\s\\S]*?)</p>", text)]
+    candidates = [clean(t) for t in re.findall(r"<p(?:\s[^>]*)?>([\s\S]*?)</p>", text)]
     # Very short editorial prompts are not summaries; preserve meaningful text only.
     candidates = [p for p in candidates if len(p) >= 55 and "?" not in p[:70]]
     lines = []
     for p in candidates:
-        sentence = re.split(r"(?<=[.!?])\\s+", p)[0].strip()
+        sentence = re.split(r"(?<=[.!?])\s+", p)[0].strip()
         if len(sentence) > 180:
             continue
         if len(sentence) >= 40:
