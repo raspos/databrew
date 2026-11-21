@@ -38,6 +38,39 @@
 .more-feed{display:block;width:100%;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:9px;margin-top:22px;padding:11px 16px;font-weight:600;font-size:13px}
 .more-feed[hidden]{display:none}
 @media(max-width:570px){.tab{padding:7px 13px}.entry .project-shot{aspect-ratio:16/7}}
+/* Per-article comments and sharing: accessible, on-demand, no third-party iframe before click. */
+.entry-actions{display:flex;align-items:center;gap:8px;margin-top:15px;flex-wrap:wrap}
+.entry-action{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  min-height:36px;padding:6px 13px;background:var(--paper);color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;text-decoration:none;
+  font-size:12px;font-weight:650;line-height:1.4
+}
+.entry-action:hover,.entry-action[aria-expanded="true"]{border-color:var(--accent);color:var(--accent)}
+.entry-action:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.share-wrap{position:relative}
+.share-menu{
+  position:absolute;bottom:calc(100% + 8px);left:0;z-index:9;
+  min-width:208px;display:grid;gap:2px;padding:8px;
+  border:1px solid var(--line);border-radius:11px;background:var(--paper);
+  box-shadow:0 12px 28px rgba(0,0,0,.14)
+}
+.share-menu[hidden],.comment-panel[hidden]{display:none}
+.share-menu a,.share-menu button{
+  display:block;width:100%;text-align:left;background:transparent;color:var(--ink);
+  border:0;border-radius:6px;padding:9px 11px;text-decoration:none;font-size:13px;font-weight:550;
+  line-height:1.5
+}
+.share-menu a:hover,.share-menu button:hover{background:var(--soft)}
+.share-menu .share-notice{font-size:11px;color:var(--muted);padding:4px 9px;line-height:1.45;margin:0}
+.comment-panel{margin:15px 0 2px;padding:16px 16px 5px;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+.comment-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.comment-head h3{font-size:14px;margin:0;font-weight:700}
+.comment-note{font-size:12px;line-height:1.6;color:var(--muted);margin:7px 0 14px}
+.comment-slot{min-height:60px;overflow:hidden}
+.comment-slot .utterances{max-width:100%;margin:0}
+.comment-slot .utterances-frame{max-width:100%}
+@media(max-width:570px){.entry-actions{gap:7px}.entry-action{min-height:38px;padding:7px 12px}.share-menu{min-width:196px}.comment-panel{padding:14px 11px 4px}}
 </style>
 </head>
 <body>
@@ -64,8 +97,175 @@
 'use strict';
 var themeBtn=document.getElementById('theme');
 try{var saved=localStorage.getItem('databrew_theme');if(saved==='dark'||saved==='light')document.documentElement.dataset.theme=saved;}catch(e){}
-themeBtn.addEventListener('click',function(){var current=document.documentElement.dataset.theme==='dark'?'dark':'light',next=current==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('databrew_theme',next)}catch(e){}});
+themeBtn.addEventListener('click',function(){var current=document.documentElement.dataset.theme==='dark'?'dark':'light',next=current==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('databrew_theme',next)}catch(e){}syncCommentTheme();});
 var feed=document.getElementById('feed'),buttons=[].slice.call(document.querySelectorAll('[data-filter]')),all=[],filter='all',limit=24,more=document.getElementById('more-feed');
+
+var activeComments=null,activeShare=null;
+function postLink(post){
+  var url=new URL(location.pathname,location.origin);
+  url.searchParams.set('filter',post.type);
+  url.searchParams.set('item',String(post.id));
+  return url.href;
+}
+function postLabel(post){
+  return String(post.title||post.name||post.text||'databrew NOW').replace(/\s+/g,' ').trim().slice(0,100);
+}
+function utterancesTheme(){
+  var override=document.documentElement.dataset.theme;
+  var dark=override==='dark'||(!override&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+  return dark?'github-dark':'github-light';
+}
+function syncCommentTheme(){
+  var iframe=document.querySelector('.comment-panel:not([hidden]) iframe.utterances-frame');
+  if(iframe&&iframe.contentWindow)iframe.contentWindow.postMessage({type:'set-theme',theme:utterancesTheme()},'https://utteranc.es');
+}
+function closeComments(){
+  if(!activeComments)return;
+  activeComments.pane.hidden=true;
+  activeComments.button.setAttribute('aria-expanded','false');
+  activeComments=null;
+}
+function closeShare(){
+  if(!activeShare)return;
+  activeShare.menu.hidden=true;
+  activeShare.button.setAttribute('aria-expanded','false');
+  activeShare=null;
+}
+document.addEventListener('click',function(e){
+  if(activeShare&&!activeShare.wrapper.contains(e.target))closeShare();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    if(activeShare){var shareButton=activeShare.button;closeShare();shareButton.focus();}
+    else if(activeComments){var commentButton=activeComments.button;closeComments();commentButton.focus();}
+  }
+});
+function interactionButton(label){
+  var btn=el('button','entry-action',label);
+  btn.type='button';
+  return btn;
+}
+function addInteractions(node,post){
+  if(!post.id)return;
+  var direct=postLink(post),heading=postLabel(post);
+  var toolbar=el('div','entry-actions');
+  toolbar.setAttribute('aria-label','게시물 댓글 및 공유');
+  if(post.type==='threads'){
+    var metaComments=el('a','entry-action','댓글 · Threads ↗');
+    metaComments.href=post.url;
+    metaComments.target='_blank';
+    metaComments.rel='noopener noreferrer';
+    toolbar.appendChild(metaComments);
+  }else{
+    var commentButton=interactionButton('댓글');
+    var commentPane=el('section','comment-panel');
+    var commentId='now-comments-'+encodeURIComponent(post.type+':'+post.id);
+    commentPane.id=commentId;
+    commentPane.hidden=true;
+    commentButton.setAttribute('aria-expanded','false');
+    commentButton.setAttribute('aria-controls',commentId);
+    commentButton.setAttribute('aria-label',heading+' 댓글 보기');
+    var ch=el('div','comment-head');
+    ch.appendChild(el('h3','', '이 글의 댓글'));
+    var note=el('p','comment-note','GitHub 계정으로 댓글을 남길 수 있습니다. 댓글은 GitHub Issues에 공개됩니다.');
+    var slot=el('div','comment-slot');
+    ch.appendChild(el('a','small',''));
+    ch.lastChild.href='https://github.com/raspos/databrew/issues';
+    ch.lastChild.target='_blank';
+    ch.lastChild.rel='noopener noreferrer';
+    ch.lastChild.textContent='댓글 관리·전체보기 ↗';
+    commentPane.append(ch,note,slot);
+    commentButton.addEventListener('click',function(){
+      closeShare();
+      if(activeComments&&activeComments.pane===commentPane){closeComments();return;}
+      closeComments();
+      commentPane.hidden=false;
+      commentButton.setAttribute('aria-expanded','true');
+      activeComments={pane:commentPane,button:commentButton};
+      if(!slot.dataset.loaded){
+        slot.dataset.loaded='true';
+        var script=document.createElement('script');
+        script.src='https://utteranc.es/client.js';
+        script.setAttribute('repo','raspos/databrew');
+        script.setAttribute('issue-term','databrew-now:'+post.type+':'+String(post.id));
+        script.setAttribute('theme',utterancesTheme());
+        script.setAttribute('crossorigin','anonymous');
+        script.async=true;
+        script.addEventListener('error',function(){
+          slot.replaceChildren(el('p','comment-note','댓글 서비스를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'));
+          delete slot.dataset.loaded;
+        });
+        slot.appendChild(script);
+      }
+    });
+    toolbar.appendChild(commentButton);
+    node.appendChild(commentPane);
+    // Toolbar stays above the lazy-loaded comments panel.
+    node.insertBefore(toolbar,commentPane);
+  }
+  var wrap=el('div','share-wrap'),shareButton=interactionButton('공유');
+  var shareId='now-share-'+encodeURIComponent(post.type+':'+post.id);
+  shareButton.setAttribute('aria-controls',shareId);
+  shareButton.setAttribute('aria-expanded','false');
+  shareButton.setAttribute('aria-haspopup','true');
+  shareButton.setAttribute('aria-label',heading+' 공유');
+  var menu=el('div','share-menu');menu.id=shareId;menu.hidden=true;
+  function shareAction(label,href){
+    var a=el('a','',label);
+    a.href=href;a.target='_blank';a.rel='noopener noreferrer';
+    menu.appendChild(a);
+  }
+  var threads=new URL('https://www.threads.com/intent/post');
+  threads.searchParams.set('text',heading);
+  threads.searchParams.set('url',direct);
+  shareAction('Threads에 공유',threads.href);
+  var x=new URL('https://twitter.com/intent/tweet');
+  x.searchParams.set('text',heading);
+  x.searchParams.set('url',direct);
+  shareAction('X에 공유',x.href);
+  var facebook=new URL('https://www.facebook.com/sharer/sharer.php');
+  facebook.searchParams.set('u',direct);
+  shareAction('Facebook에 공유',facebook.href);
+  var copy=el('button','', '링크 복사');copy.type='button';
+  copy.addEventListener('click',async function(){
+    var ok=false;
+    try{
+      if(navigator.clipboard&&window.isSecureContext){
+        await navigator.clipboard.writeText(direct);ok=true;
+      }else{
+        var field=el('textarea');field.value=direct;
+        field.style.position='fixed';field.style.opacity='0';
+        document.body.appendChild(field);field.select();
+        ok=document.execCommand('copy');field.remove();
+      }
+    }catch(e){ok=false;}
+    status.textContent=ok?'링크를 복사했습니다.':'복사에 실패했습니다. 주소창에서 복사해 주세요.';
+    copy.textContent=ok?'복사 완료':'링크 복사';
+  });
+  menu.appendChild(copy);
+  if(typeof navigator.share==='function'){
+    var device=el('button','', '다른 앱으로 공유');device.type='button';
+    device.addEventListener('click',async function(){
+      try{await navigator.share({title:heading,text:heading,url:direct});closeShare();}
+      catch(e){if(e&&e.name!=='AbortError')status.textContent='기기 공유를 완료하지 못했습니다.';}
+    });
+    menu.appendChild(device);
+  }
+  var status=el('p','share-notice');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+  menu.appendChild(status);
+  shareButton.addEventListener('click',function(){
+    closeComments();
+    if(activeShare&&activeShare.menu===menu){closeShare();return;}
+    closeShare();
+    menu.hidden=false;
+    shareButton.setAttribute('aria-expanded','true');
+    activeShare={menu:menu,button:shareButton,wrapper:wrap};
+  });
+  wrap.append(shareButton,menu);
+  toolbar.appendChild(wrap);
+  if(post.type==='threads')node.appendChild(toolbar);
+}
+
 function el(tag,cls,txt){var x=document.createElement(tag);if(cls)x.className=cls;if(txt!=null)x.textContent=String(txt);return x;}
 function safe(url,threads){try{var u=new URL(url,location.href);if(u.protocol!=='https:'&&u.protocol!=='http:')return '';if(threads&&!/(^|\.)(threads\.com|threads\.net)$/.test(u.hostname))return '';return u.href;}catch(e){return ''}}
 function fmt(s){if(!s)return '';if(/^\d{4}-\d{2}-\d{2}$/.test(String(s)))return String(s).replace(/-/g,'.')+' 기준';try{var d=new Date(s);if(!isFinite(d.getTime()))return '';return new Intl.DateTimeFormat('ko-KR',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d)}catch(e){return String(s||'')}}
@@ -83,7 +283,8 @@ meta.append(mark,author,badge,date);node.appendChild(meta);
 if(post.type==='threads'){
   if(post.text)node.appendChild(el('p','copy',post.text));
   if(post.media)imageMedia(node,post.media,'media','Threads 공개 게시물 첨부 이미지');
-  var tf=el('div','entryfoot');addLink(tf,'원문 · 댓글 보기 ↗',post.url,true);node.appendChild(tf);
+  var tf=el('div','entryfoot');addLink(tf,'Threads 원문 보기 ↗',post.url,true);node.appendChild(tf);
+  addInteractions(node,post);
   return node;
 }
 var h=el('h2'),title=el('a','',post.title||'');
@@ -97,9 +298,12 @@ var foot=el('div','entryfoot');
 addLink(foot,post.type==='watch'?'원본 데이터 확인 ↗':post.type==='projects'?'프로젝트 열기 ↗':'기사 읽기 →',post.url,post.type==='watch'||post.type==='projects');
 if(post.type==='projects'&&post.detailUrl)addLink(foot,'프로젝트 소개 →',post.detailUrl,false);
 node.appendChild(foot);
+addInteractions(node,post);
 return node;
 }
 function render(){
+closeShare();
+closeComments();
 var filtered=all.filter(function(p){return filter==='all'||p.type===filter});
 feed.replaceChildren();
 if(!filtered.length){
