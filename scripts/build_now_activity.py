@@ -107,10 +107,10 @@ def parse_projects() -> list[dict]:
     for project in projects:
         if project["id"] in editorial:
             story = project["story"]
-            if not isinstance(story, str) or not 400 <= len(story) <= 500:
-                raise ValueError("400–500 character story requirement failed: " + project["id"])
+            if not isinstance(story, str) or not 90 <= len(story) <= 150:
+                raise ValueError("3–4-line project intro (90–150 chars) requirement failed: " + project["id"])
     # New projects can appear automatically with a card-length introduction;
-    # they will receive a reviewed 400–500 character story before the next editorial release.
+    # they will receive a reviewed 3–4-line intro before the next editorial release.
 
     return projects
 
