@@ -21,6 +21,7 @@ from typing import Any
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "now" / "activity.json"
 INDEX = ROOT / "index.html"
+PROJECT_STORIES = ROOT / "now" / "project-stories.json"
 KST = dt.timezone(dt.timedelta(hours=9))
 BASE = {
     "bok": "https://bokwatch.pages.dev/",
@@ -67,6 +68,9 @@ def clean(value: str) -> str:
 
 def parse_projects() -> list[dict]:
     source = INDEX.read_text(encoding="utf-8")
+    editorial = json.loads(PROJECT_STORIES.read_text(encoding="utf-8"))
+    if not isinstance(editorial, dict):
+        raise ValueError("project-stories.json must be an object")
     cards = re.findall(r'<article\b[^>]*class="[^"]*\bcard\b[^"]*"[^>]*>.*?</article>', source, re.S)
     projects = []
     seen = set()
@@ -94,9 +98,18 @@ def parse_projects() -> list[dict]:
             "url": html.unescape(service.group(1)) if service else "https://raspos.github.io/databrew/projects/" + slug + "/",
             "thumbnail": ("../" + html.unescape(art.group(1))) if art else "",
             "paused": slug == "lee-jae-myung-x" or name == "이재명 X 트래커",
+            "story": editorial.get(slug, ""),
         })
     if len(projects) < 10:
         raise ValueError("project card parsing failed; refusing to erase project history")
+    for project in projects:
+        if project["id"] in editorial:
+            story = project["story"]
+            if not isinstance(story, str) or not 400 <= len(story) <= 500:
+                raise ValueError("400–500 character story requirement failed: " + project["id"])
+    # New projects can appear automatically with a card-length introduction;
+    # they will receive a reviewed 400–500 character story before the next editorial release.
+
     return projects
 
 
