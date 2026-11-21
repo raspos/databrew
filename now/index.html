@@ -169,11 +169,13 @@ function addInteractions(node,post){
     ch.appendChild(el('h3','', '이 글의 댓글'));
     var note=el('p','comment-note','GitHub 계정으로 댓글을 남길 수 있습니다. 댓글은 GitHub Issues에 공개됩니다.');
     var slot=el('div','comment-slot');
-    ch.appendChild(el('a','small',''));
-    ch.lastChild.href='https://github.com/raspos/databrew/issues';
-    ch.lastChild.target='_blank';
-    ch.lastChild.rel='noopener noreferrer';
-    ch.lastChild.textContent='댓글 관리·전체보기 ↗';
+    var issueSearch=new URL('https://github.com/raspos/databrew/issues');
+    issueSearch.searchParams.set('q','is:issue databrew-now:'+post.type+':'+String(post.id));
+    var issueLink=el('a','small','GitHub에서 보기 ↗');
+    issueLink.href=issueSearch.href;
+    issueLink.target='_blank';
+    issueLink.rel='noopener noreferrer';
+    ch.appendChild(issueLink);
     commentPane.append(ch,note,slot);
     commentButton.addEventListener('click',function(){
       closeShare();
