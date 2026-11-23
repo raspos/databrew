@@ -8,11 +8,11 @@
     "project": "bokwatch",
     "tag": "BOK워치",
     "tagAuto": true,
-    "summary": "증시 폭락과 기준금리 인상이 겹치는 ‘이중 긴축’ 위험. 중앙일보 원문과 별도로, 신문 기사에 인용하지 않은 실험적 BOK워치 확률도 소개합니다.",
+    "summary": "증시 폭락과 기준금리 인상에 따른 ‘이중 긴축’ 위험을 짚었다. 중앙일보 기사에 싣지 않은 자체 개발 BOK워치 모형(금리 인상 확률 71.8%)과 변화 그래프는 STORIES에 별도로 소개한다.",
     "en": {
       "title": "Stock Market Crash May Tighten Conditions as Much as Two or Three Rate Hikes",
       "outlet": "JoongAng Ilbo",
-      "summary": "A look at the double-tightening risk from falling equities and rising policy rates. BOK Watch's experimental model is shared here separately, not cited in the JoongAng Ilbo article."
+      "summary": "A double-tightening analysis with BOK Watch's separate experimental model: a 71.8% estimate of a Nov 26 rate hike using equal weights of KOFR OIS and 91-day Monetary Stabilization Bond rates; this figure was not cited in the JoongAng Ilbo article."
     }
   },
   {
