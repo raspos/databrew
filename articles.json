@@ -8,11 +8,11 @@
     "project": "bokwatch",
     "tag": "BOK워치",
     "tagAuto": true,
-    "summary": "증시 급락은 소비를 위축시키고, 금리 인상은 이자 부담을 키운다. 중앙일보 기사에서 짚은 ‘이중 긴축’의 위험과 BOK워치 금리 인상 확률.",
+    "summary": "증시 폭락과 기준금리 인상이 겹치는 ‘이중 긴축’ 위험. 중앙일보 원문과 별도로, 신문 기사에 인용하지 않은 실험적 BOK워치 확률도 소개합니다.",
     "en": {
       "title": "Stock Market Crash May Tighten Conditions as Much as Two or Three Rate Hikes",
       "outlet": "JoongAng Ilbo",
-      "summary": "Korea's stock selloff may squeeze consumption even before the Bank of Korea raises rates again. The story examines the risk of double tightening and links to BOK Watch's market-implied policy probabilities."
+      "summary": "A look at the double-tightening risk from falling equities and rising policy rates. BOK Watch's experimental model is shared here separately, not cited in the JoongAng Ilbo article."
     }
   },
   {
