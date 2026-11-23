@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T02:33:57+00:00",
+  "generated_at": "2026-11-23T03:00:48+00:00",
   "repositories": {
     "raspos/all-time-xi": {
       "pushed_at": "2026-10-27T12:32:30Z",
@@ -7,14 +7,14 @@
       "last_workflow": null
     },
     "raspos/apt-watch": {
-      "pushed_at": "2026-11-20T08:33:20Z",
+      "pushed_at": "2026-11-22T06:49:09Z",
       "default_branch": "main",
       "last_workflow": {
         "name": "Deploy to GitHub Pages",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-20T08:33:22Z",
-        "html_url": "https://github.com/raspos/apt-watch/actions/runs/44703478257"
+        "created_at": "2026-11-22T06:49:11Z",
+        "html_url": "https://github.com/raspos/apt-watch/actions/runs/44995433200"
       }
     },
     "raspos/balchik-imagination": {
@@ -29,14 +29,14 @@
       }
     },
     "raspos/bokwatch": {
-      "pushed_at": "2026-11-21T02:14:40Z",
+      "pushed_at": "2026-11-23T00:09:45Z",
       "default_branch": "main",
       "last_workflow": {
-        "name": "daily",
+        "name": "deploy",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-21T08:15:19Z",
-        "html_url": "https://github.com/raspos/bokwatch/actions/runs/44884002895"
+        "created_at": "2026-11-23T00:09:47Z",
+        "html_url": "https://github.com/raspos/bokwatch/actions/runs/45087129158"
       }
     },
     "raspos/chip-cycle": {
@@ -171,14 +171,14 @@
       }
     },
     "raspos/seoul-apartment-tracker": {
-      "pushed_at": "2026-11-21T01:35:11Z",
+      "pushed_at": "2026-11-22T22:10:55Z",
       "default_branch": "main",
       "last_workflow": {
         "name": "pages build and deployment",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-21T01:35:12Z",
-        "html_url": "https://github.com/raspos/seoul-apartment-tracker/actions/runs/44851040712"
+        "created_at": "2026-11-22T22:10:57Z",
+        "html_url": "https://github.com/raspos/seoul-apartment-tracker/actions/runs/45076257086"
       }
     }
   },
