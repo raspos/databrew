@@ -32,6 +32,9 @@ BASE = {
     "apt": "https://raspos.github.io/apt-watch/",
     "records": "https://raspos.github.io/seoul-apartment-tracker/",
 }
+# Public Pages builds can lag the already committed, fully published source JSON.
+# Check only the owner's canonical GitHub repo as an alternate dated release.
+BOK_GITHUB_DATA = "https://raw.githubusercontent.com/raspos/bokwatch/main/site/data/"
 SOURCE_LIMIT = 32 * 1024 * 1024
 
 
@@ -179,12 +182,47 @@ def _msb91_model(asof: str, rate: float, spread: float, r0: float,
     return probability, r0 + delta
 
 
+def _bok_latest_release() -> tuple[dict, dict, str]:
+    """Read the latest verified BOK release, even when Pages deploy is lagging.
+
+    Both sources are the owner's public, immutable-by-day JSON artifacts.
+    Accept only a matching meta/latest+snapshot/asof pair. Prefer the live
+    BOK Pages release for equal dates; GitHub is only an alternate when newer.
+    """
+    candidates = []
+    problems = []
+    today = dt.datetime.now(KST).date()
+    for kind, root in (("pages", BASE["bok"] + "data/"),
+                       ("github", BOK_GITHUB_DATA)):
+        try:
+            meta = read_url(root + "meta.json")
+            latest = day_of(meta["latest"])
+            if dt.date.fromisoformat(latest) > today:
+                raise ValueError("BOK release claims an observation date in the future")
+            snapshot = read_url(root + "snapshots/" + latest + ".json")
+            if day_of(snapshot.get("asof")) != latest:
+                raise ValueError("BOK meta/snapshot date mismatch")
+            if number(snapshot.get("r0")) is None:
+                raise ValueError("BOK release has no published base rate")
+            candidates.append((latest, 1 if kind == "pages" else 0,
+                               meta, snapshot, kind))
+        except (ValueError, KeyError, TypeError, OSError,
+                urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+            problems.append(kind + ":" + type(exc).__name__)
+    if not candidates:
+        raise ValueError("No valid BOK release available (" + ", ".join(problems) + ")")
+    latest, _, meta, snapshot, kind = max(candidates, key=lambda row: (row[0], row[1]))
+    if len(candidates) == 2 and candidates[0][0] != candidates[1][0]:
+        print("BOK source lag: Pages", candidates[0][0],
+              "GitHub", candidates[1][0], "→ using", kind, latest)
+    elif problems:
+        print("BOK source fallback:", ", ".join(problems), "→ using", kind, latest)
+    return meta, snapshot, kind
+
+
 def bok_update() -> dict:
-    meta = read_url(BASE["bok"] + "data/meta.json")
+    meta, snapshot, release = _bok_latest_release()
     day = day_of(meta["latest"])
-    snapshot = read_url(BASE["bok"] + "data/snapshots/" + day + ".json")
-    if day_of(snapshot.get("asof")) != day:
-        raise ValueError("BOK meta/snapshot mismatch")
     next_meeting = _bok_meeting(snapshot)
     meeting_day = day_of(next_meeting["date"])
     ois = number(next_meeting["p_hike"])
@@ -239,7 +277,11 @@ def bok_update() -> dict:
         "title": title, "text": prose(pieces), "sentence_count": len(pieces),
         "source": "BOK워치 · KOFR OIS(50%) + 통안증권 91일(50%)",
         "url": BASE["bok"],
-        "note": "NOW 혼합 추정. 통안채 91일물에는 여러 회의의 금리 기대가 포함되며, 실제 정책 결정과 다를 수 있음.",
+        "note": ("NOW 혼합 추정. 통안채 91일물에는 여러 회의의 금리 기대가 포함되며, "
+                 "실제 정책 결정과 다를 수 있음."
+                 + (" 이번 관측은 BOK워치 공개 GitHub 스냅샷을 기준으로 작성 "
+                    "(Pages 배포 시각 차이)." if release == "github" else "")),
+        "release_channel": release,
         "components": {"kofr_ois": round(ois, 5), "msb91": round(msb_p, 5),
                        "weights": [0.5, 0.5], "bond_model": "min_hike"},
     }
