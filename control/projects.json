@@ -160,6 +160,17 @@
       "refresh_sla_hours": null
     },
     {
+      "id": "major-formula",
+      "name": "메이저의 공식",
+      "series": "sports",
+      "url": "https://raspos.github.io/major-formula/",
+      "repo": "raspos/major-formula",
+      "cadence": "manual",
+      "cadence_note": "새 메이저가 끝난 뒤 수동 갱신·검증(자동 수집은 아직 꺼져 있음)",
+      "visitor_source": "none",
+      "refresh_sla_hours": null
+    },
+    {
       "id": "lee-x-tracker",
       "name": "이재명 X 트래커",
       "series": "archive",

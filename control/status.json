@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-24T06:18:55+00:00",
+  "generated_at": "2026-11-24T08:17:50+00:00",
   "repositories": {
     "raspos/all-time-xi": {
       "pushed_at": "2026-10-27T12:32:30Z",
@@ -67,14 +67,14 @@
       }
     },
     "raspos/fx-odds": {
-      "pushed_at": "2026-11-23T21:45:19Z",
+      "pushed_at": "2026-11-24T08:01:37Z",
       "default_branch": "main",
       "last_workflow": {
-        "name": "daily",
+        "name": "quote",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-23T21:38:18Z",
-        "html_url": "https://github.com/raspos/fx-odds/actions/runs/45271700670"
+        "created_at": "2026-11-24T08:01:27Z",
+        "html_url": "https://github.com/raspos/fx-odds/actions/runs/45352547857"
       }
     },
     "raspos/hongdam-craft": {
@@ -124,6 +124,17 @@
         "conclusion": "success",
         "created_at": "2026-11-10T00:22:11Z",
         "html_url": "https://github.com/raspos/korean-newsroom-hub/actions/runs/42727763741"
+      }
+    },
+    "raspos/major-formula": {
+      "pushed_at": "2026-11-24T08:16:41Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "build-and-deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-24T08:16:43Z",
+        "html_url": "https://github.com/raspos/major-formula/actions/runs/45354714580"
       }
     },
     "raspos/pay-watch": {
@@ -205,8 +216,8 @@
     }
   },
   "coverage": {
-    "public_repositories_checked": 21,
-    "public_repositories_reported": 20
+    "public_repositories_checked": 22,
+    "public_repositories_reported": 21
   },
   "disclaimer": "Last workflow status is not a data quality certification."
 }

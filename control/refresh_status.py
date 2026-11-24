@@ -24,7 +24,7 @@ ALLOWED = {"raspos/" + p for p in (
     "chip-cycle", "korea-ranked", "korea-corporate-scorecard",
     "honmaek-map", "balchik-imagination", "seoul-apartment-tracker",
     "korean-newsroom-hub", "korean-newsroom-mcp",
-    "bok-governor", "sahoegwabudo",
+    "bok-governor", "sahoegwabudo", "major-formula",
 )}
 def get(path):
     req = urllib.request.Request(API + path, headers={
