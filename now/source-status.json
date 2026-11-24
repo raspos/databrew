@@ -1,5 +1,72 @@
 {
   "schema_version": 1,
-  "checked_at": null,
-  "services": []
+  "checked_at": "2026-11-24T10:10:20+09:00",
+  "services": [
+    {
+      "id": "bok",
+      "name": "BOK워치",
+      "url": "https://bokwatch.pages.dev/",
+      "mode": "daily",
+      "state": "ok",
+      "observed_day": "2026-11-20",
+      "source_at": "2026-11-23T09:07+09:00",
+      "lag_days": 4,
+      "last_success_at": "2026-11-24T10:10:20+09:00"
+    },
+    {
+      "id": "fx",
+      "name": "FX워치",
+      "url": "https://raspos.github.io/fx-odds/",
+      "mode": "daily",
+      "state": "ok",
+      "observed_day": "2026-11-23",
+      "source_at": "2026-11-23",
+      "lag_days": 1,
+      "last_success_at": "2026-11-24T10:10:20+09:00"
+    },
+    {
+      "id": "debt",
+      "name": "DEBT워치",
+      "url": "https://debtwatch.pages.dev/",
+      "mode": "project",
+      "state": "project",
+      "observed_day": null,
+      "source_at": null,
+      "lag_days": null,
+      "last_success_at": null
+    },
+    {
+      "id": "pay",
+      "name": "PAY워치",
+      "url": "https://raspos.github.io/pay-watch/",
+      "mode": "project",
+      "state": "project",
+      "observed_day": null,
+      "source_at": null,
+      "lag_days": null,
+      "last_success_at": null
+    },
+    {
+      "id": "apt",
+      "name": "APT워치",
+      "url": "https://raspos.github.io/apt-watch/",
+      "mode": "daily",
+      "state": "ok",
+      "observed_day": "2026-11-22",
+      "source_at": "2026-11-22",
+      "lag_days": 2,
+      "last_success_at": "2026-11-24T10:10:20+09:00"
+    },
+    {
+      "id": "records",
+      "name": "서울 아파트 신고가",
+      "url": "https://raspos.github.io/seoul-apartment-tracker/",
+      "mode": "daily",
+      "state": "ok",
+      "observed_day": "2026-11-23",
+      "source_at": "2026-11-23T07:06:39+09:00",
+      "lag_days": 1,
+      "last_success_at": "2026-11-24T10:10:20+09:00"
+    }
+  ]
 }
