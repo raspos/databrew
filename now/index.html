@@ -45,6 +45,12 @@
 .watch-source .watch-detail .dot{vertical-align:1px}.watch-source .dot.warn{background:var(--accent)}
 .watch-source small{font:500 10px "IBM Plex Mono",monospace;color:var(--muted);padding-left:4px}
 .watch-monitor-note{font-size:12px;color:var(--muted);line-height:1.6;margin:13px 0 0}
+.watch-quick{display:flex;gap:6px;align-items:center;padding:0 0 13px;overflow-x:auto;scrollbar-width:thin}
+.watch-quick-label{font:600 10px "IBM Plex Mono",monospace;letter-spacing:.06em;color:var(--accent);margin-right:4px;flex:none}
+.watch-chip{flex:none;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:5px 11px;background:var(--paper);font-size:11px;font-weight:650;white-space:nowrap}
+.watch-chip:hover{border-color:var(--accent);color:var(--accent)}
+.watch-chip .quickdate{font:500 10px "IBM Plex Mono",monospace;color:var(--muted);margin-left:5px}
+
 
 /* Per-article comments and sharing: accessible, on-demand, no third-party iframe before click. */
 .entry-actions{display:flex;align-items:center;gap:8px;margin-top:15px;flex-wrap:wrap}
@@ -90,6 +96,7 @@
 </header>
 <div class="layout">
 <main>
+ <nav class="watch-quick" id="watch-quick" aria-label="WATCH 서비스 바로가기"><span class="watch-quick-label">WATCH 05</span></nav>
  <div class="tabs" role="group" aria-label="게시물 필터"><button class="tab" data-filter="all" aria-pressed="true">전체 <span class="count" data-count="all"></span></button><button class="tab" data-filter="watch" aria-pressed="false">WATCH <span class="count" data-count="watch"></span></button><button class="tab" data-filter="projects" aria-pressed="false">PROJECTS <span class="count" data-count="projects"></span></button><button class="tab" data-filter="stories" aria-pressed="false">STORIES <span class="count" data-count="stories"></span></button><button class="tab" data-filter="threads" aria-pressed="false">Threads <span class="count" data-count="threads"></span></button></div>
  <div class="feed" id="feed" aria-live="polite"><p class="loading">기록을 불러오는 중입니다.</p></div><button type="button" class="more-feed" id="more-feed" hidden>이전 기록 더 보기 ↓</button>
 </main>
@@ -377,6 +384,13 @@ else if(watch.length){wstatus.textContent='기존 원본 기록 확인 · 다음
     else{message=date?'마지막 등록 '+date+' · 점검 대기':'원본 점검 대기';}
     detail.appendChild(dot);detail.appendChild(document.createTextNode(message));
     row.append(name,detail);target.appendChild(row);
+    if(info.id!=='records'){
+      var quick=el('a','watch-chip',info.name),qdate=el('span','quickdate');
+      quick.href=info.url;quick.target='_blank';quick.rel='noopener noreferrer';
+      qdate.textContent=info.mode==='project'?'소개':date?date.slice(5).replace('-','.'):'점검 대기';
+      quick.appendChild(qdate);
+      document.getElementById('watch-quick').appendChild(quick);
+    }
   });
   last.textContent=sourceHealth.checked_at?
     '마지막 확인 '+fmt(sourceHealth.checked_at)+' · 자료가 그대로면 과거 관측일을 유지합니다.':
