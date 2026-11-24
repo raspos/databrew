@@ -1,0 +1,45 @@
+name: Validate databrew NOW reliability
+
+on:
+  pull_request:
+    paths:
+      - scripts/build_now_activity.py
+      - tests/test_now_activity.py
+      - tests/test_now_engagement.py
+      - now/index.html
+      - now/source-status.json
+      - now/project-stories.json
+      - now/story-summaries.json
+      - articles.json
+      - .github/workflows/build-now.yml
+      - .github/workflows/validate-now.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test WATCH adapters and source-health behavior
+        run: python -m unittest discover -s tests -p 'test_now_activity.py' -v
+      - name: Test NOW per-item comments and share buttons
+        run: python -m unittest discover -s tests -p 'test_now_engagement.py' -v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate NOW inline JavaScript syntax
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib,re
+          page=pathlib.Path('now/index.html').read_text()
+          blocks=re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>',page)
+          assert blocks,"No inline JavaScript found"
+          pathlib.Path('/tmp/databrew-now-inline.js').write_text('\n'.join(blocks))
+          PY
+          node --check /tmp/databrew-now-inline.js
