@@ -38,6 +38,20 @@
 .more-feed{display:block;width:100%;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:9px;margin-top:22px;padding:11px 16px;font-weight:600;font-size:13px}
 .more-feed[hidden]{display:none}
 @media(max-width:570px){.tab{padding:7px 13px}.entry .project-shot{aspect-ratio:16/7}}
+/* Transparent WATCH source monitoring; never mislabel a check time as observation time. */
+.watch-list{display:grid;gap:0}.watch-source{padding:10px 0;border-top:1px solid var(--line)}
+.watch-source:first-child{border-top:0}.watch-source a{font-size:13px;font-weight:700;color:var(--ink);text-decoration:none}
+.watch-source a:hover{color:var(--accent)}.watch-source .watch-detail{font-size:11px;line-height:1.55;color:var(--muted);margin:3px 0 0}
+.watch-source .watch-detail .dot{vertical-align:1px}.watch-source .dot.warn{background:var(--accent)}
+.watch-source small{font:500 10px "IBM Plex Mono",monospace;color:var(--muted);padding-left:4px}
+.watch-monitor-note{font-size:12px;color:var(--muted);line-height:1.6;margin:13px 0 0}
+.watch-quick{display:flex;gap:6px;align-items:center;padding:0 0 13px;overflow-x:auto;scrollbar-width:thin}
+.watch-quick-label{font:600 10px "IBM Plex Mono",monospace;letter-spacing:.06em;color:var(--accent);margin-right:4px;flex:none}
+.watch-chip{flex:none;text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:5px 11px;background:var(--paper);font-size:11px;font-weight:650;white-space:nowrap}
+.watch-chip:hover{border-color:var(--accent);color:var(--accent)}
+.watch-chip .quickdate{font:500 10px "IBM Plex Mono",monospace;color:var(--muted);margin-left:5px}
+
+
 /* Per-article comments and sharing: accessible, on-demand, no third-party iframe before click. */
 .entry-actions{display:flex;align-items:center;gap:8px;margin-top:15px;flex-wrap:wrap}
 .entry-action{
@@ -82,11 +96,13 @@
 </header>
 <div class="layout">
 <main>
+ <nav class="watch-quick" id="watch-quick" aria-label="WATCH 서비스 바로가기"><span class="watch-quick-label">WATCH 05</span></nav>
  <div class="tabs" role="group" aria-label="게시물 필터"><button class="tab" data-filter="all" aria-pressed="true">전체 <span class="count" data-count="all"></span></button><button class="tab" data-filter="watch" aria-pressed="false">WATCH <span class="count" data-count="watch"></span></button><button class="tab" data-filter="projects" aria-pressed="false">PROJECTS <span class="count" data-count="projects"></span></button><button class="tab" data-filter="stories" aria-pressed="false">STORIES <span class="count" data-count="stories"></span></button><button class="tab" data-filter="threads" aria-pressed="false">Threads <span class="count" data-count="threads"></span></button></div>
  <div class="feed" id="feed" aria-live="polite"><p class="loading">기록을 불러오는 중입니다.</p></div><button type="button" class="more-feed" id="more-feed" hidden>이전 기록 더 보기 ↓</button>
 </main>
 <aside class="aside" aria-label="databrew NOW 소개">
  <section class="box"><p class="small">ABOUT NOW</p><h2>기록은 기사에서 끝나지 않습니다.</h2><p>BOK·FX·APT워치와 서울 아파트 신고가의 공개 자료가 갱신되면 새 기록을 만듭니다. 기존 프로젝트, 새 프로젝트, STORIES도 이어집니다.</p><a class="follow" id="follow" href="#" target="_blank" rel="noopener noreferrer" hidden>Threads에서 팔로우 ↗</a><div class="status" id="watch-status"><span class="dot off"></span>WATCH 갱신 데이터 확인 중</div><div class="status" id="sync-status"><span class="dot off"></span>Threads 계정 연결 전</div></section>
+ <section class="box" aria-label="WATCH 시리즈 원본 현황"><p class="small">WATCH / SOURCE STATUS</p><h2>WATCH 시리즈 5개</h2><p>최신 수치는 원본 서비스의 관측 기준일을 따릅니다. NOW 점검 시각과는 다를 수 있습니다.</p><div class="watch-list" id="watch-service-list"><p>원본 상태를 확인하는 중입니다.</p></div><p class="watch-monitor-note" id="watch-last-check">마지막 점검 기록 확인 중</p></section>
  <section class="box"><p class="small">EXPLORE</p><div class="links"><a href="../">databrew 프로젝트 허브 ↗</a><a href="../articles/">STORIES 전체 보기 ↗</a><a href="../#watch">WATCH 시리즈 ↗</a><a href="../#craft">CRAFT 시리즈 ↗</a><a href="../#sports">SPORTS 시리즈 ↗</a></div></section>
 </aside>
 </div>
@@ -320,10 +336,11 @@ buttons.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filte
 buttons.forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;limit=24;render()})});
 more.addEventListener('click',function(){limit+=24;render()});
 function load(path){return fetch(path,{cache:'no-store'}).then(function(r){if(!r.ok)throw Error('load failed');return r.json()})}
-Promise.allSettled([load('threads.json'),load('../articles.json'),load('activity.json')]).then(function(results){
+Promise.allSettled([load('threads.json'),load('../articles.json'),load('activity.json'),load('source-status.json')]).then(function(results){
 var threads=results[0].status==='fulfilled'&&results[0].value||{};
 var articles=results[1].status==='fulfilled'&&results[1].value||[];
 var activity=results[2].status==='fulfilled'&&results[2].value||{};
+var sourceHealth=results[3].status==='fulfilled'&&results[3].value||{};
 var threadPosts=Array.isArray(threads.posts)?threads.posts:[];
 var projects=Array.isArray(activity.projects)?activity.projects:[],watch=Array.isArray(activity.watch)?activity.watch:[];
 var projectMap={};projects.forEach(function(p){projectMap[p.id]=p});
@@ -334,8 +351,51 @@ if(threads.profile_url){
 var status=document.getElementById('sync-status');
 if(threads.updated_at&&threads.profile_url){status.replaceChildren(el('span','dot'));status.appendChild(document.createTextNode('Threads 최근 동기화: '+fmt(threads.updated_at)))}
 var wstatus=document.getElementById('watch-status');
-if(activity.updated_at){wstatus.replaceChildren(el('span','dot'));wstatus.appendChild(document.createTextNode('WATCH 수집 확인: '+fmt(activity.updated_at)))}
-else if(watch.length){wstatus.textContent='WATCH 초기 자료 · 다음 자동 갱신 대기'}
+if(sourceHealth.checked_at){wstatus.replaceChildren(el('span','dot'));wstatus.appendChild(document.createTextNode('원본 점검: '+fmt(sourceHealth.checked_at)))}
+else if(activity.updated_at){wstatus.textContent='최근 NOW 데이터 변경: '+fmt(activity.updated_at)}
+else if(watch.length){wstatus.textContent='기존 원본 기록 확인 · 다음 점검 대기'}
+(function renderWatchSources(){
+  var catalog=[
+    {id:'bok',name:'BOK워치',url:'https://bokwatch.pages.dev/',mode:'daily'},
+    {id:'fx',name:'FX워치',url:'https://raspos.github.io/fx-odds/',mode:'daily'},
+    {id:'debt',name:'DEBT워치',url:'https://debtwatch.pages.dev/',mode:'project'},
+    {id:'pay',name:'PAY워치',url:'https://raspos.github.io/pay-watch/',mode:'project'},
+    {id:'apt',name:'APT워치',url:'https://raspos.github.io/apt-watch/',mode:'daily'},
+    {id:'records',name:'서울 아파트 신고가 트래커',url:'https://raspos.github.io/seoul-apartment-tracker/',mode:'daily'}
+  ];
+  var recorded={};
+  (Array.isArray(sourceHealth.services)?sourceHealth.services:[]).forEach(function(x){
+    if(x&&x.id)recorded[x.id]=x;
+  });
+  var latest={};
+  watch.forEach(function(w){if(w&&w.service&&w.day&&(!latest[w.service]||w.day>latest[w.service]))latest[w.service]=w.day});
+  var target=document.getElementById('watch-service-list');
+  var last=document.getElementById('watch-last-check');
+  target.replaceChildren();
+  catalog.forEach(function(info){
+    var state=recorded[info.id]||{},date=state.observed_day||latest[info.id]||'';
+    var row=el('div','watch-source'),name=el('a','',info.name+' ↗');
+    name.href=info.url;name.target='_blank';name.rel='noopener noreferrer';
+    var detail=el('p','watch-detail'),dot=el('span','dot off');
+    var message='';
+    if(info.mode==='project')message='서비스 공개 · 정기 수치 자동 연동 전';
+    else if(state.state==='error'){dot.className='dot warn';message='원본 조회 오류 · 기존 기록 유지';if(date)message+=' · '+date+' 기준';}
+    else if(state.state==='ok'){dot.className='dot';message=date?'원본 '+date+' 기준':'원본 관측일 확인 중';if(typeof state.lag_days==='number'&&state.lag_days>=3)message+=' ('+state.lag_days+'일 전)';}
+    else{message=date?'마지막 등록 '+date+' · 점검 대기':'원본 점검 대기';}
+    detail.appendChild(dot);detail.appendChild(document.createTextNode(message));
+    row.append(name,detail);target.appendChild(row);
+    if(info.id!=='records'){
+      var quick=el('a','watch-chip',info.name),qdate=el('span','quickdate');
+      quick.href=info.url;quick.target='_blank';quick.rel='noopener noreferrer';
+      qdate.textContent=info.mode==='project'?'소개':date?date.slice(5).replace('-','.'):'점검 대기';
+      quick.appendChild(qdate);
+      document.getElementById('watch-quick').appendChild(quick);
+    }
+  });
+  last.textContent=sourceHealth.checked_at?
+    '마지막 확인 '+fmt(sourceHealth.checked_at)+' · 자료가 그대로면 과거 관측일을 유지합니다.':
+    '원본 점검 실행 기록은 다음 자동 수집에서 표시됩니다.';
+})();
 threadPosts.forEach(function(p){
   var u=safe(p.permalink,true);
   if(u&&p.timestamp){var mediaSrc=p.media_type==='VIDEO'?p.thumbnail_url:(p.thumbnail_url||p.media_url);

@@ -20,6 +20,7 @@ from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "now" / "activity.json"
+SOURCE_STATUS = ROOT / "now" / "source-status.json"
 INDEX = ROOT / "index.html"
 PROJECT_STORIES = ROOT / "now" / "project-stories.json"
 STORY_SUMMARIES = ROOT / "now" / "story-summaries.json"
@@ -460,6 +461,60 @@ SOURCES = [
     ("records", records_update),
 ]
 
+# Only these four services currently publish a verified, documented daily
+# JSON schema. DEBT and PAY remain valid WATCH services, but do not imply a
+# daily reading until their public release endpoints have been audited.
+WATCH_CATALOG = [
+    ("bok", "BOK워치", BASE["bok"], "daily"),
+    ("fx", "FX워치", BASE["fx"], "daily"),
+    ("debt", "DEBT워치", "https://debtwatch.pages.dev/", "project"),
+    ("pay", "PAY워치", "https://raspos.github.io/pay-watch/", "project"),
+    ("apt", "APT워치", BASE["apt"], "daily"),
+    ("records", "서울 아파트 신고가", BASE["records"], "daily"),
+]
+
+
+def source_report(when: str, results: dict[str, dict | None],
+                  previous: dict[str, dict], prior_posts: dict) -> dict:
+    """Show the five WATCH services and the separate Seoul records tracker.
+
+    This file is a *health / provenance report*, not a market-data feed:
+    no current values are inferred when upstream source collection fails.
+    """
+    today = dt.datetime.fromisoformat(when).date()
+    services = []
+    recent = {}
+    for item in prior_posts.values():
+        if not isinstance(item, dict):
+            continue
+        service = item.get("service")
+        if item.get("day") and (service not in recent or item["day"] > recent[service]["day"]):
+            recent[service] = item
+    for ident, name, url, mode in WATCH_CATALOG:
+        previous_entry = previous.get(ident, {})
+        result = results.get(ident)
+        last = result or recent.get(ident) or {}
+        observed = str(last.get("day") or previous_entry.get("observed_day") or "")
+        lag = None
+        if observed:
+            try:
+                lag = max(0, (today - dt.date.fromisoformat(day_of(observed))).days)
+            except ValueError:
+                observed = ""
+        # A project with no audited daily feed must never appear "failed".
+        state = ("project" if mode == "project"
+                 else "ok" if result is not None else "error")
+        success_time = (when if result is not None else previous_entry.get("last_success_at"))
+        services.append({
+            "id": ident, "name": name, "url": url, "mode": mode,
+            "state": state,
+            "observed_day": observed if mode == "daily" else None,
+            "source_at": (result or last).get("source_at") if mode == "daily" else None,
+            "lag_days": lag if mode == "daily" else None,
+            "last_success_at": success_time if mode == "daily" else None,
+        })
+    return {"schema_version": 1, "checked_at": when, "services": services}
+
 
 def main() -> int:
     old = {}
@@ -477,6 +532,16 @@ def main() -> int:
         project["is_new"] = bool(project["first_seen"])
     prior_posts = {p["id"]: p for p in old.get("watch", []) if isinstance(p, dict) and p.get("id")}
     error_names = []
+    observed_results = {}
+    previous_status = {}
+    if SOURCE_STATUS.exists():
+        try:
+            prior_report = json.loads(SOURCE_STATUS.read_text(encoding="utf-8"))
+            previous_status = {p["id"]: p for p in prior_report.get("services", [])
+                               if isinstance(p, dict) and p.get("id")}
+        except (ValueError, TypeError, KeyError):
+            print("Previous source status malformed; reconstructing from WATCH history",
+                  file=sys.stderr)
     for service, getter in SOURCES:
         try:
             item = getter()
@@ -484,10 +549,17 @@ def main() -> int:
                 raise ValueError("date and service mismatch")
             # Do not reissue old data as today's reading. Identical source-day = one card.
             prior_posts[item["id"]] = item
+            observed_results[service] = item
             print(service, item["day"], item["title"])
-        except (ValueError, KeyError, TypeError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+        except (ValueError, KeyError, TypeError, OSError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
             print("source unavailable:", service, type(exc).__name__, str(exc)[:160], file=sys.stderr)
             error_names.append(service)
+    # Persist a fresh source check even when numeric values have not changed.
+    # The report's checked_at is NEVER used as a market observation date.
+    report = source_report(when, observed_results, previous_status, prior_posts)
+    SOURCE_STATUS.parent.mkdir(parents=True, exist_ok=True)
+    SOURCE_STATUS.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+                             encoding="utf-8")
     posts = sorted(prior_posts.values(), key=lambda p: (p.get("day", ""), p.get("service", "")), reverse=True)[:180]
     out = {"schema_version": 3, "projects": projects, "watch": posts, "stories": collect_stories()}
     old_content = {k: old.get(k) for k in out}

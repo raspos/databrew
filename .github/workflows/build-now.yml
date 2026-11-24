@@ -12,12 +12,13 @@ on:
       - now/index.html
       - tests/test_now_activity.py
       - tests/test_now_engagement.py
+      - now/source-status.json
       - .github/workflows/build-now.yml
   workflow_dispatch:
   schedule:
-    # Twice daily at 11:00 and 23:00 KST (02:00 and 14:00 UTC).
-    # Actions cron may start late; displayed timestamps come from source.
-    - cron: "0 2,14 * * *"
+    # Six staggered source checks daily, 01:23/05:23/09:23/13:23/17:23/21:23 KST.
+    # The source observation date is NEVER replaced with the check time.
+    - cron: "23 0,4,8,12,16,20 * * *"
 
 permissions:
   contents: write
@@ -40,17 +41,17 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_now_activity.py' -v
       - name: Verify NOW per-article comments and sharing markup
         run: python -m unittest discover -s tests -p 'test_now_engagement.py' -v
-      - name: Collect WATCH, project and Seoul apartment public releases
+      - name: Collect WATCH and project releases, including source-health report
         run: python scripts/build_now_activity.py
       - name: Commit new snapshots only if actually changed
         run: |
-          if git diff --quiet -- now/activity.json; then
-            echo "No changes in NOW feed."
+          if git diff --quiet -- now/activity.json now/source-status.json; then
+            echo "No changes in NOW feed or source status."
             exit 0
           fi
           git config user.name "databrew-now-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add now/activity.json
+          git add now/activity.json now/source-status.json
           git commit -m "chore(now): refresh source-dated WATCH and project feed"
           git pull --rebase origin main
           git push origin HEAD:main
