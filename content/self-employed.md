@@ -1,7 +1,7 @@
 # 대한민국 자영업자로 살아남기
 
 **유형** EXPERIENCE · **분야** 경제 · **상태** 로그인 필요  
-**서비스** https://self-employed-survival.raspos.chatgpt.site/#setup
+**서비스** https://raspos.github.io/self-employed-survival/
 
 ---
 
