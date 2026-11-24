@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-24T10:48:58+09:00",
+  "checked_at": "2026-11-24T23:57:52+09:00",
   "services": [
     {
       "id": "bok",
@@ -11,7 +11,7 @@
       "observed_day": "2026-11-23",
       "source_at": "2026-11-24T10:01+09:00",
       "lag_days": 1,
-      "last_success_at": "2026-11-24T10:48:58+09:00"
+      "last_success_at": "2026-11-24T23:57:52+09:00"
     },
     {
       "id": "fx",
@@ -19,10 +19,10 @@
       "url": "https://raspos.github.io/fx-odds/",
       "mode": "daily",
       "state": "ok",
-      "observed_day": "2026-11-23",
-      "source_at": "2026-11-23",
-      "lag_days": 1,
-      "last_success_at": "2026-11-24T10:48:58+09:00"
+      "observed_day": "2026-11-24",
+      "source_at": "2026-11-24",
+      "lag_days": 0,
+      "last_success_at": "2026-11-24T23:57:52+09:00"
     },
     {
       "id": "debt",
@@ -52,10 +52,10 @@
       "url": "https://raspos.github.io/apt-watch/",
       "mode": "daily",
       "state": "ok",
-      "observed_day": "2026-11-22",
-      "source_at": "2026-11-22",
-      "lag_days": 2,
-      "last_success_at": "2026-11-24T10:48:58+09:00"
+      "observed_day": "2026-11-24",
+      "source_at": "2026-11-24",
+      "lag_days": 0,
+      "last_success_at": "2026-11-24T23:57:52+09:00"
     },
     {
       "id": "records",
@@ -66,7 +66,7 @@
       "observed_day": "2026-11-23",
       "source_at": "2026-11-23T07:06:39+09:00",
       "lag_days": 1,
-      "last_success_at": "2026-11-24T10:48:58+09:00"
+      "last_success_at": "2026-11-24T23:57:52+09:00"
     }
   ]
 }

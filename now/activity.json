@@ -184,6 +184,19 @@
       "is_new": false
     },
     {
+      "id": "major-formula",
+      "name": "메이저의 공식",
+      "description": "우승에는 공식이 있는가?",
+      "series": "sports",
+      "project_url": "https://raspos.github.io/databrew/projects/major-formula/",
+      "url": "https://raspos.github.io/major-formula/",
+      "thumbnail": "../thumbs/magazine/major-formula.webp",
+      "paused": false,
+      "story": "",
+      "first_seen": "2026-11-24T23:57:52+09:00",
+      "is_new": true
+    },
+    {
       "id": "lee-x-tracker",
       "name": "이재명 X 트래커",
       "description": "대통령의 X 게시물과 반응, 언어와 여론의 흐름을 지지율과 함께 봅니다.",
@@ -254,7 +267,7 @@
       "description": "한국 자영업자의 창업과 경영을 체험하는 36개월 시뮬레이션.",
       "series": "archive",
       "project_url": "https://raspos.github.io/databrew/projects/self-employed/",
-      "url": "https://self-employed-survival.raspos.chatgpt.site/#setup",
+      "url": "https://raspos.github.io/self-employed-survival/",
       "thumbnail": "../thumbs/magazine/self-employed.webp",
       "paused": false,
       "story": "창업하기 전에 데이터로 한 번 실패해 볼 수 있다면. 업종과 지역, 자본금을 고르는 자영업 생존 시뮬레이터입니다. 공개 폐업·생존 통계와 상권 경쟁 밀도를 통해 선택한 창업 조건의 위험을 살펴봅니다.",
@@ -354,6 +367,30 @@
     }
   ],
   "watch": [
+    {
+      "id": "watch:fx:2026-11-24",
+      "service": "fx",
+      "day": "2026-11-24",
+      "source_at": "2026-11-24",
+      "title": "FX워치 | 달러당 원화값 1,346.60원 · 30일 예상범위 1,304~1,390원",
+      "text": "2026-11-24 기준 달러당 원화값 1,346.60원, 한국은행 ECOS 매매기준율. 직전 관측 대비 +9.30원, 원화 약세. 7일 뒤 80% 예상 구간 1,327.9~1,365.6원. 30일 뒤 80% 예상 구간 1,304.3~1,390.3원. 30일 예상 범위 폭 86.0원, 7일 범위 37.7원보다 2.3배 넓은 모습. 예상 구간의 하단과 상단은 변동성 모형이 계산한 범위이며 실제 방향을 예언하는 수치가 아닌 특성.",
+      "sentence_count": 6,
+      "source": "FX워치 · 한국은행 ECOS 매매기준율",
+      "url": "https://raspos.github.io/fx-odds/",
+      "note": "매매기준율을 사용하며 서울외환시장 15:30 종가와 다를 수 있음. 구간은 예측치."
+    },
+    {
+      "id": "watch:apt:2026-11-24",
+      "service": "apt",
+      "day": "2026-11-24",
+      "source_at": "2026-11-24",
+      "title": "APT워치 | 서울 아파트 호가·실거래 관측 · 네고 압력 +4.00%",
+      "text": "2026-11-24 기준 서울 25개 구 고정 표본 아파트 매도 호가 관측. 같은 단지·면적·층 구간의 최근 90일 유사 실거래가와 현재 호가를 비교하는 네고 압력지수. 실거래가 대비 호가 괴리 +4.00%, 매도 호가가 최근 유사 실거래보다 높은 구간. 최근 7일 대비 같은 비교 그룹의 괴리 변화 -0.25%p, 공통 비교 그룹 61개. 전일 변화는 두 날짜에 공통으로 잡힌 비교 그룹만을 반영한 값으로 당일 지수 수준 자체의 단순 차이와 구분. 정상 수집 표본 110개 단지, 매도 매물 12,664건. 관측 단지의 희망가격을 추적하는 표본 지표로 서울 전체 주택시장의 공식 평균과는 다른 성격.",
+      "sentence_count": 7,
+      "source": "APT워치 · 서울 표본 아파트",
+      "url": "https://raspos.github.io/apt-watch/",
+      "note": "NEGO INDEX는 희망 호가와 실거래가의 차이이며 실제 협상할인율이 아님."
+    },
     {
       "id": "watch:records:2026-11-23",
       "service": "records",
@@ -544,5 +581,5 @@
       "summary_source": "editorial"
     }
   ],
-  "updated_at": "2026-11-24T10:48:58+09:00"
+  "updated_at": "2026-11-24T23:57:52+09:00"
 }
