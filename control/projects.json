@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-11-16",
+  "updated_at": "2026-11-24",
   "timezone": "Asia/Seoul",
   "status_refresh": "daily at 07:30 KST (GitHub Actions schedule is best-effort)",
   "note": "cadence는 실제 프로젝트 자동 실행 워크플로 설정이 아니라 공개된 갱신 주기·감시 기준입니다. 실제 주기는 각 프로젝트에서 변경해야 합니다.",
@@ -94,6 +94,17 @@
       "refresh_sla_hours": null
     },
     {
+      "id": "bok-governor",
+      "name": "한은 총재",
+      "series": "craft",
+      "url": "https://raspos.github.io/bok-governor/",
+      "repo": "raspos/bok-governor",
+      "cadence": "manual",
+      "cadence_note": "시뮬레이션 게임 · 수동 배포(확인된 자동 갱신 스케줄 없음)",
+      "visitor_source": "countapi",
+      "refresh_sla_hours": null
+    },
+    {
       "id": "son-goal-museum",
       "name": "손흥민 골 기념관",
       "series": "sports",
@@ -167,6 +178,17 @@
       "repo": "raspos/ramen-genealogy",
       "cadence": "manual",
       "cadence_note": "확인된 자동 갱신 스케줄 없음",
+      "visitor_source": "none",
+      "refresh_sla_hours": null
+    },
+    {
+      "id": "sahoegwabudo",
+      "name": "사회과부도",
+      "series": "archive",
+      "url": "https://raspos.github.io/sahoegwabudo/",
+      "repo": "raspos/sahoegwabudo",
+      "cadence": "manual",
+      "cadence_note": "월 1회 자료 갱신 PR 워크플로를 준비해 뒀으나 아직 실행된 적 없음 · 현재는 수동 배포",
       "visitor_source": "none",
       "refresh_sla_hours": null
     },

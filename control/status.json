@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T03:00:48+00:00",
+  "generated_at": "2026-11-24T01:31:02+00:00",
   "repositories": {
     "raspos/all-time-xi": {
       "pushed_at": "2026-10-27T12:32:30Z",
@@ -28,15 +28,26 @@
         "html_url": "https://github.com/raspos/balchik-imagination/actions/runs/41331370041"
       }
     },
-    "raspos/bokwatch": {
-      "pushed_at": "2026-11-23T00:09:45Z",
+    "raspos/bok-governor": {
+      "pushed_at": "2026-11-19T11:18:47Z",
       "default_branch": "main",
       "last_workflow": {
-        "name": "deploy",
+        "name": "pages build and deployment",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-23T00:09:47Z",
-        "html_url": "https://github.com/raspos/bokwatch/actions/runs/45087129158"
+        "created_at": "2026-11-19T11:18:49Z",
+        "html_url": "https://github.com/raspos/bok-governor/actions/runs/44513682103"
+      }
+    },
+    "raspos/bokwatch": {
+      "pushed_at": "2026-11-24T01:28:35Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "test",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-24T01:28:37Z",
+        "html_url": "https://github.com/raspos/bokwatch/actions/runs/45305310316"
       }
     },
     "raspos/chip-cycle": {
@@ -56,14 +67,14 @@
       }
     },
     "raspos/fx-odds": {
-      "pushed_at": "2026-11-20T18:05:31Z",
+      "pushed_at": "2026-11-23T21:45:19Z",
       "default_branch": "main",
       "last_workflow": {
         "name": "daily",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-20T17:58:07Z",
-        "html_url": "https://github.com/raspos/fx-odds/actions/runs/44788294195"
+        "created_at": "2026-11-23T21:38:18Z",
+        "html_url": "https://github.com/raspos/fx-odds/actions/runs/45271700670"
       }
     },
     "raspos/hongdam-craft": {
@@ -159,15 +170,26 @@
         "html_url": "https://github.com/raspos/reconstruction-craft/actions/runs/43601537133"
       }
     },
+    "raspos/sahoegwabudo": {
+      "pushed_at": "2026-11-23T02:07:28Z",
+      "default_branch": "main",
+      "last_workflow": {
+        "name": "테스트·배포 (GitHub Pages)",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-11-23T02:07:31Z",
+        "html_url": "https://github.com/raspos/sahoegwabudo/actions/runs/45098379660"
+      }
+    },
     "raspos/se-young-archive": {
-      "pushed_at": "2026-11-16T09:53:50Z",
+      "pushed_at": "2026-11-23T10:55:01Z",
       "default_branch": "main",
       "last_workflow": {
         "name": "Refresh derived badminton data",
         "status": "completed",
         "conclusion": "success",
-        "created_at": "2026-11-16T09:53:27Z",
-        "html_url": "https://github.com/raspos/se-young-archive/actions/runs/43843837965"
+        "created_at": "2026-11-23T10:54:41Z",
+        "html_url": "https://github.com/raspos/se-young-archive/actions/runs/45160336032"
       }
     },
     "raspos/seoul-apartment-tracker": {
@@ -183,8 +205,8 @@
     }
   },
   "coverage": {
-    "public_repositories_checked": 19,
-    "public_repositories_reported": 18
+    "public_repositories_checked": 21,
+    "public_repositories_reported": 20
   },
   "disclaimer": "Last workflow status is not a data quality certification."
 }
