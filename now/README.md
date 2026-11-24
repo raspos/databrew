@@ -33,7 +33,7 @@ The script exits successfully without changes when `THREADS_ACCESS_TOKEN` is not
 
 ## Automatic NOW content (v2)
 
-The `Build databrew NOW daily feed` GitHub Action runs twice a day, at **11:00 and 23:00 KST** (02:00/14:00 UTC; Actions may start late), and supports manual dispatch. It reads *already published, public* source JSON without inventing data:
+The `Build databrew NOW daily feed` GitHub Action checks sources **six times daily** at approximately **01:23, 05:23, 09:23, 13:23, 17:23, and 21:23 KST** (UTC: 16:23, 20:23, 00:23, 04:23, 08:23, 12:23; GitHub Actions may be delayed). The schedule is intentionally offset from minute :00. It supports manual dispatch and reads *already published, public* source JSON without inventing data:
 
 | NOW item | Input | Observation-date rule |
 | --- | --- | --- |
@@ -44,6 +44,10 @@ The `Build databrew NOW daily feed` GitHub Action runs twice a day, at **11:00 a
 | Existing and new projects | Current `index.html` project cards | Old projects have no invented launch date; newly detected projects get first-seen timestamp |
 | STORIES | Current `articles.json`, article source HTML, and `now/story-summaries.json` | 4–5 line verified editorial summary; new articles fall back to 4–5 literal source excerpts, not AI guesses |
 | Threads | Existing `threads.json` | Meta's own timestamp, once the user authenticates |
+
+**WATCH series monitor (2026-11-24):** The five WATCH projects are BOK워치, FX워치, DEBT워치, PAY워치 and APT워치. The first, second and fifth have verified daily public JSON adapters; DEBT워치 and PAY워치 currently remain clickable projects with a transparent "daily metrics not connected" label, rather than invented numbers or borrowed metrics. The **Seoul apartment record-high tracker** is a sixth, separate automated source but is not one of the five WATCH brand projects.
+
+**What changed in the refresh workflow:** `now/source-status.json` records the last actual source check time, last observation day and whether each source was readable. It is committed even if no new data appear in `now/activity.json`. This distinguishes an operating polling job from a stalled source. A failed adapter does not erase the previous verified article. The NOW sidebar shows every WATCH service, clearly distinguishing source observation dates from check times and warning when the last check failed. In addition, a stale hard-coded integration assertion requiring BOK WATCH to always show exactly 81.3% was removed: legitimate market probability changes are no longer blocked by an old test snapshot.
 
 **Source publish dependency:** refreshing NOW cannot force source projects to update. If APT WATCH, FX WATCH or the Seoul records tracker stops releasing files, NOW retains the last dated card and never labels an old number as today's reading. A failed source does not replace prior snapshots with zeros. The generator is intentionally source-specific and does not try to invent DEBT워치 or PAY워치 daily metrics before their JSON schemas and refresh schedules are verified. Both remain discoverable as projects.
 
@@ -57,11 +61,11 @@ python -m http.server 8080
 # open /now/
 ```
 
-The script needs network access to read published source data; GitHub Actions provides it. The released `now/activity.json` may initially include only the verified BOK item and the existing 26 projects until the first successful scheduled/manual collection.
+The script needs network access to read published source data; GitHub Actions provides it. The released `now/activity.json` retains source-dated WATCH cards and all 27 currently registered projects. A successful source poll with unchanged observations updates the separate `source-status.json` without falsely re-dating old numbers.
 
 ## Editorial project stories
 
-Every one of the 26 previously existing projects has an individually edited, roughly 3–4-line, 90–150 character introduction in `now/project-stories.json`. The NOW feed shows this `story` instead of the one-line archive teaser, with the original project thumbnail and direct service link. The content is grounded in each project's existing detail page. The generator validates the supplied story length on each run and retains it when revising project metadata. Newly detected projects can enter the feed automatically with their ordinary card teaser; a reviewed concise 90–150 character introduction should be added to the same file for full publication. No fictional launch dates are assigned to existing projects.
+Every one of the 27 currently registered projects has an individually edited, roughly 3–4-line, 90–150 character introduction in `now/project-stories.json`. The NOW feed shows this `story` instead of the one-line archive teaser, with the original project thumbnail and direct service link. The content is grounded in each project's existing detail page. The generator validates the supplied story length on each run and retains it when revising project metadata. Newly detected projects can enter the feed automatically with their ordinary card teaser; a reviewed concise 90–150 character introduction should be added to the same file for full publication. No fictional launch dates are assigned to existing projects.
 
 BOK WATCH NOW uses a **user-specified 50/50 ensemble** rather than copying the BOK site's OIS-only main display or the inaccurate internal `memo.json` text. On the latest source day, 2026-11-20: OIS 64.94%, MSB91 97.58% using the original `min_hike` solver, so NOW's displayed weighted hike probability is **81.26% → 81.3%**. The original CD91 solver is reproduced as a guard: 80.49%. A 91-day yield contains expectations for the November and January policy meetings, so that inferred November probability is assumption-sensitive and this is clearly disclosed. The post includes at least five factual Korean clauses without standard sentence-final verb endings.
 
