@@ -551,7 +551,7 @@ def main() -> int:
             prior_posts[item["id"]] = item
             observed_results[service] = item
             print(service, item["day"], item["title"])
-        except (ValueError, KeyError, TypeError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+        except (ValueError, KeyError, TypeError, OSError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
             print("source unavailable:", service, type(exc).__name__, str(exc)[:160], file=sys.stderr)
             error_names.append(service)
     # Persist a fresh source check even when numeric values have not changed.
