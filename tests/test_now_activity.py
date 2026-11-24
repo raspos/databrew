@@ -51,6 +51,73 @@ class NowBuildTests(unittest.TestCase):
         self.assertEqual(result["components"]["weights"], [0.5, 0.5])
         self.assertAlmostEqual(result["components"]["msb91"], 0.97576, places=4)
 
+    def test_bok_prefers_newer_valid_public_github_release(self):
+        page = {
+            "latest": "2026-11-20",
+            "upcoming": ["2026-11-26", "2027-01-14"]
+        }
+        github = {
+            "latest": "2026-11-23",
+            "upcoming": ["2026-11-26", "2027-01-14"]
+        }
+        reads = {
+            mod.BASE["bok"] + "data/meta.json": page,
+            mod.BASE["bok"] + "data/snapshots/2026-11-20.json": {
+                "asof": "2026-11-20", "r0": 3.0,
+            },
+            mod.BOK_GITHUB_DATA + "meta.json": github,
+            mod.BOK_GITHUB_DATA + "snapshots/2026-11-23.json": {
+                "asof": "2026-11-23", "r0": 3.0,
+            }
+        }
+        with patch.object(mod, "read_url", side_effect=lambda url: reads[url]):
+            meta, snap, release = mod._bok_latest_release()
+        self.assertEqual(release, "github")
+        self.assertEqual(meta["latest"], "2026-11-23")
+        self.assertEqual(snap["asof"], "2026-11-23")
+
+    def test_bok_rejects_mismatched_github_snapshot(self):
+        reads = {
+            mod.BASE["bok"] + "data/meta.json": {"latest": "2026-11-20"},
+            mod.BASE["bok"] + "data/snapshots/2026-11-20.json": {
+                "asof": "2026-11-20", "r0": 3.0,
+            },
+            mod.BOK_GITHUB_DATA + "meta.json": {"latest": "2026-11-23"},
+            mod.BOK_GITHUB_DATA + "snapshots/2026-11-23.json": {
+                "asof": "2026-11-20", "r0": 3.0,
+            }
+        }
+        with patch.object(mod, "read_url", side_effect=lambda url: reads[url]):
+            _, snap, release = mod._bok_latest_release()
+        self.assertEqual(release, "pages")
+        self.assertEqual(snap["asof"], "2026-11-20")
+
+    def test_bok_same_day_prefers_live_pages_release(self):
+        meta = {"latest": "2026-11-23"}
+        reads = {
+            mod.BASE["bok"] + "data/meta.json": meta,
+            mod.BASE["bok"] + "data/snapshots/2026-11-23.json": {
+                "asof": "2026-11-23", "r0": 3.0,
+            },
+            mod.BOK_GITHUB_DATA + "meta.json": meta,
+            mod.BOK_GITHUB_DATA + "snapshots/2026-11-23.json": {
+                "asof": "2026-11-23", "r0": 3.0,
+            }
+        }
+        with patch.object(mod, "read_url", side_effect=lambda url: reads[url]):
+            _, _, release = mod._bok_latest_release()
+        self.assertEqual(release, "pages")
+
+    def test_bok_20261123_official_snapshot_91day_calibration(self):
+        # Regression anchored to the actual 2026-11-23 public snapshot.
+        msb, msb_rate = mod._msb91_model("2026-11-23", 3.280, -0.035, 3.0,
+                                         ["2026-11-26", "2027-01-14"])
+        cd, cd_rate = mod._msb91_model("2026-11-23", 3.390, 0.18, 3.0,
+                                       ["2026-11-26", "2027-01-14"])
+        self.assertAlmostEqual(cd, .7437, places=4)
+        self.assertAlmostEqual(msb, .70735, places=4)
+        self.assertAlmostEqual(0.5 * (msb + .5816), .64447, places=4)
+
     def test_91day_cd_model_reproduces_official_calibration(self):
         prob, _ = mod._msb91_model("2026-11-20", 3.39, 0.18, 3.0,
                                    ["2026-11-26", "2027-01-14", "2027-02-25"])
