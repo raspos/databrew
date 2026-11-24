@@ -58,12 +58,14 @@ class NowBuildTests(unittest.TestCase):
 
     def test_project_stories_are_concise_3_to_4_line_intros(self):
         projects = mod.parse_projects()
-        self.assertEqual(len(projects), 27)
+        self.assertGreaterEqual(len(projects), 27)
         self.assertTrue(any(p['id'] == 'sahoegwabudo' for p in projects))
         for project in projects:
+            # New cards can publish before a longer, human-edited intro is added.
             with self.subTest(project=project["id"]):
-                self.assertGreaterEqual(len(project["story"]), 90)
-                self.assertLessEqual(len(project["story"]), 150)
+                if project["story"]:
+                    self.assertGreaterEqual(len(project["story"]), 90)
+                    self.assertLessEqual(len(project["story"]), 150)
 
     def test_fx_uses_reference_rate_not_1530_spot(self):
         item = {
@@ -120,7 +122,40 @@ class NowBuildTests(unittest.TestCase):
         for post in payload["watch"]:
             self.assertGreaterEqual(post["sentence_count"], 5)
             self.assertGreaterEqual(len(post["text"].split(". ")), 5)
-        self.assertIn("81.3%", next(p for p in payload["watch"] if p["service"] == "bok")["title"])
+        bok = next(p for p in payload["watch"] if p["service"] == "bok")
+        self.assertEqual(bok["components"]["weights"], [0.5, 0.5])
+        self.assertIn("50:50", bok["title"])
+        for key in ("kofr_ois", "msb91"):
+            self.assertTrue(0 <= bok["components"][key] <= 1)
+
+    def test_watch_catalog_includes_debt_pay_without_inventing_prices(self):
+        names = [x[0] for x in mod.WATCH_CATALOG]
+        self.assertEqual(names, ["bok", "fx", "debt", "pay", "apt", "records"])
+        result = mod.source_report(
+            "2026-11-24T10:00:00+09:00",
+            {"fx": {"service": "fx", "day": "2026-11-23", "source_at": "2026-11-23"}},
+            {"bok": {"id": "bok", "last_success_at": "2026-11-23T18:58:07+09:00"}},
+            {"watch:bok:2026-11-20": {
+                "service": "bok", "day": "2026-11-20", "source_at": "2026-11-23T09:07+09:00"
+            }},
+        )
+        services = {p["id"]: p for p in result["services"]}
+        self.assertEqual(len(services), 6)
+        self.assertEqual(services["bok"]["state"], "error")
+        self.assertEqual(services["bok"]["observed_day"], "2026-11-20")
+        self.assertEqual(services["bok"]["lag_days"], 4)
+        self.assertEqual(services["bok"]["last_success_at"], "2026-11-23T18:58:07+09:00")
+        self.assertEqual(services["fx"]["state"], "ok")
+        self.assertEqual(services["fx"]["lag_days"], 1)
+        for key in ("debt", "pay"):
+            self.assertEqual(services[key]["state"], "project")
+            self.assertIsNone(services[key]["observed_day"])
+
+    def test_source_status_separate_from_market_data(self):
+        self.assertNotEqual(mod.SOURCE_STATUS, mod.OUTPUT)
+        body = mod.source_report("2026-11-24T10:00:00+09:00", {}, {}, {})
+        self.assertEqual(body["checked_at"], "2026-11-24T10:00:00+09:00")
+        self.assertFalse(any(x["observed_day"] for x in body["services"]))
 
     def test_new_story_article_auto_extract(self):
         rows = mod._auto_story_lines({"url": "articles/20261119-t0xh/"})
