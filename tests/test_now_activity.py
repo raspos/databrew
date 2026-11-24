@@ -128,6 +128,15 @@ class NowBuildTests(unittest.TestCase):
         for key in ("kofr_ois", "msb91"):
             self.assertTrue(0 <= bok["components"][key] <= 1)
 
+    def test_now_frontend_shows_all_watch_services_and_source_checks(self):
+        page = (ROOT / "now" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="watch-quick"', page)
+        self.assertIn('WATCH 05', page)
+        self.assertIn("load('source-status.json')", page)
+        self.assertIn('id="watch-service-list"', page)
+        self.assertIn("원본 조회 오류 · 기존 기록 유지", page)
+        self.assertIn("서비스 공개 · 정기 수치 자동 연동 전", page)
+
     def test_watch_catalog_includes_debt_pay_without_inventing_prices(self):
         names = [x[0] for x in mod.WATCH_CATALOG]
         self.assertEqual(names, ["bok", "fx", "debt", "pay", "apt", "records"])
