@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-24T23:57:52+09:00",
+  "checked_at": "2026-11-25T09:51:24+09:00",
   "services": [
     {
       "id": "bok",
@@ -8,10 +8,10 @@
       "url": "https://bokwatch.pages.dev/",
       "mode": "daily",
       "state": "ok",
-      "observed_day": "2026-11-23",
-      "source_at": "2026-11-24T10:01+09:00",
+      "observed_day": "2026-11-24",
+      "source_at": "2026-11-25T08:58+09:00",
       "lag_days": 1,
-      "last_success_at": "2026-11-24T23:57:52+09:00"
+      "last_success_at": "2026-11-25T09:51:24+09:00"
     },
     {
       "id": "fx",
@@ -21,8 +21,8 @@
       "state": "ok",
       "observed_day": "2026-11-24",
       "source_at": "2026-11-24",
-      "lag_days": 0,
-      "last_success_at": "2026-11-24T23:57:52+09:00"
+      "lag_days": 1,
+      "last_success_at": "2026-11-25T09:51:24+09:00"
     },
     {
       "id": "debt",
@@ -54,8 +54,8 @@
       "state": "ok",
       "observed_day": "2026-11-24",
       "source_at": "2026-11-24",
-      "lag_days": 0,
-      "last_success_at": "2026-11-24T23:57:52+09:00"
+      "lag_days": 1,
+      "last_success_at": "2026-11-25T09:51:24+09:00"
     },
     {
       "id": "records",
@@ -63,10 +63,10 @@
       "url": "https://raspos.github.io/seoul-apartment-tracker/",
       "mode": "daily",
       "state": "ok",
-      "observed_day": "2026-11-23",
-      "source_at": "2026-11-23T07:06:39+09:00",
-      "lag_days": 1,
-      "last_success_at": "2026-11-24T23:57:52+09:00"
+      "observed_day": "2026-11-25",
+      "source_at": "2026-11-25T08:50:02+09:00",
+      "lag_days": 0,
+      "last_success_at": "2026-11-25T09:51:24+09:00"
     }
   ]
 }
