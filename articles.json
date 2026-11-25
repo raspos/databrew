@@ -1,5 +1,22 @@
 [
   {
+    "id": "20261125-mokdong",
+    "title": "현대냐 삼성이냐…30조원 목동 재건축의 패권 경쟁",
+    "url": "articles/20261125-mokdong/",
+    "outlet": "프로딴짓러",
+    "date": "2026-11-25",
+    "project": "reconstruction-craft",
+    "tag": "재건축 크래프트",
+    "tagAuto": true,
+    "image": "articles/20261125-mokdong/hero.webp",
+    "summary": "목동 14개 단지의 시공권을 둘러싼 현대건설과 삼성물산의 경쟁이 치열해지고 있다. 2·11·14단지의 수주 구도와 건설사별 전략을 살펴보고, 실제 재건축 시장을 모티브로 만든 전략 시뮬레이션 게임을 소개한다.",
+    "en": {
+      "title": "Hyundai vs Samsung: The Battle for Mokdong's 30 Trillion Won Redevelopment Market",
+      "outlet": "databrew",
+      "summary": "A look at the interconnected competition for 14 redevelopment contracts and an interactive strategy game inspired by the real bidding landscape."
+    }
+  },
+  {
     "id": "20261123-bokt",
     "title": "증시 폭락, 금리 2~3번 올린 효과…한은 추가 인상에 ‘이중 긴축’ 우려",
     "url": "articles/20261123-bokt/",
