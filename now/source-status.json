@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-25T14:46:02+09:00",
+  "checked_at": "2026-11-25T23:33:03+09:00",
   "services": [
     {
       "id": "bok",
@@ -11,7 +11,7 @@
       "observed_day": "2026-11-24",
       "source_at": "2026-11-25T09:46+09:00",
       "lag_days": 1,
-      "last_success_at": "2026-11-25T14:46:02+09:00"
+      "last_success_at": "2026-11-25T23:33:03+09:00"
     },
     {
       "id": "fx",
@@ -22,7 +22,7 @@
       "observed_day": "2026-11-25",
       "source_at": "2026-11-25",
       "lag_days": 0,
-      "last_success_at": "2026-11-25T14:46:02+09:00"
+      "last_success_at": "2026-11-25T23:33:03+09:00"
     },
     {
       "id": "debt",
@@ -55,7 +55,7 @@
       "observed_day": "2026-11-24",
       "source_at": "2026-11-24",
       "lag_days": 1,
-      "last_success_at": "2026-11-25T14:46:02+09:00"
+      "last_success_at": "2026-11-25T23:33:03+09:00"
     },
     {
       "id": "records",
@@ -66,7 +66,7 @@
       "observed_day": "2026-11-25",
       "source_at": "2026-11-25T08:50:02+09:00",
       "lag_days": 0,
-      "last_success_at": "2026-11-25T14:46:02+09:00"
+      "last_success_at": "2026-11-25T23:33:03+09:00"
     }
   ]
 }
