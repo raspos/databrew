@@ -30,6 +30,11 @@
 .art-comments h2{font-size:20px;margin:0 0 4px}
 .art-comments .cm-note{font-size:13px;color:var(--muted);margin:0 0 14px}
 .art-comments .cm-err{font-size:14px;color:var(--muted);padding:14px 0}
+.art-comments .cm-open{font:inherit;font-size:14px;font-weight:700;cursor:pointer;color:var(--accent);background:none;border:1px solid var(--accent);border-radius:999px;padding:10px 22px;min-height:44px}
+.art-comments .cm-open:hover{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.art-comments .cm-open:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.art-comments .cm-slot{margin-top:6px}
+.art-comments .cm-slot .utterances{max-width:100%;margin:0}
 @media (max-width:560px){
   .art{padding-top:26px}
   .art-head{flex-direction:column;align-items:stretch;gap:2px}

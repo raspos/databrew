@@ -43,16 +43,17 @@
 - 글쓰기 도구의 "조회수 보기"에서 페이지별 조회수와 사이트 누적 방문을 한 번에 볼 수 있습니다. 직접 쓴 기사 페이지에는 조회수가 함께 표시됩니다.
 - GoatCounter도 함께 쓰려면 `analytics.js` 맨 위의 `GC_CODE`에 사이트 코드를 넣으세요(PAY워치처럼 쿠키 없이 방문 통계를 따로 봅니다). 지금은 꺼져 있습니다.
 
-## 댓글 (giscus)
+## 댓글 (utterances · GitHub Issues)
 
-기사 페이지(`/articles/<id>/`) 맨 아래에 댓글이 붙도록 `comments.js`가 준비돼 있습니다. GitHub Discussions를 쓰는 giscus 방식이고, 기사마다 고정 ID(`article-<id>`)로 토론이 하나씩 연결되므로 기사를 수정해 다시 게시해도 댓글이 유지됩니다. 기존에 올린 기사에도 자동으로 붙습니다.
-아직 저장소에서 Discussions가 꺼져 있고 giscus 앱이 설치되지 않아, **아래 설정을 마치기 전에는 댓글 영역이 보이지 않습니다**(기사 읽기에는 영향 없음).
+기사 페이지(`/articles/<id>/`) 맨 아래에 댓글이 붙습니다. NOW 피드와 같은 utterances 방식이라 설정 하나로 둘 다 동작합니다. 기존에 올린 기사에도 자동으로 붙습니다.
 
-1. 저장소 `raspos/databrew` → Settings → General → Features → **Discussions** 체크
-2. Discussions 탭에서 카테고리 하나 만들기(이름 예: `댓글`, 형식은 **Announcements** 권장: 새 토론은 관리자와 giscus만 만들 수 있어 스팸이 줄어듭니다)
-3. https://github.com/apps/giscus 에서 **Install** → `raspos/databrew` 선택
-4. https://giscus.app 에서 저장소 `raspos/databrew`와 위 카테고리를 고르면 화면 아래 코드에 `data-category-id="DIC_…"` 값이 나옵니다. 그 값을 `comments.js`의 `categoryId`에 넣으면 됩니다(저에게 알려 주셔도 됩니다). `repoId`(`R_kgDOVUoIRA`)는 이미 들어 있습니다.
+- 독자가 "댓글 보기·쓰기"를 누를 때만 외부 스크립트(utteranc.es)를 불러옵니다. 누르기 전에는 외부 요청이 없고, 댓글 서비스가 막혀도 기사는 그대로 읽힙니다.
+- 기사마다 고정 ID(`databrew-story:<기사 ID>`)로 GitHub 이슈가 하나씩 만들어집니다. 기사를 수정해 다시 게시해도 댓글이 유지됩니다.
+- 댓글을 쓰려면 GitHub 로그인이 필요하고, 댓글은 `raspos/databrew` 저장소의 공개 이슈로 저장됩니다. 읽기는 로그인 없이 됩니다. GitHub 계정이 없는 독자가 쓰게 하려면 별도 인증·저장 시스템이 필요해 이번 범위에는 넣지 않았습니다.
+- 관리: 부적절한 댓글 삭제, 토론 잠금, 차단은 저장소 [Issues](https://github.com/raspos/databrew/issues)에서 관리자가 합니다.
 
-- 댓글 작성은 GitHub 로그인이 필요합니다. 읽기는 로그인 없이 됩니다. GitHub 계정이 없는 독자도 쓰게 하려면 별도 인증·저장 시스템이 필요해 이번 범위에는 넣지 않았습니다.
-- 삭제·숨김·차단은 저장소 Discussions 화면에서 관리자가 합니다.
-- 댓글 서비스가 응답하지 않으면 "댓글을 불러오지 못했습니다" 안내만 나오고 기사는 그대로 보입니다.
+**한 번만 필요한 설정 (저장소 소유자)**
+1. https://github.com/apps/utterances 에서 **Install** → *Only select repositories* → `raspos/databrew` 하나만 선택
+2. 저장소 Settings → General → Features에서 **Issues**가 켜져 있는지 확인(현재 켜져 있음)
+
+설치 전에는 댓글 영역에 utterances의 설정 오류 안내가 나옵니다. 설치 뒤 기사 아래에서 실제로 댓글을 하나 써서 이슈가 생기는지 확인하세요.
