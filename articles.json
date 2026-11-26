@@ -1,5 +1,22 @@
 [
   {
+    "id": "20261126-bokwatch",
+    "title": "95%에서 52.3%로…흔들린 시장의 확신과 BOK워치의 다음 실험",
+    "url": "articles/20261126-bokwatch/",
+    "outlet": "프로딴짓러",
+    "date": "2026-11-26",
+    "project": "bokwatch",
+    "tag": "BOK워치",
+    "tagAuto": true,
+    "image": "thumbs/bokwatch.webp",
+    "summary": "11월 금통위를 앞두고 BOK워치의 인상 확률은 95.0%에서 최종 저장 전망 52.3%까지 하락했다. 실제 금리 결정과 시장 기대의 변화를 돌아보고 현 모형의 한계와 3.0 개편 방향을 공개한다.",
+    "en": {
+      "title": "From 95% to 52.3%: A Fading Rate-Hike Conviction and BOK Watch 3.0",
+      "outlet": "databrew",
+      "summary": "BOK Watch's final archived hike estimate fell to 52.3% before the November decision. This story reviews the forecast, its limitations, and the ongoing validation of competing models for BOK Watch 3.0."
+    }
+  },
+  {
     "id": "20261125-mokdong",
     "title": "현대냐 삼성이냐…30조원 목동 재건축의 패권 경쟁",
     "url": "articles/20261125-mokdong/",
