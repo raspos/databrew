@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-26T22:59:17+09:00",
+  "checked_at": "2026-11-27T09:39:36+09:00",
   "services": [
     {
       "id": "bok",
@@ -10,8 +10,8 @@
       "state": "ok",
       "observed_day": "2026-11-26",
       "source_at": "2026-11-26T18:35+09:00",
-      "lag_days": 0,
-      "last_success_at": "2026-11-26T22:59:17+09:00"
+      "lag_days": 1,
+      "last_success_at": "2026-11-27T09:39:36+09:00"
     },
     {
       "id": "fx",
@@ -21,8 +21,8 @@
       "state": "ok",
       "observed_day": "2026-11-26",
       "source_at": "2026-11-26",
-      "lag_days": 0,
-      "last_success_at": "2026-11-26T22:59:17+09:00"
+      "lag_days": 1,
+      "last_success_at": "2026-11-27T09:39:36+09:00"
     },
     {
       "id": "debt",
@@ -54,8 +54,8 @@
       "state": "ok",
       "observed_day": "2026-11-24",
       "source_at": "2026-11-24",
-      "lag_days": 2,
-      "last_success_at": "2026-11-26T22:59:17+09:00"
+      "lag_days": 3,
+      "last_success_at": "2026-11-27T09:39:36+09:00"
     },
     {
       "id": "records",
@@ -65,8 +65,8 @@
       "state": "ok",
       "observed_day": "2026-11-26",
       "source_at": "2026-11-26T09:18:44+09:00",
-      "lag_days": 0,
-      "last_success_at": "2026-11-26T22:59:17+09:00"
+      "lag_days": 1,
+      "last_success_at": "2026-11-27T09:39:36+09:00"
     }
   ]
 }
